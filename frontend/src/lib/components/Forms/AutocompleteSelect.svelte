@@ -76,6 +76,7 @@
 		lazyLimit?: number;
 		lazyThreshold?: number;
 		maxVisibleChips?: number;
+		maxRenderedOptions?: number;
 	}
 
 	let {
@@ -126,7 +127,15 @@
 		lazy = false,
 		lazyLimit = 10,
 		lazyThreshold = 50,
-		maxVisibleChips: _maxVisibleChips = 3
+		maxVisibleChips: _maxVisibleChips = 3,
+		// Hard cap on how many `<li>` items MultiSelect materialises in the
+		// dropdown. Without it, callers that pass a few thousand options as a
+		// prop (e.g. a ServiceNow instance with 2000+ tables) render every
+		// option to the DOM at mount — the dropdown is hidden via CSS but
+		// Svelte still creates every node, which can OOM the tab. Search /
+		// filtering still operates on the full options array; the cap only
+		// limits what gets rendered.
+		maxRenderedOptions = 200
 	}: Props = $props();
 
 	// Clamp to supported CSS range (chip-max-1 through chip-max-5 in app.css)
@@ -683,6 +692,7 @@
 			{allowUserOptions}
 			duplicates={false}
 			key={JSON.stringify}
+			maxOptions={maxRenderedOptions}
 			filterFunc={effectiveLazy ? passthroughFilter : fastFilter}
 			noMatchingOptionsMsg={effectiveLazy
 				? isLoading || lazySearchPending
