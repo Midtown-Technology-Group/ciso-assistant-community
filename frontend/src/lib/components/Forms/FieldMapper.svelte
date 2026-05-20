@@ -238,6 +238,7 @@
 				onChange={handleTableChange}
 				helpText={tableHelpText}
 				baseClass="w-full md:w-1/2"
+				translateOptions={false}
 			/>
 		{/key}
 	</section>
@@ -281,6 +282,7 @@
 										onChange={(val) => (fieldMap[field.key] = val)}
 										nullable={true}
 										baseClass="w-full"
+										translateOptions={false}
 									/>
 								{/key}
 							</div>
@@ -333,6 +335,7 @@
 													}}
 													nullable={true}
 													baseClass="w-full"
+													translateOptions={false}
 												/>
 											{/key}
 										</div>
