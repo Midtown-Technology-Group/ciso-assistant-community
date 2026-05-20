@@ -238,6 +238,17 @@ class ServiceNowClient(BaseIntegrationClient):
             "nameNOT LIKEstagemgmt_",
             "nameNOT LIKEsysevent",
             "nameNOT LIKEsyslog",
+            # Configuration Items (CMDB inventory). Measured ~862 of these
+            # on a stock instance and they're never ITSM workflow targets.
+            # Single biggest contributor to the option list bloat.
+            "nameNOT LIKEcmdb_",
+            "nameNOT LIKEkb_",  # Knowledge Base internals
+            "nameNOT LIKEsp_",  # Service Portal internals
+            "nameNOT LIKEclone_",  # Instance clone utilities
+            "nameNOT LIKElive_",  # Live feed internals
+            "nameNOT LIKEdp_",  # Data Policy internals
+            "nameNOT LIKEsa_",  # Service Analytics
+            "nameNOT LIKEsttrm_",  # Settings/term internals
         ]
 
         # Combine with OR operator logic if needed, but here we need AND logic (exclusion)
@@ -252,7 +263,13 @@ class ServiceNowClient(BaseIntegrationClient):
         params = {
             "sysparm_query": query,
             "sysparm_fields": "name,label",
-            "sysparm_limit": 5000,  # Safety limit
+            # Hard cap. The frontend AutocompleteSelect blows up beyond a few
+            # hundred options; we cap on the wire so the user is never shown
+            # more than this many tables, regardless of how generous the
+            # exclusion list is. If a real workflow table gets cut by this
+            # cap, the right answer is to tighten exclusions rather than
+            # raise the cap.
+            "sysparm_limit": 500,
             "sysparm_exclude_reference_link": "true",
         }
 
