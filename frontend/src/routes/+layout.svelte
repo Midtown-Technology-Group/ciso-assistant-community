@@ -7,8 +7,10 @@
 	import '@fortawesome/fontawesome-free/css/all.min.css';
 
 	import { browser } from '$app/environment';
+	import { initializeThemePreference } from '$lib/utils/theme';
 
 	onMount(() => {
+		initializeThemePreference();
 		document.body.dataset.hydrated = 'true';
 	});
 
