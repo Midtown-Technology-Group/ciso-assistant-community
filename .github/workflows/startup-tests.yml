@@ -136,7 +136,7 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
-          name: ${{ env.BRANCH_SANITIZED }}-${{ env.NOW }}-${{ github.job }}-report-${{ matrix.playwright-browser }}
+          name: ${{ env.BRANCH_SANITIZED }}-${{ env.NOW }}-${{ github.job }}-report-${{ matrix.python-version }}
           path: |
             ${{ env.backend-directory }}/*.log
             ${{ env.frontend-directory }}/tests/reports/
@@ -213,6 +213,7 @@ jobs:
           exit 1
 
   enterprise-startup-functional-test:
+    if: github.repository_owner == 'intuitem'
     runs-on: ubuntu-24.04
     timeout-minutes: 19
     env:
@@ -325,13 +326,14 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
-          name: ${{ env.BRANCH_SANITIZED }}-${{ env.NOW }}-${{ github.job }}-report-${{ matrix.playwright-browser }}
+          name: ${{ env.BRANCH_SANITIZED }}-${{ env.NOW }}-${{ github.job }}-report-${{ matrix.python-version }}
           path: |
             ${{ env.backend-directory }}/*.log
             ${{ env.enterprise-frontend-build-directory }}/tests/reports/
           retention-days: 5
 
   enterprise-startup-docker-compose-test:
+    if: github.repository_owner == 'intuitem'
     runs-on: ubuntu-24.04
     env:
       COMPOSE_TEST: True

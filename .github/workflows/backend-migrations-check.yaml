@@ -69,6 +69,7 @@ jobs:
         run: poetry run python manage.py makemigrations --check --dry-run --verbosity=3
 
   enterprise-migrations-check:
+    if: github.repository_owner == 'intuitem'
     runs-on: ubuntu-24.04
     env:
       DJANGO_DEBUG: "True"
