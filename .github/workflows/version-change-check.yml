@@ -25,12 +25,13 @@ jobs:
           fetch-depth: 0
       - name: Check if VERSION file was modified
         shell: bash
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
         run: |
           set -euo pipefail
 
-          base_ref="${{ github.event.pull_request.base.ref }}"
-          git fetch --no-tags --depth=1 origin "$base_ref"
-          changed_files="$(git diff --name-only "origin/$base_ref"...HEAD)"
+          git fetch --no-tags --depth=1 origin "$BASE_REF"
+          changed_files="$(git diff --name-only "origin/$BASE_REF"...HEAD)"
 
           product_changes="$(
             printf '%s\n' "$changed_files" |

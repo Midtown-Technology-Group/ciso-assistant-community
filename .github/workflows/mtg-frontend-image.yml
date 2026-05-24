@@ -82,15 +82,19 @@ jobs:
 
       - name: Summarize image
         shell: bash
+        env:
+          IMAGE_NAME: ${{ steps.image.outputs.name }}
+          IMAGE_SHORT_SHA: ${{ steps.image.outputs.short_sha }}
+          IMAGE_TAGS: ${{ steps.image.outputs.tags }}
         run: |
           {
             echo "### Frontend image"
             echo
-            echo "Image: \`${{ steps.image.outputs.name }}\`"
-            echo "Primary tag: \`mtg-${{ steps.image.outputs.short_sha }}\`"
+            echo "Image: \`$IMAGE_NAME\`"
+            echo "Primary tag: \`mtg-$IMAGE_SHORT_SHA\`"
             echo
             echo "All tags:"
             while IFS= read -r tag; do
               echo "- \`$tag\`"
-            done <<< "${{ steps.image.outputs.tags }}"
+            done <<< "$IMAGE_TAGS"
           } >> "$GITHUB_STEP_SUMMARY"
