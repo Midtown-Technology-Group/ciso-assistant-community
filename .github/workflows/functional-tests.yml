@@ -76,6 +76,7 @@ jobs:
           retention-days: 1
 
   build_enterprise_frontend:
+    if: github.repository_owner == 'intuitem'
     runs-on: ubuntu-24.04
     outputs:
       build_done: "true"
@@ -120,11 +121,10 @@ jobs:
   get_playwright_test_files:
     needs:
       - build_community_frontend
-      - build_enterprise_frontend
     runs-on: ubuntu-24.04
     outputs:
       community_test_files: ${{ steps.list_community_files.outputs.test_files }}
-      enterprise_test_files: ${{ steps.list_enterprise_files.outputs.test_files }}
+      enterprise_test_files: ${{ steps.list_enterprise_files.outputs.test_files || '[]' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -138,10 +138,12 @@ jobs:
           echo "test_files=$COMMUNITY_TEST_FILES" >> $GITHUB_OUTPUT
 
       - name: Pre-build Enterprise Frontend
+        if: github.repository_owner == 'intuitem'
         working-directory: ${{ env.enterprise-frontend-directory }}
         run: make pre-build
 
       - name: Get Enterprise Playwright Test Files
+        if: github.repository_owner == 'intuitem'
         id: list_enterprise_files
         working-directory: ${{ env.enterprise-frontend-build-directory }}
         run: |
@@ -328,6 +330,7 @@ jobs:
           retention-days: 5
 
   enterprise-functional-tests:
+    if: github.repository_owner == 'intuitem' && needs.get_playwright_test_files.outputs.enterprise_test_files != '[]'
     needs: get_playwright_test_files
     runs-on: ubuntu-24.04
     env:

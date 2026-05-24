@@ -5,7 +5,7 @@ permissions:
 on:
   pull_request:
     branches: [main]
-    types: [opened]
+    types: [opened, synchronize, reopened]
 
 # Cancel older in-progress runs for the same PR or the same ref (branch)
 concurrency:
@@ -22,11 +22,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - name: Check if VERSION file was modified
+        shell: bash
         run: |
-          version_file="ciso_assistant/VERSION"
-          if git diff --name-only HEAD^1 HEAD | grep -q "$version_file"; then
+          set -euo pipefail
+
+          base_ref="${{ github.event.pull_request.base.ref }}"
+          git fetch --no-tags --depth=1 origin "$base_ref"
+          changed_files="$(git diff --name-only "origin/$base_ref"...HEAD)"
+
+          product_changes="$(
+            printf '%s\n' "$changed_files" |
+              grep -E '^(backend/|frontend/|docker-compose|Dockerfile|charts/|helm/|pyproject\.toml|poetry\.lock|package\.json|pnpm-lock\.yaml)' || true
+          )"
+
+          if [[ -z "$product_changes" ]]; then
+            echo "No product/runtime files changed; skipping VERSION requirement."
+            exit 0
+          fi
+
+          version_file="backend/ciso_assistant/VERSION"
+          if printf '%s\n' "$changed_files" | grep -Fxq "$version_file"; then
             echo "$version_file has been modified in this pull request."
           else
             echo "::error::$version_file must be modified in this pull request."
