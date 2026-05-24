@@ -14,14 +14,16 @@
 	let { data }: Props = $props();
 </script>
 
-<div class="flex mx-auto justify-center items-center h-screen w-screen bg-slate-200">
-	<div class="absolute top-5 left-5">
-		<div class="flex flex-row w-full space-x-4 pb-3">
+<div class="min-h-screen w-full bg-slate-200 px-4 py-6 sm:px-6">
+	<div class="flex justify-center sm:absolute sm:top-5 sm:left-5">
+		<div class="flex flex-row max-w-40 sm:max-w-48 space-x-4 pb-3">
 			<Logo />
 		</div>
 	</div>
-	<div class="flex w-full items-center justify-center">
-		<div class="flex flex-col bg-white p-12 rounded-lg shadow-lg items-center space-y-4">
+	<div class="flex min-h-[calc(100vh-8rem)] w-full items-center justify-center">
+		<div
+			class="flex flex-col w-full max-w-md bg-white p-5 sm:p-8 lg:p-12 rounded-lg shadow-lg items-center space-y-4"
+		>
 			<div class="bg-primary-300 px-6 py-5 rounded-full text-3xl">
 				<i class="fa-solid fa-key"></i>
 			</div>

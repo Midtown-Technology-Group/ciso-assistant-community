@@ -15,14 +15,14 @@
 	let { data }: Props = $props();
 </script>
 
-<div class="flex mx-auto justify-center items-center h-screen w-screen bg-slate-200">
-	<div class="absolute top-5 left-5">
-		<div class="flex flex-row w-full space-x-4 pb-3">
+<div class="min-h-screen w-full bg-slate-200 px-4 py-6 sm:px-6">
+	<div class="flex justify-center sm:absolute sm:top-5 sm:left-5">
+		<div class="flex flex-row max-w-40 sm:max-w-48 space-x-4 pb-3">
 			<Logo />
 		</div>
 	</div>
-	<div class="flex items-center justify-center p-10 space-x-4 w-full">
-		<div class="lg:w-1/4 p-6 shadow-lg rounded-lg bg-white">
+	<div class="flex items-center justify-center min-h-[calc(100vh-8rem)] w-full">
+		<div class="w-full max-w-md lg:w-1/4 p-5 sm:p-6 shadow-lg rounded-lg bg-white">
 			<div id="password_reset" class="flex flex-col items-center space-y-4">
 				<div class="bg-primary-300 px-6 py-5 rounded-full text-3xl">
 					<i class="fa-solid fa-lock"></i>
@@ -33,7 +33,7 @@
 				<p class="text-center text-gray-600 text-sm">
 					{m.enterYourEmail()}.
 				</p>
-				<div>
+				<div class="w-full">
 					<!-- SuperForm with dataType 'form' -->
 					<SuperForm
 						class="flex flex-col space-y-3"
