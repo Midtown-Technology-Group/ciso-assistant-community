@@ -61,10 +61,12 @@
 		{#each items as item}
 			{#if sideBarVisibleItems && sideBarVisibleItems[item.name] !== false}
 				<Accordion.Item value={item.name} id={item.name.toLowerCase().replace(' ', '-')}>
-					<Accordion.ItemTrigger class="flex w-full items-center cursor-pointer">
+					<Accordion.ItemTrigger
+						class="flex w-full items-center cursor-pointer text-surface-900 dark:text-surface-200 hover:text-primary-800 dark:hover:text-primary-200"
+					>
 						<SideBarCategory {item} />
 						<Accordion.ItemIndicator
-							class="transition-transform duration-200 data-[state=open]:rotate-0 data-[state=closed]:-rotate-90"
+							class="transition-transform duration-200 data-[state=open]:rotate-0 data-[state=closed]:-rotate-90 text-surface-900 dark:text-surface-200"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
