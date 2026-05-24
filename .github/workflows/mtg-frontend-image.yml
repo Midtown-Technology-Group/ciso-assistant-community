@@ -47,7 +47,7 @@ jobs:
           INPUT_TAG: ${{ inputs.tag }}
         run: |
           set -euo pipefail
-          image="$(echo "ghcr.io/${GITHUB_REPOSITORY}/frontend" | tr '[:upper:]' '[:lower:]')"
+          image="$(echo "ghcr.io/${GITHUB_REPOSITORY_OWNER}/mtg-ciso-assistant-frontend" | tr '[:upper:]' '[:lower:]')"
           short_sha="$(git rev-parse --short=9 HEAD)"
           {
             echo "name=$image"
