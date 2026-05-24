@@ -65,9 +65,71 @@
 		background-color: var(--color-surface-100);
 	}
 
+	.dark .input,
+	.dark .select,
+	.dark .multiselect,
+	.dark .textarea {
+		background-color: var(--color-surface-900);
+		color: var(--color-surface-100);
+		border-color: var(--color-surface-700);
+	}
+
 	.checkbox,
 	.radio {
 		background-color: var(--color-surface-100);
+	}
+
+	.dark .checkbox,
+	.dark .radio {
+		background-color: var(--color-surface-900);
+		border-color: var(--color-surface-700);
+	}
+
+	.dark .card,
+	.dark .bg-white,
+	.dark .bg-surface-50,
+	.dark .bg-surface-100 {
+		background-color: var(--color-surface-900) !important;
+		color: var(--color-surface-100);
+	}
+
+	.dark .hover\:bg-gray-50:hover,
+	.dark .hover\:bg-gray-100:hover,
+	.dark .hover\:bg-surface-50:hover,
+	.dark .hover\:bg-surface-100:hover {
+		background-color: var(--color-surface-800) !important;
+	}
+
+	.dark .border-gray-200,
+	.dark .border-surface-200 {
+		border-color: var(--color-surface-700) !important;
+	}
+
+	.dark .divide-gray-200 > :not(:last-child),
+	.dark .divide-surface-200 > :not(:last-child) {
+		border-color: var(--color-surface-700) !important;
+	}
+
+	.dark .text-gray-900,
+	.dark .text-gray-800,
+	.dark .text-surface-950,
+	.dark .text-surface-900,
+	.dark .text-surface-800 {
+		color: var(--color-surface-100) !important;
+	}
+
+	.dark .text-gray-700,
+	.dark .text-gray-600,
+	.dark .text-surface-700,
+	.dark .text-surface-600 {
+		color: var(--color-surface-300) !important;
+	}
+
+	.dark .text-gray-500,
+	.dark .text-gray-400,
+	.dark .text-surface-500,
+	.dark .text-surface-400 {
+		color: var(--color-surface-400) !important;
 	}
 }
 
