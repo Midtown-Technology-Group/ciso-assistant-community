@@ -27,9 +27,9 @@ Use GitHub Actions workflow `MTG Build Frontend Image`.
 
 The workflow builds `frontend/Dockerfile` and pushes:
 
-- `ghcr.io/midtown-technology-group/ciso-assistant-community/frontend:mtg-<short-sha>`
-- `ghcr.io/midtown-technology-group/ciso-assistant-community/frontend:sha-<full-sha>`
-- `ghcr.io/midtown-technology-group/ciso-assistant-community/frontend:mtg-main` on `main`
+- `ghcr.io/midtown-technology-group/mtg-ciso-assistant-frontend:mtg-<short-sha>`
+- `ghcr.io/midtown-technology-group/mtg-ciso-assistant-frontend:sha-<full-sha>`
+- `ghcr.io/midtown-technology-group/mtg-ciso-assistant-frontend:mtg-main` on `main`
 
 The image build includes OCI labels, SBOM, and provenance.
 
