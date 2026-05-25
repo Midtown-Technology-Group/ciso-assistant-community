@@ -146,6 +146,14 @@ def test_inherited_for_folder_returns_current_targeted_assertions_only(
         effective_date=date.today() + timedelta(days=1),
     )
     future.target_folders.add(msp_domains["customer"])
+    status_expired = MSPControlAssertion.objects.create(
+        folder=msp_domains["provider"],
+        standards_folder=msp_domains["standards"],
+        applied_control=msp_control["applied_control"],
+        name="Status-expired disk encryption coverage",
+        status=MSPControlAssertion.CoverageStatus.EXPIRED,
+    )
+    status_expired.target_folders.add(msp_domains["customer"])
     other_customer = MSPControlAssertion.objects.create(
         folder=msp_domains["provider"],
         standards_folder=msp_domains["standards"],
@@ -177,3 +185,86 @@ def test_inherited_for_requirement_assessment_matches_reference_control(
     )
 
     assert list(coverage) == [assertion]
+
+
+@pytest.mark.django_db
+def test_sync_to_applied_controls_uses_inherited_msp_coverage(
+    msp_domains, msp_control, customer_requirement_assessment
+):
+    assertion = MSPControlAssertion.objects.create(
+        folder=msp_domains["provider"],
+        standards_folder=msp_domains["standards"],
+        applied_control=msp_control["applied_control"],
+        name="Disk encryption satisfies customer requirement",
+    )
+    assertion.target_folders.add(msp_domains["customer"])
+    assessment = customer_requirement_assessment.compliance_assessment
+
+    changes = assessment.sync_to_applied_controls(dry_run=True)
+
+    assert changes[str(customer_requirement_assessment.id)]["changes"] == [
+        {
+            "current": RequirementAssessment.Result.NOT_ASSESSED,
+            "new": RequirementAssessment.Result.COMPLIANT,
+        }
+    ]
+    customer_requirement_assessment.refresh_from_db()
+    assert customer_requirement_assessment.result == RequirementAssessment.Result.NOT_ASSESSED
+
+    assessment.sync_to_applied_controls(dry_run=False)
+    customer_requirement_assessment.refresh_from_db()
+
+    assert customer_requirement_assessment.result == RequirementAssessment.Result.COMPLIANT
+
+
+@pytest.mark.django_db
+def test_sync_to_applied_controls_preserves_local_control_authority(
+    msp_domains, msp_control, customer_requirement_assessment
+):
+    assertion = MSPControlAssertion.objects.create(
+        folder=msp_domains["provider"],
+        standards_folder=msp_domains["standards"],
+        applied_control=msp_control["applied_control"],
+        name="Inherited disk encryption coverage",
+    )
+    assertion.target_folders.add(msp_domains["customer"])
+    local_control = AppliedControl.objects.create(
+        folder=msp_domains["customer"],
+        name="Customer-managed disk encryption exception",
+        ref_id="CUSTOMER-DISK-ENCRYPTION",
+        reference_control=msp_control["reference_control"],
+        status=AppliedControl.Status.DEPRECATED,
+    )
+    customer_requirement_assessment.applied_controls.add(local_control)
+    assessment = customer_requirement_assessment.compliance_assessment
+
+    assessment.sync_to_applied_controls(dry_run=False)
+    customer_requirement_assessment.refresh_from_db()
+
+    assert (
+        customer_requirement_assessment.result
+        == RequirementAssessment.Result.NON_COMPLIANT
+    )
+
+
+@pytest.mark.django_db
+def test_sync_to_applied_controls_maps_degraded_msp_coverage_to_partial(
+    msp_domains, msp_control, customer_requirement_assessment
+):
+    assertion = MSPControlAssertion.objects.create(
+        folder=msp_domains["provider"],
+        standards_folder=msp_domains["standards"],
+        applied_control=msp_control["applied_control"],
+        name="Degraded disk encryption coverage",
+        status=MSPControlAssertion.CoverageStatus.DEGRADED,
+    )
+    assertion.target_folders.add(msp_domains["customer"])
+    assessment = customer_requirement_assessment.compliance_assessment
+
+    assessment.sync_to_applied_controls(dry_run=False)
+    customer_requirement_assessment.refresh_from_db()
+
+    assert (
+        customer_requirement_assessment.result
+        == RequirementAssessment.Result.PARTIALLY_COMPLIANT
+    )

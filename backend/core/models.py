@@ -5343,16 +5343,31 @@ class MSPControlAssertion(NameDescriptionMixin, FolderMixin):
     def is_current(self) -> bool:
         today = date.today()
         return (
-            self.status == self.CoverageStatus.ACTIVE
+            self.status != self.CoverageStatus.EXPIRED
             and (self.effective_date is None or self.effective_date <= today)
             and (self.expiry_date is None or self.expiry_date >= today)
         )
+
+    def to_requirement_assessment_result(self) -> "RequirementAssessment.Result":
+        if not self.is_current:
+            return RequirementAssessment.Result.NOT_ASSESSED
+        if (
+            self.status == self.CoverageStatus.ACTIVE
+            and self.result == self.CoverageResult.COVERED
+        ):
+            return RequirementAssessment.Result.COMPLIANT
+        if self.result == self.CoverageResult.NOT_COVERED:
+            return RequirementAssessment.Result.NON_COMPLIANT
+        if self.result == self.CoverageResult.NOT_APPLICABLE:
+            return RequirementAssessment.Result.NOT_APPLICABLE
+        return RequirementAssessment.Result.PARTIALLY_COMPLIANT
 
     @classmethod
     def inherited_for_folder(cls, folder: Folder) -> QuerySet["MSPControlAssertion"]:
         today = date.today()
         return (
             cls.objects.filter(target_folders=folder)
+            .exclude(status=cls.CoverageStatus.EXPIRED)
             .filter(Q(effective_date__isnull=True) | Q(effective_date__lte=today))
             .filter(Q(expiry_date__isnull=True) | Q(expiry_date__gte=today))
             .select_related(
@@ -7042,15 +7057,18 @@ class ComplianceAssessment(Assessment):
 
     def sync_to_applied_controls(self, dry_run=True):
         """
-        the logic is to get the requirement assessments that have applied controls attached
+        the logic is to get the requirement assessments with either local applied controls
+        or inherited MSP control assertions
         then for each:
-        if one applied control attached:
+        if one local applied control attached:
             if the AC status is active, toggle requirement assessment to compliant
             if the AC status is in any other status, toggle the requirement assessment to non_compliant
-        if two or more applied controls are attached:
+        if two or more local applied controls are attached:
             if all AC are active, toggle to compliant
             if at least one AC is active, toggle to partially compliant
             else toggle to non_compliant
+        if no local applied controls are attached:
+            infer the result from current inherited MSP control assertions
         """
 
         def infer_result(applied_controls):
@@ -7064,13 +7082,37 @@ class ComplianceAssessment(Assessment):
             else:
                 return RequirementAssessment.Result.NON_COMPLIANT
 
+        def infer_result_from_inherited_assertions(assertions):
+            assertion_results = [
+                result
+                for assertion in assertions
+                if (result := assertion.to_requirement_assessment_result())
+                != RequirementAssessment.Result.NOT_ASSESSED
+            ]
+            if not assertion_results:
+                return RequirementAssessment.Result.NOT_ASSESSED
+            if all(
+                result == RequirementAssessment.Result.COMPLIANT
+                for result in assertion_results
+            ):
+                return RequirementAssessment.Result.COMPLIANT
+            if all(
+                result == RequirementAssessment.Result.NOT_APPLICABLE
+                for result in assertion_results
+            ):
+                return RequirementAssessment.Result.NOT_APPLICABLE
+            if all(
+                result == RequirementAssessment.Result.NON_COMPLIANT
+                for result in assertion_results
+            ):
+                return RequirementAssessment.Result.NON_COMPLIANT
+            return RequirementAssessment.Result.PARTIALLY_COMPLIANT
+
         changes: dict[str, dict[str, RequirementAssessment.Result]] = {}
-        requirement_assessments_with_ac = (
-            RequirementAssessment.objects.filter(
-                compliance_assessment=self, applied_controls__isnull=False
-            )
+        requirement_assessments = (
+            RequirementAssessment.objects.filter(compliance_assessment=self)
             .select_related("requirement")
-            .prefetch_related("applied_controls")
+            .prefetch_related("applied_controls", "requirement__reference_controls")
             .distinct()
         )
 
@@ -7087,9 +7129,19 @@ class ComplianceAssessment(Assessment):
 
         to_update: set[RequirementAssessment] = set()
 
-        for ra in requirement_assessments_with_ac:
+        for ra in requirement_assessments:
             applied_controls = list(ra.applied_controls.all())
-            new_result = infer_result(applied_controls)
+            if applied_controls:
+                new_result = infer_result(applied_controls)
+            else:
+                inherited_assertions = list(
+                    MSPControlAssertion.inherited_for_requirement_assessment(ra)
+                )
+                new_result = infer_result_from_inherited_assertions(
+                    inherited_assertions
+                )
+                if new_result == RequirementAssessment.Result.NOT_ASSESSED:
+                    continue
             if ra.result != new_result:
                 ra_changes = {
                     "str": str(ra.requirement.safe_display_str),
