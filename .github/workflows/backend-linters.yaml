@@ -48,6 +48,7 @@ jobs:
       #   working-directory: ${{env.working-directory}}
       #   run: ruff check .
   ruff-enterprise:
+    if: ${{ hashFiles('enterprise/backend/pyproject.toml') != '' }}
     runs-on: ubuntu-24.04
     env:
       working-directory: ./enterprise/backend

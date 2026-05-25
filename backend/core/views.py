@@ -6547,6 +6547,101 @@ class RiskAssessmentActionPlanBudgetOverview(
         return Response(self.compute_budget_overview(qs))
 
 
+class MSPControlAssertionViewSet(BaseModelViewSet):
+    """
+    API endpoint for MSP-operated controls inherited by customer domains.
+    """
+
+    model = MSPControlAssertion
+    filterset_fields = [
+        "folder",
+        "standards_folder",
+        "target_folders",
+        "applied_control",
+        "reference_control",
+        "status",
+        "result",
+    ]
+    search_fields = [
+        "name",
+        "description",
+        "scope",
+        "evidence_note",
+        "applied_control__name",
+        "applied_control__ref_id",
+        "reference_control__name",
+        "reference_control__ref_id",
+    ]
+
+    def get_serializer_class(self, **kwargs):
+        if kwargs.get("action", self.action) == "inherited_coverage":
+            return MSPControlAssertionReadSerializer
+        return super().get_serializer_class(**kwargs)
+
+    def get_queryset(self):
+        return (
+            super()
+            .get_queryset()
+            .select_related(
+                "folder",
+                "standards_folder",
+                "applied_control",
+                "applied_control__folder",
+                "reference_control",
+            )
+            .prefetch_related("target_folders")
+        )
+
+    @action(detail=False, methods=["get"], url_path="inherited-coverage")
+    def inherited_coverage(self, request):
+        folder_id = request.query_params.get("folder")
+        requirement_assessment_id = request.query_params.get("requirement_assessment")
+
+        if not folder_id and not requirement_assessment_id:
+            raise DRFValidationError(
+                {
+                    "detail": "Provide either folder or requirement_assessment query parameter."
+                }
+            )
+
+        if requirement_assessment_id:
+            try:
+                requirement_assessment = RequirementAssessment.objects.select_related(
+                    "folder",
+                    "requirement",
+                ).get(id=requirement_assessment_id)
+            except RequirementAssessment.DoesNotExist:
+                raise NotFound("Requirement assessment not found.")
+            if not RoleAssignment.is_object_readable(
+                request.user, RequirementAssessment, requirement_assessment.id
+            ):
+                raise PermissionDenied("Requirement assessment is not readable.")
+            if not RoleAssignment.is_access_allowed(
+                request.user,
+                Permission.objects.get(codename="view_mspcontrolassertion"),
+                requirement_assessment.folder,
+            ):
+                raise PermissionDenied("MSP control assertions are not readable.")
+            coverage = MSPControlAssertion.inherited_for_requirement_assessment(
+                requirement_assessment
+            )
+        else:
+            try:
+                folder = Folder.objects.get(id=folder_id)
+            except Folder.DoesNotExist:
+                raise NotFound("Folder not found.")
+            if not RoleAssignment.is_access_allowed(
+                request.user,
+                Permission.objects.get(codename="view_mspcontrolassertion"),
+                folder,
+            ):
+                raise PermissionDenied("MSP control assertions are not readable.")
+            coverage = MSPControlAssertion.inherited_for_folder(folder)
+
+        serializer = self.get_serializer(coverage, many=True)
+        return Response({"results": serializer.data}, status=status.HTTP_200_OK)
+
+
 class PolicyViewSet(AppliedControlViewSet):
     model = Policy
     filterset_fields = [

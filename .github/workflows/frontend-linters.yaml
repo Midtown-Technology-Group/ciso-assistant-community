@@ -56,6 +56,7 @@ jobs:
       #   working-directory: ${{env.working-directory}}
       #   run: pnpm run check
   lint-enterprise:
+    if: ${{ hashFiles('enterprise/frontend/package.json') != '' }}
     runs-on: ubuntu-24.04
     env:
       working-directory: ./frontend
