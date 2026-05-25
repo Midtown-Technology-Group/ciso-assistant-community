@@ -5246,6 +5246,144 @@ class AppliedControl(
         return max(-1, days_remaining)
 
 
+class MSPControlAssertion(NameDescriptionMixin, FolderMixin):
+    class CoverageStatus(models.TextChoices):
+        ACTIVE = "active", _("Active")
+        DEGRADED = "degraded", _("Degraded")
+        IN_PROGRESS = "in_progress", _("In progress")
+        EXPIRED = "expired", _("Expired")
+
+    class CoverageResult(models.TextChoices):
+        COVERED = "covered", _("Covered")
+        PARTIALLY_COVERED = "partially_covered", _("Partially covered")
+        NOT_COVERED = "not_covered", _("Not covered")
+        NOT_APPLICABLE = "not_applicable", _("Not applicable")
+
+    applied_control = models.ForeignKey(
+        AppliedControl,
+        on_delete=models.PROTECT,
+        verbose_name=_("Provider applied control"),
+        related_name="msp_assertions",
+    )
+    reference_control = models.ForeignKey(
+        ReferenceControl,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        verbose_name=_("Reference control"),
+        related_name="msp_assertions",
+    )
+    standards_folder = models.ForeignKey(
+        Folder,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        verbose_name=_("Standards domain"),
+        related_name="msp_standard_assertions",
+    )
+    target_folders = models.ManyToManyField(
+        Folder,
+        blank=True,
+        verbose_name=_("Covered customer domains"),
+        related_name="inherited_msp_control_assertions",
+    )
+    status = models.CharField(
+        max_length=32,
+        choices=CoverageStatus.choices,
+        default=CoverageStatus.ACTIVE,
+        verbose_name=_("Status"),
+    )
+    result = models.CharField(
+        max_length=32,
+        choices=CoverageResult.choices,
+        default=CoverageResult.COVERED,
+        verbose_name=_("Result"),
+    )
+    scope = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_("Coverage scope"),
+        help_text=_("What the MSP-operated control covers for target domains."),
+    )
+    evidence_note = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_("Evidence note"),
+        help_text=_("Where customers and auditors should look for shared evidence."),
+    )
+    effective_date = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name=_("Effective date"),
+    )
+    expiry_date = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name=_("Expiry date"),
+    )
+
+    fields_to_check = ["name"]
+
+    class Meta:
+        verbose_name = _("MSP control assertion")
+        verbose_name_plural = _("MSP control assertions")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["folder", "applied_control", "name"],
+                name="unique_msp_control_assertion_name",
+            )
+        ]
+
+    def save(self, *args, **kwargs) -> None:
+        if self.reference_control_id is None and self.applied_control_id:
+            self.reference_control = self.applied_control.reference_control
+        super().save(*args, **kwargs)
+
+    @property
+    def is_current(self) -> bool:
+        today = date.today()
+        return (
+            self.status == self.CoverageStatus.ACTIVE
+            and (self.effective_date is None or self.effective_date <= today)
+            and (self.expiry_date is None or self.expiry_date >= today)
+        )
+
+    @classmethod
+    def inherited_for_folder(cls, folder: Folder) -> QuerySet["MSPControlAssertion"]:
+        today = date.today()
+        return (
+            cls.objects.filter(target_folders=folder)
+            .filter(Q(effective_date__isnull=True) | Q(effective_date__lte=today))
+            .filter(Q(expiry_date__isnull=True) | Q(expiry_date__gte=today))
+            .select_related(
+                "folder",
+                "standards_folder",
+                "applied_control",
+                "applied_control__folder",
+                "reference_control",
+            )
+            .distinct()
+        )
+
+    @classmethod
+    def inherited_for_requirement_assessment(
+        cls, requirement_assessment: "RequirementAssessment"
+    ) -> QuerySet["MSPControlAssertion"]:
+        queryset = cls.inherited_for_folder(requirement_assessment.folder)
+        applied_control_ids = requirement_assessment.applied_controls.values_list(
+            "id", flat=True
+        )
+        reference_control_ids = (
+            requirement_assessment.requirement.reference_controls.values_list(
+                "id", flat=True
+            )
+        )
+        return queryset.filter(
+            Q(applied_control_id__in=applied_control_ids)
+            | Q(reference_control_id__in=reference_control_ids)
+        )
+
+
 class OrganisationIssue(
     NameDescriptionMixin,
     FolderMixin,

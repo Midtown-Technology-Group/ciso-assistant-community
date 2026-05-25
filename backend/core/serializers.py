@@ -1418,6 +1418,21 @@ class AppliedControlReadSerializer(AppliedControlWriteSerializer):
         return ret
 
 
+class MSPControlAssertionWriteSerializer(BaseModelSerializer):
+    class Meta:
+        model = MSPControlAssertion
+        fields = "__all__"
+
+
+class MSPControlAssertionReadSerializer(MSPControlAssertionWriteSerializer):
+    folder = FieldsRelatedField()
+    standards_folder = FieldsRelatedField()
+    target_folders = FieldsRelatedField(many=True)
+    applied_control = FieldsRelatedField(["id", "name", "ref_id", "folder"])
+    reference_control = FieldsRelatedField(["id", "name", "ref_id", "urn"])
+    is_current = serializers.BooleanField(read_only=True)
+
+
 class AppliedControlListSerializer(BaseModelSerializer):
     """
     Lightweight serializer for the applied controls list view.
