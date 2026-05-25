@@ -83,6 +83,7 @@
 	const complianceAssessment = data.requirementAssessment.compliance_assessment;
 	const viewerRole: 'respondent' | 'auditor' =
 		data.viewerRole === 'auditor' ? 'auditor' : 'respondent';
+	const inheritedMspCoverage = $derived(data.inheritedMspCoverage ?? []);
 	const {
 		showAppliedControls,
 		showEvidences,
@@ -186,6 +187,59 @@
 			</h2>
 			<MarkdownRenderer content={data.requirement.description} />
 		</div>
+	{/if}
+	{#if inheritedMspCoverage.length > 0}
+		<section class="card p-4 preset-tonal-success space-y-3">
+			<div class="flex flex-wrap items-center justify-between gap-2">
+				<h2 class="font-semibold text-base flex items-center gap-2">
+					<i class="fa-solid fa-shield-check"></i>
+					<span>Inherited MSP coverage</span>
+				</h2>
+				<span class="badge preset-filled-success-500 text-xs">
+					{inheritedMspCoverage.length}
+					{inheritedMspCoverage.length === 1 ? 'control' : 'controls'}
+				</span>
+			</div>
+			<div class="space-y-2">
+				{#each inheritedMspCoverage as coverage}
+					<article class="rounded-container border border-success-300-700 bg-surface-50-950 p-3">
+						<div class="flex flex-wrap items-start justify-between gap-2">
+							<div class="min-w-0">
+								<p class="font-medium">{coverage.name}</p>
+								<p class="text-xs text-surface-600-300">
+									{coverage.applied_control?.str ?? coverage.applied_control?.name}
+									{#if coverage.applied_control?.folder?.str}
+										<span> · {coverage.applied_control.folder.str}</span>
+									{/if}
+								</p>
+							</div>
+							<div class="flex flex-wrap gap-2">
+								<span class="badge preset-tonal-success text-xs">{safeTranslate(coverage.result)}</span>
+								<span class="badge preset-tonal-primary text-xs">{safeTranslate(coverage.status)}</span>
+							</div>
+						</div>
+						{#if coverage.scope}
+							<p class="mt-2 text-sm">{coverage.scope}</p>
+						{/if}
+						{#if coverage.evidence_note}
+							<p class="mt-2 text-xs text-surface-600-300">
+								<i class="fa-solid fa-file-shield mr-1"></i>{coverage.evidence_note}
+							</p>
+						{/if}
+						{#if coverage.reference_control?.str || coverage.standards_folder?.str}
+							<div class="mt-2 flex flex-wrap gap-2 text-xs">
+								{#if coverage.reference_control?.str}
+									<span class="badge preset-tonal-secondary">{coverage.reference_control.str}</span>
+								{/if}
+								{#if coverage.standards_folder?.str}
+									<span class="badge preset-tonal-secondary">{coverage.standards_folder.str}</span>
+								{/if}
+							</div>
+						{/if}
+					</article>
+				{/each}
+			</div>
+		</section>
 	{/if}
 	{#if has_threats || has_reference_controls || annotation || mappingInference.result}
 		<div class="card p-4 preset-tonal-secondary text-sm flex flex-col justify-evenly cursor-auto">

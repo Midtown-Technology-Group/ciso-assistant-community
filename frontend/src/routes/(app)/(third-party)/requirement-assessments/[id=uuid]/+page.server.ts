@@ -9,6 +9,14 @@ export const load = (async ({ fetch, params }) => {
 	const URLModel = 'requirement-assessments';
 	const baseEndpoint = `${BASE_API_URL}/${URLModel}/${params.id}/`;
 	const requirementAssessment = await fetch(baseEndpoint).then((res) => res.json());
+	const inheritedMspCoverage = await fetch(
+		`${BASE_API_URL}/msp-control-assertions/inherited-coverage/?requirement_assessment=${params.id}`
+	)
+		.then((res) => (res.ok ? res.json() : { results: [] }))
+		.catch((error) => {
+			console.error('Failed to fetch inherited MSP coverage:', error);
+			return { results: [] };
+		});
 	const complianceAssessmentScore = await fetch(
 		`${BASE_API_URL}/compliance-assessments/${requirementAssessment.compliance_assessment.id}/global_score/`
 	).then((res) => res.json());
@@ -45,6 +53,7 @@ export const load = (async ({ fetch, params }) => {
 	return {
 		requirementAssessment,
 		complianceAssessmentScore,
+		inheritedMspCoverage: inheritedMspCoverage?.results ?? [],
 		requirement,
 		parent,
 		tables,
