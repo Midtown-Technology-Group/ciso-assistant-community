@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 
 import pytest
+from django.utils import timezone
 
 from core.models import (
     AppliedControl,
@@ -153,6 +154,38 @@ def test_msp_assertion_serializer_accepts_provider_children(
     )
 
     assert serializer.is_valid(), serializer.errors
+
+
+@pytest.mark.django_db
+def test_msp_assertion_records_bifrost_verification_signal(
+    msp_domains, msp_control
+):
+    verified_at = timezone.now()
+    assertion = MSPControlAssertion.objects.create(
+        folder=msp_domains["provider"],
+        provider_folder=msp_domains["provider"],
+        applied_control=msp_control["applied_control"],
+        name="Disk encryption is centrally enforced",
+        result=MSPControlAssertion.CoverageResult.PARTIALLY_COVERED,
+        status=MSPControlAssertion.CoverageStatus.DEGRADED,
+        verification_source="Bifrost",
+        verification_reference="workflow-run:disk-encryption:123",
+        verification_summary="42 of 43 managed devices reported encrypted disks.",
+        verification_payload={"encrypted": 42, "total": 43},
+        last_verified_at=verified_at,
+    )
+    assertion.target_folders.add(msp_domains["customer"])
+
+    assertion.refresh_from_db()
+
+    assert assertion.verification_source == "Bifrost"
+    assert assertion.verification_reference == "workflow-run:disk-encryption:123"
+    assert assertion.verification_payload == {"encrypted": 42, "total": 43}
+    assert assertion.last_verified_at == verified_at
+    assert (
+        assertion.to_requirement_assessment_result()
+        == RequirementAssessment.Result.PARTIALLY_COMPLIANT
+    )
 
 
 @pytest.mark.django_db

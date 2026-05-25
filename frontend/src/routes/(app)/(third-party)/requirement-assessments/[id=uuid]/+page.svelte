@@ -226,6 +226,20 @@
 								<i class="fa-solid fa-file-shield mr-1"></i>{coverage.evidence_note}
 							</p>
 						{/if}
+						{#if coverage.verification_source || coverage.last_verified_at || coverage.verification_summary}
+							<p class="mt-2 text-xs text-surface-600-300">
+								<i class="fa-solid fa-signal mr-1"></i>
+								{#if coverage.verification_source}
+									<span>{coverage.verification_source}</span>
+								{/if}
+								{#if coverage.last_verified_at}
+									<span> · {new Date(coverage.last_verified_at).toLocaleString()}</span>
+								{/if}
+								{#if coverage.verification_summary}
+									<span> · {coverage.verification_summary}</span>
+								{/if}
+							</p>
+						{/if}
 						{#if coverage.reference_control?.str || coverage.provider_folder?.str}
 							<div class="mt-2 flex flex-wrap gap-2 text-xs">
 								{#if coverage.reference_control?.str}
