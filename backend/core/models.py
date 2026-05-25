@@ -5273,13 +5273,11 @@ class MSPControlAssertion(NameDescriptionMixin, FolderMixin):
         verbose_name=_("Reference control"),
         related_name="msp_assertions",
     )
-    standards_folder = models.ForeignKey(
+    provider_folder = models.ForeignKey(
         Folder,
         on_delete=models.PROTECT,
-        null=True,
-        blank=True,
-        verbose_name=_("Standards domain"),
-        related_name="msp_standard_assertions",
+        verbose_name=_("Service provider domain"),
+        related_name="msp_provider_assertions",
     )
     target_folders = models.ManyToManyField(
         Folder,
@@ -5335,9 +5333,38 @@ class MSPControlAssertion(NameDescriptionMixin, FolderMixin):
         ]
 
     def save(self, *args, **kwargs) -> None:
+        if self.provider_folder_id is None:
+            self.provider_folder = (
+                self.applied_control.folder if self.applied_control_id else self.folder
+            )
+        if self.folder_id is None or self.folder_id == Folder.get_root_folder_id():
+            self.folder = self.provider_folder
         if self.reference_control_id is None and self.applied_control_id:
             self.reference_control = self.applied_control.reference_control
         super().save(*args, **kwargs)
+
+    def clean(self) -> None:
+        if self.provider_folder_id and self.folder_id != self.provider_folder_id:
+            raise ValidationError(
+                {
+                    "folder": _(
+                        "MSP control assertions must be owned by the service provider domain."
+                    )
+                }
+            )
+        if (
+            self.applied_control_id
+            and self.provider_folder_id
+            and self.applied_control.folder_id != self.provider_folder_id
+        ):
+            raise ValidationError(
+                {
+                    "applied_control": _(
+                        "Provider applied control must belong to the service provider domain."
+                    )
+                }
+            )
+        super().clean()
 
     @property
     def is_current(self) -> bool:
@@ -5372,7 +5399,7 @@ class MSPControlAssertion(NameDescriptionMixin, FolderMixin):
             .filter(Q(expiry_date__isnull=True) | Q(expiry_date__gte=today))
             .select_related(
                 "folder",
-                "standards_folder",
+                "provider_folder",
                 "applied_control",
                 "applied_control__folder",
                 "reference_control",

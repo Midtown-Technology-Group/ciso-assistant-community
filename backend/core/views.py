@@ -6555,7 +6555,7 @@ class MSPControlAssertionViewSet(BaseModelViewSet):
     model = MSPControlAssertion
     filterset_fields = [
         "folder",
-        "standards_folder",
+        "provider_folder",
         "target_folders",
         "applied_control",
         "reference_control",
@@ -6584,7 +6584,7 @@ class MSPControlAssertionViewSet(BaseModelViewSet):
             .get_queryset()
             .select_related(
                 "folder",
-                "standards_folder",
+                "provider_folder",
                 "applied_control",
                 "applied_control__folder",
                 "reference_control",

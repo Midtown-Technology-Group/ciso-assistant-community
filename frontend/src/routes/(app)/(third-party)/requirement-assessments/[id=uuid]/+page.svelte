@@ -226,13 +226,13 @@
 								<i class="fa-solid fa-file-shield mr-1"></i>{coverage.evidence_note}
 							</p>
 						{/if}
-						{#if coverage.reference_control?.str || coverage.standards_folder?.str}
+						{#if coverage.reference_control?.str || coverage.provider_folder?.str}
 							<div class="mt-2 flex flex-wrap gap-2 text-xs">
 								{#if coverage.reference_control?.str}
 									<span class="badge preset-tonal-secondary">{coverage.reference_control.str}</span>
 								{/if}
-								{#if coverage.standards_folder?.str}
-									<span class="badge preset-tonal-secondary">{coverage.standards_folder.str}</span>
+								{#if coverage.provider_folder?.str}
+									<span class="badge preset-tonal-secondary">{coverage.provider_folder.str}</span>
 								{/if}
 							</div>
 						{/if}

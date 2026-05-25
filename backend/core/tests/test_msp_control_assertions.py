@@ -12,6 +12,7 @@ from core.models import (
     RequirementAssessment,
     RequirementNode,
 )
+from core.serializers import MSPControlAssertionWriteSerializer
 from iam.models import Folder
 
 
@@ -20,28 +21,28 @@ def msp_domains():
     root = Folder.objects.get(content_type=Folder.ContentType.ROOT)
     provider = Folder.objects.create(
         parent_folder=root,
-        name="MTG Provider",
+        name="MTG MSP",
         description="MSP provider domain",
     )
-    standards = Folder.objects.create(
+    internal = Folder.objects.create(
         parent_folder=root,
-        name="MTG Global MSP Standards",
-        description="Global MSP standards domain",
+        name="MTG Internal",
+        description="MTG internal compliance domain",
     )
     customer = Folder.objects.create(
-        parent_folder=root,
+        parent_folder=provider,
         name="Customer A",
         description="Customer domain",
     )
     sibling_customer = Folder.objects.create(
-        parent_folder=root,
+        parent_folder=provider,
         name="Customer B",
         description="Customer domain",
     )
     return {
         "root": root,
         "provider": provider,
-        "standards": standards,
+        "internal": internal,
         "customer": customer,
         "sibling_customer": sibling_customer,
     }
@@ -50,7 +51,7 @@ def msp_domains():
 @pytest.fixture
 def msp_control(msp_domains):
     reference_control = ReferenceControl.objects.create(
-        folder=msp_domains["standards"],
+        folder=msp_domains["provider"],
         name="Disk encryption",
         ref_id="CIS-3.11",
         urn="urn:mtg:reference-control:disk-encryption",
@@ -71,12 +72,12 @@ def msp_control(msp_domains):
 @pytest.fixture
 def customer_requirement_assessment(msp_domains, msp_control):
     framework = Framework.objects.create(
-        folder=msp_domains["standards"],
+        folder=msp_domains["provider"],
         name="CIS IG1",
         urn="urn:mtg:framework:cis-ig1",
     )
     requirement = RequirementNode.objects.create(
-        folder=msp_domains["standards"],
+        folder=msp_domains["provider"],
         framework=framework,
         name="Encrypt endpoint disks",
         urn="urn:mtg:requirement:encrypt-endpoint-disks",
@@ -111,7 +112,7 @@ def test_msp_assertion_inherits_reference_control_from_applied_control(
 ):
     assertion = MSPControlAssertion.objects.create(
         folder=msp_domains["provider"],
-        standards_folder=msp_domains["standards"],
+        provider_folder=msp_domains["provider"],
         applied_control=msp_control["applied_control"],
         name="Disk encryption is centrally enforced",
     )
@@ -120,19 +121,54 @@ def test_msp_assertion_inherits_reference_control_from_applied_control(
 
 
 @pytest.mark.django_db
+def test_msp_assertion_serializer_requires_customer_children(
+    msp_domains, msp_control
+):
+    serializer = MSPControlAssertionWriteSerializer(
+        data={
+            "folder": str(msp_domains["provider"].id),
+            "provider_folder": str(msp_domains["provider"].id),
+            "applied_control": str(msp_control["applied_control"].id),
+            "name": "Disk encryption is centrally enforced",
+            "target_folders": [str(msp_domains["internal"].id)],
+        }
+    )
+
+    assert not serializer.is_valid()
+    assert "target_folders" in serializer.errors
+
+
+@pytest.mark.django_db
+def test_msp_assertion_serializer_accepts_provider_children(
+    msp_domains, msp_control
+):
+    serializer = MSPControlAssertionWriteSerializer(
+        data={
+            "folder": str(msp_domains["provider"].id),
+            "provider_folder": str(msp_domains["provider"].id),
+            "applied_control": str(msp_control["applied_control"].id),
+            "name": "Disk encryption is centrally enforced",
+            "target_folders": [str(msp_domains["customer"].id)],
+        }
+    )
+
+    assert serializer.is_valid(), serializer.errors
+
+
+@pytest.mark.django_db
 def test_inherited_for_folder_returns_current_targeted_assertions_only(
     msp_domains, msp_control
 ):
     current = MSPControlAssertion.objects.create(
         folder=msp_domains["provider"],
-        standards_folder=msp_domains["standards"],
+        provider_folder=msp_domains["provider"],
         applied_control=msp_control["applied_control"],
         name="Current disk encryption coverage",
     )
     current.target_folders.add(msp_domains["customer"])
     expired = MSPControlAssertion.objects.create(
         folder=msp_domains["provider"],
-        standards_folder=msp_domains["standards"],
+        provider_folder=msp_domains["provider"],
         applied_control=msp_control["applied_control"],
         name="Expired disk encryption coverage",
         expiry_date=date.today() - timedelta(days=1),
@@ -140,7 +176,7 @@ def test_inherited_for_folder_returns_current_targeted_assertions_only(
     expired.target_folders.add(msp_domains["customer"])
     future = MSPControlAssertion.objects.create(
         folder=msp_domains["provider"],
-        standards_folder=msp_domains["standards"],
+        provider_folder=msp_domains["provider"],
         applied_control=msp_control["applied_control"],
         name="Future disk encryption coverage",
         effective_date=date.today() + timedelta(days=1),
@@ -148,7 +184,7 @@ def test_inherited_for_folder_returns_current_targeted_assertions_only(
     future.target_folders.add(msp_domains["customer"])
     status_expired = MSPControlAssertion.objects.create(
         folder=msp_domains["provider"],
-        standards_folder=msp_domains["standards"],
+        provider_folder=msp_domains["provider"],
         applied_control=msp_control["applied_control"],
         name="Status-expired disk encryption coverage",
         status=MSPControlAssertion.CoverageStatus.EXPIRED,
@@ -156,7 +192,7 @@ def test_inherited_for_folder_returns_current_targeted_assertions_only(
     status_expired.target_folders.add(msp_domains["customer"])
     other_customer = MSPControlAssertion.objects.create(
         folder=msp_domains["provider"],
-        standards_folder=msp_domains["standards"],
+        provider_folder=msp_domains["provider"],
         applied_control=msp_control["applied_control"],
         name="Other customer disk encryption coverage",
     )
@@ -173,7 +209,7 @@ def test_inherited_for_requirement_assessment_matches_reference_control(
 ):
     assertion = MSPControlAssertion.objects.create(
         folder=msp_domains["provider"],
-        standards_folder=msp_domains["standards"],
+        provider_folder=msp_domains["provider"],
         applied_control=msp_control["applied_control"],
         name="Disk encryption satisfies customer requirement",
         scope="MTG enforces endpoint disk encryption through central management.",
@@ -193,7 +229,7 @@ def test_sync_to_applied_controls_uses_inherited_msp_coverage(
 ):
     assertion = MSPControlAssertion.objects.create(
         folder=msp_domains["provider"],
-        standards_folder=msp_domains["standards"],
+        provider_folder=msp_domains["provider"],
         applied_control=msp_control["applied_control"],
         name="Disk encryption satisfies customer requirement",
     )
@@ -223,7 +259,7 @@ def test_sync_to_applied_controls_preserves_local_control_authority(
 ):
     assertion = MSPControlAssertion.objects.create(
         folder=msp_domains["provider"],
-        standards_folder=msp_domains["standards"],
+        provider_folder=msp_domains["provider"],
         applied_control=msp_control["applied_control"],
         name="Inherited disk encryption coverage",
     )
@@ -253,7 +289,7 @@ def test_sync_to_applied_controls_maps_degraded_msp_coverage_to_partial(
 ):
     assertion = MSPControlAssertion.objects.create(
         folder=msp_domains["provider"],
-        standards_folder=msp_domains["standards"],
+        provider_folder=msp_domains["provider"],
         applied_control=msp_control["applied_control"],
         name="Degraded disk encryption coverage",
         status=MSPControlAssertion.CoverageStatus.DEGRADED,
