@@ -111,7 +111,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         default=iam.models.Folder.get_root_folder_id,
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="mspcontrolassertion_folder",
+                        related_name="%(class)s_folder",
                         to="iam.folder",
                     ),
                 ),
