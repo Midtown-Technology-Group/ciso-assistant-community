@@ -1419,6 +1419,55 @@ class AppliedControlReadSerializer(AppliedControlWriteSerializer):
 
 
 class MSPControlAssertionWriteSerializer(BaseModelSerializer):
+    def validate(self, attrs):
+        attrs = super().validate(attrs)
+        provider_folder = attrs.get(
+            "provider_folder", getattr(self.instance, "provider_folder", None)
+        )
+        folder = attrs.get("folder", getattr(self.instance, "folder", None))
+        applied_control = attrs.get(
+            "applied_control", getattr(self.instance, "applied_control", None)
+        )
+        target_folders = attrs.get("target_folders")
+
+        if provider_folder is None and applied_control is not None:
+            provider_folder = applied_control.folder
+            attrs["provider_folder"] = provider_folder
+        if folder is None and provider_folder is not None:
+            folder = provider_folder
+            attrs["folder"] = folder
+
+        if provider_folder and folder and folder != provider_folder:
+            raise serializers.ValidationError(
+                {
+                    "folder": "MSP control assertions must be owned by the service provider domain."
+                }
+            )
+        if (
+            provider_folder
+            and applied_control
+            and applied_control.folder_id != provider_folder.id
+        ):
+            raise serializers.ValidationError(
+                {
+                    "applied_control": "Provider applied control must belong to the service provider domain."
+                }
+            )
+        if provider_folder and target_folders is not None:
+            invalid_targets = [
+                target
+                for target in target_folders
+                if provider_folder.id
+                not in [parent.id for parent in target.get_parent_folders()]
+            ]
+            if invalid_targets:
+                raise serializers.ValidationError(
+                    {
+                        "target_folders": "Covered customer domains must be children of the service provider domain."
+                    }
+                )
+        return attrs
+
     class Meta:
         model = MSPControlAssertion
         fields = "__all__"
@@ -1426,7 +1475,7 @@ class MSPControlAssertionWriteSerializer(BaseModelSerializer):
 
 class MSPControlAssertionReadSerializer(MSPControlAssertionWriteSerializer):
     folder = FieldsRelatedField()
-    standards_folder = FieldsRelatedField()
+    provider_folder = FieldsRelatedField()
     target_folders = FieldsRelatedField(many=True)
     applied_control = FieldsRelatedField(["id", "name", "ref_id", "folder"])
     reference_control = FieldsRelatedField(["id", "name", "ref_id", "urn"])
