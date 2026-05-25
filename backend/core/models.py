@@ -5309,6 +5309,37 @@ class MSPControlAssertion(NameDescriptionMixin, FolderMixin):
         verbose_name=_("Evidence note"),
         help_text=_("Where customers and auditors should look for shared evidence."),
     )
+    verification_source = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True,
+        verbose_name=_("Verification source"),
+        help_text=_("System or workflow that last verified this assertion."),
+    )
+    verification_reference = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name=_("Verification reference"),
+        help_text=_("External run, execution, or evidence reference for the last verification."),
+    )
+    verification_summary = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_("Verification summary"),
+        help_text=_("Short machine-generated summary of the latest technical verification."),
+    )
+    verification_payload = models.JSONField(
+        default=dict,
+        blank=True,
+        verbose_name=_("Verification payload"),
+        help_text=_("Structured non-secret details from the latest technical verification."),
+    )
+    last_verified_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_("Last verified at"),
+    )
     effective_date = models.DateField(
         null=True,
         blank=True,
