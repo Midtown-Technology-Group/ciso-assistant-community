@@ -97,20 +97,22 @@
 			{safeTranslate('noResultsFound')}
 		</div>
 	{:else}
-		<div class="overflow-x-auto">
-			<table class="w-full text-left text-sm">
-				<thead class="text-xs uppercase text-surface-500 dark:text-surface-400">
-					<tr>
-						<th class="py-2 font-medium">{m.domains()}</th>
-						<th class="py-2 font-medium">{safeTranslate('parentDomain')}</th>
-						<th class="py-2 font-medium">{safeTranslate('contentType')}</th>
-						<th class="py-2 text-right font-medium">{safeTranslate('customerChildren')}</th>
-					</tr>
-				</thead>
-				<tbody class="divide-y divide-surface-100 dark:divide-surface-800">
+		<div class="space-y-1 text-sm">
+			<div
+				class="grid min-w-[42rem] grid-cols-[minmax(14rem,1fr)_minmax(10rem,0.7fr)_7rem_8rem] gap-3 text-xs uppercase text-surface-500 dark:text-surface-400"
+			>
+				<div class="py-2 font-medium">{m.domains()}</div>
+				<div class="py-2 font-medium">{safeTranslate('parentDomain')}</div>
+				<div class="py-2 font-medium">{safeTranslate('contentType')}</div>
+				<div class="py-2 text-right font-medium">{safeTranslate('customerChildren')}</div>
+			</div>
+			<div class="overflow-x-auto">
+				<div class="min-w-[42rem] divide-y divide-surface-100 dark:divide-surface-800">
 					{#each rows as row (row.id)}
-						<tr class="text-surface-900 dark:text-surface-100">
-							<td class="py-2">
+						<div
+							class="grid grid-cols-[minmax(14rem,1fr)_minmax(10rem,0.7fr)_7rem_8rem] gap-3 text-surface-900 dark:text-surface-100"
+						>
+							<div class="py-2">
 								<a
 									href="/folders/{row.id}"
 									class="inline-flex items-center gap-2 hover:text-primary-700 dark:hover:text-primary-200"
@@ -119,18 +121,18 @@
 									<i class="fa-solid fa-folder-tree text-xs text-surface-400"></i>
 									<span>{row.name}</span>
 								</a>
-							</td>
-							<td class="py-2 text-surface-600 dark:text-surface-300">
+							</div>
+							<div class="py-2 text-surface-600 dark:text-surface-300">
 								{row.path.at(-1) ?? '-'}
-							</td>
-							<td class="py-2 text-surface-600 dark:text-surface-300">{row.type}</td>
-							<td class="py-2 text-right tabular-nums text-surface-600 dark:text-surface-300">
+							</div>
+							<div class="py-2 text-surface-600 dark:text-surface-300">{row.type}</div>
+							<div class="py-2 text-right tabular-nums text-surface-600 dark:text-surface-300">
 								{row.childCount}
-							</td>
-						</tr>
+							</div>
+						</div>
 					{/each}
-				</tbody>
-			</table>
+				</div>
+			</div>
 		</div>
 	{/if}
 </section>
