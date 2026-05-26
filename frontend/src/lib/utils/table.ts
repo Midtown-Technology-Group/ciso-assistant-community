@@ -122,6 +122,15 @@ export const DOMAIN_FILTER: ListViewFilterConfig = {
 	}
 };
 
+export const DOMAIN_ONLY_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'folders?content_type=DO',
+		label: 'domain',
+		multiple: true
+	}
+};
+
 export const LABELS_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
@@ -268,6 +277,40 @@ export const APPLIED_CONTROL_STATUS_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
 		optionsEndpoint: 'applied-controls/status',
+		optionsLabelField: 'label',
+		optionsValueField: 'value',
+		label: 'status',
+		browserCache: 'force-cache',
+		multiple: true
+	}
+};
+
+export const MSP_CONTROL_ASSERTION_RESULT_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		options: [
+			{ label: 'covered', value: 'covered' },
+			{ label: 'partially_covered', value: 'partially_covered' },
+			{ label: 'not_covered', value: 'not_covered' },
+			{ label: 'not_applicable', value: 'not_applicable' }
+		],
+		optionsLabelField: 'label',
+		optionsValueField: 'value',
+		label: 'result',
+		browserCache: 'force-cache',
+		multiple: true
+	}
+};
+
+export const MSP_CONTROL_ASSERTION_STATUS_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		options: [
+			{ label: 'active', value: 'active' },
+			{ label: 'degraded', value: 'degraded' },
+			{ label: 'in_progress', value: 'in_progress' },
+			{ label: 'expired', value: 'expired' }
+		],
 		optionsLabelField: 'label',
 		optionsValueField: 'value',
 		label: 'status',
@@ -590,6 +633,15 @@ export const REFERENCE_CONTROL_FILTER: ListViewFilterConfig = {
 	props: {
 		label: 'referenceControl',
 		optionsEndpoint: 'reference-controls',
+		multiple: true
+	}
+};
+
+export const APPLIED_CONTROL_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'applied-controls',
+		label: 'appliedControl',
 		multiple: true
 	}
 };
@@ -1585,6 +1637,39 @@ export const listViewFields = {
 			is_assigned: IS_ASSIGNED_FILTER,
 			owner: OWNER_FILTER,
 			linked_models: APPLIED_CONTROL_LINKED_MODELS_FILTER
+		}
+	},
+	'msp-control-assertions': {
+		head: [
+			'name',
+			'providerFolder',
+			'targetFolders',
+			'appliedControl',
+			'referenceControl',
+			'result',
+			'status',
+			'lastVerifiedAt',
+			'isCurrent'
+		],
+		body: [
+			'name',
+			'provider_folder',
+			'target_folders',
+			'applied_control',
+			'reference_control',
+			'result',
+			'status',
+			'last_verified_at',
+			'is_current'
+		],
+		meta: ['id', 'scope', 'evidence_note', 'verification_source', 'verification_reference'],
+		filters: {
+			provider_folder: DOMAIN_FILTER,
+			target_folders: DOMAIN_ONLY_FILTER,
+			applied_control: APPLIED_CONTROL_FILTER,
+			reference_control: REFERENCE_CONTROL_FILTER,
+			result: MSP_CONTROL_ASSERTION_RESULT_FILTER,
+			status: MSP_CONTROL_ASSERTION_STATUS_FILTER
 		}
 	},
 	policies: {

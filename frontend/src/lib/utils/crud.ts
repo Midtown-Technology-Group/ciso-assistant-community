@@ -475,6 +475,54 @@ export const URL_MODEL_MAP: ModelMap = {
 			{ field: 'priority' }
 		]
 	},
+	'msp-control-assertions': {
+		name: 'mspcontrolassertion',
+		localName: 'mspControlAssertion',
+		localNamePlural: 'mspControlAssertions',
+		verboseName: 'MSP control assertion',
+		verboseNamePlural: 'MSP control assertions',
+		detailViewFields: [
+			{ field: 'id' },
+			{ field: 'name' },
+			{ field: 'description' },
+			{ field: 'provider_folder' },
+			{ field: 'target_folders' },
+			{ field: 'applied_control' },
+			{ field: 'reference_control' },
+			{ field: 'result' },
+			{ field: 'status' },
+			{ field: 'scope' },
+			{ field: 'evidence_note' },
+			{ field: 'verification_source' },
+			{ field: 'verification_reference' },
+			{ field: 'verification_summary' },
+			{ field: 'last_verified_at', type: 'datetime' },
+			{ field: 'effective_date', type: 'date' },
+			{ field: 'expiry_date', type: 'date' },
+			{ field: 'is_current' },
+			{ field: 'created_at', type: 'datetime' },
+			{ field: 'updated_at', type: 'datetime' }
+		],
+		foreignKeyFields: [
+			{
+				field: 'provider_folder',
+				urlModel: 'folders',
+				urlParams: 'content_type=DO&content_type=GL'
+			},
+			{ field: 'target_folders', urlModel: 'folders', urlParams: 'content_type=DO' },
+			{ field: 'applied_control', urlModel: 'applied-controls' },
+			{ field: 'reference_control', urlModel: 'reference-controls' }
+		],
+		selectFields: [{ field: 'result' }, { field: 'status' }],
+		filters: [
+			{ field: 'provider_folder' },
+			{ field: 'target_folders' },
+			{ field: 'applied_control' },
+			{ field: 'reference_control' },
+			{ field: 'result' },
+			{ field: 'status' }
+		]
+	},
 	'applied-controls_duplicate': {
 		name: 'appliedcontrol',
 		localName: 'appliedControl',
