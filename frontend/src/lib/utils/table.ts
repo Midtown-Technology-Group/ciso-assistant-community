@@ -288,7 +288,12 @@ export const APPLIED_CONTROL_STATUS_FILTER: ListViewFilterConfig = {
 export const MSP_CONTROL_ASSERTION_RESULT_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
-		optionsEndpoint: 'msp-control-assertions/result',
+		options: [
+			{ label: 'covered', value: 'covered' },
+			{ label: 'partially_covered', value: 'partially_covered' },
+			{ label: 'not_covered', value: 'not_covered' },
+			{ label: 'not_applicable', value: 'not_applicable' }
+		],
 		optionsLabelField: 'label',
 		optionsValueField: 'value',
 		label: 'result',
@@ -300,7 +305,12 @@ export const MSP_CONTROL_ASSERTION_RESULT_FILTER: ListViewFilterConfig = {
 export const MSP_CONTROL_ASSERTION_STATUS_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
-		optionsEndpoint: 'msp-control-assertions/status',
+		options: [
+			{ label: 'active', value: 'active' },
+			{ label: 'degraded', value: 'degraded' },
+			{ label: 'in_progress', value: 'in_progress' },
+			{ label: 'expired', value: 'expired' }
+		],
 		optionsLabelField: 'label',
 		optionsValueField: 'value',
 		label: 'status',
