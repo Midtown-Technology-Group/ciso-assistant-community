@@ -65,6 +65,18 @@
 		background-color: var(--color-surface-100);
 	}
 
+	.dark,
+	.dark body {
+		color: var(--color-surface-100);
+	}
+
+	.dark main,
+	.dark section,
+	.dark article,
+	.dark aside {
+		color: var(--color-surface-100);
+	}
+
 	.dark .input,
 	.dark .select,
 	.dark .multiselect,
@@ -91,6 +103,39 @@
 	.dark .bg-surface-100 {
 		background-color: var(--color-surface-900) !important;
 		color: var(--color-surface-100);
+	}
+
+	.dark .bg-gray-50,
+	.dark .bg-gray-100,
+	.dark .bg-slate-50,
+	.dark .bg-slate-100 {
+		background-color: var(--color-surface-900) !important;
+		color: var(--color-surface-100);
+	}
+
+	.dark .bg-blue-50,
+	.dark .bg-violet-50,
+	.dark .bg-purple-50,
+	.dark .bg-sky-50 {
+		background-color: color-mix(in oklch, var(--color-primary-900), transparent 30%) !important;
+		color: var(--color-surface-50) !important;
+	}
+
+	.dark .bg-green-50,
+	.dark .bg-emerald-50,
+	.dark .bg-teal-50 {
+		background-color: color-mix(in oklch, var(--color-success-900), transparent 30%) !important;
+		color: var(--color-surface-50) !important;
+	}
+
+	.dark .bg-yellow-50,
+	.dark .bg-amber-50 {
+		background-color: color-mix(in oklch, var(--color-warning-900), transparent 28%) !important;
+		color: var(--color-surface-50) !important;
+	}
+
+	.dark [data-testid='logo-image'] {
+		filter: drop-shadow(0 10px 20px rgb(0 0 0 / 0.22));
 	}
 
 	.dark .hover\:bg-gray-50:hover,
@@ -133,7 +178,8 @@
 	.dark .text-gray-700,
 	.dark .text-gray-600,
 	.dark .text-surface-700,
-	.dark .text-surface-600 {
+	.dark .text-surface-600,
+	.dark .text-surface-600-300 {
 		color: var(--color-surface-200) !important;
 	}
 
@@ -141,12 +187,28 @@
 	.dark .text-gray-400,
 	.dark .text-surface-500,
 	.dark .text-surface-400 {
-		color: var(--color-surface-300) !important;
+		color: var(--color-surface-200) !important;
 	}
 
 	.dark .text-gray-300,
 	.dark .text-surface-300 {
-		color: var(--color-surface-400) !important;
+		color: var(--color-surface-300) !important;
+	}
+
+	.dark .text-gray-200,
+	.dark .text-gray-100,
+	.dark .text-surface-200,
+	.dark .text-surface-100,
+	.dark .text-white {
+		color: var(--color-surface-50) !important;
+	}
+
+	.dark .placeholder\:text-gray-400::placeholder,
+	.dark .placeholder\:text-surface-400::placeholder,
+	.dark input::placeholder,
+	.dark textarea::placeholder {
+		color: var(--color-surface-300) !important;
+		opacity: 1;
 	}
 }
 
