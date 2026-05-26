@@ -48,6 +48,7 @@ export const URL_MODEL = [
 	'threats',
 	'risk-scenarios',
 	'applied-controls',
+	'msp-control-assertions',
 	'policies',
 	'risk-acceptances',
 	'validation-flows',

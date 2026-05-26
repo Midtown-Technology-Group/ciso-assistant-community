@@ -170,6 +170,12 @@ export const navData = {
 					href: '/applied-controls'
 				},
 				{
+					name: 'mspControlAssertions',
+					fa_icon: 'fa-solid fa-shield-halved',
+					href: '/msp-control-assertions',
+					permissions: ['view_mspcontrolassertion']
+				},
+				{
 					name: 'calendar',
 					fa_icon: 'fa-solid fa-calendar-days',
 					href: '/calendar',

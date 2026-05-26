@@ -286,6 +286,23 @@ export const AppliedControlDuplicateSchema = z.object({
 	duplicate_evidences: z.boolean().optional()
 });
 
+export const MSPControlAssertionSchema = z.object({
+	...NameDescriptionMixin,
+	provider_folder: z.string(),
+	target_folders: z.array(z.string().uuid().optional()).optional(),
+	applied_control: z.string(),
+	reference_control: z.string().optional().nullable(),
+	result: z.string().default('covered'),
+	status: z.string().default('active'),
+	scope: z.string().optional().nullable(),
+	evidence_note: z.string().optional().nullable(),
+	verification_source: z.string().optional().nullable(),
+	verification_reference: z.string().optional().nullable(),
+	verification_summary: z.string().optional().nullable(),
+	effective_date: z.union([z.literal('').transform(() => null), z.iso.date()]).nullish(),
+	expiry_date: z.union([z.literal('').transform(() => null), z.iso.date()]).nullish()
+});
+
 export const PolicySchema = AppliedControlSchema.omit({ category: true });
 
 export const RiskAcceptanceSchema = z.object({
@@ -1730,6 +1747,7 @@ const SCHEMA_MAP: Record<string, ZodSchema> = {
 	cwes: CWESchema,
 	'risk-scenarios': RiskScenarioSchema,
 	'applied-controls': AppliedControlSchema,
+	'msp-control-assertions': MSPControlAssertionSchema,
 	'applied-controls_duplicate': AppliedControlDuplicateSchema,
 	'organisation-objectives_duplicate': OrganisationObjectiveDuplicateSchema,
 	policies: PolicySchema,

@@ -214,6 +214,13 @@
 						domains separate when our internal controls differ from the controls we apply for
 						customers.
 					</p>
+					<a
+						href="/msp-control-assertions"
+						class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary-700 hover:text-primary-900 dark:text-primary-200 dark:hover:text-primary-100"
+					>
+						<i class="fa-solid fa-shield-halved"></i>
+						Manage MSP control assertions
+					</a>
 				</div>
 				<div class="grid min-w-0 grid-cols-1 gap-2 text-sm sm:grid-cols-3 xl:w-[34rem]">
 					<div
@@ -238,6 +245,57 @@
 						<p class="font-semibold text-surface-900 dark:text-surface-50">MTG internal</p>
 						<p class="mt-1 text-xs text-surface-700 dark:text-surface-200">
 							Separate domain tree for our own controls, risks, and evidence.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	{/if}
+	{#if URLModel === 'msp-control-assertions'}
+		<section
+			class="mb-4 rounded-container border border-surface-200 bg-white p-4 text-surface-900 shadow-sm dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100"
+			aria-label="MSP control assertion workflow"
+		>
+			<div class="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+				<div class="max-w-3xl space-y-1">
+					<p class="text-xs font-semibold uppercase text-primary-700 dark:text-primary-200">
+						Provider-applied coverage
+					</p>
+					<h2 class="text-lg font-semibold text-surface-950 dark:text-surface-50">
+						Map one provider control to many covered customer domains
+					</h2>
+					<p class="text-sm leading-6 text-surface-700 dark:text-surface-200">
+						Use assertions for controls MTG operates on behalf of customers, such as managed disk
+						encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then
+						treat covered customer requirements as inherited from the provider control.
+					</p>
+				</div>
+				<div
+					class="grid min-w-0 grid-cols-1 gap-2 text-sm sm:grid-cols-3 xl:w-[34rem]"
+					aria-hidden="true"
+				>
+					<div
+						class="rounded-container border border-primary-200 bg-primary-50 p-3 dark:border-primary-700 dark:bg-primary-950/60"
+					>
+						<p class="font-semibold text-primary-900 dark:text-primary-100">Provider control</p>
+						<p class="mt-1 text-xs text-surface-700 dark:text-surface-200">
+							The applied control we operate and verify.
+						</p>
+					</div>
+					<div
+						class="rounded-container border border-success-200 bg-success-50 p-3 dark:border-success-700 dark:bg-success-950/60"
+					>
+						<p class="font-semibold text-success-900 dark:text-success-100">Customer coverage</p>
+						<p class="mt-1 text-xs text-surface-700 dark:text-surface-200">
+							The child domains receiving inherited coverage.
+						</p>
+					</div>
+					<div
+						class="rounded-container border border-surface-200 bg-surface-50 p-3 dark:border-surface-700 dark:bg-surface-800"
+					>
+						<p class="font-semibold text-surface-900 dark:text-surface-50">Verification</p>
+						<p class="mt-1 text-xs text-surface-700 dark:text-surface-200">
+							The source, reference, and summary for live technical evidence.
 						</p>
 					</div>
 				</div>

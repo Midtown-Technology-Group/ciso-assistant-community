@@ -276,6 +276,30 @@ export const APPLIED_CONTROL_STATUS_FILTER: ListViewFilterConfig = {
 	}
 };
 
+export const MSP_CONTROL_ASSERTION_RESULT_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'msp-control-assertions/result',
+		optionsLabelField: 'label',
+		optionsValueField: 'value',
+		label: 'result',
+		browserCache: 'force-cache',
+		multiple: true
+	}
+};
+
+export const MSP_CONTROL_ASSERTION_STATUS_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'msp-control-assertions/status',
+		optionsLabelField: 'label',
+		optionsValueField: 'value',
+		label: 'status',
+		browserCache: 'force-cache',
+		multiple: true
+	}
+};
+
 export const APPLIED_CONTROL_IMPACT_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
@@ -590,6 +614,15 @@ export const REFERENCE_CONTROL_FILTER: ListViewFilterConfig = {
 	props: {
 		label: 'referenceControl',
 		optionsEndpoint: 'reference-controls',
+		multiple: true
+	}
+};
+
+export const APPLIED_CONTROL_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'applied-controls',
+		label: 'appliedControl',
 		multiple: true
 	}
 };
@@ -1585,6 +1618,39 @@ export const listViewFields = {
 			is_assigned: IS_ASSIGNED_FILTER,
 			owner: OWNER_FILTER,
 			linked_models: APPLIED_CONTROL_LINKED_MODELS_FILTER
+		}
+	},
+	'msp-control-assertions': {
+		head: [
+			'name',
+			'providerFolder',
+			'targetFolders',
+			'appliedControl',
+			'referenceControl',
+			'result',
+			'status',
+			'lastVerifiedAt',
+			'isCurrent'
+		],
+		body: [
+			'name',
+			'provider_folder',
+			'target_folders',
+			'applied_control',
+			'reference_control',
+			'result',
+			'status',
+			'last_verified_at',
+			'is_current'
+		],
+		meta: ['id', 'scope', 'evidence_note', 'verification_source', 'verification_reference'],
+		filters: {
+			provider_folder: DOMAIN_FILTER,
+			target_folders: DOMAIN_FILTER,
+			applied_control: APPLIED_CONTROL_FILTER,
+			reference_control: REFERENCE_CONTROL_FILTER,
+			result: MSP_CONTROL_ASSERTION_RESULT_FILTER,
+			status: MSP_CONTROL_ASSERTION_STATUS_FILTER
 		}
 	},
 	policies: {
