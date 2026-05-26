@@ -122,6 +122,15 @@ export const DOMAIN_FILTER: ListViewFilterConfig = {
 	}
 };
 
+export const DOMAIN_ONLY_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'folders?content_type=DO',
+		label: 'domain',
+		multiple: true
+	}
+};
+
 export const LABELS_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
@@ -1646,7 +1655,7 @@ export const listViewFields = {
 		meta: ['id', 'scope', 'evidence_note', 'verification_source', 'verification_reference'],
 		filters: {
 			provider_folder: DOMAIN_FILTER,
-			target_folders: DOMAIN_FILTER,
+			target_folders: DOMAIN_ONLY_FILTER,
 			applied_control: APPLIED_CONTROL_FILTER,
 			reference_control: REFERENCE_CONTROL_FILTER,
 			result: MSP_CONTROL_ASSERTION_RESULT_FILTER,
