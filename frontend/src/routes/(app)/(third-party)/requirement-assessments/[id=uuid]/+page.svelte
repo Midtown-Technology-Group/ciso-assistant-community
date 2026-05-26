@@ -188,25 +188,37 @@
 			<MarkdownRenderer content={data.requirement.description} />
 		</div>
 	{/if}
-	{#if inheritedMspCoverage.length > 0}
-		<section class="card p-4 preset-tonal-success space-y-3">
-			<div class="flex flex-wrap items-center justify-between gap-2">
-				<h2 class="font-semibold text-base flex items-center gap-2">
-					<i class="fa-solid fa-shield-check"></i>
-					<span>Inherited MSP coverage</span>
-				</h2>
+	<section
+		class="card border border-success-200 bg-success-50 p-4 text-surface-900 shadow-sm dark:border-success-700 dark:bg-success-950/50 dark:text-surface-100 space-y-3"
+	>
+		<div class="flex flex-wrap items-center justify-between gap-2">
+			<h2 class="font-semibold text-base flex items-center gap-2">
+				<i class="fa-solid fa-shield-check text-success-700 dark:text-success-200"></i>
+				<span>Inherited MSP coverage</span>
+			</h2>
+			{#if inheritedMspCoverage.length > 0}
 				<span class="badge preset-filled-success-500 text-xs">
 					{inheritedMspCoverage.length}
 					{inheritedMspCoverage.length === 1 ? 'control' : 'controls'}
 				</span>
-			</div>
+			{:else}
+				<span
+					class="badge border border-success-300 bg-white text-xs text-success-800 dark:border-success-700 dark:bg-surface-900 dark:text-success-100"
+				>
+					No inherited controls
+				</span>
+			{/if}
+		</div>
+		{#if inheritedMspCoverage.length > 0}
 			<div class="space-y-2">
 				{#each inheritedMspCoverage as coverage}
-					<article class="rounded-container border border-success-300-700 bg-surface-50-950 p-3">
+					<article
+						class="rounded-container border border-success-200 bg-white p-3 dark:border-success-700 dark:bg-surface-900"
+					>
 						<div class="flex flex-wrap items-start justify-between gap-2">
 							<div class="min-w-0">
-								<p class="font-medium">{coverage.name}</p>
-								<p class="text-xs text-surface-600-300">
+								<p class="font-medium text-surface-950 dark:text-surface-50">{coverage.name}</p>
+								<p class="text-xs text-surface-700 dark:text-surface-200">
 									{coverage.applied_control?.str ?? coverage.applied_control?.name}
 									{#if coverage.applied_control?.folder?.str}
 										<span> · {coverage.applied_control.folder.str}</span>
@@ -214,20 +226,24 @@
 								</p>
 							</div>
 							<div class="flex flex-wrap gap-2">
-								<span class="badge preset-tonal-success text-xs">{safeTranslate(coverage.result)}</span>
-								<span class="badge preset-tonal-primary text-xs">{safeTranslate(coverage.status)}</span>
+								<span class="badge preset-tonal-success text-xs"
+									>{safeTranslate(coverage.result)}</span
+								>
+								<span class="badge preset-tonal-primary text-xs"
+									>{safeTranslate(coverage.status)}</span
+								>
 							</div>
 						</div>
 						{#if coverage.scope}
-							<p class="mt-2 text-sm">{coverage.scope}</p>
+							<p class="mt-2 text-sm text-surface-800 dark:text-surface-100">{coverage.scope}</p>
 						{/if}
 						{#if coverage.evidence_note}
-							<p class="mt-2 text-xs text-surface-600-300">
+							<p class="mt-2 text-xs text-surface-700 dark:text-surface-200">
 								<i class="fa-solid fa-file-shield mr-1"></i>{coverage.evidence_note}
 							</p>
 						{/if}
 						{#if coverage.verification_source || coverage.last_verified_at || coverage.verification_summary}
-							<p class="mt-2 text-xs text-surface-600-300">
+							<p class="mt-2 text-xs text-surface-700 dark:text-surface-200">
 								<i class="fa-solid fa-signal mr-1"></i>
 								{#if coverage.verification_source}
 									<span>{coverage.verification_source}</span>
@@ -253,8 +269,20 @@
 					</article>
 				{/each}
 			</div>
-		</section>
-	{/if}
+		{:else}
+			<div
+				class="rounded-container border border-dashed border-success-300 bg-white p-3 dark:border-success-700 dark:bg-surface-900"
+			>
+				<p class="text-sm font-medium text-surface-950 dark:text-surface-50">
+					This requirement is ready for provider coverage.
+				</p>
+				<p class="mt-1 text-sm leading-6 text-surface-700 dark:text-surface-200">
+					When a service-provider assertion maps to this requirement, it will appear here with the
+					provider domain, applied control, result, and Bifrost verification signal.
+				</p>
+			</div>
+		{/if}
+	</section>
 	{#if has_threats || has_reference_controls || annotation || mappingInference.result}
 		<div class="card p-4 preset-tonal-secondary text-sm flex flex-col justify-evenly cursor-auto">
 			<h2 class="font-semibold text-base flex flex-row justify-between">

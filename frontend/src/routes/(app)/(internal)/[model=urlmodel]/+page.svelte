@@ -196,6 +196,54 @@
 </script>
 
 {#if data?.table}
+	{#if URLModel === 'folders'}
+		<section
+			class="mb-4 rounded-container border border-surface-200 bg-white p-4 text-surface-900 shadow-sm dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100"
+			aria-label="MSP tenancy model"
+		>
+			<div class="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
+				<div class="max-w-3xl space-y-1">
+					<p class="text-xs font-semibold uppercase text-primary-700 dark:text-primary-200">
+						MSP tenancy model
+					</p>
+					<h2 class="text-lg font-semibold text-surface-950 dark:text-surface-50">
+						Provider coverage flows to customer domains
+					</h2>
+					<p class="text-sm leading-6 text-surface-700 dark:text-surface-200">
+						Use one service provider domain as the parent for customer domains. Keep MTG internal
+						domains separate when our internal controls differ from the controls we apply for
+						customers.
+					</p>
+				</div>
+				<div class="grid min-w-0 grid-cols-1 gap-2 text-sm sm:grid-cols-3 xl:w-[34rem]">
+					<div
+						class="rounded-container border border-primary-200 bg-primary-50 p-3 dark:border-primary-700 dark:bg-primary-950/60"
+					>
+						<p class="font-semibold text-primary-900 dark:text-primary-100">Service provider</p>
+						<p class="mt-1 text-xs text-surface-700 dark:text-surface-200">
+							Parent domain for MSP-applied controls and verification signals.
+						</p>
+					</div>
+					<div
+						class="rounded-container border border-success-200 bg-success-50 p-3 dark:border-success-700 dark:bg-success-950/60"
+					>
+						<p class="font-semibold text-success-900 dark:text-success-100">Customer children</p>
+						<p class="mt-1 text-xs text-surface-700 dark:text-surface-200">
+							Customer assessments can inherit covered safeguards from the provider.
+						</p>
+					</div>
+					<div
+						class="rounded-container border border-surface-200 bg-surface-50 p-3 dark:border-surface-700 dark:bg-surface-800"
+					>
+						<p class="font-semibold text-surface-900 dark:text-surface-50">MTG internal</p>
+						<p class="mt-1 text-xs text-surface-700 dark:text-surface-200">
+							Separate domain tree for our own controls, risks, and evidence.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	{/if}
 	<div class="shadow-lg">
 		{#key URLModel}
 			<ModelTable
