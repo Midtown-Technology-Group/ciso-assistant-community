@@ -9,7 +9,8 @@ function buildMultiParam(key: string, values: string[]): string {
 
 function buildEndpoint(base: string, filterParams: string, extraParams: string = ''): string {
 	const params = [filterParams, extraParams].filter(Boolean).join('&');
-	return params ? `${base}?${params}` : base;
+	const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+	return params ? `${normalizedBase}?${params}` : normalizedBase;
 }
 
 export const load: PageServerLoad = async ({ fetch, parent, url }) => {
@@ -39,7 +40,7 @@ export const load: PageServerLoad = async ({ fetch, parent, url }) => {
 		findings: buildEndpoint('/findings', ownerParams, 'limit=0'),
 		organisationObjectives: buildEndpoint('/organisation-objectives', assignedToParams, 'limit=0'),
 		rightRequests: buildEndpoint('/privacy/right-requests', ownerParams, 'limit=0'),
-		validationFlows: `/validation-flows?approver=${user.id}&limit=0`,
+		validationFlows: `/validation-flows/?approver=${user.id}&limit=0`,
 		metricInstances: buildEndpoint('/metrology/metric-instances', ownerParams, 'limit=0')
 	};
 

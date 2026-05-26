@@ -7,6 +7,7 @@
 		type ExportGroup,
 		type ExportOption
 	} from '$lib/components/Modals/ExportModal.svelte';
+	import DomainHierarchy from '$lib/components/DomainHierarchy/DomainHierarchy.svelte';
 	import ModelTable from '$lib/components/ModelTable/ModelTable.svelte';
 	import { safeTranslate } from '$lib/utils/i18n';
 	import { driverInstance } from '$lib/utils/stores';
@@ -197,63 +198,7 @@
 
 {#if data?.table}
 	{#if URLModel === 'folders'}
-		<section
-			class="mb-4 rounded-container border border-surface-200 bg-white p-4 text-surface-900 shadow-sm dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100"
-			aria-label={safeTranslate('mspTenancyModel')}
-		>
-			<div class="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
-				<div class="max-w-3xl space-y-1">
-					<p class="text-xs font-semibold uppercase text-primary-700 dark:text-primary-200">
-						{safeTranslate('mspTenancyModel')}
-					</p>
-					<h2 class="text-lg font-semibold text-surface-950 dark:text-surface-50">
-						{safeTranslate('mspProviderCoverageFlows')}
-					</h2>
-					<p class="text-sm leading-6 text-surface-700 dark:text-surface-200">
-						{safeTranslate('mspTenancyModelDescription')}
-					</p>
-					<a
-						href="/msp-control-assertions"
-						class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary-700 hover:text-primary-900 dark:text-primary-200 dark:hover:text-primary-100"
-					>
-						<i class="fa-solid fa-shield-halved"></i>
-						{safeTranslate('manageMspControlAssertions')}
-					</a>
-				</div>
-				<div class="grid min-w-0 grid-cols-1 gap-2 text-sm sm:grid-cols-3 xl:w-[34rem]">
-					<div
-						class="rounded-container border border-primary-200 bg-primary-50 p-3 dark:border-primary-700 dark:bg-primary-950/60"
-					>
-						<p class="font-semibold text-primary-900 dark:text-primary-100">
-							{safeTranslate('serviceProvider')}
-						</p>
-						<p class="mt-1 text-xs text-surface-700 dark:text-surface-200">
-							{safeTranslate('serviceProviderDomainDescription')}
-						</p>
-					</div>
-					<div
-						class="rounded-container border border-success-200 bg-success-50 p-3 dark:border-success-700 dark:bg-success-950/60"
-					>
-						<p class="font-semibold text-success-900 dark:text-success-100">
-							{safeTranslate('customerChildren')}
-						</p>
-						<p class="mt-1 text-xs text-surface-700 dark:text-surface-200">
-							{safeTranslate('customerChildrenDescription')}
-						</p>
-					</div>
-					<div
-						class="rounded-container border border-surface-200 bg-surface-50 p-3 dark:border-surface-700 dark:bg-surface-800"
-					>
-						<p class="font-semibold text-surface-900 dark:text-surface-50">
-							{safeTranslate('mtgInternal')}
-						</p>
-						<p class="mt-1 text-xs text-surface-700 dark:text-surface-200">
-							{safeTranslate('mtgInternalDescription')}
-						</p>
-					</div>
-				</div>
-			</div>
-		</section>
+		<DomainHierarchy />
 	{/if}
 	{#if URLModel === 'msp-control-assertions'}
 		<section
