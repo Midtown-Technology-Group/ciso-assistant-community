@@ -1,0 +1,19 @@
+{
+  "name": "ciso-assistant-docs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare:docs": "node scripts/prepare-starlight-content.mjs",
+    "dev": "npm run prepare:docs && astro dev",
+    "build": "npm run prepare:docs && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.39.2",
+    "astro": "^6.3.8"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.2"
+  }
+}
