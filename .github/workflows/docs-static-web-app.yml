@@ -51,3 +51,4 @@ jobs:
           app_location: /
           output_location: dist
           app_build_command: npm run build
+          skip_deploy_on_missing_secrets: true
