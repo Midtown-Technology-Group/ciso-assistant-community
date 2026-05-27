@@ -20,9 +20,6 @@ export default defineConfig({
         },
       ],
       sidebar,
-      editLink: {
-        baseUrl: 'https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/codex/starlight-docs/docs/',
-      },
       tableOfContents: {
         minHeadingLevel: 2,
         maxHeadingLevel: 3,

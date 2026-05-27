@@ -45,6 +45,11 @@ function slugFromOutput(relativeOutputPath) {
   return toPosix(noExt);
 }
 
+function linkFromSlug(slug) {
+  if (!slug || slug === 'index') return '/';
+  return `/${slug.replace(/\/index$/i, '')}/`;
+}
+
 function cleanTitle(rawTitle, fallback) {
   const text = rawTitle
     .replace(/^#+\s*/, '')
@@ -70,17 +75,19 @@ function stripFrontmatter(markdown) {
 }
 
 function descriptionFrom(frontmatter) {
+  const folded = frontmatter.match(/^description:\s*>-\s*\r?\n((?:\s{2,}.+\r?\n?)+)/m);
+  if (folded) {
+    return folded[1]
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .join(' ');
+  }
+
   const single = frontmatter.match(/^description:\s*["']?(.+?)["']?\s*$/m);
   if (single) return single[1].trim();
 
-  const folded = frontmatter.match(/^description:\s*>-\s*\r?\n((?:\s{2,}.+\r?\n?)+)/m);
-  if (!folded) return '';
-
-  return folded[1]
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .join(' ');
+  return '';
 }
 
 function normalizeGitBookMarkup(markdown) {
@@ -91,22 +98,31 @@ function normalizeGitBookMarkup(markdown) {
     .replace(/\{% hint style="[^"]+" %\}/g, '')
     .replace(/\{% end(content-ref|hint) %\}/g, '')
     .replace(/\{% .*? %\}/g, '')
+    .replace(/^#{1,6}\s*$/gm, '')
+    .replace(/&#x20;/g, '')
+    .replace(/<figcaption>\s*<\/figcaption>/g, '')
+    .replace(/^```env\s*$/gm, '```dotenv')
     .replace(/(<img\s+[^>]*src=")(?:\.\.\/)*\.gitbook\/assets\//g, '$1/.gitbook/assets/')
     .replace(/(!\[[^\]]*\]\()(?:\.\.\/)*\.gitbook\/assets\//g, '$1/.gitbook/assets/')
     .replace(/(!\[[^\]]*\]\(<)(?:\.\.\/)*\.gitbook\/assets\//g, '$1/.gitbook/assets/');
 }
 
 function rewriteMarkdownLinks(markdown, sourcePath) {
-  return markdown.replace(/(\[[^\]]*\]\()([^)\s]+\.md)(#[^)]+)?(\))/g, (match, prefix, target, hash = '', suffix) => {
+  return markdown.replace(/(\[[^\]]*\]\()([^)\s<>]+)(#[^)]+)?(\))/g, (match, prefix, target, hash = '', suffix) => {
     if (/^(https?:)?\/\//i.test(target)) return match;
+    if (target.startsWith('/') || target.startsWith('#') || target.startsWith('mailto:')) return match;
+    if (target.includes('.gitbook/assets/')) return match;
 
     const decodedTarget = decodeURI(target);
     const sourceDir = path.dirname(sourcePath);
-    const targetSource = path.normalize(path.resolve(sourceDir, decodedTarget));
+    const resolvedTarget = path.normalize(path.resolve(sourceDir, decodedTarget));
+    const targetSource = decodedTarget.endsWith('/')
+      ? path.join(resolvedTarget, 'README.md')
+      : resolvedTarget;
     const slug = sourceToSlug.get(targetSource.toLowerCase());
     if (!slug) return match;
 
-    const relativeTarget = slug ? `/${slug}` : '/';
+    const relativeTarget = linkFromSlug(slug);
     return `${prefix}${relativeTarget}${hash}${suffix}`;
   });
 }
@@ -117,11 +133,14 @@ function ensureFrontmatter(markdown, sourcePath) {
   const fallback = path.basename(sourcePath, '.md').replace(/[-_]+/g, ' ');
   const title = cleanTitle(firstHeading?.[1] ?? '', fallback);
   const description = descriptionFrom(frontmatter);
+  const sourceRelativePath = toPosix(path.relative(sourceRoot, sourcePath));
+  const editUrl = `https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/${sourceRelativePath}`;
 
   const generated = [
     '---',
     `title: ${yamlString(title)}`,
     description ? `description: ${yamlString(description)}` : '',
+    `editUrl: ${yamlString(editUrl)}`,
     '---',
     '',
   ].filter((line) => line !== '').join('\n');
@@ -155,7 +174,7 @@ function parseSummary(summary) {
     const slug = sourceToSlug.get(resolved.toLowerCase());
     if (slug === undefined) continue;
 
-    const entry = { label, link: slug ? `/${slug}/` : '/' };
+    const entry = { label, link: linkFromSlug(slug) };
     if (!currentGroup && indent === 0) {
       if (slug === '' || slug === 'index') continue;
       sidebar.push(entry);
