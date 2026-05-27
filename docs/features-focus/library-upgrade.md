@@ -1,4 +1,7 @@
-# Library upgrade
+---
+title: "Library upgrade"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/library-upgrade.md"
+---# Library upgrade
 
 <figure><img src="../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 

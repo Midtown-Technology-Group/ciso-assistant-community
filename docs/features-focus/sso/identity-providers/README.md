@@ -1,4 +1,7 @@
-# Identity providers
+---
+title: "Identity providers"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/sso/identity-providers/README.md"
+---# Identity providers
 
 {% hint style="success" %}
 You can log into CISO Assistant with any identity provider (IdP), given that it supports either SAML or OpenID Connect (OIDC).

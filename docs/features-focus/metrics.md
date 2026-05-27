@@ -1,4 +1,7 @@
-# Metrics
+---
+title: "Metrics"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/metrics.md"
+---# Metrics
 
 ### Expected outcome
 

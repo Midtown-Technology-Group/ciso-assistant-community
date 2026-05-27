@@ -1,4 +1,7 @@
-# Outgoing webhooks
+---
+title: "Outgoing webhooks"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/integration/outgoing-webhooks.md"
+---# Outgoing webhooks
 
 ## Outgoing Webhooks
 

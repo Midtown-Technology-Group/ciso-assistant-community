@@ -1,9 +1,8 @@
 ---
-description: >-
-  Multi-factor authentication adds an extra layer of security to your account by
-  requiring both your password and a time-based code when you log in.
+title: "Setting up Multi-Factor Authentication (MFA)"
+description: "Multi-factor authentication adds an extra layer of security to your account by requiring both your password and a time-based code when you log in."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/setting-up-multi-factor-authentication-mfa.md"
 ---
-
 # Setting up Multi-Factor Authentication (MFA)
 
 ### Prerequisites

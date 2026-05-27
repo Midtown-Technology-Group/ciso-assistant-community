@@ -1,7 +1,8 @@
 ---
-description: Manage your assessments over time
+title: "🔎 Overview"
+description: "Manage your assessments over time"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/overview.md"
 ---
-
 # 🔎 Overview
 
 ## Analytics

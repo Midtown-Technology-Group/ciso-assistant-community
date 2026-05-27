@@ -1,7 +1,8 @@
 ---
-description: Deep dive into CISO Asisstant IAM model
+title: "Understanding the IAM model"
+description: "Deep dive into CISO Asisstant IAM model"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/organization/understanding-the-iam-model.md"
 ---
-
 # Understanding the IAM model
 
 Access security is a foundational aspect of any risk or compliance management platform. In this article, we’ll explore how **authentication**, **authorization**, and **accounting** — the three pillars of the AAA model — are structured and applied within **CISO Assistant**.

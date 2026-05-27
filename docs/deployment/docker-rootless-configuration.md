@@ -1,7 +1,8 @@
 ---
-description: Deployment documentation for rootless containers
+title: "Docker rootless configuration"
+description: "Deployment documentation for rootless containers"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/docker-rootless-configuration.md"
 ---
-
 # Docker rootless configuration
 
 > Since V3.16, CISO Assistant now runs as non-root user 1001:1001 by default across all compose templates.

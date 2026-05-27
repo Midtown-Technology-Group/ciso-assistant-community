@@ -1,8 +1,8 @@
 ---
-description: Guidelines on data import format
-icon: diagram-previous
+title: "Data import wizard"
+description: "Guidelines on data import format"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/data-import-wizard.md"
 ---
-
 # Data import wizard
 
 {% hint style="info" %}

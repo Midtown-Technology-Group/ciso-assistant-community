@@ -1,7 +1,8 @@
 ---
-description: Small tutorial to learn how to create your first compliance assessment
+title: "✅ Creating your first Audit"
+description: "Small tutorial to learn how to create your first compliance assessment"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/creating-your-first-audit.md"
 ---
-
 # ✅ Creating your first Audit
 
 {% embed url="https://www.loom.com/share/ee89b6a3129e4be6bef726ceb4d9c806" %}

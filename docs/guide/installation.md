@@ -1,8 +1,8 @@
 ---
-description: Docker Compose or Helm for Kubernetes
-icon: desktop-arrow-down
+title: "Installation"
+description: "Docker Compose or Helm for Kubernetes"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/installation.md"
 ---
-
 # Installation
 
 

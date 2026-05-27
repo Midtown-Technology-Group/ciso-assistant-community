@@ -1,7 +1,8 @@
 ---
-description: Small tutorial to learn how to create your first compliance assessment
+title: "📊 Creating your first risk assessment"
+description: "Small tutorial to learn how to create your first compliance assessment"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/creating-your-first-risk-assessment.md"
 ---
-
 # 📊 Creating your first risk assessment
 
 {% embed url="https://www.loom.com/share/8f3c55e7559444f39d1d8029336c1dee" %}

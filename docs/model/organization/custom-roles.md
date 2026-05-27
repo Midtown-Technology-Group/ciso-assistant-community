@@ -1,7 +1,8 @@
 ---
-description: For fine-grained permissions management - PRO feature
+title: "Custom roles"
+description: "For fine-grained permissions management - PRO feature"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/organization/custom-roles.md"
 ---
-
 # Custom roles
 
 **Notice:**\

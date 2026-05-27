@@ -1,4 +1,7 @@
-# OpenID Connect (OIDC)
+---
+title: "OpenID Connect (OIDC)"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/sso/openid-connect-oidc.md"
+---# OpenID Connect (OIDC)
 
 ### Configure CISO Assistant with OpenID Connect (OIDC)
 

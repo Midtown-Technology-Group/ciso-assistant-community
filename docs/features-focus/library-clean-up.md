@@ -1,7 +1,8 @@
 ---
-description: How to delete/remove a loaded library
+title: "Library clean-up"
+description: "How to delete/remove a loaded library"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/library-clean-up.md"
 ---
-
 # Library clean-up
 
 If you want to delete a load library, make sure it's not used anywhere (for framework, that's an audit is not depending on them, for a risk matrix, that a risk assessment is not relying on it, etc.) and head to the loaded libraries section of your libraries (Governance/Libraries).

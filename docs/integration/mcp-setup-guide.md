@@ -1,10 +1,8 @@
 ---
-description: >-
-  This guide explains how to connect your AI assistant to CISO Assistant using
-  the Model Context Protocol (MCP). Once set up, you'll be able to ask your AI
-  to create risk assessments, manage compliance
+title: "MCP setup guide"
+description: "This guide explains how to connect your AI assistant to CISO Assistant using the Model Context Protocol (MCP). Once set up, you'll be able to ask your AI to create risk assessments, manage compliance"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/integration/mcp-setup-guide.md"
 ---
-
 # MCP setup guide
 
 Compatible with: SaaS or on-premises, CE or Pro

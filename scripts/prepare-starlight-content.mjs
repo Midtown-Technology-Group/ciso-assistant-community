@@ -90,6 +90,21 @@ function descriptionFrom(frontmatter) {
   return '';
 }
 
+function frontmatterValue(frontmatter, key) {
+  const pattern = new RegExp(`^${key}:\\s*(.+?)\\s*$`, 'm');
+  const match = frontmatter.match(pattern);
+  if (!match) return '';
+
+  const raw = match[1].trim();
+  if (!raw) return '';
+
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return raw.replace(/^['"]|['"]$/g, '').trim();
+  }
+}
+
 function normalizeGitBookMarkup(markdown) {
   return markdown
     .replace(/\{% embed url="([^"]+)" %\}/g, '[$1]($1)')
@@ -131,10 +146,11 @@ function ensureFrontmatter(markdown, sourcePath) {
   const { frontmatter, body } = stripFrontmatter(markdown);
   const firstHeading = body.match(/^#\s+(.+)$/m);
   const fallback = path.basename(sourcePath, '.md').replace(/[-_]+/g, ' ');
-  const title = cleanTitle(firstHeading?.[1] ?? '', fallback);
-  const description = descriptionFrom(frontmatter);
+  const title = frontmatterValue(frontmatter, 'title') || cleanTitle(firstHeading?.[1] ?? '', fallback);
+  const description = frontmatterValue(frontmatter, 'description') || descriptionFrom(frontmatter);
   const sourceRelativePath = toPosix(path.relative(sourceRoot, sourcePath));
-  const editUrl = `https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/${sourceRelativePath}`;
+  const editUrl = frontmatterValue(frontmatter, 'editUrl')
+    || `https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/${sourceRelativePath}`;
 
   const generated = [
     '---',
@@ -142,10 +158,9 @@ function ensureFrontmatter(markdown, sourcePath) {
     description ? `description: ${yamlString(description)}` : '',
     `editUrl: ${yamlString(editUrl)}`,
     '---',
-    '',
   ].filter((line) => line !== '').join('\n');
 
-  return `${generated}${body}`;
+  return `${generated}\n\n${body}`;
 }
 
 function parseSummary(summary) {

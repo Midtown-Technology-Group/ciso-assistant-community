@@ -1,9 +1,8 @@
 ---
-description: >-
-  User groups are built-in objects giving permissions to all users inside of
-  them, with a specific role across a scope.
+title: "User Groups"
+description: "User groups are built-in objects giving permissions to all users inside of them, with a specific role across a scope."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/organization/user-groups.md"
 ---
-
 # User Groups
 
 For now, it is not possible to create custom role assignments so you need to use built-in user groups. They are linking a domain with a role which contains precise permissions, that will be given to users in this group.

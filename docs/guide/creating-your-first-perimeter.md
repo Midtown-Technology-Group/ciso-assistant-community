@@ -1,9 +1,8 @@
 ---
-description: >-
-  Small tutorial to learn how to create your first perimeter and be prepared for
-  risk and compliance assessment
+title: "🏗️ Creating your first perimeter"
+description: "Small tutorial to learn how to create your first perimeter and be prepared for risk and compliance assessment"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/creating-your-first-perimeter.md"
 ---
-
 # 🏗️ Creating your first perimeter
 
 {% hint style="warning" %}

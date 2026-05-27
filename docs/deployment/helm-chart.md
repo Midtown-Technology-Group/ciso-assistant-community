@@ -1,7 +1,8 @@
 ---
-description: instructions for Kubernetes installation with Helm Chart
+title: "Helm Chart"
+description: "instructions for Kubernetes installation with Helm Chart"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/helm-chart.md"
 ---
-
 # Helm Chart
 
 ### GH OCI registry

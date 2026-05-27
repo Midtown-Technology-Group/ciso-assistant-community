@@ -1,10 +1,8 @@
 ---
-description: >-
-  CISO Assistant can send you email notifications to keep you informed about
-  deadlines, assignments, and status changes.
-icon: bell
+title: "Notifications"
+description: "CISO Assistant can send you email notifications to keep you informed about deadlines, assignments, and status changes."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/notifications.md"
 ---
-
 # Notifications
 
 #### Prerequisites

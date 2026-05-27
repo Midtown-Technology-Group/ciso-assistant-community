@@ -1,4 +1,7 @@
-# Frequent questions
+---
+title: "Frequent questions"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/frequent-questions.md"
+---# Frequent questions
 
 
 

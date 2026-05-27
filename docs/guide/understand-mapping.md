@@ -1,8 +1,8 @@
 ---
-description: Main concepts of the mapping feature
-icon: diagram-sankey
+title: "Understand mapping"
+description: "Main concepts of the mapping feature"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/understand-mapping.md"
 ---
-
 # Understand mapping
 
 One common challenge when dealing with audits is about being able to reuse your assessment on one framework to move to a different one. This commonly refered to as mapping or crosswalk between standards.

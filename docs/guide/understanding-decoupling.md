@@ -1,7 +1,7 @@
 ---
-icon: octopus-deploy
+title: "Understanding decoupling"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/understanding-decoupling.md"
 ---
-
 # Understanding decoupling
 
 Decoupling compliance from security operations and controls is a cornerstone of CISO Assistant philosophy. Let's see it through this short animation:

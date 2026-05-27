@@ -1,9 +1,8 @@
 ---
-description: >-
-  This is where risk analyses are managed, from definition to potential
-  acceptance.
+title: "💣 Risk"
+description: "This is where risk analyses are managed, from definition to potential acceptance."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/risk.md"
 ---
-
 # 💣 Risk
 
 <figure><img src="../.gitbook/assets/iso27005.svg" alt=""><figcaption><p>ISO 27005 risk management workflow</p></figcaption></figure>

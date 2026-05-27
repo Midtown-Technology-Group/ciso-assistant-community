@@ -1,7 +1,8 @@
 ---
-description: Experimenting CISO Assistant through remote server or hypervisor
+title: "Remote/Virtualization"
+description: "Experimenting CISO Assistant through remote server or hypervisor"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/remote-virtualization.md"
 ---
-
 # Remote/Virtualization
 
 

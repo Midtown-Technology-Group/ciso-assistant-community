@@ -1,4 +1,7 @@
-# API usage
+---
+title: "API usage"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/integration/api-documentation.md"
+---# API usage
 
 ### Access the online documentation
 

@@ -1,9 +1,8 @@
 ---
-description: >-
-  This guide covers how to keep sensitive configuration (database credentials,
-  mailer passwords, API keys) out of your docker-compose.yml.
+title: "Managing Secrets"
+description: "This guide covers how to keep sensitive configuration (database credentials, mailer passwords, API keys) out of your docker-compose.yml."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/managing-secrets.md"
 ---
-
 # Managing Secrets
 
 ### 1. The `.env` File

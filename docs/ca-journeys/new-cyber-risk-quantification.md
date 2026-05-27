@@ -1,7 +1,8 @@
 ---
-description: CRQ quick start
+title: "New - Cyber Risk Quantification"
+description: "CRQ quick start"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/ca-journeys/new-cyber-risk-quantification.md"
 ---
-
 # New - Cyber Risk Quantification
 
 ## [Cyber Risk Quantification on CISO Assistant](https://app.guidde.com/playbooks/wTDpUXVPGoG4HGxhw44iN3)

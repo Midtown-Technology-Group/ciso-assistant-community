@@ -1,4 +1,7 @@
-# SAML
+---
+title: "SAML"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/sso/saml.md"
+---# SAML
 
 {% hint style="danger" %}
 <mark style="color:$danger;">Please note: if OIDC mode has ben configured before, you must</mark> <mark style="color:$danger;"></mark><mark style="color:$danger;">**reset the Client ID field to**</mark><mark style="color:$danger;">**&#x20;**</mark><mark style="color:$danger;">**`0`**</mark><mark style="color:$danger;">**&#x20;**</mark><mark style="color:$danger;">**in the OIDC tab and save**</mark> <mark style="color:$danger;"></mark><mark style="color:$danger;">before proceeding.</mark>

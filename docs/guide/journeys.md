@@ -1,7 +1,7 @@
 ---
-icon: face-glasses
+title: "Journeys"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/journeys.md"
 ---
-
 # Journeys
 
 **"I'm just curious and want to see what the tool is about."**

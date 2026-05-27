@@ -1,4 +1,7 @@
-# Add and manage users
+---
+title: "Add and manage users"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/organization/add-and-manage-users.md"
+---# Add and manage users
 
 
 

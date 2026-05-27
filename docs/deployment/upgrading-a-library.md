@@ -1,7 +1,8 @@
 ---
-description: getting the incremental updates of your framework, matrix or catalog
+title: "Upgrading a library"
+description: "getting the incremental updates of your framework, matrix or catalog"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/upgrading-a-library.md"
 ---
-
 # Upgrading a library
 
 In you've updated your instance and didn't see the changes on a loaded library, you can do the following to refresh the library to the latest version:

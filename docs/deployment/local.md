@@ -1,7 +1,8 @@
 ---
-description: Basic setup for local deployment and experimentation
+title: "Local"
+description: "Basic setup for local deployment and experimentation"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/local.md"
 ---
-
 # Local
 
 The recommended pattern for local deployment is to use **Docker Compose**. Check the Readme file on the CISO Assistant repo for the latest instructions.

@@ -1,11 +1,8 @@
 ---
-description: >-
-  This is CISO Assistant documentation. You'll find advice on how to get
-  started, and details on our vision of risk and compliance assessment.
-cover: .gitbook/assets/gh_banner.png
-coverY: 0
+title: "👋 Welcome to CISO Assistant"
+description: "This is CISO Assistant documentation. You'll find advice on how to get started, and details on our vision of risk and compliance assessment."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/README.md"
 ---
-
 # 👋 Welcome to CISO Assistant
 
 ## A different take on Cyber Security Posture Management

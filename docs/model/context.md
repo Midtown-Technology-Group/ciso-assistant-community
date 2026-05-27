@@ -1,9 +1,8 @@
 ---
-description: >-
-  This is the place to define the context for risk and compliance management.
-  All items here are optional.
+title: "⚙️ Context"
+description: "This is the place to define the context for risk and compliance management. All items here are optional."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/context.md"
 ---
-
 # ⚙️ Context
 
 ## Threat

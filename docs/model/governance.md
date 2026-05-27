@@ -1,9 +1,8 @@
 ---
-description: >-
-  You will set here documents and items that are used as a basis for
-  assessments.
+title: "🏛️ Governance"
+description: "You will set here documents and items that are used as a basis for assessments."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/governance.md"
 ---
-
 # 🏛️ Governance
 
 ## Policy

@@ -1,7 +1,8 @@
 ---
-description: Configure Microsoft Entra ID as an Identity Provider for CISO Assistant
+title: "Microsoft Entra ID"
+description: "Configure Microsoft Entra ID as an Identity Provider for CISO Assistant"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/sso/identity-providers/microsoft-entra-id.md"
 ---
-
 # Microsoft Entra ID
 
 {% tabs %}

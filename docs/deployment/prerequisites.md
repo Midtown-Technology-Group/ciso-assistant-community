@@ -1,4 +1,7 @@
-# Prerequisites
+---
+title: "Prerequisites"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/prerequisites.md"
+---# Prerequisites
 
 ### Prerequisites to Install CISO Assistant On-Premises
 

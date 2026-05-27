@@ -1,7 +1,8 @@
 ---
-description: Importing CIS Controls or CSA CCM
+title: "CIS Controls / Cloud Controls Matrix (CCM)"
+description: "Importing CIS Controls or CSA CCM"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/customization/cis-controls.md"
 ---
-
 # CIS Controls / Cloud Controls Matrix (CCM)
 
 ### New: import the excel directly to the app to get it converted

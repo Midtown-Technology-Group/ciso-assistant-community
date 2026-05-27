@@ -1,7 +1,8 @@
 ---
-description: ServiceNow Integration Guide
+title: "ServiceNow"
+description: "ServiceNow Integration Guide"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/integration/third-party-integrations/servicenow.md"
 ---
-
 # ServiceNow
 
 This guide details how to configure the bidirectional synchronization between **CISO Assistant** and **ServiceNow**. This integration allows you to:

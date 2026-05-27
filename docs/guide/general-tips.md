@@ -1,7 +1,7 @@
 ---
-icon: sparkle
+title: "General tips"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/general-tips.md"
 ---
-
 # General tips
 
 CISO Assistant is intended to be a multi-paradigm tool to suit everyone's background and approch to cyber security program organisation.

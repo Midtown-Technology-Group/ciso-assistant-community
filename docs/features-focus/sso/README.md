@@ -1,7 +1,8 @@
 ---
-description: Configure Single Sign-On with different SAML or OpenID Connect providers
+title: "SSO"
+description: "Configure Single Sign-On with different SAML or OpenID Connect providers"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/sso/README.md"
 ---
-
 # SSO
 
 ### Documented providers

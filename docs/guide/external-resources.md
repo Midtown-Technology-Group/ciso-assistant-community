@@ -1,7 +1,8 @@
 ---
-description: Community supported content
+title: "🌐 External resources"
+description: "Community supported content"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/external-resources.md"
 ---
-
 # 🌐 External resources
 
 ## Live sessions

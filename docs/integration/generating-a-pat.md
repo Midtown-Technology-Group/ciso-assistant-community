@@ -1,7 +1,8 @@
 ---
-description: Personal Access Token to interact with the API
+title: "Generating a PAT"
+description: "Personal Access Token to interact with the API"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/integration/generating-a-pat.md"
 ---
-
 # Generating a PAT
 
 ## [Getting a PAT (Personal Access Token) for CISO Assistant](https://app.guidde.com/playbooks/v63umE8itx2auhUk5z2cw3)

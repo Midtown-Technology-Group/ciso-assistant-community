@@ -1,8 +1,8 @@
 ---
-description: Draft
-hidden: true
+title: "Windows"
+description: "Draft"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/windows.md"
 ---
-
 # Windows
 
 1. Make sure to have Docker Desktop installed with WSL2 support

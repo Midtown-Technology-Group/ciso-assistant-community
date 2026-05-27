@@ -1,7 +1,8 @@
 ---
-description: Minor nonconformity, Major nonconformity, etc.
+title: "Manage extended result"
+description: "Minor nonconformity, Major nonconformity, etc."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/compliance/manage-extended-result.md"
 ---
-
 # Manage extended result
 
 ## [Manage Minor Nonconformities And Audit Results Efficiently](https://app.guidde.com/playbooks/tfJoxjgR2GViiWgprnp1hn)

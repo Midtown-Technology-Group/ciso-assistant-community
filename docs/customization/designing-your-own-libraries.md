@@ -1,4 +1,7 @@
-# Designing your own Libraries
+---
+title: "Designing your own Libraries"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/customization/designing-your-own-libraries.md"
+---# Designing your own Libraries
 
 {% hint style="warning" %}
 **NOTE:** This section is still under reworking. For complementary informations, please refer to the [**dedicated README on GitHub**](https://github.com/intuitem/ciso-assistant-community/blob/main/tools/README.md).

@@ -1,9 +1,8 @@
 ---
-description: >-
-  This is where you can carry out your compliance work based on the framework of
-  your choice.
+title: "📋 Compliance"
+description: "This is where you can carry out your compliance work based on the framework of your choice."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/compliance/README.md"
 ---
-
 # 📋 Compliance
 
 ## Framework

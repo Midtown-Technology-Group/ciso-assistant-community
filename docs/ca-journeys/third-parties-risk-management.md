@@ -1,4 +1,7 @@
-# Third Parties Risk Management
+---
+title: "Third Parties Risk Management"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/ca-journeys/third-parties-risk-management.md"
+---# Third Parties Risk Management
 
 {% embed url="https://app.guidde.com/share/playbooks/hLVvBdoDyaNiZmFPgBPi4z" %}
 

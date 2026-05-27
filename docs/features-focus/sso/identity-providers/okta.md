@@ -1,7 +1,8 @@
 ---
-description: Configure Okta as an Identity Provider for CISO Assistant
+title: "Okta"
+description: "Configure Okta as an Identity Provider for CISO Assistant"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/sso/identity-providers/okta.md"
 ---
-
 # Okta
 
 Go into your **Okta admin console** (it should look like this: `https://<your_url>.okta.com/admin/dashboard`)

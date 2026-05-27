@@ -1,4 +1,7 @@
-# Teams
+---
+title: "Teams"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/organization/teams.md"
+---# Teams
 
 **Teams** in CISO Assistant are used to group users who work together on the same security activities, such as risk assessments, compliance programs, or audits.&#x20;
 

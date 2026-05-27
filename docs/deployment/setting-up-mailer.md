@@ -1,10 +1,8 @@
 ---
-description: >-
-  CISO Assistant uses SMTP to send transactional emails (password reset,
-  superuser creation, notifications). This page covers configuration and the TLS
-  specifics introduced in 3.16.
+title: "Setting up mailer"
+description: "CISO Assistant uses SMTP to send transactional emails (password reset, superuser creation, notifications). This page covers configuration and the TLS specifics introduced in 3.16."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/setting-up-mailer.md"
 ---
-
 # Setting up mailer
 
 ### Environment variables

@@ -1,7 +1,8 @@
 ---
-description: How to add custom certificates for your remote installation
+title: "Custom certificates"
+description: "How to add custom certificates for your remote installation"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/custom-certificates.md"
 ---
-
 # Custom certificates
 
 You can configure your own Certificate by replacing the line `tls internal` in the docker-compose.yml by `tls <cert_file> <key_file>`. Here is Caddy documentation on this [https://caddyserver.com/docs/caddyfile/directives/tls](https://caddyserver.com/docs/caddyfile/directives/tls)

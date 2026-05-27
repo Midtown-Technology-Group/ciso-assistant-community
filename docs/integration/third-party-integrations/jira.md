@@ -1,4 +1,7 @@
-# Jira
+---
+title: "Jira"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/integration/third-party-integrations/jira.md"
+---# Jira
 
 ## Overview
 

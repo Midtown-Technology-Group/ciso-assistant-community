@@ -1,7 +1,8 @@
 ---
-description: Tips and tricks regarding specific cases
+title: "Special cases"
+description: "Tips and tricks regarding specific cases"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/special-cases.md"
 ---
-
 # Special cases
 
 

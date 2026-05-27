@@ -1,4 +1,7 @@
-# 00 - initial setup
+---
+title: "00 - initial setup"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/ca-journeys/00-initial-setup.md"
+---# 00 - initial setup
 
 ## [CISO Assistant: initial setup](https://app.guidde.com/playbooks/ePGKrmy5kVfGgH1Fpb97JX)
 

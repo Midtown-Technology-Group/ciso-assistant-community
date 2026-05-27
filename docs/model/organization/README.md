@@ -1,9 +1,8 @@
 ---
-description: >-
-  You can find here CISO Assistant global organization. All entities will be
-  linked to or contained within these objects.
+title: "📁 Organization"
+description: "You can find here CISO Assistant global organization. All entities will be linked to or contained within these objects."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/organization/README.md"
 ---
-
 # 📁 Organization
 
 ## A folder organization

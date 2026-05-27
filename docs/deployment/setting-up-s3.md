@@ -1,7 +1,8 @@
 ---
-description: How to connect your S3 block storage for your installation
+title: "Setting up S3"
+description: "How to connect your S3 block storage for your installation"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/setting-up-s3.md"
 ---
-
 # Setting up S3
 
 By default, CISO Assistant stores attachments on the local filesystem.\

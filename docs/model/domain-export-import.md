@@ -1,7 +1,7 @@
 ---
-icon: square-this-way-up
+title: "Domain export/import"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/model/domain-export-import.md"
 ---
-
 # Domain export/import
 
 Pro users (eg. consultants) can export a full domain with its affiliated objects

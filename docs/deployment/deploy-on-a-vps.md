@@ -1,7 +1,8 @@
 ---
-description: Virtual Private Server - Remote internet-facing VM
+title: "Deploy on a VPS"
+description: "Virtual Private Server - Remote internet-facing VM"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/deploy-on-a-vps.md"
 ---
-
 # Deploy on a VPS
 
 This setup aims to expose CISO Assistant on a VPS while using automated Let's Encrypt for certificates management.

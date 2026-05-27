@@ -1,7 +1,7 @@
 ---
-hidden: true
+title: "Getting your custom framework (v1)"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/customization/getting-your-custom-framework.md"
 ---
-
 # Getting your custom framework (v1)
 
 {% hint style="danger" %}

@@ -1,7 +1,8 @@
 ---
-description: Configure Google Workspace as an Identity Provider for CISO Assistant
+title: "Google Workspace"
+description: "Configure Google Workspace as an Identity Provider for CISO Assistant"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/sso/identity-providers/google-workplace.md"
 ---
-
 # Google Workspace
 
 {% hint style="danger" %}

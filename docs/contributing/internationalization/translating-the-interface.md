@@ -1,4 +1,7 @@
-# Translating the interface
+---
+title: "Translating the interface"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/contributing/internationalization/translating-the-interface.md"
+---# Translating the interface
 
 You can contribute to interface translations using a tool called [fink](https://fink.inlang.com/).
 

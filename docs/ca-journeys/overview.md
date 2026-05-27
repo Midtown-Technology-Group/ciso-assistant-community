@@ -1,4 +1,7 @@
-# 01 - basic audit
+---
+title: "01 - basic audit"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/ca-journeys/overview.md"
+---# 01 - basic audit
 
 ## [CISO Assistant: starting an audit](https://app.guidde.com/playbooks/68qUXmai1HgEMzMooV7g6b)
 

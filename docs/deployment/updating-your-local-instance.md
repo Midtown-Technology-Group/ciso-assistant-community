@@ -1,10 +1,8 @@
 ---
-description: >-
-  How to update your local instance. All docker images are available on ghcr
-  with the specific versions matching the repo tags. The latest tag points to
-  the most recent release for both back and front.
+title: "Updating your local instance"
+description: "How to update your local instance. All docker images are available on ghcr with the specific versions matching the repo tags. The latest tag points to the most recent release for both back and front."
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/deployment/updating-your-local-instance.md"
 ---
-
 # Updating your local instance
 
 ## Hands-free

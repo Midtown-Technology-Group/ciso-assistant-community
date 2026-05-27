@@ -1,7 +1,8 @@
 ---
-description: Switch the UI language
+title: "Changing the language"
+description: "Switch the UI language"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/customization/changing-the-language.md"
 ---
-
 # Changing the language
 
 <figure><img src="../.gitbook/assets/translations.gif" alt=""><figcaption></figcaption></figure>

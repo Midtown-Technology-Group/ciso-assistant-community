@@ -1,7 +1,8 @@
 ---
-description: Overview of the requirements dispatch mode
+title: "Assignments / respondent mode"
+description: "Overview of the requirements dispatch mode"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/features-focus/assignments-respondent-mode.md"
 ---
-
 # Assignments / respondent mode
 
 This feature is intended for organisations who wish to rely on a single audit where multiple users or teams will collaborate by responding to their specific sections (one or multiple requirements).

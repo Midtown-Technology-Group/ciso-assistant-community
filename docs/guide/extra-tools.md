@@ -1,7 +1,8 @@
 ---
-description: Some useful tools for following up assessments
+title: "🧰 Extra tools"
+description: "Some useful tools for following up assessments"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/guide/extra-tools.md"
 ---
-
 # 🧰 Extra tools
 
 ## X-rays

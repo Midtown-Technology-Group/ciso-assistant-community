@@ -1,7 +1,8 @@
 ---
-description: How to submit a framework, matrix or catalog to the community repository
+title: "Submit a library"
+description: "How to submit a framework, matrix or catalog to the community repository"
+editUrl: "https://github.com/Midtown-Technology-Group/ciso-assistant-community/edit/docs/docs/contributing/submit-a-library-framework.md"
 ---
-
 # Submit a library
 
 **If you are familiar with Github and Git, the submission is pretty straightforward:**
