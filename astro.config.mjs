@@ -3,7 +3,7 @@ import starlight from '@astrojs/starlight';
 import sidebar from './src/generated/sidebar.mjs';
 
 export default defineConfig({
-  site: 'https://docs-ciso.midtowntg.com',
+  site: 'https://docs.ciso.midtowntg.com',
   integrations: [
     starlight({
       title: 'CISO Assistant',
