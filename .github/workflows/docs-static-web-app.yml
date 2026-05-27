@@ -3,7 +3,7 @@ name: Docs Static Web App
 on:
   push:
     branches:
-      - codex/starlight-docs
+      - docs
   pull_request:
     branches:
       - docs
