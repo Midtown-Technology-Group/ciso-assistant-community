@@ -4,6 +4,7 @@
 	import type { ActionData, PageData } from './$types';
 
 	import { page } from '$app/state';
+	import { goto } from '$lib/utils/breadcrumbs';
 	import AutocompleteSelect from '$lib/components/Forms/AutocompleteSelect.svelte';
 	import SuperForm from '$lib/components/Forms/Form.svelte';
 	import HiddenInput from '$lib/components/Forms/HiddenInput.svelte';
@@ -15,7 +16,6 @@
 	import { getSecureRedirect, getFieldVisibility, alignmentColorMap } from '$lib/utils/helpers';
 	import { Progress, Tabs } from '@skeletonlabs/skeleton-svelte';
 
-	import { complianceResultColorMap } from '$lib/utils/constants';
 	import { hideSuggestions } from '$lib/utils/stores';
 	import { m } from '$paraglide/messages';
 	import { countMasked } from '$lib/utils/related-visibility';
@@ -35,10 +35,12 @@
 		type ModalStore
 	} from '$lib/components/Modals/stores';
 	import MarkdownRenderer from '$lib/components/MarkdownRenderer.svelte';
+	import MappingInferenceView from '$lib/components/ComplianceAssessment/MappingInferenceView.svelte';
 	import {
 		computeRequirementScoreAndResult,
 		formatScoreValue,
-		displayScoreColor
+		displayScoreColor,
+		resultBadgeStyle
 	} from '$lib/utils/helpers';
 
 	interface Props {
@@ -68,10 +70,9 @@
 	}
 
 	function cancel(): void {
-		var currentUrl = window.location.href;
-		var url = new URL(currentUrl);
-		var nextValue = getSecureRedirect(url.searchParams.get('next'));
-		window.location.href = nextValue || complianceAssessmentURL;
+		const url = new URL(window.location.href);
+		const nextValue = getSecureRedirect(url.searchParams.get('next'));
+		goto(nextValue || complianceAssessmentURL);
 	}
 
 	const complianceAssessmentURL = `/compliance-assessments/${data.requirementAssessment.compliance_assessment.id}`;
@@ -257,16 +258,11 @@
 		applyAction: true,
 		resetForm: false,
 		validators: zod(schema),
-		taintedMessage: false,
+		taintedMessage: m.taintedFormMessage(),
 		validationMethod: 'auto'
 	});
 
-	let mappingInference = $derived({
-		sourceRequirementAssessments:
-			data.requirementAssessment.mapping_inference.source_requirement_assessments,
-		result: data.requirementAssessment.mapping_inference.result,
-		annotation: ''
-	});
+	let mappingInference = $derived(data.requirementAssessment.mapping_inference);
 
 	let requirementAssessmentsList: string[] = $hideSuggestions;
 
@@ -286,29 +282,29 @@
 		hideSuggestions.set(requirementAssessmentsList);
 	}
 
-	let classesText = $derived(
-		complianceResultColorMap[mappingInference.result] === '#000000' ? 'text-white' : ''
+	// Field visibility — derived so that SvelteKit's data reload (e.g. after the
+	// audit's field_visibility is edited in another tab and the user navigates
+	// back) refreshes the flags. A plain const would capture a stale reference.
+	const fw = $derived(data.requirementAssessment.compliance_assessment.framework);
+	const complianceAssessment = $derived(data.requirementAssessment.compliance_assessment);
+	const viewerRole: 'respondent' | 'auditor' = $derived(
+		data.viewerRole === 'auditor' ? 'auditor' : 'respondent'
 	);
+	const fieldVis = $derived(getFieldVisibility(complianceAssessment, viewerRole));
+	const showAnswers = $derived(fieldVis.showAnswers);
+	const showResult = $derived(fieldVis.showResult);
+	const showExtendedResult = $derived(fieldVis.showExtendedResult);
+	const showStatus = $derived(fieldVis.showStatus);
+	const showScore = $derived(fieldVis.showScore);
+	const showDocumentationScore = $derived(fieldVis.showDocumentationScore);
+	const showObservation = $derived(fieldVis.showObservation);
+	const showAppliedControls = $derived(fieldVis.showAppliedControls);
+	const showEvidences = $derived(fieldVis.showEvidences);
+	const showRespondentAlignment = $derived(fieldVis.showRespondentAlignment);
+	const showComments = $derived(fieldVis.showComments);
 
-	// Field visibility
-	const fw = data.requirementAssessment.compliance_assessment.framework;
-	const complianceAssessment = data.requirementAssessment.compliance_assessment;
-	const viewerRole: 'respondent' | 'auditor' =
-		data.viewerRole === 'auditor' ? 'auditor' : 'respondent';
-	const {
-		showResult,
-		showStatus,
-		showScore,
-		showDocumentationScore,
-		showObservation,
-		showAppliedControls,
-		showEvidences,
-		showRespondentAlignment,
-		showComments
-	} = getFieldVisibility(complianceAssessment, viewerRole);
-
-	const isAuditor = viewerRole === 'auditor';
-	const canShowAppliedControls = showAppliedControls && !page.data.user.is_third_party;
+	const isAuditor = $derived(viewerRole === 'auditor');
+	const canShowAppliedControls = $derived(showAppliedControls && !page.data.user.is_third_party);
 
 	function pickDefaultTab(): string {
 		if (canShowAppliedControls) return 'applied_controls';
@@ -374,10 +370,17 @@
 		computeRequirementScoreAndResult(data.requirementAssessment, $formStore.answers)
 	);
 
-	let expandedInferences = $state(false);
-
 	let computedResult = $derived(computedScoreAndResult.result);
 	let computedScore = $derived(computedScoreAndResult.score);
+
+	// effective_* are resolved server-side via the Node -> CA cascade. They are
+	// null when scoring is disabled on the CA.
+	const ra = data.requirementAssessment;
+	const req = ra.requirement;
+	const resolvedMin = ra.effective_min_score ?? page.data.compliance_assessment_score.min_score;
+	const resolvedMax = ra.effective_max_score ?? page.data.compliance_assessment_score.max_score;
+	const resolvedScoresDef =
+		ra.effective_scores_definition ?? page.data.compliance_assessment_score.scores_definition;
 </script>
 
 {#if data.requirementAssessment.compliance_assessment.is_locked}
@@ -391,10 +394,17 @@
 		</div>
 	</div>
 {/if}
-<div class="card space-y-2 p-4 bg-white shadow-sm">
+<div class="card space-y-2 p-4 bg-surface-50-950 shadow-sm">
 	<div class="flex justify-between">
-		<div class="flex">
+		<div class="flex items-center gap-2">
 			<span class="code left h-min">{data.requirement.urn}</span>
+			{#if data.requirementAssessment.assessable && typeof data.requirement.weight === 'number' && Number.isFinite(data.requirement.weight) && data.requirement.weight !== 1}
+				<span
+					class="badge h-fit bg-indigo-100 text-indigo-800 dark:bg-indigo-500/20 dark:text-indigo-300"
+				>
+					{m.requirementWeight()}: {data.requirement.weight}
+				</span>
+			{/if}
 		</div>
 		<a
 			class="text-pink-500 hover:text-pink-400"
@@ -405,7 +415,7 @@
 	{#if data.requirement?.implementation_groups?.length > 0}
 		<div class="mb-2">
 			{#each data.requirement.implementation_groups as ig}
-				<span class="badge bg-blue-100 mr-2">
+				<span class="badge bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300 mr-2">
 					{getImplementationGroupName(ig)}
 				</span>
 			{/each}
@@ -505,99 +515,7 @@
 					</div>
 				{/if}
 				{#if mappingInference.result}
-					<div class="my-2">
-						<p class="font-medium">
-							<i class="fa-solid fa-link"></i>
-							{m.mappingInference()}
-						</p>
-						<span class="text-xs text-gray-500"
-							><i class="fa-solid fa-circle-info"></i> {m.mappingInferenceHelpText()}</span
-						>
-						<div>
-							<ul class="list-disc ml-4 {!expandedInferences ? 'hidden' : ''}">
-								{#each Object.entries(mappingInference.sourceRequirementAssessments) as [source_urn, source_requirement_assessment]}
-									<li>
-										<p>
-											<a
-												class="anchor"
-												href="/requirement-assessments/{source_requirement_assessment.id}"
-											>
-												{source_requirement_assessment.str}
-											</a>
-										</p>
-										<p class="whitespace-pre-line py-1">
-											<span class="italic">{m.coverageColon()}</span>
-											<span class="badge h-fit">
-												{safeTranslate(source_requirement_assessment.coverage)}
-											</span>
-										</p>
-										<p class="whitespace-pre-line py-1">
-											<span class="italic">{m.framework()}</span>
-											<a
-												class="anchor badge h-fit"
-												href="/frameworks/{source_requirement_assessment.source_framework.id}"
-											>
-												{source_requirement_assessment.source_framework.name}
-											</a>
-										</p>
-										<p class="whitespace-pre-line py-1">
-											<span class="italic">{m.mapping()}</span>
-											{#if source_requirement_assessment.used_mapping_set}
-												<a
-													class="anchor badge h-fit"
-													href="/requirement-mapping-sets/{source_requirement_assessment
-														.used_mapping_set?.id}"
-												>
-													{source_requirement_assessment.used_mapping_set?.name}
-												</a>
-											{:else}
-												<span class="text-gray-500">--</span>
-											{/if}
-										</p>
-										{#if source_requirement_assessment.is_scored}
-											<p class="whitespace-pre-line py-1">
-												<span class="italic">{m.scoreSemiColon()}</span>
-												<span class="badge h-fit">
-													{safeTranslate(source_requirement_assessment.score)}
-												</span>
-											</p>
-										{/if}
-										<p class="whitespace-pre-line py-1">
-											<span class="italic">{m.suggestionColon()}</span>
-											<span
-												class="badge {classesText} h-fit"
-												style="background-color: {complianceResultColorMap[
-													mappingInference.result
-												]};"
-											>
-												{safeTranslate(mappingInference.result)}
-											</span>
-										</p>
-										{#if mappingInference.annotation}
-											<p class="whitespace-pre-line py-1">
-												<span class="italic">{m.annotationColon()}</span>
-												{mappingInference.annotation}
-											</p>
-										{/if}
-									</li>
-								{/each}
-							</ul>
-						</div>
-						<button
-							onclick={() => (expandedInferences = !expandedInferences)}
-							class="m-5 text-blue-800"
-							aria-expanded={expandedInferences}
-						>
-							<i class="{expandedInferences ? 'fas fa-chevron-up' : 'fas fa-chevron-down'} mr-3"
-							></i>
-							{#if expandedInferences}
-								{m.hideInferences()}
-							{:else}
-								{m.showInferences()}
-							{/if}
-							({Object.keys(mappingInference.sourceRequirementAssessments).length})
-						</button>
-					</div>
+					<MappingInferenceView {mappingInference} />
 				{/if}
 			{/if}
 		</div>
@@ -612,7 +530,7 @@
 		>
 			{#snippet children({ form, data })}
 				{#if canShowAppliedControls || showEvidences || isAuditor}
-					<div class="card shadow-lg bg-white">
+					<div class="card shadow-lg bg-surface-50-950">
 						<Tabs
 							value={group}
 							onValueChange={(e) => {
@@ -621,10 +539,14 @@
 						>
 							<Tabs.List>
 								{#if canShowAppliedControls}
-									<Tabs.Trigger value="applied_controls">{m.appliedControls()}</Tabs.Trigger>
+									<Tabs.Trigger value="applied_controls" data-testid="applied-controls-tab"
+										>{m.appliedControls()}</Tabs.Trigger
+									>
 								{/if}
 								{#if showEvidences}
-									<Tabs.Trigger value="evidences">{m.evidences()}</Tabs.Trigger>
+									<Tabs.Trigger value="evidences" data-testid="evidences-tab"
+										>{m.evidences()}</Tabs.Trigger
+									>
 								{/if}
 								{#if isAuditor}
 									<Tabs.Trigger value="security_exceptions">{m.securityExceptions()}</Tabs.Trigger>
@@ -645,7 +567,7 @@
 													class="btn self-end shadow-sm
 														{nothingToSuggest
 														? 'bg-emerald-50 border border-emerald-200 text-emerald-700 cursor-not-allowed pointer-events-none'
-														: 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300'}"
+														: 'bg-surface-50-950 border border-surface-200-800 text-surface-700-300 hover:bg-surface-100-900 hover:border-surface-300-700'}"
 													type="button"
 													disabled={nothingToSuggest || createAppliedControlsLoading}
 													aria-label={nothingToSuggest
@@ -785,22 +707,26 @@
 				<HiddenInput {form} field="compliance_assessment" />
 				<HiddenInput {form} field="nextRequirementAssessmentId" />
 				<div class="flex flex-col my-8 space-y-6">
-					{#if page.data.requirementAssessment.requirement.questions != null && Object.keys(page.data.requirementAssessment.requirement.questions).length !== 0}
-						<Question
-							{form}
-							field="answers"
-							questions={page.data.requirementAssessment.requirement.questions}
-							label={m.questionSingular()}
-						/>
+					{#if showAnswers && page.data.requirementAssessment.requirement.questions != null && Object.keys(page.data.requirementAssessment.requirement.questions).length !== 0}
+						<div data-testid="answers-field">
+							<Question
+								{form}
+								field="answers"
+								questions={page.data.requirementAssessment.requirement.questions}
+								label={m.questionSingular()}
+							/>
+						</div>
 					{/if}
-					{#if showStatus && page.data.requirementAssessment.compliance_assessment.progress_status_enabled}
-						<Select
-							{form}
-							options={page.data.model.selectOptions['status']}
-							field="status"
-							label={m.status()}
-							helpText={m.requirementAssessmentStatusHelpText()}
-						/>
+					{#if showStatus}
+						<div data-testid="status-field">
+							<Select
+								{form}
+								options={page.data.model.selectOptions['status']}
+								field="status"
+								label={m.status()}
+								helpText={m.requirementAssessmentStatusHelpText()}
+							/>
+						</div>
 					{/if}
 					{#if showRespondentAlignment && page.data.requirementAssessment.respondent_alignment}
 						<p class="flex flex-row items-center space-x-4">
@@ -816,36 +742,38 @@
 						</p>
 					{/if}
 					{#if showResult}
-						{#if computedResult}
-							<p class="flex flex-row items-center space-x-4">
-								<span class="font-medium">{m.result()}</span>
-								<span
-									class="badge text-sm font-semibold"
-									style="background-color: {complianceResultColorMap[
-										computedResult || 'not_assessed'
-									] || '#ddd'}"
-								>
-									{safeTranslate(computedResult || 'not_assessed')}
-								</span>
-							</p>
-						{:else}
+						<div data-testid="result-field">
+							{#if computedResult}
+								<p class="flex flex-row items-center space-x-4">
+									<span class="font-medium">{m.result()}</span>
+									<span
+										class="badge text-sm font-semibold"
+										style={resultBadgeStyle(computedResult || 'not_assessed')}
+									>
+										{safeTranslate(computedResult || 'not_assessed')}
+									</span>
+								</p>
+							{:else}
+								<Select
+									{form}
+									options={page.data.model.selectOptions['result']}
+									field="result"
+									label={m.result()}
+									helpText={m.requirementAssessmentResultHelpText()}
+								/>
+							{/if}
+						</div>
+					{/if}
+					{#if showExtendedResult}
+						<div data-testid="extended-result-field">
 							<Select
 								{form}
-								options={page.data.model.selectOptions['result']}
-								field="result"
-								label={m.result()}
-								helpText={m.requirementAssessmentResultHelpText()}
+								options={page.data.model.selectOptions['extended_result']}
+								field="extended_result"
+								label={m.extendedResult()}
+								helpText={m.extendedResultHelpText()}
 							/>
-						{/if}
-					{/if}
-					{#if showResult && page.data.requirementAssessment.compliance_assessment.extended_result_enabled}
-						<Select
-							{form}
-							options={page.data.model.selectOptions['extended_result']}
-							field="extended_result"
-							label={m.extendedResult()}
-							helpText={m.extendedResultHelpText()}
-						/>
+						</div>
 					{/if}
 					{#if page.data.compliance_assessment_score.scoring_enabled}
 						{#if computedScore !== null}
@@ -854,20 +782,14 @@
 									<span class="font-medium">{m.score()}</span>
 									<div class="shrink-0 relative">
 										<Progress
-											value={formatScoreValue(
-												computedScore || 0,
-												page.data.compliance_assessment_score.max_score
-											)}
+											value={formatScoreValue(computedScore || 0, resolvedMax, false, resolvedMin)}
 											min={0}
 											max={100}
 										>
 											<Progress.Circle class="[--size:--spacing(10)]">
 												<Progress.CircleTrack />
 												<Progress.CircleRange
-													class={displayScoreColor(
-														computedScore,
-														page.data.compliance_assessment_score.max_score
-													)}
+													class={displayScoreColor(computedScore, resolvedMax, false, resolvedMin)}
 												/>
 											</Progress.Circle>
 											<div class="absolute inset-0 flex items-center justify-center">
@@ -879,12 +801,12 @@
 							{/if}
 						{:else if data.result !== 'not_applicable'}
 							{#if showScore}
-								<div class="flex flex-col">
+								<div class="flex flex-col" data-testid="score-field">
 									<Score
 										{form}
-										min_score={page.data.compliance_assessment_score.min_score}
-										max_score={page.data.compliance_assessment_score.max_score}
-										scores_definition={page.data.compliance_assessment_score.scores_definition}
+										min_score={resolvedMin}
+										max_score={resolvedMax}
+										scores_definition={resolvedScoresDef}
 										field="score"
 										label={page.data.compliance_assessment_score.show_documentation_score
 											? m.implementationScore()
@@ -910,9 +832,9 @@
 							{#if showDocumentationScore && page.data.compliance_assessment_score.show_documentation_score}
 								<Score
 									{form}
-									min_score={page.data.compliance_assessment_score.min_score}
-									max_score={page.data.compliance_assessment_score.max_score}
-									scores_definition={page.data.compliance_assessment_score.scores_definition}
+									min_score={resolvedMin}
+									max_score={resolvedMax}
+									scores_definition={resolvedScoresDef}
 									field="documentation_score"
 									label={m.documentationScore()}
 									isDoc={true}
@@ -923,14 +845,16 @@
 					{/if}
 
 					{#if showObservation}
-						<MarkdownField {form} field="observation" label="Observation" />
+						<div data-testid="observation-field">
+							<MarkdownField {form} field="observation" label="Observation" />
+						</div>
 					{/if}
 				</div>
 				<div
-					class="flex flex-row justify-between space-x-4 sticky bottom-0 backdrop-blur-sm pt-4 pb-2 border-t border-slate-200"
+					class="flex flex-row justify-between space-x-4 sticky bottom-0 backdrop-blur-sm pt-4 pb-2 border-t border-surface-200-800"
 				>
 					<button
-						class="btn bg-gray-400 text-white font-semibold w-full"
+						class="btn bg-surface-400-600 text-white font-semibold w-full"
 						type="button"
 						onclick={cancel}>{m.cancel()}</button
 					>

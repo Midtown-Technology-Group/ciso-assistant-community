@@ -3,6 +3,7 @@ import mimetypes
 from pathlib import Path
 from uuid import UUID
 
+import requests
 import structlog
 import yaml
 from django.db import models
@@ -24,6 +25,7 @@ from rest_framework.response import Response
 import weasyprint
 from weasyprint import HTML
 
+from core.net_safety import BlockedRequestError, assert_public_url
 from core.views import BaseModelViewSet
 from iam.models import RoleAssignment, Folder
 
@@ -49,6 +51,32 @@ def _get_templates_dir(lang: str) -> Path:
     if localized.exists() and any(localized.glob("*.md")):
         return localized
     return TEMPLATES_BASE_DIR / "en"
+
+
+_PDF_FETCH_MAX_BYTES = 10 * 1024 * 1024
+
+
+# WeasyPrint passes a configured `ssl_context` we don't thread through:
+# deployments needing a custom CA for embedded images won't get it. File
+# an issue if that becomes a real need.
+def _safe_url_fetcher(url, timeout=10, ssl_context=None):
+    if url.startswith("data:"):
+        return weasyprint.default_url_fetcher(url)
+    assert_public_url(url, allowed_schemes=("https",))
+    r = requests.get(url, timeout=timeout, allow_redirects=False, stream=True)
+    try:
+        status_code = r.status_code
+        final_url = r.url
+        content_type = r.headers.get("Content-Type", "application/octet-stream")
+        if 300 <= status_code < 400:
+            raise BlockedRequestError(f"Redirects not followed: {url}")
+        content = r.raw.read(_PDF_FETCH_MAX_BYTES + 1, decode_content=True)
+    finally:
+        r.close()
+    if len(content) > _PDF_FETCH_MAX_BYTES:
+        raise BlockedRequestError(f"Response exceeds {_PDF_FETCH_MAX_BYTES} bytes")
+    mime = content_type.split(";")[0].strip() or None
+    return {"string": content, "mime_type": mime, "redirected_url": final_url}
 
 
 class ManagedDocumentViewSet(BaseModelViewSet):
@@ -200,7 +228,7 @@ class DocumentAttachmentViewSet(BaseModelViewSet):
         """Serve the attachment file with correct content type."""
         try:
             pk_uuid = UUID(pk)
-        except (ValueError, AttributeError):
+        except ValueError, AttributeError:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         object_ids_view = RoleAssignment.get_accessible_object_ids(
             Folder.get_root_folder(), request.user, DocumentAttachment
@@ -462,7 +490,7 @@ class DocumentRevisionViewSet(BaseModelViewSet):
 
         # Generate PDF snapshot
         try:
-            self._generate_pdf_snapshot(revision)
+            self._generate_pdf_snapshot(revision, request.user)
         except Exception as e:
             logger.warning("Failed to generate PDF snapshot", error=str(e))
 
@@ -563,13 +591,15 @@ class DocumentRevisionViewSet(BaseModelViewSet):
         )
 
     @staticmethod
-    def _inline_images(html_content):
+    def _inline_images(html_content, accessible_ids):
         """Replace document attachment image URLs with base64 data URIs for PDF export."""
         import base64
         import re
 
         def replace_match(match):
             attachment_id = match.group(1)
+            if UUID(attachment_id) not in accessible_ids:
+                return match.group(0)
             try:
                 attachment = DocumentAttachment.objects.get(pk=attachment_id)
                 if attachment.file and attachment.file.storage.exists(
@@ -598,7 +628,7 @@ class DocumentRevisionViewSet(BaseModelViewSet):
     def export_pdf(self, request, pk=None):
         """Export revision content as a PDF document."""
         revision = self.get_object()
-        pdf = self._render_pdf_bytes(revision)
+        pdf = self._render_pdf_bytes(revision, request.user)
         response = HttpResponse(pdf, content_type="application/pdf")
         filename = slugify(revision.document.display_name)
         response["Content-Disposition"] = (
@@ -610,7 +640,7 @@ class DocumentRevisionViewSet(BaseModelViewSet):
     def status(self, request):
         return Response(dict(DocumentRevision.Status.choices))
 
-    def _render_pdf_bytes(self, revision):
+    def _render_pdf_bytes(self, revision, user):
         """Render a revision to PDF bytes (shared by export and snapshot)."""
         import markdown as md_lib
 
@@ -618,7 +648,10 @@ class DocumentRevisionViewSet(BaseModelViewSet):
             revision.content,
             extensions=["tables", "fenced_code", "toc", "nl2br"],
         )
-        content_html = self._inline_images(content_html)
+        accessible_ids = RoleAssignment.get_accessible_object_ids(
+            Folder.get_root_folder(), user, DocumentAttachment
+        )[0]
+        content_html = self._inline_images(content_html, set(accessible_ids))
         author_name = ""
         if revision.author:
             author_name = (
@@ -643,27 +676,13 @@ class DocumentRevisionViewSet(BaseModelViewSet):
             "doc_management/policy_document_pdf.html", context
         )
 
-        def _safe_url_fetcher(url, timeout=10, ssl_context=None):
-            """Allow data URIs and public HTTPS images, block everything else.
-
-            Prevents SSRF via file://, internal network URLs, or non-HTTPS schemes
-            while still allowing users to embed external logos/images.
-            """
-            if url.startswith("data:"):
-                return weasyprint.default_url_fetcher(url)
-            if url.startswith("https://"):
-                return weasyprint.default_url_fetcher(
-                    url, timeout=timeout, ssl_context=ssl_context
-                )
-            raise ValueError(f"Blocked resource loading for URL scheme: {url}")
-
         return HTML(string=html_string, url_fetcher=_safe_url_fetcher).write_pdf()
 
-    def _generate_pdf_snapshot(self, revision):
+    def _generate_pdf_snapshot(self, revision, user):
         """Generate and save a PDF snapshot for a revision."""
         from django.core.files.base import ContentFile
 
-        pdf_content = self._render_pdf_bytes(revision)
+        pdf_content = self._render_pdf_bytes(revision, user)
         filename = slugify(revision.document.display_name)
         revision.pdf_snapshot.save(
             f"{filename}_v{revision.version_number}.pdf",

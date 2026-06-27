@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "الربط بإطار",
+	"mapToFrameworkDescription": "إنشاء تدقيق جديد في إطار آخر، مرتبط من هذا التدقيق.",
+	"mapFromAudit": "الربط من تدقيق",
+	"mapFromAuditDescription": "جلب النتائج المرتبطة من تدقيق آخر إلى هذا التدقيق.",
+	"selectSourceAudit": "اختر تدقيقًا مصدريًا للإثراء منه",
+	"mapFromSuccess": "تم تحديث التدقيق بنجاح",
+	"mapFromError": "فشل الربط من تدقيق المصدر",
+	"currentState": "الحالة الحالية",
+	"projectedState": "الحالة المتوقعة",
+	"confirmMapping": "تأكيد الربط",
+	"mapFromPreview": "معاينة الربط",
+	"requirementsUpdated": "متطلبات سيتم تحديثها",
+	"noMappingPath": "لم يتم العثور على مسار ربط بين هذه الأطر",
+	"mapFromNoChanges": "لن يغيّر هذا التدقيق المصدري أي شيء في التدقيق الحالي.",
+	"sourceRequirement": "متطلب المصدر",
+	"fullCoverage": "تغطية كاملة",
+	"partialCoverage": "تغطية جزئية",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "الفرنسية",
 	"english": "الإنجليزية",
@@ -490,7 +507,8 @@
 	"linkHelpText": "رابط خارجي للتتبع أو المرجع (مثل شيربوينت، جيرا، إلخ)",
 	"effortHelpText": "الجهد المطلوب لتنفيذ التحكم المطبق",
 	"costHelpText": "التكلفة المطلوبة لتنفيذ الرقابة المطبقة",
-	"riskAcceptanceJusitficationHelpText": "تبرير قبول المخاطر. يمكن فقط للموافق تحرير هذا الحقل.",
+	"riskAcceptanceJustificationHelpText": "تبرير قبول المخاطر. يمكن فقط للموافق تحرير هذا الحقل.",
+	"riskAcceptanceJustificationLabel": "مبرر قبول المخاطر",
 	"approverHelpText": "هوية مالك المخاطر والموافق",
 	"riskAcceptanceRiskScenariosHelpText": "سيناريوهات المخاطر التي تم قبولها",
 	"attachmentHelpText": "ملف دليل (مثل لقطة الشاشة، ملف السجل، إلخ.)",
@@ -735,7 +753,7 @@
 	"maturity": "نضج",
 	"progress": "تقدم",
 	"back": "خلف",
-	"backToWorkshop": "العودة إلى دراسة Ebios RM / النظام البيئي",
+	"backToWorkshop": "العودة إلى دراسة EBIOS RM / النظام البيئي",
 	"duplicate": "ينسخ",
 	"duplicateRiskAssessment": "تكرار تقييم المخاطر",
 	"duplicateAppliedControl": "تكرار عنصر التحكم المطبق",
@@ -743,6 +761,19 @@
 	"favicon": "الرمز المفضل",
 	"logo": "الشعار",
 	"clientSettings": "إعدادات العميل",
+	"infraConfig": "البنية التحتية",
+	"infraConfigDescription": "إدارة تكوين البنية التحتية المكشوف لطبقة البنية التحتية. تُستخدم عناوين IP ونطاقات CIDR أدناه لتكوين الوصول إلى الواجهة الخلفية تلقائيًا.",
+	"infraConfigSettingsUpdated": "تم تحديث إعدادات البنية التحتية بنجاح",
+	"allowedIps": "عناوين IP المسموح بها",
+	"ipAddressOrCidr": "عنوان IP أو CIDR",
+	"invalidIpOrCidr": "أدخل عنوان IP صالحًا أو نطاق CIDR.",
+	"ipAlreadyAdded": "عنوان IP هذا موجود بالفعل في القائمة.",
+	"tooManyAllowedIps": "يمكنك إضافة {max} عنوان IP كحد أقصى.",
+	"enterIpFirst": "أدخل عنوان IP أو CIDR أولاً.",
+	"allowsAllIpsWarning": "هذا يسمح بالوصول من أي عنوان IP.",
+	"confirmEmptyAllowlist": "أنت على وشك الحفظ بدون أي عناوين IP في قائمة السماح. قد يؤدي هذا إلى حظر كل الوصول. هل تريد المتابعة؟",
+	"removeIp": "إزالة {ip}",
+	"noAllowedIpsYet": "لا توجد عناوين IP مسموح بها بعد.",
 	"invalidFileType": "نوع الملف غير صالح",
 	"logoHelpText": "سيتم عرض الشعار في رأس التطبيق. التنسيقات المقبولة هي PNG وJPEG وWEBP وSVG.",
 	"faviconHelpText": "سيتم عرض الرمز المفضل في علامة تبويب المتصفح. التنسيقات المقبولة هي ICO وPNG وJPEG وWEBP",
@@ -876,6 +907,16 @@
 	"emailPasswordMismatch": "غير قادر على تسجيل الدخول باستخدام بيانات الاعتماد المقدمة.",
 	"securitySettings": "إعدادات الأمان",
 	"securitySettingsDescription": "قم بتكوين إعدادات الأمان الخاصة بك هنا.",
+	"preferencesSettings": "التفضيلات",
+	"preferencesSettingsDescription": "قم بتكوين تفضيلات العرض الشخصية الخاصة بك هنا.",
+	"dateFormat": "تنسيق التاريخ",
+	"dateFormatDescription": "اختر كيفية عرض التواريخ في جميع أنحاء التطبيق.",
+	"dateFormatAuto": "تلقائي (حسب اللغة)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "يوم/شهر/سنة (31/05/2026)",
+	"dateFormatMmddyyyy": "شهر/يوم/سنة (05/31/2026)",
+	"dateFormatLongDmy": "طويل، اليوم أولاً (31 مايو 2026)",
+	"dateFormatLongMdy": "طويل، الشهر أولاً (مايو 31، 2026)",
 	"multiFactorAuthentication": "المصادقة متعددة العوامل",
 	"authenticatorApp": "تطبيق المصادقة",
 	"authenticatorAppDescription": "استخدم تطبيق المصادقة لإنشاء كلمة مرور لمرة واحدة تعتمد على الوقت (TOTP) للمصادقة الثنائية.",
@@ -952,8 +993,14 @@
 	"associatedFindingsAssessments": "التقييمات المرتبطة",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "ساعة {count} ",
 				"countPlural=other": "ساعات {count} "
@@ -962,8 +1009,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "دقيقة {count}",
 				"countPlural=other": "دقائق {count}"
@@ -972,8 +1024,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "يوم {count}",
 				"countPlural=other": "أيام {count}"
@@ -982,8 +1039,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} عنصر غير مرئي.",
 				"countPlural=other": "{count} عناصر غير مرئية."
@@ -1082,8 +1144,14 @@
 	"errorFetching": "تعذر تحميل معلومات التسلسل. يرجى المحاولة مرة أخرى.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "لا سيؤثر على أي كائنات أخرى.",
 				"countPlural=one": "سيتم حذف {count} كائن(أ) مرتبط(ة) ولكنهم سيخسرون أحد أو أكثر من العلاقات.",
@@ -1243,8 +1311,13 @@
 	"builderPublishModalDescription": "ستحدّث هذه العملية الإطار النشط. راجع التعديلات أدناه.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "تم إضافة {count} متطلبات",
 				"countPlural=other": "تم إضافة {count} متطلبات"
@@ -1253,8 +1326,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} أسئلة",
 				"countPlural=other": "{count} أسئلة"
@@ -1263,8 +1341,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "تم حذف {count} متطلبات",
 				"countPlural=other": "تم حذف {count} متطلبات"
@@ -1273,8 +1356,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} أسئلة",
 				"countPlural=other": "{count} أسئلة"
@@ -1284,8 +1372,13 @@
 	"builderNoStructuralChanges": "لم يتم اكتشاف تغييرات هيكلية (بيانات وصفية فقط).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "تم اكتشاف {count} تغييرات جذرية",
 				"countPlural=other": "تم اكتشاف {count} تغييرات جذرية"
@@ -1295,8 +1388,13 @@
 	"builderBreakingChangesHint": "قد تؤثر هذه التعديلات على التسجيل أو الرؤية أو نتائج الامتثال في التدقيقات الموجودة.",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "سيتأثر {count} تدقيقات موجودة",
 				"countPlural=other": "سيتأثر {count} تدقيقات موجودة"
@@ -1334,8 +1432,13 @@
 	"builderNoRulesOrGroupsConfigured": "لم يتم تكوين أي قواعد أو مجموعات",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} قواعد نتائج",
 				"countPlural=other": "{count} قواعد نتائج"
@@ -1344,8 +1447,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} مجموعات",
 				"countPlural=other": "{count} مجموعات"
@@ -1358,8 +1466,13 @@
 	"builderScoreScale": "مقياس الدرجات",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} مستويات",
 				"countPlural=other": "{count} مستويات"
@@ -1429,8 +1542,13 @@
 	"builderAssessableLeaf": "ورقة قابلة للتقييم",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "قابل للتقييم · {count} عنصر فرعي",
 				"countPlural=other": "قابل للتقييم · {count} عناصر فرعية"
@@ -1439,8 +1557,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "مجموعة · {count} عنصر فرعي",
 				"countPlural=other": "مجموعة · {count} عناصر فرعية"
@@ -1467,8 +1590,13 @@
 	"builderAddQuestion": "إضافة سؤال",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} عنصر فرعي مخفي",
 				"countPlural=other": "{count} عناصر فرعية مخفية"
@@ -1496,8 +1624,14 @@
 	"builderChangeTypeWarning": "سيؤدي تغيير النوع إلى حذف الخيارات الموجودة. هل تريد المتابعة؟",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "يظهر عندما {ref} = {count} إجابات",
 				"countPlural=other": "يظهر عندما {ref} = {count} إجابات"
@@ -1576,31 +1710,39 @@
 	"builderQuestionTypeUniqueChoice": "اختيار فريد",
 	"builderQuestionTypeMultipleChoice": "اختيار متعدد",
 	"builderQuestionTypeDate": "التاريخ",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "تم التغيير في",
+	"requirementWeight": "الوزن",
+	"scim": "SCIM",
+	"scimDescription": "قم بتكوين توفير SCIM 2.0. وجّه موفّر الهوية الخاص بك إلى نقطة النهاية أدناه وقم بمصادقته باستخدام رمز حامل تم إنشاؤه هنا.",
+	"scimEndpointUrl": "عنوان URL لنقطة نهاية SCIM",
+	"scimTokens": "رموز SCIM",
+	"generateScimToken": "إنشاء رمز",
+	"noScimTokens": "لا توجد رموز SCIM بعد.",
+	"scimTokenName": "الاسم",
+	"scimTokenDigest": "الملخص",
+	"revokeScimToken": "إبطال",
+	"scimTokenGenerated": "تم إنشاء الرمز",
+	"scimTokenWarning": "انسخ هذا الرمز الآن. لأسباب أمنية، لن يتم عرضه مرة أخرى.",
+	"scimTokenRevoked": "تم إبطال رمز SCIM",
+	"scimTokenGenerationFailed": "فشل إنشاء رمز SCIM",
+	"idpGroup": "مجموعة IdP",
+	"idpGroups": "مجموعات IdP",
+	"idpGroupsDescription": "تمكين اتحاد مجموعات IdP (توفير SCIM، وتعيينات مجموعات IdP، وعضويات مجموعات IdP للمستخدمين).",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

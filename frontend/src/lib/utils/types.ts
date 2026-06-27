@@ -58,6 +58,7 @@ export const URL_MODEL = [
 	'teams',
 	'users',
 	'user-groups',
+	'idp-groups',
 	'roles',
 	'role-assignments',
 	'compliance-assessments',
@@ -77,6 +78,7 @@ export const URL_MODEL = [
 	'entity-assessments',
 	'solutions',
 	'contracts',
+	'custom-fields',
 	'representatives',
 	'vulnerabilities',
 	'security-advisories',
@@ -138,6 +140,7 @@ export const URL_MODEL = [
 	// pmbok
 	'generic-collections',
 	'accreditations',
+	'projects',
 	'responsibility-roles',
 	'responsibility-matrices',
 	'responsibility-matrix-activities',

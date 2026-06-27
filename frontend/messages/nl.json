@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "Naar een kader mappen",
+	"mapToFrameworkDescription": "Een nieuwe audit in een ander kader maken, gemapt vanuit deze.",
+	"mapFromAudit": "Vanuit een audit mappen",
+	"mapFromAuditDescription": "Gemapte resultaten uit een andere audit in deze overnemen.",
+	"selectSourceAudit": "Selecteer een bronaudit om vanuit te verrijken",
+	"mapFromSuccess": "Audit succesvol bijgewerkt",
+	"mapFromError": "Mappen vanuit bronaudit mislukt",
+	"currentState": "Huidige status",
+	"projectedState": "Verwachte status",
+	"confirmMapping": "Mapping bevestigen",
+	"mapFromPreview": "Voorbeeld van mapping",
+	"requirementsUpdated": "vereisten worden bijgewerkt",
+	"noMappingPath": "Geen koppelingspad gevonden tussen deze kaders",
+	"mapFromNoChanges": "Deze bronaudit zou niets wijzigen in de huidige audit.",
+	"sourceRequirement": "Bronvereiste",
+	"fullCoverage": "Volledige dekking",
+	"partialCoverage": "Gedeeltelijke dekking",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "Frans",
 	"english": "Engels",
@@ -460,7 +477,8 @@
 	"linkHelpText": "Externe URL voor opvolging of referentie (bijv. sharepoint, jira, etc.)",
 	"effortHelpText": "De inspanning die nodig is om de toegepaste controle uit te voeren",
 	"costHelpText": "De kosten die nodig zijn om de toegepaste controle te implementeren",
-	"riskAcceptanceJusitficationHelpText": "Rechtvaardiging voor de risicoacceptatie. Alleen de goedkeurder kan dit veld bewerken.",
+	"riskAcceptanceJustificationHelpText": "Rechtvaardiging voor de risicoacceptatie. Alleen de goedkeurder kan dit veld bewerken.",
+	"riskAcceptanceJustificationLabel": "Motivering voor risicoacceptatie",
 	"approverHelpText": "Identiteit van risico-eigenaar en goedkeurder",
 	"riskAcceptanceRiskScenariosHelpText": "De risicoscenario's die worden geaccepteerd",
 	"attachmentHelpText": "Bestand voor bewijs (bijv. screenshot, logbestand, enz.)",
@@ -714,6 +732,19 @@
 	"favicon": "Favorieten",
 	"logo": "Logo",
 	"clientSettings": "Clientinstellingen",
+	"infraConfig": "Infrastructuur",
+	"infraConfigDescription": "Beheer de infrastructuurconfiguratie die wordt blootgesteld aan de infrastructuurlaag. De onderstaande IP-adressen en CIDR-bereiken worden gebruikt om de backendtoegang automatisch te configureren.",
+	"infraConfigSettingsUpdated": "Infrastructuurinstellingen succesvol bijgewerkt",
+	"allowedIps": "Toegestane IP's",
+	"ipAddressOrCidr": "IP-adres of CIDR",
+	"invalidIpOrCidr": "Voer een geldig IP-adres of CIDR-bereik in.",
+	"ipAlreadyAdded": "Dit IP staat al in de lijst.",
+	"tooManyAllowedIps": "U kunt maximaal {max} IP-adressen toevoegen.",
+	"enterIpFirst": "Voer eerst een IP-adres of CIDR in.",
+	"allowsAllIpsWarning": "Dit staat toegang vanaf elk IP-adres toe.",
+	"confirmEmptyAllowlist": "U staat op het punt op te slaan zonder IP's in de toegestane lijst. Dit kan alle toegang blokkeren. Doorgaan?",
+	"removeIp": "{ip} verwijderen",
+	"noAllowedIpsYet": "Nog geen toegestane IP's.",
 	"invalidFileType": "Ongeldig bestandstype",
 	"logoHelpText": "Het logo wordt weergegeven in de header van de applicatie. Geaccepteerde formaten zijn PNG, JPEG, WEBP, SVG.",
 	"faviconHelpText": "Het favicon wordt weergegeven in het browsertabblad. Geaccepteerde formaten zijn ICO, PNG, JPEG, WEBP, SVG.",
@@ -849,6 +880,16 @@
 	"emailPasswordMismatch": "Kan niet inloggen met de opgegeven inloggegevens.",
 	"securitySettings": "Beveiligingsinstellingen",
 	"securitySettingsDescription": "Configureer hier uw beveiligingsinstellingen.",
+	"preferencesSettings": "Voorkeuren",
+	"preferencesSettingsDescription": "Configureer hier uw persoonlijke weergavevoorkeuren.",
+	"dateFormat": "Datumnotatie",
+	"dateFormatDescription": "Kies hoe datums in de hele applicatie worden weergegeven.",
+	"dateFormatAuto": "Automatisch (volg taal)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "Dag/Maand/Jaar (31/05/2026)",
+	"dateFormatMmddyyyy": "Maand/Dag/Jaar (05/31/2026)",
+	"dateFormatLongDmy": "Lang, dag eerst (31 mei 2026)",
+	"dateFormatLongMdy": "Lang, maand eerst (mei 31, 2026)",
 	"multiFactorAuthentication": "Multi-factor authenticatie",
 	"authenticatorApp": "Authenticator-app",
 	"authenticatorAppDescription": "Gebruik een authenticatie-app om een op tijd gebaseerd eenmalig wachtwoord (TOTP) te genereren voor tweefactorauthenticatie.",
@@ -954,8 +995,14 @@
 	"mappingSuggestionTeasing": "Suggesties voor in kaart brengen zijn nu beschikbaar! U kunt de filters gebruiken om suggesties te verkennen op basis van geladen kaders.",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Uur",
 				"countPlural=other": "{count} Uren"
@@ -964,8 +1011,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Minuut",
 				"countPlural=other": "{count} Minuten"
@@ -974,8 +1026,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Dag",
 				"countPlural=other": "{count} Dagen"
@@ -984,8 +1041,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} object niet zichtbaar.",
 				"countPlural=other": "{count} objecten niet zichtbaar."
@@ -1348,7 +1410,7 @@
 	"backToBaseAudit": "Terug naar basisaudit",
 	"backToStudy": "Terug naar studie",
 	"backToTable": "Terug naar tabel",
-	"backToWorkshop": "Terug naar Ebios RM-studie / ecosysteem",
+	"backToWorkshop": "Terug naar EBIOS RM-studie / ecosysteem",
 	"backupVersionError": "Kan de back-up niet laden, de versie van de back-up is ongeldig",
 	"baseAudit": "Basisaudit",
 	"beneficiaryEntity": "Begunstigde",
@@ -1382,7 +1444,7 @@
 	"changeDataRecipient": "Gegevensontvanger wijzigen",
 	"changeDataSubject": "Betrokkene wijzigen",
 	"changeDataTransfer": "Gegevensoverdracht wijzigen",
-	"changeEbiosRMStudy": "Ebios RM-studie wijzigen",
+	"changeEbiosRMStudy": "EBIOS RM-studie wijzigen",
 	"changeEffort": "... inspanning",
 	"changeElementaryAction": "Elementaire actie wijzigen",
 	"changeEntity": "Entiteit wijzigen",
@@ -1587,7 +1649,7 @@
 	"deleteDataRecipient": "Gegevensontvanger verwijderen",
 	"deleteDataSubject": "Betrokkene verwijderen",
 	"deleteDataTransfer": "Gegevensoverdracht verwijderen",
-	"deleteEbiosRMStudy": "Ebios RM-studie verwijderen",
+	"deleteEbiosRMStudy": "EBIOS RM-studie verwijderen",
 	"deleteElementaryAction": "Elementaire actie verwijderen",
 	"deleteEntity": "Entiteit verwijderen",
 	"deleteEntityAssessment": "Entiteitbeoordeling verwijderen",
@@ -1692,9 +1754,9 @@
 	"ebiosExploitation": "Exploitatie",
 	"ebiosInitialAccess": "Initiële toegang",
 	"ebiosOperationalScenarioHelp": "Aanvalspaden bieden een beschrijving op hoog niveau van hoe een strategisch scenario (uit workshop 3) zich zou kunnen ontvouwen. Hoewel een strategisch scenario meerdere aanvalspaden kan hebben, vertaalt elk pad zich in één operationeel scenario in workshop 4. U kunt vervolgens elk operationeel scenario opsplitsen in meerdere bedrijfsmodi die elementaire acties combineren om een volledige kill chain te beschrijven.",
-	"ebiosRM": "Ebios RM",
-	"ebiosRMStudies": "Ebios RM-studies",
-	"ebiosRadarParameters": "Ebios RM-radarparameters",
+	"ebiosRM": "EBIOS RM",
+	"ebiosRMStudies": "EBIOS RM-studies",
+	"ebiosRadarParameters": "EBIOS RM-radarparameters",
 	"ebiosReconnaissance": "Verkenning",
 	"ebiosRmBaseline": "Fundamenten",
 	"ebiosRmBaselineSubtitle": "Definieer uw beveiligingsbasislijn door compliance",
@@ -1711,8 +1773,8 @@
 	"ebiosRmRiskAnalysesSubtitle": "Vat risico's samen en bereid het behandelingsplan voor",
 	"ebiosRmRoToSubtitle": "Breng risicobronnen in kaart naar doelstellingen en bestudeer hun relevantie",
 	"ebiosRmStrategicScenariosSubtitle": "Definieer strategische scenario's",
-	"ebiosRmStudies": "Ebios RM-studies",
-	"ebiosRmStudy": "Ebios RM-studie",
+	"ebiosRmStudies": "EBIOS RM-studies",
+	"ebiosRmStudy": "EBIOS RM-studie",
 	"ebiosRmSyncExisting": "Bestaande synchroniseren",
 	"ebiosRmSyncExistingDescription": "Update de bestaande risicobeoordeling met huidige EBIOS RM-gegevens (behoudt uw werk)",
 	"ebiosRmSyncModalBody": "Een risicobeoordeling bestaat al voor deze EBIOS RM-studie: \"{name}\"\n\nWilt u:",
@@ -1748,7 +1810,7 @@
 	"ebiosWs5_4": "Beoordeel en documenteer restrisico's",
 	"ebiosWs5_5": "Stel risicomonitoringskader op",
 	"ebiosWs5_tooltip": "Er is nog geen risicobeoordeling uitgevoerd",
-	"ebios_rm": "Ebios RM",
+	"ebios_rm": "EBIOS RM",
 	"economic": "Economisch",
 	"ecosystemRadar": "Ecosysteemradar",
 	"edited": "bewerkt",
@@ -1873,7 +1935,7 @@
 	"global_settings": "Globale instellingen",
 	"globalsettings": "Globale instellingen",
 	"goBackToControls": "Terug naar controles",
-	"goBackToEbiosRmStudy": "Ga terug naar Ebios RM-studie",
+	"goBackToEbiosRmStudy": "Ga terug naar EBIOS RM-studie",
 	"govern": "Besturen",
 	"governingLawCountry": "Land van toepasselijk recht",
 	"graphAnimate": "Animeren",
@@ -3001,8 +3063,14 @@
 	"errorFetching": "Kan de kaskade-informatie niet laden. Probeer het opnieuw.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "Geen andere objecten worden beïnvloed.",
 				"countPlural=one": "{count} gerelateerd object wordt niet verwijderd maar verliest een of meer relaties.",
@@ -3146,8 +3214,13 @@
 	"builderPublishModalDescription": "Hiermee wordt het live kader bijgewerkt. Bekijk de wijzigingen hieronder.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} vereisten toegevoegd",
 				"countPlural=other": "{count} vereisten toegevoegd"
@@ -3156,8 +3229,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} vragen",
 				"countPlural=other": "{count} vragen"
@@ -3166,8 +3244,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} vereisten verwijderd",
 				"countPlural=other": "{count} vereisten verwijderd"
@@ -3176,8 +3259,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} vragen",
 				"countPlural=other": "{count} vragen"
@@ -3187,8 +3275,13 @@
 	"builderNoStructuralChanges": "Geen structurele wijzigingen gedetecteerd (alleen metadata).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} ingrijpende wijzigingen gedetecteerd",
 				"countPlural=other": "{count} ingrijpende wijzigingen gedetecteerd"
@@ -3198,8 +3291,13 @@
 	"builderBreakingChangesHint": "Deze wijzigingen kunnen invloed hebben op de scoring, zichtbaarheid of nalevingsresultaten in bestaande audits.",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} bestaande audits worden beïnvloed",
 				"countPlural=other": "{count} bestaande audits worden beïnvloed"
@@ -3237,8 +3335,13 @@
 	"builderNoRulesOrGroupsConfigured": "Geen regels of groepen geconfigureerd",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} uitkomstregels",
 				"countPlural=other": "{count} uitkomstregels"
@@ -3247,8 +3350,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} groepen",
 				"countPlural=other": "{count} groepen"
@@ -3261,8 +3369,13 @@
 	"builderScoreScale": "Scoreschaal",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} niveaus",
 				"countPlural=other": "{count} niveaus"
@@ -3332,8 +3445,13 @@
 	"builderAssessableLeaf": "Beoordeelbaar blad",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Beoordeelbaar · {count} kind",
 				"countPlural=other": "Beoordeelbaar · {count} kinderen"
@@ -3342,8 +3460,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Groep · {count} kind",
 				"countPlural=other": "Groep · {count} kinderen"
@@ -3370,8 +3493,13 @@
 	"builderAddQuestion": "Vraag toevoegen",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} kind verborgen",
 				"countPlural=other": "{count} kinderen verborgen"
@@ -3399,8 +3527,14 @@
 	"builderChangeTypeWarning": "Het type wijzigen verwijdert bestaande keuzes. Doorgaan?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Getoond wanneer {ref} = {count} antwoorden",
 				"countPlural=other": "Getoond wanneer {ref} = {count} antwoorden"
@@ -3479,31 +3613,39 @@
 	"builderQuestionTypeUniqueChoice": "Unieke keuze",
 	"builderQuestionTypeMultipleChoice": "Meerkeuze",
 	"builderQuestionTypeDate": "Datum",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "gewijzigd in",
+	"requirementWeight": "Gewicht",
+	"scim": "SCIM",
+	"scimDescription": "SCIM 2.0-provisioning configureren. Wijs uw identiteitsprovider naar het onderstaande eindpunt en authenticeer deze met een hier gegenereerd bearer-token.",
+	"scimEndpointUrl": "SCIM-eindpunt-URL",
+	"scimTokens": "SCIM-tokens",
+	"generateScimToken": "Token genereren",
+	"noScimTokens": "Nog geen SCIM-tokens.",
+	"scimTokenName": "Naam",
+	"scimTokenDigest": "Digest",
+	"revokeScimToken": "Intrekken",
+	"scimTokenGenerated": "Token gegenereerd",
+	"scimTokenWarning": "Kopieer dit token nu. Om veiligheidsredenen wordt het niet opnieuw weergegeven.",
+	"scimTokenRevoked": "SCIM-token ingetrokken",
+	"scimTokenGenerationFailed": "Kan SCIM-token niet genereren",
+	"idpGroup": "IdP-groep",
+	"idpGroups": "IdP-groepen",
+	"idpGroupsDescription": "IdP-groepsfederatie inschakelen (SCIM-provisioning, IdP-groepskoppelingen en IdP-groepslidmaatschappen van gebruikers).",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

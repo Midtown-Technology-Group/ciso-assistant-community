@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "Mapear para um framework",
+	"mapToFrameworkDescription": "Criar uma nova auditoria noutro framework, mapeada a partir desta.",
+	"mapFromAudit": "Mapear a partir de uma auditoria",
+	"mapFromAuditDescription": "Trazer os resultados mapeados de outra auditoria para esta.",
+	"selectSourceAudit": "Selecione uma auditoria de origem para enriquecer",
+	"mapFromSuccess": "Auditoria atualizada com sucesso",
+	"mapFromError": "Falha ao mapear a partir da auditoria de origem",
+	"currentState": "Estado atual",
+	"projectedState": "Estado previsto",
+	"confirmMapping": "Confirmar mapeamento",
+	"mapFromPreview": "Pré-visualização do mapeamento",
+	"requirementsUpdated": "requisitos serão atualizados",
+	"noMappingPath": "Nenhum caminho de mapeamento encontrado entre estes frameworks",
+	"mapFromNoChanges": "Esta auditoria de origem não alteraria nada na auditoria atual.",
+	"sourceRequirement": "Requisito de origem",
+	"fullCoverage": "Cobertura total",
+	"partialCoverage": "Cobertura parcial",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "Francês",
 	"english": "Inglês",
@@ -491,7 +508,8 @@
 	"linkHelpText": "URL externo para acompanhamento ou referência (ex. sharepoint, jira, etc.)",
 	"effortHelpText": "O esforço necessário para implementar o controle aplicado",
 	"costHelpText": "O custo necessário para implementar o controle aplicado",
-	"riskAcceptanceJusitficationHelpText": "Justificativa para a aceitação do risco. Somente o aprovador pode editar este campo.",
+	"riskAcceptanceJustificationHelpText": "Justificativa para a aceitação do risco. Somente o aprovador pode editar este campo.",
+	"riskAcceptanceJustificationLabel": "Justificativa da aceitação do risco",
 	"approverHelpText": "Identidade do proprietário e aprovador do risco",
 	"riskAcceptanceRiskScenariosHelpText": "Os cenários de risco que foram aceitos",
 	"attachmentHelpText": "Arquivo de evidência (por exemplo, captura de tela, arquivo de log, etc.)",
@@ -736,7 +754,7 @@
 	"maturity": "Maturidade",
 	"progress": "Progressão",
 	"back": "Retornar",
-	"backToWorkshop": "Voltar ao estudo Ebios RM / ecossistema",
+	"backToWorkshop": "Voltar ao estudo EBIOS RM / ecossistema",
 	"duplicate": "Duplicar",
 	"duplicateRiskAssessment": "Duplicar a avaliação de risco",
 	"duplicateAppliedControl": "Duplicar o controle aplicado",
@@ -744,6 +762,19 @@
 	"favicon": "Favicon",
 	"logo": "Logotipo",
 	"clientSettings": "Configurações do cliente",
+	"infraConfig": "Infraestrutura",
+	"infraConfigDescription": "Gerencie a configuração de infraestrutura exposta à camada de infraestrutura. Os endereços IP e os intervalos CIDR abaixo são usados para configurar automaticamente o acesso ao backend.",
+	"infraConfigSettingsUpdated": "Configurações de infraestrutura atualizadas com sucesso",
+	"allowedIps": "IPs permitidos",
+	"ipAddressOrCidr": "Endereço IP ou CIDR",
+	"invalidIpOrCidr": "Insira um endereço IP ou intervalo CIDR válido.",
+	"ipAlreadyAdded": "Este IP já está na lista.",
+	"tooManyAllowedIps": "Você pode adicionar no máximo {max} endereços IP.",
+	"enterIpFirst": "Insira primeiro um endereço IP ou CIDR.",
+	"allowsAllIpsWarning": "Isto permite o acesso a partir de qualquer endereço IP.",
+	"confirmEmptyAllowlist": "Você está prestes a salvar sem nenhum IP na lista de permissões. Isto pode bloquear todo o acesso. Continuar?",
+	"removeIp": "Remover {ip}",
+	"noAllowedIpsYet": "Ainda não há IPs permitidos.",
 	"invalidFileType": "Tipo de arquivo inválido",
 	"logoHelpText": "O logotipo será exibido no cabeçalho do aplicativo. Os formatos aceitos são PNG, JPEG, WEBP, SVG.",
 	"faviconHelpText": "O favicon será exibido na aba do navegador. Os formatos aceitos são ICO, PNG, JPEG, WEBP, SVG.",
@@ -879,6 +910,16 @@
 	"emailPasswordMismatch": "Não é possível efetuar login com as credenciais fornecidas.",
 	"securitySettings": "Configurações de segurança",
 	"securitySettingsDescription": "Configure suas configurações de segurança aqui.",
+	"preferencesSettings": "Preferências",
+	"preferencesSettingsDescription": "Configure aqui as suas preferências de exibição pessoais.",
+	"dateFormat": "Formato de data",
+	"dateFormatDescription": "Escolha como as datas são exibidas em toda a aplicação.",
+	"dateFormatAuto": "Automático (seguir o idioma)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "Dia/Mês/Ano (31/05/2026)",
+	"dateFormatMmddyyyy": "Mês/Dia/Ano (05/31/2026)",
+	"dateFormatLongDmy": "Longo, dia primeiro (31 de maio de 2026)",
+	"dateFormatLongMdy": "Longo, mês primeiro (maio 31, 2026)",
 	"multiFactorAuthentication": "Autenticação multifatorial",
 	"authenticatorApp": "Aplicativo autenticador",
 	"authenticatorAppDescription": "Use um aplicativo autenticador para gerar uma senha de uso único baseada em tempo (TOTP) para autenticação de dois fatores.",
@@ -983,8 +1024,14 @@
 	"associatedFindingsAssessments": "Acompanhamentos associados",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Hora",
 				"countPlural=other": "{count} Horas"
@@ -993,8 +1040,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Minuto",
 				"countPlural=other": "{count} Minutos"
@@ -1003,8 +1055,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Dia",
 				"countPlural=other": "{count} Dias"
@@ -1013,8 +1070,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} objeto não visível.",
 				"countPlural=other": "{count} objetos não visíveis."
@@ -1117,8 +1179,14 @@
 	"errorFetching": "Não foi possível carregar as informações de cascata. Por favor, tente novamente.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "Nenhum outro objeto será impactado.",
 				"countPlural=one": "{count} objeto relacionado não será excluído, mas perderá um ou mais relacionamentos.",
@@ -1266,8 +1334,13 @@
 	"builderPublishModalDescription": "Esta ação atualizará o framework em produção. Revise as alterações abaixo.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} requisitos adicionados",
 				"countPlural=other": "{count} requisitos adicionados"
@@ -1276,8 +1349,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} perguntas",
 				"countPlural=other": "{count} perguntas"
@@ -1286,8 +1364,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} requisitos removidos",
 				"countPlural=other": "{count} requisitos removidos"
@@ -1296,8 +1379,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} perguntas",
 				"countPlural=other": "{count} perguntas"
@@ -1307,8 +1395,13 @@
 	"builderNoStructuralChanges": "Nenhuma alteração estrutural detectada (apenas metadados).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} alterações incompatíveis detectadas",
 				"countPlural=other": "{count} alterações incompatíveis detectadas"
@@ -1318,8 +1411,13 @@
 	"builderBreakingChangesHint": "Estas alterações podem afetar a pontuação, a visibilidade ou os resultados de conformidade nas auditorias existentes.",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} auditorias existentes serão afetadas",
 				"countPlural=other": "{count} auditorias existentes serão afetadas"
@@ -1357,8 +1455,13 @@
 	"builderNoRulesOrGroupsConfigured": "Nenhuma regra ou grupo configurado",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} regras de resultado",
 				"countPlural=other": "{count} regras de resultado"
@@ -1367,8 +1470,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} grupos",
 				"countPlural=other": "{count} grupos"
@@ -1381,8 +1489,13 @@
 	"builderScoreScale": "Escala de pontuação",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} níveis",
 				"countPlural=other": "{count} níveis"
@@ -1452,8 +1565,13 @@
 	"builderAssessableLeaf": "Folha avaliável",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Avaliável · {count} filho",
 				"countPlural=other": "Avaliável · {count} filhos"
@@ -1462,8 +1580,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Grupo · {count} filho",
 				"countPlural=other": "Grupo · {count} filhos"
@@ -1490,8 +1613,13 @@
 	"builderAddQuestion": "Adicionar pergunta",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} filho oculto",
 				"countPlural=other": "{count} filhos ocultos"
@@ -1519,8 +1647,14 @@
 	"builderChangeTypeWarning": "Alterar o tipo excluirá as opções existentes. Continuar?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Exibido quando {ref} = {count} respostas",
 				"countPlural=other": "Exibido quando {ref} = {count} respostas"
@@ -1599,31 +1733,39 @@
 	"builderQuestionTypeUniqueChoice": "Escolha única",
 	"builderQuestionTypeMultipleChoice": "Múltipla escolha",
 	"builderQuestionTypeDate": "Data",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "alterado em",
+	"requirementWeight": "Peso",
+	"scim": "SCIM",
+	"scimDescription": "Configure o provisionamento SCIM 2.0. Aponte o seu provedor de identidade para o endpoint abaixo e autentique-o com um token bearer gerado aqui.",
+	"scimEndpointUrl": "URL do endpoint SCIM",
+	"scimTokens": "Tokens SCIM",
+	"generateScimToken": "Gerar token",
+	"noScimTokens": "Ainda não há tokens SCIM.",
+	"scimTokenName": "Nome",
+	"scimTokenDigest": "Resumo",
+	"revokeScimToken": "Revogar",
+	"scimTokenGenerated": "Token gerado",
+	"scimTokenWarning": "Copie este token agora. Por motivos de segurança, ele não será exibido novamente.",
+	"scimTokenRevoked": "Token SCIM revogado",
+	"scimTokenGenerationFailed": "Falha ao gerar o token SCIM",
+	"idpGroup": "Grupo IdP",
+	"idpGroups": "Grupos IdP",
+	"idpGroupsDescription": "Ativar a federação de grupos IdP (provisionamento SCIM, mapeamentos de grupos IdP e associações a grupos IdP nos usuários).",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

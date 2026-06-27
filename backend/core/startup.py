@@ -9,6 +9,9 @@ from core.utils import RoleCodename, UserGroupCodename
 logger = get_logger(__name__)
 
 READER_PERMISSIONS_LIST = [
+    "view_customfielddefinition",
+    "view_compliance_assessment_full",
+    "view_object_audittrail",
     "view_appliedcontrol",
     "view_mspcontrolassertion",
     "view_asset",
@@ -98,6 +101,7 @@ READER_PERMISSIONS_LIST = [
     # pmbok
     "view_genericcollection",
     "view_accreditation",
+    "view_project",
     "view_responsibilityrole",
     "view_responsibilitymatrix",
     "view_responsibilitymatrixactivity",
@@ -133,6 +137,8 @@ READER_PERMISSIONS_LIST = [
 ]
 
 APPROVER_PERMISSIONS_LIST = [
+    "view_customfielddefinition",
+    "view_compliance_assessment_full",
     "view_perimeter",
     "view_riskassessment",
     "view_appliedcontrol",
@@ -216,6 +222,7 @@ APPROVER_PERMISSIONS_LIST = [
     # pmbok
     "view_genericcollection",
     "view_accreditation",
+    "view_project",
     "view_responsibilityrole",
     "view_responsibilitymatrix",
     "view_responsibilitymatrixactivity",
@@ -244,6 +251,9 @@ APPROVER_PERMISSIONS_LIST = [
 ]
 
 ANALYST_PERMISSIONS_LIST = [
+    "view_customfielddefinition",
+    "view_compliance_assessment_full",
+    "view_object_audittrail",
     "add_filteringlabel",
     "view_filteringlabel",
     "view_libraryfilteringlabel",
@@ -522,6 +532,10 @@ ANALYST_PERMISSIONS_LIST = [
     "add_accreditation",
     "change_accreditation",
     "delete_accreditation",
+    "view_project",
+    "add_project",
+    "change_project",
+    "delete_project",
     "view_responsibilityrole",
     "add_responsibilityrole",
     "change_responsibilityrole",
@@ -606,6 +620,12 @@ ANALYST_PERMISSIONS_LIST = [
 ]
 
 DOMAIN_MANAGER_PERMISSIONS_LIST = [
+    "add_customfielddefinition",
+    "view_customfielddefinition",
+    "change_customfielddefinition",
+    "delete_customfielddefinition",
+    "view_compliance_assessment_full",
+    "view_object_audittrail",
     "add_filteringlabel",
     "view_filteringlabel",
     "view_libraryfilteringlabel",
@@ -924,6 +944,10 @@ DOMAIN_MANAGER_PERMISSIONS_LIST = [
     "add_accreditation",
     "change_accreditation",
     "delete_accreditation",
+    "view_project",
+    "add_project",
+    "change_project",
+    "delete_project",
     "view_responsibilityrole",
     "add_responsibilityrole",
     "change_responsibilityrole",
@@ -1013,6 +1037,13 @@ DOMAIN_MANAGER_PERMISSIONS_LIST = [
 ]
 
 ADMINISTRATOR_PERMISSIONS_LIST = [
+    "add_customfielddefinition",
+    "view_customfielddefinition",
+    "change_customfielddefinition",
+    "delete_customfielddefinition",
+    "view_central_auditlog",
+    "view_compliance_assessment_full",
+    "view_object_audittrail",
     "add_user",
     "view_user",
     "view_actor",
@@ -1025,6 +1056,10 @@ ADMINISTRATOR_PERMISSIONS_LIST = [
     "view_usergroup",
     "change_usergroup",
     "delete_usergroup",
+    "add_idpgroup",
+    "view_idpgroup",
+    "change_idpgroup",
+    "delete_idpgroup",
     "add_event",
     "view_event",
     "change_event",
@@ -1316,7 +1351,6 @@ ADMINISTRATOR_PERMISSIONS_LIST = [
     "view_tasknode",
     "change_tasknode",
     "delete_tasknode",
-    "view_logentry",
     # resilience,
     "add_businessimpactanalysis",
     "view_businessimpactanalysis",
@@ -1376,6 +1410,10 @@ ADMINISTRATOR_PERMISSIONS_LIST = [
     "add_accreditation",
     "change_accreditation",
     "delete_accreditation",
+    "view_project",
+    "add_project",
+    "change_project",
+    "delete_project",
     "view_responsibilityrole",
     "add_responsibilityrole",
     "change_responsibilityrole",
@@ -1535,6 +1573,42 @@ AUDITEE_PERMISSIONS_LIST = [
     "change_comment",
     "delete_comment",
 ]
+
+
+def ensure_admin_user():
+    """Ensure the designated superuser exists and is in the admin group.
+
+    - FORCE_CREATE_ADMIN + email + user doesn't exist: create superuser
+    - FORCE_CREATE_ADMIN + email + user exists: promote to superuser
+    - Admin group empty + email + user doesn't exist: create superuser
+    - Always: sync all is_superuser users into the admin group
+    """
+    from iam.models import Folder, User, UserGroup
+
+    administrators = UserGroup.objects.get(
+        name="BI-UG-ADM", folder=Folder.get_root_folder()
+    )
+    admin_group_empty = (
+        User.objects.filter(user_groups=administrators).distinct().count() == 0
+    )
+
+    superuser_email = settings.CISO_ASSISTANT_SUPERUSER_EMAIL
+    if superuser_email:
+        superuser_exists = User.objects.filter(email=superuser_email).exists()
+
+        if not superuser_exists and (settings.FORCE_CREATE_ADMIN or admin_group_empty):
+            try:
+                User.objects.create_superuser(email=superuser_email, is_superuser=True)
+            except Exception as e:
+                logger.error("Error creating superuser", exc_info=True)
+        elif superuser_exists and settings.FORCE_CREATE_ADMIN:
+            user = User.objects.get(email=superuser_email)
+            if not user.is_superuser:
+                user.is_superuser = True
+                user.save(update_fields=["is_superuser", "is_active"])
+
+    for u in User.objects.filter(is_superuser=True):
+        u.user_groups.add(administrators)
 
 
 def startup(sender=None, **kwargs):
@@ -1734,6 +1808,16 @@ def startup(sender=None, **kwargs):
         logger.error("Error creating default Metric Units", exc_info=True)
 
     try:
+        Terminology.create_default_project_statuses()
+    except Exception as e:
+        logger.error("Error creating default Project Statuses", exc_info=True)
+
+    try:
+        Terminology.create_default_project_health()
+    except Exception as e:
+        logger.error("Error creating default Project Health", exc_info=True)
+
+    try:
         from pmbok.models import ResponsibilityRole
 
         ResponsibilityRole.create_default_roles()
@@ -1766,30 +1850,7 @@ def startup(sender=None, **kwargs):
     except Exception as e:
         logger.error("Error backfilling builtin metrics", exc_info=True)
 
-    # add administrators group to superusers (for resiliency)
-    administrators = UserGroup.objects.get(
-        name="BI-UG-ADM", folder=Folder.get_root_folder()
-    )
-    if (
-        User.objects.filter(user_groups=administrators).distinct().count() == 0
-        or settings.FORCE_CREATE_ADMIN
-    ):
-        # if superuser defined and does not exist, then create it
-        if (
-            settings.CISO_ASSISTANT_SUPERUSER_EMAIL
-            and not User.objects.filter(
-                email=settings.CISO_ASSISTANT_SUPERUSER_EMAIL
-            ).exists()
-        ):
-            try:
-                User.objects.create_superuser(
-                    email=settings.CISO_ASSISTANT_SUPERUSER_EMAIL, is_superuser=True
-                )
-            except Exception as e:
-                logger.error("Error creating superuser", exc_info=True)
-
-        for u in User.objects.filter(is_superuser=True):
-            u.user_groups.add(administrators)
+    ensure_admin_user()
 
     # reset global setings in case of an issue
     default_settings = {

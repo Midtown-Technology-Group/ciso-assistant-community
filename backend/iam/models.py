@@ -23,7 +23,7 @@ if TYPE_CHECKING:
     from iam.cache_builders import AssignmentLite
 from core.utils import (
     BUILTIN_USERGROUP_CODENAMES,
-    BUILTIN_ROLE_CODENAMES,
+    get_translated_builtin_role_name,
 )
 from core.base_models import (
     AbstractBaseModel,
@@ -85,6 +85,8 @@ IGNORED_PERMISSION_MODELS = (
     "usergroup",
     "ssosettings",
     "historicalmetric",
+    "idpgroup",
+    "scimtoken",
 )
 
 
@@ -100,7 +102,7 @@ def _get_root_folder() -> Folder | None:
         )
     except Folder.DoesNotExist:
         return None
-    except (OperationalError, ProgrammingError):
+    except OperationalError, ProgrammingError:
         return None
 
 
@@ -437,19 +439,15 @@ class UserGroup(NameDescriptionMixin, FolderMixin):
         verbose_name_plural = _("user groups")
 
     def __str__(self) -> str:
-        resolved_name = (
-            BUILTIN_USERGROUP_CODENAMES.get(self.name) if self.builtin else self.name
-        ) or self.name
-        return f"{self.folder.name} - {resolved_name}"
+        if self.builtin:
+            role_codename = BUILTIN_USERGROUP_CODENAMES.get(self.name, self.name)
+            role_name = get_translated_builtin_role_name(role_codename)
+        else:
+            role_name = self.name
+        return f"{self.folder.name} - {role_name}"
 
     def get_name_display(self) -> str:
         return self.name
-
-    def get_localization_dict(self) -> dict:
-        resolved_name = (
-            BUILTIN_USERGROUP_CODENAMES.get(self.name) if self.builtin else self.name
-        ) or self.name
-        return {"folder": self.folder.name, "role": resolved_name}
 
     def save(self, *args, **kwargs):
         result = super().save(*args, **kwargs)
@@ -603,6 +601,7 @@ class User(ActorSyncMixin, AbstractBaseUser, AbstractBaseModel, FolderMixin):
     email = models.CharField(max_length=100, unique=True)
     first_login = models.BooleanField(default=True)
     preferences = models.JSONField(default=dict)
+    DATE_FORMATS = {"auto", "iso", "ddmmyyyy", "mmddyyyy", "long_dmy", "long_mdy"}
     keep_local_login = models.BooleanField(
         default=False,
         help_text=_(
@@ -635,6 +634,16 @@ class User(ActorSyncMixin, AbstractBaseUser, AbstractBaseModel, FolderMixin):
             "granted to each of their user groups."
         ),
     )
+    idp_groups = models.ManyToManyField(
+        "IdPGroup",
+        related_name="users",
+        blank=True,
+        verbose_name=_("IdP groups"),
+        help_text=_(
+            "External IdP groups this user belongs to (SCIM-managed). The user "
+            "additionally inherits the user groups granted by each IdP group."
+        ),
+    )
     observation = models.TextField(
         null=True, blank=True, verbose_name="Notes about a user"
     )
@@ -642,6 +651,21 @@ class User(ActorSyncMixin, AbstractBaseUser, AbstractBaseModel, FolderMixin):
         blank=True,
         null=True,
         verbose_name=_("Expiry date"),
+    )
+    scim_external_id = models.CharField(
+        max_length=512,
+        blank=True,
+        null=True,
+        unique=True,
+        verbose_name=_("SCIM external ID"),
+    )
+    is_scim_managed = models.BooleanField(
+        default=False,
+        verbose_name=_("SCIM managed"),
+        help_text=_(
+            "True when this account is provisioned/owned by SCIM. Independent of "
+            "scim_external_id, which the provisioning client may omit (RFC 7643)."
+        ),
     )
     objects = CaseInsensitiveUserManager()
 
@@ -718,6 +742,12 @@ class User(ActorSyncMixin, AbstractBaseUser, AbstractBaseModel, FolderMixin):
             except Exception:
                 default_lang = "en"
             prefs["lang"] = default_lang
+        if prefs.get("date_format") not in self.DATE_FORMATS:
+            prefs["date_format"] = "auto"
+        ui = prefs.get("ui") if isinstance(prefs.get("ui"), dict) else {}
+        if ui.get("theme") not in ("light", "dark", "system"):
+            ui["theme"] = "system"
+        prefs["ui"] = ui
         return prefs
 
     # Maps Django HTML template names to YAML template keys
@@ -870,19 +900,36 @@ class User(ActorSyncMixin, AbstractBaseUser, AbstractBaseModel, FolderMixin):
         return [(x.__str__(), x.builtin) for x in self.user_groups.all()]
 
     def get_roles(self):
-        """get the list of roles attached to the user"""
-        return list(
+        """get the list of roles attached to the user — directly via its user
+        groups and, when the idp_groups feature is enabled, via the user groups
+        granted by its IdP groups (groups-of-groups closure). Kept consistent
+        with the inheritance-aware ``permissions`` and ``is_admin()`` so the
+        current-user payload (and the role-name nav gating it drives) matches
+        what the user can actually do."""
+        from global_settings.utils import ff_is_enabled
+
+        roles = set(
             self.user_groups.all()
             .values_list("roleassignment__role__name", flat=True)
             .distinct()
         )
+        if ff_is_enabled("idp_groups"):
+            roles |= set(
+                self.idp_groups.all()
+                .values_list("user_groups__roleassignment__role__name", flat=True)
+                .distinct()
+            )
+        # Groups with no role assignment yield NULL through the join; never
+        # surface a null role name in the payload.
+        roles.discard(None)
+        return list(roles)
 
     @property
     def is_auditee(self) -> bool:
         """True when the user holds the auditee role on at least one domain."""
-        from core.utils import get_auditee_filtered_folder_ids
+        from core.utils import get_respondent_scoped_folder_ids
 
-        return bool(get_auditee_filtered_folder_ids(self))
+        return bool(get_respondent_scoped_folder_ids(self))
 
     @property
     def has_backup_permission(self) -> bool:
@@ -909,10 +956,25 @@ class User(ActorSyncMixin, AbstractBaseUser, AbstractBaseModel, FolderMixin):
 
     @staticmethod
     def get_admin_users() -> QuerySet["User"]:
-        return User.objects.filter(user_groups__name="BI-UG-ADM")
+        # Admin membership is reached directly or, when the idp_groups feature
+        # is enabled, via an IdP group whose user_groups include BI-UG-ADM
+        # (groups-of-groups closure).
+        from global_settings.utils import ff_is_enabled
+
+        q = Q(user_groups__name="BI-UG-ADM")
+        if ff_is_enabled("idp_groups"):
+            q |= Q(idp_groups__user_groups__name="BI-UG-ADM")
+        return User.objects.filter(q).distinct()
 
     def is_admin(self) -> bool:
-        return self.user_groups.filter(name="BI-UG-ADM").exists()
+        from global_settings.utils import ff_is_enabled
+
+        if self.user_groups.filter(name="BI-UG-ADM").exists():
+            return True
+        return (
+            ff_is_enabled("idp_groups")
+            and self.idp_groups.filter(user_groups__name="BI-UG-ADM").exists()
+        )
 
     # Permissions that grant write access but do not consume a license seat
     NON_SEAT_PERMISSIONS = {
@@ -999,7 +1061,7 @@ class Role(NameDescriptionMixin, FolderMixin):
 
     def __str__(self) -> str:
         if self.builtin:
-            return f"{BUILTIN_ROLE_CODENAMES.get(self.name)}"
+            return get_translated_builtin_role_name(self.name)
         return self.name
 
     fields_to_check = ["name"]
@@ -1590,13 +1652,73 @@ class PersonalAccessToken(models.Model):
         return f"{self.auth_token.user.email} : {self.name} : {self.auth_token.digest}"
 
 
+# -----------------------------
+# IdP groups (SCIM federation)
+# -----------------------------
+
+
+class IdPGroup(AbstractBaseModel, FolderMixin):
+    """External IdP group provisioned via SCIM. ``users`` is SCIM-managed;
+    ``user_groups`` (the CISO groups it grants) is admin-managed. Folder-scoped
+    (defaults to the root folder) so it participates in RBAC like UserGroup."""
+
+    name = models.CharField(max_length=512, unique=True, verbose_name=_("Name"))
+    user_groups = models.ManyToManyField(
+        UserGroup,
+        related_name="idp_groups",
+        blank=True,
+        verbose_name=_("User groups"),
+    )
+
+    class Meta:
+        verbose_name = _("IdP group")
+        verbose_name_plural = _("IdP groups")
+
+    def __str__(self):
+        return self.name
+
+
+class SCIMToken(models.Model):
+    """Knox-backed bearer token for SCIM 2.0 provisioning. Admin-only."""
+
+    name = models.CharField(max_length=255, default="SCIM provisioning token")
+    auth_token = models.ForeignKey(
+        AuthToken,
+        on_delete=models.CASCADE,
+        related_name="scim_token",
+    )
+
+    class Meta:
+        verbose_name = "SCIM token"
+        verbose_name_plural = "SCIM tokens"
+
+    @property
+    def created(self):
+        return self.auth_token.created
+
+    @property
+    def digest(self):
+        return self.auth_token.digest
+
+    def __str__(self):
+        return f"{self.name} : {self.auth_token.digest}"
+
+
 common_exclude = ["created_at", "updated_at"]
 auditlog.register(
     User,
-    m2m_fields={"user_groups"},
+    m2m_fields={"user_groups", "idp_groups"},
     exclude_fields=common_exclude,
 )
 auditlog.register(
     Folder,
     exclude_fields=common_exclude,
 )
+auditlog.register(
+    IdPGroup,
+    m2m_fields={"user_groups"},
+    exclude_fields=common_exclude,
+)
+
+# Keep the unmanaged SSOSettings compatibility model registered with the iam app.
+from iam.sso.models import SSOSettings  # noqa: E402,F401

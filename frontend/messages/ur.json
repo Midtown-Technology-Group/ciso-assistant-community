@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "کسی فریم ورک پر نقشہ بنائیں",
+	"mapToFrameworkDescription": "اس سے نقشہ بنا کر کسی اور فریم ورک میں نیا آڈٹ بنائیں۔",
+	"mapFromAudit": "کسی آڈٹ سے نقشہ بنائیں",
+	"mapFromAuditDescription": "کسی اور آڈٹ کے نقشہ شدہ نتائج اس میں لائیں۔",
+	"selectSourceAudit": "افزودگی کے لیے ماخذ آڈٹ منتخب کریں",
+	"mapFromSuccess": "آڈٹ کامیابی سے اپ ڈیٹ ہو گیا",
+	"mapFromError": "ماخذ آڈٹ سے نقشہ بنانے میں ناکامی",
+	"currentState": "موجودہ حالت",
+	"projectedState": "متوقع حالت",
+	"confirmMapping": "نقشہ سازی کی تصدیق کریں",
+	"mapFromPreview": "نقشہ سازی کا پیش منظر",
+	"requirementsUpdated": "تقاضے اپ ڈیٹ کیے جائیں گے",
+	"noMappingPath": "ان فریم ورکس کے درمیان کوئی نقشہ سازی کا راستہ نہیں ملا",
+	"mapFromNoChanges": "یہ ماخذ آڈٹ موجودہ آڈٹ میں کچھ تبدیل نہیں کرے گا۔",
+	"sourceRequirement": "ماخذ ضرورت",
+	"fullCoverage": "مکمل کوریج",
+	"partialCoverage": "جزوی کوریج",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "فرانسیسی",
 	"english": "انگریزی",
@@ -489,7 +506,8 @@
 	"linkHelpText": "ٹریکنگ یا حوالہ کے لیے بیرونی یو آر ایل (مثلاً شیئر پوائنٹ، جیرا، وغیرہ)",
 	"effortHelpText": "لاگو کنٹرول کو لاگو کرنے کی کوشش کی ضرورت ہے",
 	"costHelpText": "لاگو کنٹرول کو لاگو کرنے کے لیے درکار لاگت",
-	"riskAcceptanceJusitficationHelpText": "خطرے کی منظوری کا جواز۔ صرف منظوری دینے والا اس فیلڈ میں ترمیم کر سکتا ہے۔",
+	"riskAcceptanceJustificationHelpText": "خطرے کی منظوری کا جواز۔ صرف منظوری دینے والا اس فیلڈ میں ترمیم کر سکتا ہے۔",
+	"riskAcceptanceJustificationLabel": "خطرے کی منظوری کا جواز",
 	"approverHelpText": "خطرے کا مالک اور منظور کنندہ کی شناخت",
 	"riskAcceptanceRiskScenariosHelpText": "وہ خطرے کے منظرنامے جو قبول کیے گئے ہیں",
 	"attachmentHelpText": "ثبوت کے لیے فائل (جیسے اسکرین شاٹ، لاگ فائل، وغیرہ)۔ منتخب ہونے پر، آپ اپنے کلپ بورڈ سے اسکرین شاٹس کو براہ راست چسپاں کر سکتے ہیں۔",
@@ -734,7 +752,7 @@
 	"maturity": "پختگی",
 	"progress": "پیش رفت",
 	"back": "واپس",
-	"backToWorkshop": "Ebios RM مطالعہ / ایکو سسٹم پر واپس جائیں",
+	"backToWorkshop": "EBIOS RM مطالعہ / ایکو سسٹم پر واپس جائیں",
 	"duplicate": "نقل کریں",
 	"duplicateRiskAssessment": "خطرے کی تشخیص کو نقل کریں",
 	"duplicateAppliedControl": "لاگو کنٹرول کی نقل تیار کریں۔",
@@ -742,6 +760,19 @@
 	"favicon": "فیویکان",
 	"logo": "لوگو",
 	"clientSettings": "کلائنٹ کی ترتیبات",
+	"infraConfig": "انفراسٹرکچر",
+	"infraConfigDescription": "انفراسٹرکچر پرت کے سامنے ظاہر کی گئی انفراسٹرکچر کنفیگریشن کا انتظام کریں۔ نیچے دیے گئے IP پتے اور CIDR رینجز کو بیک اینڈ تک رسائی خودکار طور پر ترتیب دینے کے لیے استعمال کیا جاتا ہے۔",
+	"infraConfigSettingsUpdated": "انفراسٹرکچر کی ترتیبات کامیابی سے اپ ڈیٹ ہو گئیں",
+	"allowedIps": "اجازت شدہ IPs",
+	"ipAddressOrCidr": "IP پتہ یا CIDR",
+	"invalidIpOrCidr": "ایک درست IP پتہ یا CIDR رینج درج کریں۔",
+	"ipAlreadyAdded": "یہ IP پہلے سے فہرست میں موجود ہے۔",
+	"tooManyAllowedIps": "آپ زیادہ سے زیادہ {max} IP پتے شامل کر سکتے ہیں۔",
+	"enterIpFirst": "پہلے ایک IP پتہ یا CIDR درج کریں۔",
+	"allowsAllIpsWarning": "یہ کسی بھی IP پتے سے رسائی کی اجازت دیتا ہے۔",
+	"confirmEmptyAllowlist": "آپ اجازت فہرست میں کسی IP کے بغیر محفوظ کرنے والے ہیں۔ یہ تمام رسائی کو بلاک کر سکتا ہے۔ جاری رکھیں؟",
+	"removeIp": "{ip} ہٹائیں",
+	"noAllowedIpsYet": "ابھی تک کوئی اجازت شدہ IP نہیں۔",
 	"invalidFileType": "غلط فائل کی قسم",
 	"logoHelpText": "لوگو ایپلی کیشن کے ہیڈر میں دکھایا جائے گا۔ منظور شدہ فارمیٹس PNG، JPEG، WEBP، SVG ہیں۔",
 	"faviconHelpText": "فیویکن براؤزر کے ٹیب میں ظاہر ہوگا۔ قبول شدہ فارمیٹس ICO, PNG, JPEG, WEBP, SVG ہیں۔",
@@ -875,6 +906,16 @@
 	"emailPasswordMismatch": "فراہم کردہ اسناد کے ساتھ لاگ ان کرنے سے قاصر۔",
 	"securitySettings": "سیکیورٹی کی ترتیبات",
 	"securitySettingsDescription": "اپنی حفاظتی ترتیبات کو یہاں ترتیب دیں۔",
+	"preferencesSettings": "ترجیحات",
+	"preferencesSettingsDescription": "یہاں اپنی ذاتی ڈسپلے ترجیحات ترتیب دیں۔",
+	"dateFormat": "تاریخ کی شکل",
+	"dateFormatDescription": "منتخب کریں کہ پوری ایپلیکیشن میں تاریخیں کیسے دکھائی جائیں۔",
+	"dateFormatAuto": "خودکار (زبان کے مطابق)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "دن/مہینہ/سال (31/05/2026)",
+	"dateFormatMmddyyyy": "مہینہ/دن/سال (05/31/2026)",
+	"dateFormatLongDmy": "طویل، پہلے دن (31 مئی 2026)",
+	"dateFormatLongMdy": "طویل، پہلے مہینہ (مئی 31، 2026)",
 	"multiFactorAuthentication": "کثیر عنصر کی توثیق",
 	"authenticatorApp": "تصدیق کنندہ ایپ",
 	"authenticatorAppDescription": "دو عنصر کی توثیق کے لیے ٹائم بیسڈ ون ٹائم پاس ورڈ (TOTP) بنانے کے لیے ایک توثیق کار ایپ استعمال کریں۔",
@@ -951,8 +992,14 @@
 	"associatedFindingsAssessments": "متعلقہ فالو اپز",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "گھنٹہ {count}",
 				"countPlural=other": "گھنٹے {count}"
@@ -961,8 +1008,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "منٹ {count}",
 				"countPlural=other": "منٹ {count}"
@@ -971,8 +1023,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "دن {count}",
 				"countPlural=other": "دن {count}"
@@ -981,8 +1038,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} چیز نظر نہیں آتی۔",
 				"countPlural=other": "{count} چیزیں نظر نہیں آتیں۔"
@@ -1085,8 +1147,14 @@
 	"errorFetching": "کاسکیڈ کی معلومات لوڈ کرنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "کوئی دوسری اشیاء متاثر نہیں ہوں گی۔",
 				"countPlural=one": "{count} متعلقہ اشیاء حذف نہیں کی جائیں گی لیکن ان کی ایک یا زیادہ رشتے کھو دیں گی۔",
@@ -1239,8 +1307,13 @@
 	"builderPublishModalDescription": "یہ براہ راست فریم ورک کو اپ ڈیٹ کرے گا۔ نیچے تبدیلیوں کا جائزہ لیں۔",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} ضروریات شامل کی گئیں",
 				"countPlural=other": "{count} ضروریات شامل کی گئیں"
@@ -1249,8 +1322,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} سوالات",
 				"countPlural=other": "{count} سوالات"
@@ -1259,8 +1337,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} ضروریات ہٹا دی گئیں",
 				"countPlural=other": "{count} ضروریات ہٹا دی گئیں"
@@ -1269,8 +1352,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} سوالات",
 				"countPlural=other": "{count} سوالات"
@@ -1280,8 +1368,13 @@
 	"builderNoStructuralChanges": "کوئی ساختی تبدیلیاں نہیں ملیں (صرف میٹا ڈیٹا)۔",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} نقصان دہ تبدیلیاں ملی ہیں",
 				"countPlural=other": "{count} نقصان دہ تبدیلیاں ملی ہیں"
@@ -1291,8 +1384,13 @@
 	"builderBreakingChangesHint": "یہ تبدیلیاں موجودہ آڈٹس میں اسکورنگ، نمائش یا تعمیل کے نتائج کو متاثر کر سکتی ہیں۔",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} موجودہ آڈٹس متاثر ہوں گے",
 				"countPlural=other": "{count} موجودہ آڈٹس متاثر ہوں گے"
@@ -1330,8 +1428,13 @@
 	"builderNoRulesOrGroupsConfigured": "کوئی قواعد یا گروپس ترتیب نہیں دیے گئے",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} نتیجہ قواعد",
 				"countPlural=other": "{count} نتیجہ قواعد"
@@ -1340,8 +1443,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} گروپس",
 				"countPlural=other": "{count} گروپس"
@@ -1354,8 +1462,13 @@
 	"builderScoreScale": "اسکور کا پیمانہ",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} سطحیں",
 				"countPlural=other": "{count} سطحیں"
@@ -1425,8 +1538,13 @@
 	"builderAssessableLeaf": "قابل تشخیص پتہ",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "قابل تشخیص · {count} بچہ",
 				"countPlural=other": "قابل تشخیص · {count} بچے"
@@ -1435,8 +1553,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "گروپ · {count} بچہ",
 				"countPlural=other": "گروپ · {count} بچے"
@@ -1463,8 +1586,13 @@
 	"builderAddQuestion": "سوال شامل کریں",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} بچہ چھپا ہوا",
 				"countPlural=other": "{count} بچے چھپے ہوئے"
@@ -1492,8 +1620,14 @@
 	"builderChangeTypeWarning": "قسم بدلنے سے موجودہ انتخابات حذف ہو جائیں گے۔ جاری رکھیں؟",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "دکھایا جاتا ہے جب {ref} = {count} جوابات",
 				"countPlural=other": "دکھایا جاتا ہے جب {ref} = {count} جوابات"
@@ -1572,31 +1706,39 @@
 	"builderQuestionTypeUniqueChoice": "واحد انتخاب",
 	"builderQuestionTypeMultipleChoice": "متعدد انتخاب",
 	"builderQuestionTypeDate": "تاریخ",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "میں تبدیل ہوا",
+	"requirementWeight": "وزن",
+	"scim": "SCIM",
+	"scimDescription": "SCIM 2.0 پرووژننگ کنفیگر کریں۔ اپنے شناختی فراہم کنندہ کو نیچے دیے گئے اینڈ پوائنٹ کی طرف اشارہ کریں اور یہاں تیار کردہ بیئرر ٹوکن سے تصدیق کریں۔",
+	"scimEndpointUrl": "SCIM اینڈ پوائنٹ URL",
+	"scimTokens": "SCIM ٹوکنز",
+	"generateScimToken": "ٹوکن بنائیں",
+	"noScimTokens": "ابھی تک کوئی SCIM ٹوکن نہیں ہے۔",
+	"scimTokenName": "نام",
+	"scimTokenDigest": "ڈائجسٹ",
+	"revokeScimToken": "منسوخ کریں",
+	"scimTokenGenerated": "ٹوکن تیار ہو گیا",
+	"scimTokenWarning": "اس ٹوکن کو ابھی کاپی کریں۔ سکیورٹی وجوہات کی بنا پر یہ دوبارہ نہیں دکھایا جائے گا۔",
+	"scimTokenRevoked": "SCIM ٹوکن منسوخ کر دیا گیا",
+	"scimTokenGenerationFailed": "SCIM ٹوکن بنانے میں ناکام",
+	"idpGroup": "IdP گروپ",
+	"idpGroups": "IdP گروپس",
+	"idpGroupsDescription": "IdP گروپ فیڈریشن فعال کریں (SCIM پرووژننگ، IdP گروپ میپنگز، اور صارفین پر IdP گروپ ممبرشپس)۔",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

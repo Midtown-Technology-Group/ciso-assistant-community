@@ -1,10 +1,14 @@
+from dateutil.relativedelta import relativedelta
 from rest_framework import serializers
 
+from core.models import Terminology
 from core.serializers import BaseModelSerializer
 from core.serializer_fields import FieldsRelatedField, PathField
+from custom_fields.serializers import CustomFieldsSerializerMixin
 from pmbok.models import (
     GenericCollection,
     Accreditation,
+    Project,
     ResponsibilityRole,
     ResponsibilityMatrix,
     ResponsibilityMatrixActivity,
@@ -26,6 +30,7 @@ class GenericCollectionReadSerializer(BaseModelSerializer):
     security_exceptions = FieldsRelatedField(["id", "status"], many=True)
     policies = FieldsRelatedField(["id", "status"], many=True)
     dependencies = FieldsRelatedField(many=True)
+    projects = FieldsRelatedField(many=True)
     filtering_labels = FieldsRelatedField(["id", "folder"], many=True)
 
     class Meta:
@@ -70,13 +75,11 @@ class AccreditationReadSerializer(BaseModelSerializer):
         return obj.category.get_name_translated
 
     def get_collection_data(self, obj):
-        """Get the linked collection with all related objects"""
         if obj.linked_collection:
             return GenericCollectionReadSerializer(obj.linked_collection).data
         return None
 
     def get_checklist_progress(self, obj):
-        """Get the progress percentage of the checklist compliance assessment"""
         if obj.checklist:
             return obj.checklist.progress
         return None
@@ -92,8 +95,6 @@ class AccreditationWriteSerializer(BaseModelSerializer):
         fields = "__all__"
 
     def validate(self, data):
-        from dateutil.relativedelta import relativedelta
-
         commission_date = data.get(
             "commission_date",
             getattr(getattr(self, "instance", None), "commission_date", None),
@@ -103,14 +104,121 @@ class AccreditationWriteSerializer(BaseModelSerializer):
             getattr(getattr(self, "instance", None), "duration_months", None),
         )
 
-        # Auto-compute expiry_date when commission_date and duration_months are set
-        # and expiry_date is empty/null (cleared or never provided)
         if commission_date and duration_months and not data.get("expiry_date"):
             data["expiry_date"] = commission_date + relativedelta(
                 months=duration_months
             )
 
         return super().validate(data)
+
+
+class ProjectReadSerializer(CustomFieldsSerializerMixin, BaseModelSerializer):
+    path = PathField(read_only=True)
+    folder = FieldsRelatedField()
+    owner = FieldsRelatedField()
+    sponsor = FieldsRelatedField()
+    parent_project = FieldsRelatedField()
+    sub_projects = FieldsRelatedField(many=True)
+    linked_collection = FieldsRelatedField()
+    responsibility_matrices = FieldsRelatedField(many=True)
+    filtering_labels = FieldsRelatedField(["id", "folder"], many=True)
+    status = FieldsRelatedField(["id", "name"])
+    health = FieldsRelatedField(["id", "name"])
+
+    class Meta:
+        model = Project
+        fields = "__all__"
+
+
+class ProjectWriteSerializer(CustomFieldsSerializerMixin, BaseModelSerializer):
+    status = serializers.PrimaryKeyRelatedField(
+        queryset=Terminology.objects.filter(
+            field_path=Terminology.FieldPath.PROJECT_STATUS, is_visible=True
+        ),
+        required=False,
+        allow_null=True,
+    )
+    responsibility_matrices = serializers.PrimaryKeyRelatedField(
+        queryset=ResponsibilityMatrix.objects.all(),
+        many=True,
+        required=False,
+    )
+    create_collection = serializers.BooleanField(
+        write_only=True, required=False, default=True
+    )
+
+    class Meta:
+        model = Project
+        fields = "__all__"
+
+    def create(self, validated_data):
+        create_collection = validated_data.pop("create_collection", True)
+        # Only the collection auto-created by Project.save() is subject to opt-out;
+        # an explicitly provided collection is never touched.
+        explicit_collection = validated_data.get("linked_collection")
+        instance = super().create(validated_data)
+        # linked_collection is on_delete=SET_NULL, so the FK clears automatically.
+        if (
+            not create_collection
+            and not explicit_collection
+            and instance.linked_collection_id
+        ):
+            instance.linked_collection.delete()
+            instance.linked_collection = None
+        return instance
+
+    def update(self, instance, validated_data):
+        validated_data.pop("create_collection", None)
+        return super().update(instance, validated_data)
+
+    def validate(self, data):
+        instance = getattr(self, "instance", None)
+
+        def current(field):
+            return data.get(field, getattr(instance, field, None) if instance else None)
+
+        start = current("start_date")
+        end = current("end_date")
+        eta = current("eta")
+        if start and end and end < start:
+            raise serializers.ValidationError(
+                {"end_date": "End date cannot be earlier than start date."}
+            )
+        if start and eta and eta < start:
+            raise serializers.ValidationError(
+                {"eta": "ETA cannot be earlier than start date."}
+            )
+        return super().validate(data)
+
+    def validate_parent_project(self, value):
+        if value is None:
+            return value
+        instance = getattr(self, "instance", None)
+        if instance is None:
+            return value
+        if value.pk == instance.pk:
+            raise serializers.ValidationError("A project cannot be its own parent.")
+        descendants = set()
+        queue = list(
+            Project.objects.filter(parent_project=instance.pk).values_list(
+                "pk", flat=True
+            )
+        )
+        while queue:
+            current = queue.pop()
+            if current in descendants:
+                continue
+            descendants.add(current)
+            queue.extend(
+                Project.objects.filter(parent_project=current).values_list(
+                    "pk", flat=True
+                )
+            )
+        if value.pk in descendants:
+            raise serializers.ValidationError(
+                "Setting this project as parent would create a cycle."
+            )
+        return value
 
 
 class ResponsibilityRoleReadSerializer(BaseModelSerializer):
@@ -234,8 +342,7 @@ class ResponsibilityAssignmentWriteSerializer(BaseModelSerializer):
                     "Add it to the matrix first or pick a role already attached."
                 }
             )
-        # Mirror the cycle_cell check: actor must be a member of the matrix.
-        # Without this, direct POST/PATCH could create rows for off-matrix actors.
+        # Mirrors cycle_cell: blocks POST/PATCH from creating rows for off-matrix actors.
         if (
             activity
             and actor

@@ -1,44 +1,106 @@
-export type ThemePreference = 'light' | 'dark';
+import { writable } from 'svelte/store';
+import { browser } from '$app/environment';
 
-export const THEME_STORAGE_KEY = 'ciso:theme';
+export type ThemeMode = 'light' | 'dark' | 'system';
 
-export function systemPrefersDark(): boolean {
-	return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+const STORAGE_KEY = 'ciso-theme';
+
+function getStoredTheme(): ThemeMode {
+	if (!browser) return 'light';
+	return (localStorage.getItem(STORAGE_KEY) as ThemeMode) || 'system';
 }
 
-export function resolveThemePreference(): ThemePreference {
-	let storedPreference: string | null = null;
+function getSystemPreference(): 'light' | 'dark' {
+	if (!browser) return 'light';
+	return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function resolveTheme(mode: ThemeMode): 'light' | 'dark' {
+	return mode === 'system' ? getSystemPreference() : mode;
+}
+
+async function refreshECharts(resolved: 'light' | 'dark') {
 	try {
-		storedPreference = localStorage.getItem(THEME_STORAGE_KEY);
+		const echarts = await import('echarts');
+		// Find all ECharts containers and re-init with new theme.
+		// Charts tagged data-theme-managed handle their own theme refresh via
+		// mountThemeAwareChart (echartsTheme.ts) — skip them to avoid a double dispose.
+		document.querySelectorAll('[_echarts_instance_]:not([data-theme-managed])').forEach((el) => {
+			const instance = echarts.getInstanceByDom(el as HTMLElement);
+			if (instance) {
+				const option = instance.getOption();
+				const rendererType =
+					(instance.getZr() as any)?.painter?.type === 'canvas' ? 'canvas' : 'svg';
+				instance.dispose();
+				const newChart = echarts.init(el as HTMLElement, resolved === 'dark' ? 'dark' : null, {
+					renderer: rendererType
+				});
+				option.backgroundColor = 'transparent';
+				newChart.setOption(option);
+			}
+		});
 	} catch {
-		storedPreference = null;
+		// ECharts not loaded yet, nothing to refresh
 	}
-	if (storedPreference === 'light' || storedPreference === 'dark') {
-		return storedPreference;
+}
+
+function applyTheme(resolved: 'light' | 'dark') {
+	if (!browser) return;
+	const html = document.documentElement;
+	if (resolved === 'dark') {
+		html.classList.add('dark');
+	} else {
+		html.classList.remove('dark');
 	}
-	return systemPrefersDark() ? 'dark' : 'light';
+	// Re-init all ECharts instances with the new theme
+	refreshECharts(resolved);
 }
 
-export function applyThemePreference(preference: ThemePreference): ThemePreference {
-	document.documentElement.classList.toggle('dark', preference === 'dark');
-	return preference;
+export const themeMode = writable<ThemeMode>(getStoredTheme());
+export const resolvedTheme = writable<'light' | 'dark'>(resolveTheme(getStoredTheme()));
+
+themeMode.subscribe((mode) => {
+	if (!browser) return;
+	localStorage.setItem(STORAGE_KEY, mode);
+	const resolved = resolveTheme(mode);
+	resolvedTheme.set(resolved);
+	applyTheme(resolved);
+});
+
+if (browser) {
+	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+		let currentMode: ThemeMode = 'system';
+		themeMode.subscribe((m) => (currentMode = m))();
+		if (currentMode === 'system') {
+			const resolved = getSystemPreference();
+			resolvedTheme.set(resolved);
+			applyTheme(resolved);
+		}
+	});
 }
 
-export function persistThemePreference(preference: ThemePreference): ThemePreference {
-	try {
-		localStorage.setItem(THEME_STORAGE_KEY, preference);
-	} catch {
-		// Continue applying the in-memory theme when browser storage is unavailable.
+export async function setTheme(mode: ThemeMode, syncToBackend = true) {
+	themeMode.set(mode);
+	if (syncToBackend && browser) {
+		try {
+			await fetch('/fe-api/user-preferences', {
+				method: 'PATCH',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ ui: { theme: mode } })
+			});
+		} catch (e) {
+			console.warn('Failed to sync theme preference to server:', e);
+		}
 	}
-	return preference;
 }
 
-export function initializeThemePreference(): ThemePreference {
-	return applyThemePreference(resolveThemePreference());
-}
-
-export function toggleThemePreference(currentPreference: ThemePreference): ThemePreference {
-	const nextPreference = currentPreference === 'dark' ? 'light' : 'dark';
-	persistThemePreference(nextPreference);
-	return applyThemePreference(nextPreference);
+export function initThemeFromUser(preferences: { ui?: { theme?: ThemeMode } } | undefined) {
+	if (!browser) return;
+	const serverTheme = preferences?.ui?.theme;
+	if (serverTheme) {
+		localStorage.setItem(STORAGE_KEY, serverTheme);
+		themeMode.set(serverTheme);
+	} else {
+		themeMode.set(getStoredTheme());
+	}
 }

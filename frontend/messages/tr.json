@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "Bir çerçeveye eşle",
+	"mapToFrameworkDescription": "Bundan eşlenerek başka bir çerçevede yeni bir denetim oluştur.",
+	"mapFromAudit": "Bir denetimden eşle",
+	"mapFromAuditDescription": "Başka bir denetimdeki eşlenen sonuçları buna aktar.",
+	"selectSourceAudit": "Zenginleştirilecek bir kaynak denetim seçin",
+	"mapFromSuccess": "Denetim başarıyla güncellendi",
+	"mapFromError": "Kaynak denetimden eşleme başarısız oldu",
+	"currentState": "Mevcut durum",
+	"projectedState": "Öngörülen durum",
+	"confirmMapping": "Eşlemeyi onayla",
+	"mapFromPreview": "Eşleme önizlemesi",
+	"requirementsUpdated": "gereksinim güncellenecek",
+	"noMappingPath": "Bu çerçeveler arasında eşleme yolu bulunamadı",
+	"mapFromNoChanges": "Bu kaynak denetim, mevcut denetimde hiçbir şeyi değiştirmez.",
+	"sourceRequirement": "Kaynak gereksinim",
+	"fullCoverage": "Tam kapsama",
+	"partialCoverage": "Kısmi kapsama",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "Fransızca",
 	"english": "İngilizce",
@@ -528,7 +545,8 @@
 	"linkHelpText": "İzleme veya referans için harici URL (ör. ITSM, sharepoint, jira, vb.)",
 	"effortHelpText": "Uygulanan kontrolü uygulamak için gereken çaba",
 	"costHelpText": "Uygulanan kontrolü uygulamak için gereken maliyet",
-	"riskAcceptanceJusitficationHelpText": "Risk kabulü için gerekçe. Sadece onaylayan bu alanı düzenleyebilir.",
+	"riskAcceptanceJustificationHelpText": "Risk kabulü için gerekçe. Sadece onaylayan bu alanı düzenleyebilir.",
+	"riskAcceptanceJustificationLabel": "Risk kabulü gerekçesi",
 	"approverHelpText": "Risk sahibi ve onaylayan kimliği",
 	"riskAcceptanceRiskScenariosHelpText": "Kabul edilen risk senaryoları",
 	"attachmentHelpText": "Kanıt için dosya (ör. ekran görüntüsü, log dosyası, vb.). Seçildiğinde, ekran görüntülerini doğrudan panonuzdan yapıştırabilirsiniz.",
@@ -784,7 +802,7 @@
 	"maturity": "Olgunluk",
 	"progress": "İlerleme",
 	"back": "Geri",
-	"backToWorkshop": "Ebios RM çalışmasına / ekosisteme geri dön",
+	"backToWorkshop": "EBIOS RM çalışmasına / ekosisteme geri dön",
 	"duplicate": "Çoğalt",
 	"duplicateRiskAssessment": "Risk değerlendirmesini çoğalt",
 	"duplicateAppliedControl": "Uygulanan kontrolü çoğalt",
@@ -792,6 +810,19 @@
 	"favicon": "Site simgesi",
 	"logo": "Logo",
 	"clientSettings": "İstemci ayarları",
+	"infraConfig": "Altyapı",
+	"infraConfigDescription": "Altyapı katmanına açılan altyapı yapılandırmasını yönetin. Aşağıdaki IP adresleri ve CIDR aralıkları, arka uç erişimini otomatik olarak yapılandırmak için kullanılır.",
+	"infraConfigSettingsUpdated": "Altyapı ayarları başarıyla güncellendi",
+	"allowedIps": "İzin verilen IP'ler",
+	"ipAddressOrCidr": "IP adresi veya CIDR",
+	"invalidIpOrCidr": "Geçerli bir IP adresi veya CIDR aralığı girin.",
+	"ipAlreadyAdded": "Bu IP zaten listede.",
+	"tooManyAllowedIps": "En fazla {max} IP adresi ekleyebilirsiniz.",
+	"enterIpFirst": "Önce bir IP adresi veya CIDR girin.",
+	"allowsAllIpsWarning": "Bu, herhangi bir IP adresinden erişime izin verir.",
+	"confirmEmptyAllowlist": "İzin listesinde hiç IP olmadan kaydetmek üzeresiniz. Bu, tüm erişimi engelleyebilir. Devam edilsin mi?",
+	"removeIp": "{ip} öğesini kaldır",
+	"noAllowedIpsYet": "Henüz izin verilen IP yok.",
 	"invalidFileType": "Geçersiz dosya türü",
 	"logoHelpText": "Logo, uygulamanın başlığında görüntülenecektir. Kabul edilen formatlar: PNG, JPEG, WEBP, SVG.",
 	"faviconHelpText": "Site simgesi tarayıcı sekmesinde görüntülenecektir. Kabul edilen formatlar: ICO, PNG, JPEG, WEBP, SVG.",
@@ -942,6 +973,16 @@
 	"emailPasswordMismatch": "Sağlanan kimlik bilgileriyle giriş yapılamıyor.",
 	"securitySettings": "Güvenlik ayarları",
 	"securitySettingsDescription": "Güvenlik ayarlarınızı buradan yapılandırın.",
+	"preferencesSettings": "Tercihler",
+	"preferencesSettingsDescription": "Kişisel görüntüleme tercihlerinizi buradan yapılandırın.",
+	"dateFormat": "Tarih biçimi",
+	"dateFormatDescription": "Tarihlerin uygulama genelinde nasıl gösterileceğini seçin.",
+	"dateFormatAuto": "Otomatik (dili izle)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "Gün/Ay/Yıl (31/05/2026)",
+	"dateFormatMmddyyyy": "Ay/Gün/Yıl (05/31/2026)",
+	"dateFormatLongDmy": "Uzun, önce gün (31 Mayıs 2026)",
+	"dateFormatLongMdy": "Uzun, önce ay (Mayıs 31, 2026)",
 	"multiFactorAuthentication": "Çok faktörlü kimlik doğrulama",
 	"authenticatorApp": "Kimlik doğrulayıcı uygulaması",
 	"authenticatorAppDescription": "İki faktörlü kimlik doğrulama için zaman tabanlı tek kullanımlık parola (TOTP) oluşturmak üzere bir kimlik doğrulayıcı uygulaması kullanın.",
@@ -1224,10 +1265,10 @@
 	"activityOne": "Adım 1",
 	"activityTwo": "Adım 2",
 	"activityThree": "Adım 3",
-	"ebiosRmStudy": "Ebios RM çalışması",
+	"ebiosRmStudy": "EBIOS RM çalışması",
 	"qualifications": "Nitelendirmeler",
 	"impacts": "Etkiler",
-	"ebiosRmStudies": "Ebios RM çalışmaları",
+	"ebiosRmStudies": "EBIOS RM çalışmaları",
 	"bringTheEvidences": "Kanıtları getir",
 	"bringTheEvidencesHelpText": "Devre dışı bırakılırsa, nesne kanıtları olmadan çoğaltılacaktır",
 	"gravity": "Önem Derecesi",
@@ -1237,7 +1278,7 @@
 	"fearedEvent": "Korkulan olay",
 	"fearedEvents": "Korkulan olaylar",
 	"isSelected": "Seçildi",
-	"ebiosRM": "Ebios RM",
+	"ebiosRM": "EBIOS RM",
 	"riskOrigin": "Risk kökeni",
 	"targetObjective": "Hedef amaç",
 	"motivation": "Motivasyon",
@@ -1288,7 +1329,7 @@
 	"workshopOne": "Atölye 1",
 	"refIdSemiColon": "Referans ID:",
 	"addFearedEvent": "Korkulan olay ekle",
-	"addEbiosRmStudy": "Ebios RM Çalışması Ekle",
+	"addEbiosRmStudy": "EBIOS RM Çalışması Ekle",
 	"noAuthor": "Atanmış yazar yok",
 	"noReviewer": "Atanmış gözden geçiren yok",
 	"selectAudit": "Denetim seç",
@@ -1311,7 +1352,7 @@
 	"strategicScenario": "Stratejik senaryo",
 	"strategicScenarios": "Stratejik senaryolar",
 	"elementaryActionsTechniques": "Birimsel eylemler / Teknikler",
-	"goBackToEbiosRmStudy": "Ebios RM çalışmasına geri dön",
+	"goBackToEbiosRmStudy": "EBIOS RM çalışmasına geri dön",
 	"addStrategicScenario": "Stratejik senaryo ekle",
 	"markAsDone": "Tamamlandı olarak işaretle",
 	"markAsInProgress": "Devam ediyor olarak işaretle",
@@ -1441,7 +1482,7 @@
 	"demoEnvironmentBeingPrepared": "Demo ortamınız hazırlanıyor. Bu işlem birkaç dakika sürebilir.",
 	"firstTimeLoginModalTitle": "CISO Assistant'a Hoş Geldiniz!",
 	"firstTimeLoginModalDescription": "Bu ilk kez giriş yapıyorsunuz. Başlamak için rehberli bir tur almak ister misiniz?",
-	"ebiosRadarParameters": "Ebios RM radar parametreleri",
+	"ebiosRadarParameters": "EBIOS RM radar parametreleri",
 	"maxRadius": "Maksimum Yarıçap",
 	"greenZoneRadius": "Yeşil bölge yarıçapı",
 	"yellowZoneRadius": "Sarı bölge yarıçapı",
@@ -1703,8 +1744,14 @@
 	"associatedFindingsAssessments": "İlişkili takipler",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Saat",
 				"countPlural=other": "{count} Saatler"
@@ -1713,8 +1760,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Dakika",
 				"countPlural=other": "{count} Dakikalar"
@@ -1723,8 +1775,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Gün",
 				"countPlural=other": "{count} Günler"
@@ -1733,8 +1790,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} nesne görünür değil.",
 				"countPlural=other": "{count} nesne görünür değil."
@@ -1855,8 +1917,14 @@
 	"errorFetching": "Kaskat bilgileri yüklenemiyor. Lütfen tekrar deneyin.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "Diğer nesneler etkilenmeyecek.",
 				"countPlural=one": "{count} ilgili nesne silinmeyecek ancak bir veya daha fazla ilişkiyi kaybedecek.",
@@ -2000,8 +2068,13 @@
 	"builderPublishModalDescription": "Bu işlem yayındaki çerçeveyi güncelleyecek. Aşağıdaki değişiklikleri inceleyin.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} gereksinim eklendi",
 				"countPlural=other": "{count} gereksinim eklendi"
@@ -2010,8 +2083,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} soru",
 				"countPlural=other": "{count} soru"
@@ -2020,8 +2098,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} gereksinim kaldırıldı",
 				"countPlural=other": "{count} gereksinim kaldırıldı"
@@ -2030,8 +2113,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} soru",
 				"countPlural=other": "{count} soru"
@@ -2041,8 +2129,13 @@
 	"builderNoStructuralChanges": "Yapısal değişiklik algılanmadı (yalnızca üst veri).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} kırıcı değişiklik algılandı",
 				"countPlural=other": "{count} kırıcı değişiklik algılandı"
@@ -2052,8 +2145,13 @@
 	"builderBreakingChangesHint": "Bu değişiklikler mevcut denetimlerdeki puanlamayı, görünürlüğü veya uyumluluk sonuçlarını etkileyebilir.",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} mevcut denetim etkilenecek",
 				"countPlural=other": "{count} mevcut denetim etkilenecek"
@@ -2091,8 +2189,13 @@
 	"builderNoRulesOrGroupsConfigured": "Yapılandırılmış kural veya grup yok",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} sonuç kuralı",
 				"countPlural=other": "{count} sonuç kuralı"
@@ -2101,8 +2204,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} grup",
 				"countPlural=other": "{count} grup"
@@ -2115,8 +2223,13 @@
 	"builderScoreScale": "Puan ölçeği",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} seviye",
 				"countPlural=other": "{count} seviye"
@@ -2186,8 +2299,13 @@
 	"builderAssessableLeaf": "Değerlendirilebilir yaprak",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Değerlendirilebilir · {count} alt düğüm",
 				"countPlural=other": "Değerlendirilebilir · {count} alt düğüm"
@@ -2196,8 +2314,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Grup · {count} alt düğüm",
 				"countPlural=other": "Grup · {count} alt düğüm"
@@ -2224,8 +2347,13 @@
 	"builderAddQuestion": "Soru ekle",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} alt düğüm gizli",
 				"countPlural=other": "{count} alt düğüm gizli"
@@ -2253,8 +2381,14 @@
 	"builderChangeTypeWarning": "Türü değiştirmek mevcut seçenekleri silecek. Devam edilsin mi?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{ref} = {count} yanıt olduğunda gösterilir",
 				"countPlural=other": "{ref} = {count} yanıt olduğunda gösterilir"
@@ -2333,31 +2467,39 @@
 	"builderQuestionTypeUniqueChoice": "Tek seçim",
 	"builderQuestionTypeMultipleChoice": "Çoktan seçmeli",
 	"builderQuestionTypeDate": "Tarih",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "değiştirildi:",
+	"requirementWeight": "Ağırlık",
+	"scim": "SCIM",
+	"scimDescription": "SCIM 2.0 sağlamayı yapılandırın. Kimlik sağlayıcınızı aşağıdaki uç noktaya yönlendirin ve burada oluşturulan bir bearer belirteciyle kimlik doğrulaması yapın.",
+	"scimEndpointUrl": "SCIM uç nokta URL'si",
+	"scimTokens": "SCIM belirteçleri",
+	"generateScimToken": "Belirteç oluştur",
+	"noScimTokens": "Henüz SCIM belirteci yok.",
+	"scimTokenName": "Ad",
+	"scimTokenDigest": "Özet",
+	"revokeScimToken": "İptal et",
+	"scimTokenGenerated": "Belirteç oluşturuldu",
+	"scimTokenWarning": "Bu belirteci şimdi kopyalayın. Güvenlik nedeniyle bir daha gösterilmeyecektir.",
+	"scimTokenRevoked": "SCIM belirteci iptal edildi",
+	"scimTokenGenerationFailed": "SCIM belirteci oluşturulamadı",
+	"idpGroup": "IdP grubu",
+	"idpGroups": "IdP grupları",
+	"idpGroupsDescription": "IdP grup federasyonunu etkinleştirin (SCIM sağlama, IdP grup eşlemeleri ve kullanıcılarda IdP grup üyelikleri).",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

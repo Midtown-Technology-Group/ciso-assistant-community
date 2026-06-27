@@ -4,14 +4,16 @@
 	import List from '$lib/components/List/List.svelte';
 	import BatchCreatePersonalDataModal from '$lib/components/Modals/BatchCreatePersonalDataModal.svelte';
 	import ConfirmModal from '$lib/components/Modals/ConfirmModal.svelte';
+	import RiskAcceptanceModal from '$lib/components/Modals/RiskAcceptanceModal.svelte';
 	import CreateModal from '$lib/components/Modals/CreateModal.svelte';
 	import SelectExistingModal from '$lib/components/Modals/SelectExistingModal.svelte';
 	import ModelTable from '$lib/components/ModelTable/ModelTable.svelte';
+	import CustomFieldsDisplay from '$lib/components/Forms/CustomFieldsDisplay.svelte';
 	import { booleanDisplay } from '$lib/utils/boolean-display';
 	import { ISO_8601_REGEX } from '$lib/utils/constants';
 	import { type ModelMapEntry, type ReverseForeignKeyField } from '$lib/utils/crud';
 	import { getModelInfo } from '$lib/utils/crud.js';
-	import { formatDateOrDateTime } from '$lib/utils/datetime';
+	import { formatDate, formatDateOrDateTime } from '$lib/utils/datetime';
 	import { isURL } from '$lib/utils/helpers';
 	import { safeTranslate } from '$lib/utils/i18n';
 	import { toCamelCase } from '$lib/utils/locales.js';
@@ -27,6 +29,7 @@
 	import MarkdownRenderer from '$lib/components/MarkdownRenderer.svelte';
 	import { getListViewFields } from '$lib/utils/table';
 	import { canPerformAction } from '$lib/utils/access-control';
+	import AuditTrailButton from '$lib/components/AuditTrail/AuditTrailButton.svelte';
 	import {
 		getModalStore,
 		type ModalComponent,
@@ -36,14 +39,31 @@
 
 	const modalStore: ModalStore = getModalStore();
 
-	const defaultExcludes = [
-		'id',
-		'is_published',
-		'localization_dict',
-		'str',
-		'path',
-		'sync_mappings'
-	];
+	const defaultExcludes = ['id', 'is_published', 'str', 'path', 'sync_mappings'];
+
+	// Format the raw numbers of the ROSI explanation per the active locale.
+	function formatRosiExplanationParams(params: Record<string, number> | undefined) {
+		if (!params) return {};
+		const locale = getLocale();
+		const amount = (value: number) =>
+			new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(
+				value
+			);
+		const percent = (value: number) =>
+			new Intl.NumberFormat(locale, {
+				style: 'percent',
+				minimumFractionDigits: 1,
+				maximumFractionDigits: 1
+			}).format(value);
+		return {
+			currentAle: amount(params.currentAle),
+			residualAle: amount(params.residualAle),
+			riskReduction: amount(params.riskReduction),
+			treatmentCost: amount(params.treatmentCost),
+			netBenefit: amount(params.netBenefit),
+			rosi: percent(params.rosi)
+		};
+	}
 
 	interface Props {
 		data: any;
@@ -232,6 +252,30 @@
 		};
 		modalStore.trigger(modal);
 	}
+	function modalRiskAcceptanceApproval(id: string, name: string, action: string): void {
+		const urlModel = getModelInfo('risk-acceptances').urlModel;
+		const modalComponent: ModalComponent = {
+			ref: RiskAcceptanceModal,
+			props: {
+				_form: {
+					id: id,
+					urlmodel: urlModel,
+					justification: action.includes('revoke') ? (data.data.justification ?? '') : ''
+				},
+				id: id,
+				debug: false,
+				URLModel: urlModel,
+				formAction: action
+			}
+		};
+		const modal: ModalSettings = {
+			type: 'component',
+			component: modalComponent,
+			title: m.confirmModalTitle(),
+			body: `${m.confirmModalMessage()}: ${name}?`
+		};
+		modalStore.trigger(modal);
+	}
 
 	function modalConfirm(id: string, name: string, action: string): void {
 		const urlModel = getModelInfo('risk-acceptances').urlModel;
@@ -412,18 +456,16 @@
 			<div class="flex space-x-2">
 				<button
 					onclick={(_) => {
-						modalConfirm(data.data.id, data.data.name, '?/accept');
+						modalRiskAcceptanceApproval(data.data.id, data.data.name, '?/accept');
 					}}
-					onkeydown={(_) => modalConfirm(data.data.id, data.data.name, '?/accept')}
 					class="btn preset-filled-success-500"
 				>
 					<i class="fas fa-check mr-2"></i> {m.validate()}</button
 				>
 				<button
 					onclick={(_) => {
-						modalConfirm(data.data.id, data.data.name, '?/reject');
+						modalRiskAcceptanceApproval(data.data.id, data.data.name, '?/reject');
 					}}
-					onkeydown={(_) => modalConfirm(data.data.id, data.data.name, '?/reject')}
 					class="btn preset-filled-error-500"
 				>
 					<i class="fas fa-xmark mr-2"></i> {m.reject()}</button
@@ -441,9 +483,8 @@
 				<div class="ml-auto whitespace-nowrap">
 					<button
 						onclick={(_) => {
-							modalConfirm(data.data.id, data.data.name, '?/revoke');
+							modalRiskAcceptanceApproval(data.data.id, data.data.name, '?/revoke');
 						}}
-						onkeydown={(_) => modalConfirm(data.data.id, data.data.name, '?/revoke')}
 						class="btn preset-filled-error-500"
 					>
 						<i class="fas fa-xmark mr-2"></i> {m.revoke()}</button
@@ -454,7 +495,7 @@
 	{/if}
 
 	<!-- Main content area - modified to use conditional flex layout -->
-	<div class="card shadow-lg bg-white p-4">
+	<div class="card shadow-lg bg-surface-50-950 p-4">
 		{#if data.urlModel === 'stakeholders' && data.data?.ebios_rm_study?.id}
 			<div class="mb-4 p-3">
 				<Anchor
@@ -477,7 +518,7 @@
 					<dd>{syncMapping.remote_id}</dd>
 
 					<dt class="font-medium">{m.lastSynced()}</dt>
-					<dd>{new Date(syncMapping.last_synced_at).toLocaleString(getLocale())}</dd>
+					<dd>{formatDate(new Date(syncMapping.last_synced_at), true, getLocale())}</dd>
 
 					<dt class="font-medium">{m.status()}</dt>
 					<dd>{safeTranslate(syncMapping.sync_status)}</dd>
@@ -487,22 +528,23 @@
 		<div class={hasWidgets ? 'flex flex-row flex-wrap gap-4' : 'w-full'}>
 			<!-- Left side - Details (conditional width) -->
 			<div
-				class="flow-root rounded-lg border border-gray-100 py-3 shadow-xs {hasWidgets
+				class="flow-root rounded-lg border border-surface-100-900 py-3 shadow-xs {hasWidgets
 					? 'flex-1 min-w-[300px]'
 					: 'w-full'}"
 			>
-				<dl class="-my-3 divide-y divide-gray-100 text-sm">
+				<dl class="-my-3 divide-y divide-surface-100-900 text-sm">
 					{#each orderedEntries().filter(([key, _]) => (fields.length > 0 ? fields.includes(key) : true) && !exclude.includes(key)) as [key, value], index}
 						{@const isRelatedField = relatedFieldNames.has(key)}
 						{@const hiddenCountForValue = isRelatedField ? countMasked(value) : 0}
 						<div
-							class="grid grid-cols-1 gap-1 py-3 px-2 even:bg-surface-50 sm:grid-cols-5 sm:gap-4 {index >=
+							class="grid grid-cols-1 gap-1 py-3 px-2 even:bg-surface-100-900 sm:grid-cols-5 sm:gap-4 {index >=
 								MAX_ROWS && !expandedTable
 								? 'hidden'
 								: ''}"
 						>
+							<!-- Keys column -->
 							<dt
-								class="font-medium text-gray-900 flex items-center gap-2"
+								class="font-medium text-surface-950-50 flex items-center gap-2"
 								data-testid="{key.replace('_', '-')}-field-title"
 							>
 								<span>{safeTranslate(key)}</span>
@@ -517,7 +559,7 @@
 										</Tooltip.Trigger>
 										<Tooltip.Positioner>
 											<Tooltip.Content
-												class="card bg-gray-800 text-white p-3 max-w-xs shadow-xl border border-gray-700"
+												class="card bg-surface-950-50 text-white p-3 max-w-xs shadow-xl border border-surface-700-300"
 											>
 												<p class="text-sm">{tooltipText}</p>
 											</Tooltip.Content>
@@ -525,7 +567,8 @@
 									</Tooltip>
 								{/if}
 							</dt>
-							<dd class="text-gray-700 sm:col-span-4">
+							<!-- Value column -->
+							<dd class="text-surface-700-300 sm:col-span-4">
 								<ul class="">
 									<li
 										class="list-none whitespace-pre-line"
@@ -594,6 +637,7 @@
 												{:else}
 													--
 												{/if}
+												<!-- Values that are Arrays -->
 											{:else if Array.isArray(value)}
 												{@const visibleValues = isRelatedField
 													? value.filter((item) => !isMaskedPlaceholder(item))
@@ -614,7 +658,7 @@
 																		>{val.name}</Anchor
 																	>
 																	{#if val.legal_basis}
-																		<span class="text-gray-600">
+																		<span class="text-surface-600-400">
 																			- {safeTranslate(val.legal_basis)}
 																		</span>
 																	{/if}
@@ -622,6 +666,11 @@
 																	{@const [securityObjectiveName, securityObjectiveValue] =
 																		Object.entries(val)[0]}
 																	{safeTranslate(securityObjectiveName).toUpperCase()}: {securityObjectiveValue}
+																{:else if key === 'choices_definition'}
+																	<span class="font-mono text-xs bg-surface-200-800 px-1 rounded"
+																		>{val.ref_id}</span
+																	>
+																	- {val.name}
 																{:else if val.str && val.id && key !== 'qualifications' && key !== 'relationship' && key !== 'nature'}
 																	{@const itemHref = `/${
 																		data.model?.foreignKeyFields?.find((item) => item.field === key)
@@ -637,6 +686,8 @@
 																		rel="noopener noreferrer"
 																		class="anchor">{val.str}</a
 																	>
+																{:else if val.str && key === 'permissions'}
+																	{val.str}
 																{:else if val.str}
 																	{safeTranslate(val.str)}
 																{:else}
@@ -683,7 +734,7 @@
 												<li class="fa-solid fa-flag text-blue-500"></li>
 												{m.p3()}
 											{:else if value === 'P4'}
-												<li class="fa-solid fa-flag text-gray-500"></li>
+												<li class="fa-solid fa-flag text-surface-600-400"></li>
 												{m.p4()}
 											{:else if key === 'icon'}
 												<i class="text-lg fa {data.data.icon_fa_class}"></i>
@@ -699,6 +750,10 @@
 											{:else if typeof value === 'boolean'}
 												{@const bd = booleanDisplay(value, key, data.urlModel)}
 												<i class="{bd.icon} {bd.colorClass}"></i>
+											{:else if key === 'roc_display'}
+												{safeTranslate(value)}
+											{:else if key === 'roc_calculation_explanation'}
+												{safeTranslate(value.key, formatRosiExplanationParams(value.params))}
 											{:else if !['name', 'ref_id'].includes(key) && m[toCamelCase(value.str || value.name)]}
 												{safeTranslate((value.str || value.name) ?? value)}
 											{:else}
@@ -727,7 +782,7 @@
 		{#if orderedEntries().filter( ([key, _]) => (fields.length > 0 ? fields.includes(key) : true && !exclude.includes(key)) ).length > MAX_ROWS}
 			<button
 				onclick={() => (expandedTable = !expandedTable)}
-				class="m-5 text-blue-800"
+				class="m-5 text-primary-800-200"
 				aria-expanded={expandedTable}
 			>
 				<i class="{expandedTable ? 'fas fa-chevron-up' : 'fas fa-chevron-down'} mr-3"></i>
@@ -817,7 +872,7 @@
 
 				{#if data.urlModel === 'applied-controls'}
 					<button
-						class="btn text-gray-100 bg-linear-to-l from-sky-500 to-green-600"
+						class="btn text-white bg-linear-to-l from-sky-500 to-green-600"
 						onclick={(_) => modalDuplicateForm(m.duplicateAppliedControl)}
 						data-testid="duplicate-button"
 					>
@@ -827,7 +882,7 @@
 				{/if}
 				{#if data.urlModel === 'organisation-objectives'}
 					<button
-						class="btn text-gray-100 bg-linear-to-l from-sky-500 to-green-600"
+						class="btn text-white bg-linear-to-l from-sky-500 to-green-600"
 						onclick={(_) => modalDuplicateForm(m.duplicateOrganisationObjective)}
 						data-testid="duplicate-button"
 					>
@@ -837,12 +892,19 @@
 				{/if}
 			{/if}
 			{@render actions?.()}
+			<AuditTrailButton model={data.urlModel} objectId={data.data?.id} />
 		</div>
 	</div>
 </div>
 
+<CustomFieldsDisplay
+	urlModel={data.urlModel}
+	folderId={data.data?.folder?.id ?? data.data?.folder}
+	values={data.data?.custom_fields}
+/>
+
 {#if relatedModels.length > 0 && displayModelTable}
-	<div class="card shadow-lg mt-8 bg-white px-2 py-6">
+	<div class="card shadow-lg mt-8 bg-surface-50-950 px-2 py-6">
 		<Tabs
 			value={group}
 			onValueChange={(e) => (group = e.value)}
@@ -854,7 +916,7 @@
 					<Tabs.Trigger
 						value={urlmodel}
 						class="justify-between w-full rounded-md px-3 py-2 transition-colors
-			       aria-[selected=true]:!bg-gray-200
+			       aria-[selected=true]:!bg-surface-200-800
 			       "
 						data-testid="tabs-control"
 					>
@@ -862,7 +924,7 @@
 						{#if model.count !== undefined && model.count > 0}
 							<span
 								class="ml-2 rounded-full px-2 py-0.5 text-xs
-						   preset-tonal-secondary text-gray-700"
+						   preset-tonal-secondary text-surface-700-300"
 							>
 								{model.count}
 							</span>
@@ -903,7 +965,9 @@
 							>
 								{#snippet addButton()}
 									{#if canEditObject && field?.addExisting}
-										<span class="inline-flex overflow-hidden rounded-md border bg-white shadow-xs">
+										<span
+											class="inline-flex overflow-hidden rounded-md border bg-surface-50-950 shadow-xs"
+										>
 											<button
 												class="inline-block p-3 btn-mini-secondary w-12 focus:relative"
 												data-testid="select-existing-button"
@@ -915,7 +979,7 @@
 										</span>
 										{#if field?.batchCreate}
 											<span
-												class="inline-flex overflow-hidden rounded-md border bg-white shadow-xs"
+												class="inline-flex overflow-hidden rounded-md border bg-surface-50-950 shadow-xs"
 											>
 												<button
 													class="inline-block p-3 btn-mini-secondary w-12 focus:relative"
@@ -927,7 +991,9 @@
 												</button>
 											</span>
 										{/if}
-										<span class="inline-flex overflow-hidden rounded-md border bg-white shadow-xs">
+										<span
+											class="inline-flex overflow-hidden rounded-md border bg-surface-50-950 shadow-xs"
+										>
 											<button
 												class="inline-block border-e p-3 btn-mini-primary w-12 focus:relative"
 												data-testid="add-button"
@@ -940,7 +1006,7 @@
 									{:else}
 										{#if field?.batchCreate}
 											<span
-												class="inline-flex overflow-hidden rounded-md border bg-white shadow-xs"
+												class="inline-flex overflow-hidden rounded-md border bg-surface-50-950 shadow-xs"
 											>
 												<button
 													class="inline-block p-3 btn-mini-secondary w-12 focus:relative"

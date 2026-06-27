@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "Vastenda raamistikuga",
+	"mapToFrameworkDescription": "Loo uus audit teises raamistikus, vastendatuna sellest.",
+	"mapFromAudit": "Vastenda auditist",
+	"mapFromAuditDescription": "Too teise auditi vastendatud tulemused sellesse.",
+	"selectSourceAudit": "Valige rikastamiseks lähteaudit",
+	"mapFromSuccess": "Audit edukalt uuendatud",
+	"mapFromError": "Lähteauditist vastendamine ebaõnnestus",
+	"currentState": "Praegune olek",
+	"projectedState": "Eeldatav olek",
+	"confirmMapping": "Kinnita vastendus",
+	"mapFromPreview": "Vastenduse eelvaade",
+	"requirementsUpdated": "nõuet uuendatakse",
+	"noMappingPath": "Nende raamistike vahel ei leitud vastendusteed",
+	"mapFromNoChanges": "See lähteaudit ei muudaks praeguses auditis midagi.",
+	"sourceRequirement": "Lähtenõue",
+	"fullCoverage": "Täielik kaetus",
+	"partialCoverage": "Osaline kaetus",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "Prantsuse",
 	"english": "Inglise",
@@ -838,7 +855,8 @@
 	"linkHelpText": "Väline URL jälgimiseks või viitamiseks (nt ITSM, SharePoint, Jira jne)",
 	"effortHelpText": "Rakendatud kontrollmeetme elluviimiseks vajalik töömaht",
 	"costHelpText": "Rakendatud kontrollmeetme elluviimiseks vajalik kulu",
-	"riskAcceptanceJusitficationHelpText": "Riskiaktsepti põhjendus. Seda välja saab muuta ainult kinnitaja.",
+	"riskAcceptanceJustificationHelpText": "Riskiaktsepti põhjendus. Seda välja saab muuta ainult kinnitaja.",
+	"riskAcceptanceJustificationLabel": "Riskiaktsepti põhjendus",
 	"approverHelpText": "Riskiomaniku ja kinnitaja identiteet",
 	"riskAcceptanceRiskScenariosHelpText": "Aktsepteeritud riskistsenaariumid",
 	"attachmentHelpText": "Tõendi fail (nt ekraanipilt, logifail jne). Valimisel saad kleepida ekraanipilte otse lõikelaualt.",
@@ -1151,6 +1169,19 @@
 	"favicon": "Favicon",
 	"logo": "Logo",
 	"clientSettings": "Instants",
+	"infraConfig": "Taristu",
+	"infraConfigDescription": "Hallake taristukihile avaldatud taristu konfiguratsiooni. Allolevaid IP-aadresse ja CIDR-vahemikke kasutatakse taustsüsteemi juurdepääsu automaatseks seadistamiseks.",
+	"infraConfigSettingsUpdated": "Taristu sätted edukalt uuendatud",
+	"allowedIps": "Lubatud IP-d",
+	"ipAddressOrCidr": "IP-aadress või CIDR",
+	"invalidIpOrCidr": "Sisestage kehtiv IP-aadress või CIDR-vahemik.",
+	"ipAlreadyAdded": "See IP on juba loendis.",
+	"tooManyAllowedIps": "Saate lisada kõige rohkem {max} IP-aadressi.",
+	"enterIpFirst": "Sisestage esmalt IP-aadress või CIDR.",
+	"allowsAllIpsWarning": "See lubab juurdepääsu mis tahes IP-aadressilt.",
+	"confirmEmptyAllowlist": "Olete salvestamas ilma ühegi IP-ta lubatud loendis. See võib blokeerida kogu juurdepääsu. Kas jätkata?",
+	"removeIp": "Eemalda {ip}",
+	"noAllowedIpsYet": "Lubatud IP-sid veel pole.",
 	"templates": "Mallid",
 	"emailTemplates": "E-posti mallid",
 	"emailTemplatesDescription": "Kohanda rakenduse saadetavaid e-posti malle. Muudatused kirjutavad sisseehitatud vaikeväärtused üle.",
@@ -1494,6 +1525,16 @@
 	"emailPasswordMismatch": "Esitatud sisselogimisandmetega ei õnnestunud sisse logida.",
 	"securitySettings": "Turvaseaded",
 	"securitySettingsDescription": "Seadista siin oma turvaseaded.",
+	"preferencesSettings": "Eelistused",
+	"preferencesSettingsDescription": "Seadistage siin oma isiklikud kuvamiseelistused.",
+	"dateFormat": "Kuupäeva vorming",
+	"dateFormatDescription": "Valige, kuidas kuupäevi kogu rakenduses kuvatakse.",
+	"dateFormatAuto": "Automaatne (keele järgi)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "Päev/Kuu/Aasta (31/05/2026)",
+	"dateFormatMmddyyyy": "Kuu/Päev/Aasta (05/31/2026)",
+	"dateFormatLongDmy": "Pikk, päev enne (31. mai 2026)",
+	"dateFormatLongMdy": "Pikk, kuu enne (mai 31, 2026)",
 	"multiFactorAuthentication": "Mitmikautentimine",
 	"authenticatorApp": "Autentimisrakendus",
 	"authenticatorAppDescription": "Kasuta mitmikautentimiseks ajapõhise ühekordse parooli (TOTP) genereerimiseks autentimisrakendust.",
@@ -2674,8 +2715,14 @@
 	"associatedFindingsAssessments": "Seotud järeltegevused",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} tund",
 				"countPlural=other": "{count} tundi"
@@ -2684,8 +2731,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} minut",
 				"countPlural=other": "{count} minutit"
@@ -2694,8 +2746,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} päev",
 				"countPlural=other": "{count} päeva"
@@ -2704,8 +2761,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} objekt on peidetud. Redigeerimisel võib link kaduda.",
 				"countPlural=other": "{count} objekti on peidetud. Redigeerimisel võivad lingid kaduda."
@@ -4090,8 +4152,14 @@
 	"errorFetching": "Kaskaadi teavet ei õnnestunud laadida. Palun proovi uuesti.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "Muid objekte ei mõjutata.",
 				"countPlural=one": "{count} seotud objekti ei kustutata, kuid see kaotab ühe või mitu seost.",
@@ -4443,8 +4511,13 @@
 	"builderPublishModalDescription": "See uuendab aktiivset raamistikku. Vaata allolevad muudatused üle.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} nõuet lisatud",
 				"countPlural=other": "{count} nõudeid lisatud"
@@ -4453,8 +4526,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} küsimus",
 				"countPlural=other": "{count} küsimust"
@@ -4463,8 +4541,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} nõue eemaldatud",
 				"countPlural=other": "{count} nõuet eemaldatud"
@@ -4473,8 +4556,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} küsimus",
 				"countPlural=other": "{count} küsimust"
@@ -4484,8 +4572,13 @@
 	"builderNoStructuralChanges": "Struktuurseid muudatusi ei tuvastatud (ainult metaandmed).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} lõhkuv muudatus tuvastatud",
 				"countPlural=other": "{count} lõhkuvat muudatust tuvastatud"
@@ -4495,8 +4588,13 @@
 	"builderBreakingChangesHint": "Need muudatused võivad mõjutada olemasolevate auditite hindamist, nähtavust või vastavustulemusi.",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} olemasolev audit saab mõjutatud",
 				"countPlural=other": "{count} olemasolevat auditit saavad mõjutatud"
@@ -4534,8 +4632,13 @@
 	"builderNoRulesOrGroupsConfigured": "Reegleid ega gruppe pole seadistatud",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} tulemuse reegel",
 				"countPlural=other": "{count} tulemuse reeglid"
@@ -4544,8 +4647,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} grupp",
 				"countPlural=other": "{count} gruppi"
@@ -4558,8 +4666,13 @@
 	"builderScoreScale": "Skoori skaala",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} tase",
 				"countPlural=other": "{count} taset"
@@ -4629,8 +4742,13 @@
 	"builderAssessableLeaf": "Hinnatav lehtsõlm",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Hinnatav · {count} alamsõlm",
 				"countPlural=other": "Hinnatav · {count} alamsõlme"
@@ -4639,8 +4757,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Grupp · {count} alamsõlm",
 				"countPlural=other": "Grupp · {count} alamsõlme"
@@ -4667,8 +4790,13 @@
 	"builderAddQuestion": "Lisa küsimus",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} alamsõlm peidetud",
 				"countPlural=other": "{count} alamsõlme peidetud"
@@ -4696,8 +4824,14 @@
 	"builderChangeTypeWarning": "Tüübi muutmine kustutab olemasolevad valikud. Kas jätkata?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Kuvatakse, kui {ref} = {count} vastus",
 				"countPlural=other": "Kuvatakse, kui {ref} = {count} vastust"
@@ -4816,30 +4950,38 @@
 	"builderQuestionTypeMultipleChoice": "Mitmikvalik",
 	"builderQuestionTypeDate": "Kuupäev",
 	"builderChangedOn": "muudetud",
+	"requirementWeight": "Kaal",
+	"scim": "SCIM",
+	"scimDescription": "Seadistage SCIM 2.0 ettevalmistamine. Suunake oma identiteedipakkuja allolevale lõpp-punktile ja autentige see siin loodud bearer-tokeniga.",
+	"scimEndpointUrl": "SCIM-i lõpp-punkti URL",
+	"scimTokens": "SCIM-i tokenid",
+	"generateScimToken": "Loo token",
+	"noScimTokens": "SCIM-i tokeneid veel pole.",
+	"scimTokenName": "Nimi",
+	"scimTokenDigest": "Digest",
+	"revokeScimToken": "Tühista",
+	"scimTokenGenerated": "Token loodud",
+	"scimTokenWarning": "Kopeerige see token kohe. Turvakaalutlustel seda enam ei kuvata.",
+	"scimTokenRevoked": "SCIM-i token tühistatud",
+	"scimTokenGenerationFailed": "SCIM-i tokeni loomine ebaõnnestus",
+	"idpGroup": "IdP rühm",
+	"idpGroups": "IdP rühmad",
+	"idpGroupsDescription": "Luba IdP rühmade föderatsioon (SCIM ettevalmistamine, IdP rühmade vastendused ja kasutajate IdP rühmade liikmesused).",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

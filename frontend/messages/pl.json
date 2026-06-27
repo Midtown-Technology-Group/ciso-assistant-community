@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "Mapuj do struktury",
+	"mapToFrameworkDescription": "Utwórz nową rewizję w innej strukturze, zmapowaną z tej.",
+	"mapFromAudit": "Mapuj z rewizji",
+	"mapFromAuditDescription": "Przenieś zmapowane wyniki z innej rewizji do tej.",
+	"selectSourceAudit": "Wybierz rewizję źródłową do wzbogacenia",
+	"mapFromSuccess": "Rewizja została zaktualizowana",
+	"mapFromError": "Nie udało się zmapować z rewizji źródłowej",
+	"currentState": "Stan bieżący",
+	"projectedState": "Stan prognozowany",
+	"confirmMapping": "Potwierdź mapowanie",
+	"mapFromPreview": "Podgląd mapowania",
+	"requirementsUpdated": "wymagań zostanie zaktualizowanych",
+	"noMappingPath": "Nie znaleziono ścieżki mapowania między tymi strukturami",
+	"mapFromNoChanges": "Ta rewizja źródłowa niczego by nie zmieniła w bieżącej rewizji.",
+	"sourceRequirement": "Wymaganie źródłowe",
+	"fullCoverage": "Pełne pokrycie",
+	"partialCoverage": "Częściowe pokrycie",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "Francuski",
 	"english": "Angielski",
@@ -528,7 +545,8 @@
 	"linkHelpText": "Zewnętrzny URL do śledzenia lub odniesienia (np. sharepoint, jira, itp.)",
 	"effortHelpText": "Wysiłek wymagany do wdrożenia zastosowanej kontroli",
 	"costHelpText": "Koszt wymagany do wdrożenia zastosowanej kontroli",
-	"riskAcceptanceJusitficationHelpText": "Uzasadnienie akceptacji ryzyka. Tylko akceptujący może edytować to pole.",
+	"riskAcceptanceJustificationHelpText": "Uzasadnienie akceptacji ryzyka. Tylko akceptujący może edytować to pole.",
+	"riskAcceptanceJustificationLabel": "Uzasadnienie akceptacji ryzyka",
 	"approverHelpText": "Tożsamość właściciela ryzyka i akceptującego",
 	"riskAcceptanceRiskScenariosHelpText": "Scenariusze ryzyka, które są zaakceptowane",
 	"attachmentHelpText": "Plik dowodowy (np. zrzut ekranu, plik dziennika itp.)",
@@ -784,7 +802,7 @@
 	"maturity": "Dojrzałość",
 	"progress": "Postęp",
 	"back": "Powrót",
-	"backToWorkshop": "Powrót do badania Ebios RM / ekosystemu",
+	"backToWorkshop": "Powrót do badania EBIOS RM / ekosystemu",
 	"duplicate": "Duplikować",
 	"duplicateRiskAssessment": "Powielić ocenę ryzyka",
 	"duplicateAppliedControl": "Duplikuj zastosowaną kontrolę",
@@ -792,6 +810,19 @@
 	"favicon": "Favicon",
 	"logo": "Logo",
 	"clientSettings": "Ustawienia klienta",
+	"infraConfig": "Infrastruktura",
+	"infraConfigDescription": "Zarządzaj konfiguracją infrastruktury udostępnianą warstwie infrastruktury. Poniższe adresy IP i zakresy CIDR służą do automatycznego konfigurowania dostępu do backendu.",
+	"infraConfigSettingsUpdated": "Ustawienia infrastruktury zaktualizowane pomyślnie",
+	"allowedIps": "Dozwolone adresy IP",
+	"ipAddressOrCidr": "Adres IP lub CIDR",
+	"invalidIpOrCidr": "Wprowadź prawidłowy adres IP lub zakres CIDR.",
+	"ipAlreadyAdded": "Ten adres IP już znajduje się na liście.",
+	"tooManyAllowedIps": "Możesz dodać maksymalnie {max} adresów IP.",
+	"enterIpFirst": "Najpierw wprowadź adres IP lub CIDR.",
+	"allowsAllIpsWarning": "Umożliwia to dostęp z dowolnego adresu IP.",
+	"confirmEmptyAllowlist": "Zamierzasz zapisać bez żadnych adresów IP na liście dozwolonych. Może to zablokować cały dostęp. Kontynuować?",
+	"removeIp": "Usuń {ip}",
+	"noAllowedIpsYet": "Brak dozwolonych adresów IP.",
 	"invalidFileType": "Nieprawidłowy typ pliku",
 	"logoHelpText": "Logo będzie wyświetlane w nagłówku aplikacji. Akceptowalne formaty to PNG, JPEG, WEBP, SVG.",
 	"faviconHelpText": "Favicon będzie wyświetlany w karcie przeglądarki. Akceptowane formaty to ICO, PNG, JPEG, WEBP, SVG.",
@@ -942,6 +973,16 @@
 	"emailPasswordMismatch": "Nie można zalogować się przy użyciu podanych danych logowania.",
 	"securitySettings": "Ustawienia zabezpieczeń",
 	"securitySettingsDescription": "Skonfiguruj tutaj ustawienia zabezpieczeń.",
+	"preferencesSettings": "Preferencje",
+	"preferencesSettingsDescription": "Skonfiguruj tutaj swoje osobiste preferencje wyświetlania.",
+	"dateFormat": "Format daty",
+	"dateFormatDescription": "Wybierz sposób wyświetlania dat w całej aplikacji.",
+	"dateFormatAuto": "Automatycznie (zgodnie z językiem)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "Dzień/Miesiąc/Rok (31/05/2026)",
+	"dateFormatMmddyyyy": "Miesiąc/Dzień/Rok (05/31/2026)",
+	"dateFormatLongDmy": "Długi, najpierw dzień (31 maja 2026)",
+	"dateFormatLongMdy": "Długi, najpierw miesiąc (maj 31, 2026)",
 	"multiFactorAuthentication": "Uwierzytelnianie wieloskładnikowe",
 	"authenticatorApp": "Aplikacja uwierzytelniająca",
 	"authenticatorAppDescription": "Użyj aplikacji uwierzytelniającej, aby wygenerować jednorazowe hasło czasowe (TOTP) na potrzeby uwierzytelniania dwuskładnikowego.",
@@ -1224,10 +1265,10 @@
 	"activityOne": "Krok 1",
 	"activityTwo": "Krok 2",
 	"activityThree": "Krok 3",
-	"ebiosRmStudy": "Badanie Ebios RM",
+	"ebiosRmStudy": "Badanie EBIOS RM",
 	"qualifications": "Kwalifikacje",
 	"impacts": "Wpływ",
-	"ebiosRmStudies": "Ebios RM Studies",
+	"ebiosRmStudies": "EBIOS RM Studies",
 	"bringTheEvidences": "Przynieś dowody",
 	"bringTheEvidencesHelpText": "Jeśli wyłączone, obiekt zostanie zduplikowany bez dowodów",
 	"gravity": "Powaga",
@@ -1237,7 +1278,7 @@
 	"fearedEvent": "Obawiane zdarzenie",
 	"fearedEvents": "Obawiane zdarzeń",
 	"isSelected": "Wybrany",
-	"ebiosRM": "Ebios Rm",
+	"ebiosRM": "EBIOS RM",
 	"riskOrigin": "Pochodzenie ryzyka",
 	"targetObjective": "Cel docelowy",
 	"motivation": "Motywacja",
@@ -1288,7 +1329,7 @@
 	"workshopOne": "Warsztat 1",
 	"refIdSemiColon": "Identyfikator refencji:",
 	"addFearedEvent": "Dodaj strachu wydarzenia",
-	"addEbiosRmStudy": "Dodaj badanie Ebios RM",
+	"addEbiosRmStudy": "Dodaj badanie EBIOS RM",
 	"noAuthor": "Żaden autor nie przypisał",
 	"noReviewer": "Żadnego recenzenta",
 	"selectAudit": "Wybierz Audyt",
@@ -1311,7 +1352,7 @@
 	"strategicScenario": "Scenariusz strategiczny",
 	"strategicScenarios": "Scenariusze strategiczne",
 	"elementaryActionsTechniques": "Jednostkowe działania / techniki",
-	"goBackToEbiosRmStudy": "Wróć do badania Ebios RM",
+	"goBackToEbiosRmStudy": "Wróć do badania EBIOS RM",
 	"addStrategicScenario": "Dodaj scenariusz strategiczny",
 	"markAsDone": "Znaku, jak to zrobione",
 	"markAsInProgress": "Mark jak w toku",
@@ -1703,8 +1744,14 @@
 	"associatedFindingsAssessments": "Powiązane dalsze działania",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Godzina",
 				"countPlural=few": "{count} Godziny",
@@ -1714,8 +1761,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Minuta",
 				"countPlural=few": "{count} Minuty",
@@ -1725,8 +1777,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Dzień",
 				"countPlural=few": "{count} Dni",
@@ -1736,8 +1793,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} obiekt niewidoczny.",
 				"countPlural=other": "{count} obiekty niewidoczne."
@@ -1862,8 +1924,14 @@
 	"errorFetching": "Nie można załadować informacji o kaskadzie. Spróbuj ponownie.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "Żadne inne obiekty nie będą dotknięte.",
 				"countPlural=one": "{count} powiązany obiekt nie zostanie usunięty, ale straci jedno lub więcej relacji.",
@@ -2007,8 +2075,13 @@
 	"builderPublishModalDescription": "Spowoduje to aktualizację struktury na żywo. Sprawdź zmiany poniżej.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} wymagania dodane",
 				"countPlural=other": "{count} wymagania dodane"
@@ -2017,8 +2090,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} pytania",
 				"countPlural=other": "{count} pytania"
@@ -2027,8 +2105,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} wymagania usunięte",
 				"countPlural=other": "{count} wymagania usunięte"
@@ -2037,8 +2120,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} pytania",
 				"countPlural=other": "{count} pytania"
@@ -2048,8 +2136,13 @@
 	"builderNoStructuralChanges": "Nie wykryto zmian strukturalnych (tylko metadane).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Wykryto {count} zmiany powodujące niezgodność",
 				"countPlural=other": "Wykryto {count} zmiany powodujące niezgodność"
@@ -2059,8 +2152,13 @@
 	"builderBreakingChangesHint": "Te zmiany mogą wpłynąć na punktację, widoczność lub wyniki zgodności w istniejących audytach.",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} istniejących audytów zostanie naruszonych",
 				"countPlural=other": "{count} istniejących audytów zostanie naruszonych"
@@ -2098,8 +2196,13 @@
 	"builderNoRulesOrGroupsConfigured": "Nie skonfigurowano reguł ani grup",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} reguły wyniku",
 				"countPlural=other": "{count} reguły wyniku"
@@ -2108,8 +2211,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} grupy",
 				"countPlural=other": "{count} grupy"
@@ -2122,8 +2230,13 @@
 	"builderScoreScale": "Skala punktacji",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} poziomy",
 				"countPlural=other": "{count} poziomy"
@@ -2193,8 +2306,13 @@
 	"builderAssessableLeaf": "Oceniany liść",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Oceniane · {count} element podrzędny",
 				"countPlural=other": "Oceniane · {count} elementy podrzędne"
@@ -2203,8 +2321,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Grupa · {count} element podrzędny",
 				"countPlural=other": "Grupa · {count} elementy podrzędne"
@@ -2231,8 +2354,13 @@
 	"builderAddQuestion": "Dodaj pytanie",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} element podrzędny ukryty",
 				"countPlural=other": "{count} elementy podrzędne ukryte"
@@ -2260,8 +2388,14 @@
 	"builderChangeTypeWarning": "Zmiana typu spowoduje usunięcie istniejących opcji. Kontynuować?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Wyświetlane, gdy {ref} = {count} odpowiedzi",
 				"countPlural=other": "Wyświetlane, gdy {ref} = {count} odpowiedzi"
@@ -2340,31 +2474,39 @@
 	"builderQuestionTypeUniqueChoice": "Unikalny wybór",
 	"builderQuestionTypeMultipleChoice": "Wielokrotny wybór",
 	"builderQuestionTypeDate": "Data",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "zmienione w",
+	"requirementWeight": "Waga",
+	"scim": "SCIM",
+	"scimDescription": "Skonfiguruj provisioning SCIM 2.0. Skieruj swojego dostawcę tożsamości na poniższy punkt końcowy i uwierzytelnij go za pomocą tokenu bearer wygenerowanego tutaj.",
+	"scimEndpointUrl": "URL punktu końcowego SCIM",
+	"scimTokens": "Tokeny SCIM",
+	"generateScimToken": "Wygeneruj token",
+	"noScimTokens": "Brak tokenów SCIM.",
+	"scimTokenName": "Nazwa",
+	"scimTokenDigest": "Skrót",
+	"revokeScimToken": "Unieważnij",
+	"scimTokenGenerated": "Token wygenerowany",
+	"scimTokenWarning": "Skopiuj ten token teraz. Ze względów bezpieczeństwa nie zostanie ponownie wyświetlony.",
+	"scimTokenRevoked": "Token SCIM unieważniony",
+	"scimTokenGenerationFailed": "Nie udało się wygenerować tokenu SCIM",
+	"idpGroup": "Grupa IdP",
+	"idpGroups": "Grupy IdP",
+	"idpGroupsDescription": "Włącz federację grup IdP (provisioning SCIM, mapowania grup IdP i członkostwa w grupach IdP użytkowników).",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

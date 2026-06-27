@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "Αντιστοίχιση σε πλαίσιο",
+	"mapToFrameworkDescription": "Δημιουργία νέου ελέγχου σε άλλο πλαίσιο, αντιστοιχισμένου από αυτόν.",
+	"mapFromAudit": "Αντιστοίχιση από έλεγχο",
+	"mapFromAuditDescription": "Εισαγωγή αντιστοιχισμένων αποτελεσμάτων από άλλον έλεγχο σε αυτόν.",
+	"selectSourceAudit": "Επιλέξτε έναν έλεγχο-πηγή για εμπλουτισμό",
+	"mapFromSuccess": "Ο έλεγχος ενημερώθηκε με επιτυχία",
+	"mapFromError": "Αποτυχία αντιστοίχισης από τον έλεγχο πηγής",
+	"currentState": "Τρέχουσα κατάσταση",
+	"projectedState": "Προβλεπόμενη κατάσταση",
+	"confirmMapping": "Επιβεβαίωση αντιστοίχισης",
+	"mapFromPreview": "Προεπισκόπηση αντιστοίχισης",
+	"requirementsUpdated": "απαιτήσεις θα ενημερωθούν",
+	"noMappingPath": "Δεν βρέθηκε διαδρομή χαρτογράφησης μεταξύ αυτών των πλαισίων",
+	"mapFromNoChanges": "Αυτός ο έλεγχος-πηγή δεν θα άλλαζε τίποτα στον τρέχοντα έλεγχο.",
+	"sourceRequirement": "Απαίτηση πηγής",
+	"fullCoverage": "Πλήρης κάλυψη",
+	"partialCoverage": "Μερική κάλυψη",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "Γαλλικά",
 	"english": "Αγγλικά",
@@ -527,7 +544,8 @@
 	"linkHelpText": "Εξωτερικό URL για παρακολούθηση ή αναφορά (π.χ. ITSM, SharePoint, Jira)",
 	"effortHelpText": "Η προσπάθεια που απαιτείται για την εφαρμογή του ελέγχου",
 	"costHelpText": "Το κόστος που απαιτείται για την εφαρμογή του ελέγχου",
-	"riskAcceptanceJusitficationHelpText": "Αιτιολόγηση για την αποδοχή κινδύνου. Μόνο ο εγκρίνων μπορεί να επεξεργαστεί αυτό το πεδίο.",
+	"riskAcceptanceJustificationHelpText": "Αιτιολόγηση για την αποδοχή κινδύνου. Μόνο ο εγκρίνων μπορεί να επεξεργαστεί αυτό το πεδίο.",
+	"riskAcceptanceJustificationLabel": "Αιτιολόγηση αποδοχής κινδύνου",
 	"approverHelpText": "Ιδιοκτήτης κινδύνου και ταυτότητα εγκρίνοντος",
 	"riskAcceptanceRiskScenariosHelpText": "Τα σενάρια κινδύνου που γίνονται αποδεκτά",
 	"attachmentHelpText": "Αρχείο ως αποδεικτικό (π.χ. στιγμιότυπο, log). Μπορείτε να επικολλήσετε στιγμιότυπα απευθείας από το πρόχειρο.",
@@ -783,7 +801,7 @@
 	"maturity": "Ωριμότητα",
 	"progress": "Πρόοδος",
 	"back": "Πίσω",
-	"backToWorkshop": "Επιστροφή στη μελέτη Ebios RM / στο οικοσύστημα",
+	"backToWorkshop": "Επιστροφή στη μελέτη EBIOS RM / στο οικοσύστημα",
 	"duplicate": "Διπλότυπο",
 	"duplicateRiskAssessment": "Δημιουργία αντιγράφου της εκτίμησης κινδύνου",
 	"duplicateAppliedControl": "Δημιουργία αντιγράφου του ελέγχου",
@@ -791,6 +809,19 @@
 	"favicon": "Favicon",
 	"logo": "Λογότυπο",
 	"clientSettings": "Ρυθμίσεις πελάτη",
+	"infraConfig": "Υποδομή",
+	"infraConfigDescription": "Διαχειριστείτε τη διαμόρφωση υποδομής που εκτίθεται στο επίπεδο υποδομής. Οι παρακάτω διευθύνσεις IP και τα εύρη CIDR χρησιμοποιούνται για την αυτόματη διαμόρφωση της πρόσβασης στο backend.",
+	"infraConfigSettingsUpdated": "Οι ρυθμίσεις υποδομής ενημερώθηκαν με επιτυχία",
+	"allowedIps": "Επιτρεπόμενες IP",
+	"ipAddressOrCidr": "Διεύθυνση IP ή CIDR",
+	"invalidIpOrCidr": "Εισαγάγετε έγκυρη διεύθυνση IP ή εύρος CIDR.",
+	"ipAlreadyAdded": "Αυτή η IP υπάρχει ήδη στη λίστα.",
+	"tooManyAllowedIps": "Μπορείτε να προσθέσετε το πολύ {max} διευθύνσεις IP.",
+	"enterIpFirst": "Εισαγάγετε πρώτα μια διεύθυνση IP ή CIDR.",
+	"allowsAllIpsWarning": "Αυτό επιτρέπει την πρόσβαση από οποιαδήποτε διεύθυνση IP.",
+	"confirmEmptyAllowlist": "Πρόκειται να αποθηκεύσετε χωρίς καμία IP στη λίστα επιτρεπόμενων. Αυτό μπορεί να αποκλείσει κάθε πρόσβαση. Συνέχεια;",
+	"removeIp": "Κατάργηση {ip}",
+	"noAllowedIpsYet": "Δεν υπάρχουν ακόμη επιτρεπόμενες IP.",
 	"invalidFileType": "Μη έγκυρος τύπος αρχείου",
 	"logoHelpText": "Το λογότυπο εμφανίζεται στην κεφαλίδα. Επιτρεπόμενες μορφές: PNG, JPEG, WEBP, SVG.",
 	"faviconHelpText": "Το favicon εμφανίζεται στην καρτέλα του browser. Επιτρεπόμενες μορφές: ICO, PNG, JPEG, WEBP, SVG.",
@@ -941,6 +972,16 @@
 	"emailPasswordMismatch": "Αδυναμία σύνδεσης με τα παρεχόμενα διαπιστευτήρια.",
 	"securitySettings": "Ρυθμίσεις ασφάλειας",
 	"securitySettingsDescription": "Ρυθμίστε τις παραμέτρους ασφάλειας εδώ.",
+	"preferencesSettings": "Προτιμήσεις",
+	"preferencesSettingsDescription": "Διαμορφώστε εδώ τις προσωπικές σας προτιμήσεις εμφάνισης.",
+	"dateFormat": "Μορφή ημερομηνίας",
+	"dateFormatDescription": "Επιλέξτε πώς εμφανίζονται οι ημερομηνίες σε όλη την εφαρμογή.",
+	"dateFormatAuto": "Αυτόματα (σύμφωνα με τη γλώσσα)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "Ημέρα/Μήνας/Έτος (31/05/2026)",
+	"dateFormatMmddyyyy": "Μήνας/Ημέρα/Έτος (05/31/2026)",
+	"dateFormatLongDmy": "Πλήρης, ημέρα πρώτα (31 Μαΐου 2026)",
+	"dateFormatLongMdy": "Πλήρης, μήνας πρώτα (Μάιος 31, 2026)",
 	"multiFactorAuthentication": "Πολυπαραγοντικός έλεγχος",
 	"authenticatorApp": "Εφαρμογή ελέγχου ταυτότητας",
 	"authenticatorAppDescription": "Χρησιμοποιήστε εφαρμογή ελέγχου ταυτότητας για κωδικό TOTP δύο παραγόντων.",
@@ -1438,7 +1479,7 @@
 	"demoEnvironmentBeingPrepared": "Το περιβάλλον δειγμάτων ετοιμάζεται. Αυτό μπορεί να διαρκέσει λίγα λεπτά.",
 	"firstTimeLoginModalTitle": "Καλώς ήρθατε στο CISO Assistant!",
 	"firstTimeLoginModalDescription": "Είναι η πρώτη σας είσοδος. Θέλετε μια γρήγορη ξενάγηση;",
-	"ebiosRadarParameters": "Παράμετροι ραντάρ Ebios RM",
+	"ebiosRadarParameters": "Παράμετροι ραντάρ EBIOS RM",
 	"maxRadius": "Μέγιστη ακτίνα",
 	"greenZoneRadius": "Ακτίνα πράσινης ζώνης",
 	"yellowZoneRadius": "Ακτίνα κίτρινης ζώνης",
@@ -1694,8 +1735,13 @@
 	"associatedFindingsAssessments": "Συνδεδεμένες παρακολουθήσεις",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Ώρα",
 				"countPlural=other": "{count} Ώρες"
@@ -1807,8 +1853,14 @@
 	"errorFetching": "Δεν είναι δυνατή η φόρτωση των πληροφοριών αλυσιδωτής διαγραφής. Παρακαλώ προσπαθήστε ξανά.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "Κανένα άλλο αντικείμενο δεν θα επηρεαστεί.",
 				"countPlural=one": "{count} σχετικό αντικείμενο δεν θα διαγραφεί αλλά θα χάσει μία ή περισσότερες σχέσεις.",
@@ -1821,8 +1873,13 @@
 	"campaignsDescription": "Διαχείριση εκστρατειών ελέγχου",
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} αντικείμενο δεν είναι ορατό.",
 				"countPlural=other": "{count} αντικείμενα δεν είναι ορατά."
@@ -1946,8 +2003,13 @@
 	"builderPublishModalDescription": "Αυτή η ενέργεια θα ενημερώσει το ενεργό πλαίσιο. Ελέγξτε τις αλλαγές παρακάτω.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} απαιτήσεις προστέθηκαν",
 				"countPlural=other": "{count} απαιτήσεις προστέθηκαν"
@@ -1956,8 +2018,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} ερωτήσεις",
 				"countPlural=other": "{count} ερωτήσεις"
@@ -1966,8 +2033,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} απαιτήσεις αφαιρέθηκαν",
 				"countPlural=other": "{count} απαιτήσεις αφαιρέθηκαν"
@@ -1976,8 +2048,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} ερωτήσεις",
 				"countPlural=other": "{count} ερωτήσεις"
@@ -1987,8 +2064,13 @@
 	"builderNoStructuralChanges": "Δεν εντοπίστηκαν δομικές αλλαγές (μόνο μεταδεδομένα).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Εντοπίστηκαν {count} ασύμβατες αλλαγές",
 				"countPlural=other": "Εντοπίστηκαν {count} ασύμβατες αλλαγές"
@@ -1998,8 +2080,13 @@
 	"builderBreakingChangesHint": "Αυτές οι αλλαγές μπορεί να επηρεάσουν τη βαθμολόγηση, την ορατότητα ή τα αποτελέσματα συμμόρφωσης σε υπάρχοντες ελέγχους.",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} υπάρχοντες έλεγχοι θα επηρεαστούν",
 				"countPlural=other": "{count} υπάρχοντες έλεγχοι θα επηρεαστούν"
@@ -2037,8 +2124,13 @@
 	"builderNoRulesOrGroupsConfigured": "Δεν έχουν διαμορφωθεί κανόνες ή ομάδες",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} κανόνες αποτελέσματος",
 				"countPlural=other": "{count} κανόνες αποτελέσματος"
@@ -2047,8 +2139,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} ομάδες",
 				"countPlural=other": "{count} ομάδες"
@@ -2061,8 +2158,13 @@
 	"builderScoreScale": "Κλίμακα βαθμολογίας",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} επίπεδα",
 				"countPlural=other": "{count} επίπεδα"
@@ -2132,8 +2234,13 @@
 	"builderAssessableLeaf": "Αξιολογήσιμο φύλλο",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Αξιολογήσιμη · {count} θυγατρικό",
 				"countPlural=other": "Αξιολογήσιμη · {count} θυγατρικά"
@@ -2142,8 +2249,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Ομάδα · {count} θυγατρικό",
 				"countPlural=other": "Ομάδα · {count} θυγατρικά"
@@ -2170,8 +2282,13 @@
 	"builderAddQuestion": "Προσθήκη ερώτησης",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} θυγατρικό κρυφό",
 				"countPlural=other": "{count} θυγατρικά κρυφά"
@@ -2199,8 +2316,14 @@
 	"builderChangeTypeWarning": "Η αλλαγή τύπου θα διαγράψει τις υπάρχουσες επιλογές. Συνέχεια;",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Εμφανίζεται όταν {ref} = {count} απαντήσεις",
 				"countPlural=other": "Εμφανίζεται όταν {ref} = {count} απαντήσεις"
@@ -2279,31 +2402,39 @@
 	"builderQuestionTypeUniqueChoice": "Μοναδική επιλογή",
 	"builderQuestionTypeMultipleChoice": "Πολλαπλή επιλογή",
 	"builderQuestionTypeDate": "Ημερομηνία",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "άλλαξε σε",
+	"requirementWeight": "Βάρος",
+	"scim": "SCIM",
+	"scimDescription": "Διαμορφώστε την παροχή SCIM 2.0. Κατευθύνετε τον πάροχο ταυτότητάς σας στο παρακάτω σημείο πρόσβασης και πιστοποιήστε τον με ένα διακριτικό bearer που δημιουργείται εδώ.",
+	"scimEndpointUrl": "URL σημείου πρόσβασης SCIM",
+	"scimTokens": "Διακριτικά SCIM",
+	"generateScimToken": "Δημιουργία διακριτικού",
+	"noScimTokens": "Δεν υπάρχουν ακόμη διακριτικά SCIM.",
+	"scimTokenName": "Όνομα",
+	"scimTokenDigest": "Σύνοψη",
+	"revokeScimToken": "Ανάκληση",
+	"scimTokenGenerated": "Το διακριτικό δημιουργήθηκε",
+	"scimTokenWarning": "Αντιγράψτε αυτό το διακριτικό τώρα. Για λόγους ασφαλείας δεν θα εμφανιστεί ξανά.",
+	"scimTokenRevoked": "Το διακριτικό SCIM ανακλήθηκε",
+	"scimTokenGenerationFailed": "Αποτυχία δημιουργίας διακριτικού SCIM",
+	"idpGroup": "Ομάδα IdP",
+	"idpGroups": "Ομάδες IdP",
+	"idpGroupsDescription": "Ενεργοποίηση ομοσπονδίας ομάδων IdP (παροχή SCIM, αντιστοιχίσεις ομάδων IdP και συμμετοχές χρηστών σε ομάδες IdP).",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

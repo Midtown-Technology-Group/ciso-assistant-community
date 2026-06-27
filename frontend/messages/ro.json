@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "Mapează către un cadru",
+	"mapToFrameworkDescription": "Creează un audit nou într-un alt cadru, mapat din acesta.",
+	"mapFromAudit": "Mapează dintr-un audit",
+	"mapFromAuditDescription": "Adu rezultatele mapate dintr-un alt audit în acesta.",
+	"selectSourceAudit": "Selectați un audit sursă pentru îmbogățire",
+	"mapFromSuccess": "Audit actualizat cu succes",
+	"mapFromError": "Maparea din auditul sursă a eșuat",
+	"currentState": "Stare actuală",
+	"projectedState": "Stare estimată",
+	"confirmMapping": "Confirmă maparea",
+	"mapFromPreview": "Previzualizarea mapării",
+	"requirementsUpdated": "cerințe vor fi actualizate",
+	"noMappingPath": "Nu a fost găsită nicio cale de mapare între aceste cadre",
+	"mapFromNoChanges": "Acest audit sursă nu ar modifica nimic în auditul curent.",
+	"sourceRequirement": "Cerință sursă",
+	"fullCoverage": "Acoperire totală",
+	"partialCoverage": "Acoperire parțială",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "Franceză",
 	"english": "Engleză",
@@ -490,7 +507,8 @@
 	"linkHelpText": "URL extern pentru urmărire sau referință (ex. sharepoint, jira, etc.)",
 	"effortHelpText": "Efortul necesar pentru a implementa controlul aplicat",
 	"costHelpText": "Costul necesar pentru a implementa controlul aplicat",
-	"riskAcceptanceJusitficationHelpText": "Justificarea pentru acceptarea riscului. Doar aprobatorul poate edita acest câmp.",
+	"riskAcceptanceJustificationHelpText": "Justificarea pentru acceptarea riscului. Doar aprobatorul poate edita acest câmp.",
+	"riskAcceptanceJustificationLabel": "Justificarea acceptării riscului",
 	"approverHelpText": "Identitatea proprietarului și a aprobatorului riscului",
 	"riskAcceptanceRiskScenariosHelpText": "Scenariile de risc care sunt acceptate",
 	"attachmentHelpText": "Fișier pentru dovadă (de exemplu, captură de ecran, fișier jurnal etc.). Când este selectat, puteți lipi capturi de ecran direct din clipboard-ul dvs.",
@@ -735,7 +753,7 @@
 	"maturity": "Maturitate",
 	"progress": "Progres",
 	"back": "Înapoi",
-	"backToWorkshop": "Înapoi la studiul Ebios RM / ecosistem",
+	"backToWorkshop": "Înapoi la studiul EBIOS RM / ecosistem",
 	"duplicate": "Dublică",
 	"duplicateRiskAssessment": "Dublarea evaluării riscului",
 	"duplicateAppliedControl": "Duplicați control aplicat",
@@ -743,6 +761,19 @@
 	"favicon": "Favicon",
 	"logo": "Logo",
 	"clientSettings": "Setări client",
+	"infraConfig": "Infrastructură",
+	"infraConfigDescription": "Gestionați configurația de infrastructură expusă nivelului de infrastructură. Adresele IP și intervalele CIDR de mai jos sunt utilizate pentru a configura automat accesul la backend.",
+	"infraConfigSettingsUpdated": "Setările de infrastructură au fost actualizate cu succes",
+	"allowedIps": "IP-uri permise",
+	"ipAddressOrCidr": "Adresă IP sau CIDR",
+	"invalidIpOrCidr": "Introduceți o adresă IP sau un interval CIDR valid.",
+	"ipAlreadyAdded": "Acest IP este deja în listă.",
+	"tooManyAllowedIps": "Puteți adăuga cel mult {max} adrese IP.",
+	"enterIpFirst": "Introduceți mai întâi o adresă IP sau CIDR.",
+	"allowsAllIpsWarning": "Acest lucru permite accesul de la orice adresă IP.",
+	"confirmEmptyAllowlist": "Sunteți pe cale să salvați fără niciun IP în lista de permise. Acest lucru poate bloca tot accesul. Continuați?",
+	"removeIp": "Eliminați {ip}",
+	"noAllowedIpsYet": "Încă nu există IP-uri permise.",
 	"invalidFileType": "Tip de fișier nevalid",
 	"logoHelpText": "Logo-ul va fi afișat în antetul aplicației. Formatele acceptate sunt PNG, JPEG, WEBP, SVG.",
 	"faviconHelpText": "Favicon-ul va fi afișat în fila browser. Formatele acceptate sunt ICO, PNG, JPEG, WEBP, SVG.",
@@ -876,6 +907,16 @@
 	"emailPasswordMismatch": "Nu se poate conecta cu datele de conectare furnizate.",
 	"securitySettings": "Setări de securitate",
 	"securitySettingsDescription": "Configurați setările de securitate aici.",
+	"preferencesSettings": "Preferințe",
+	"preferencesSettingsDescription": "Configurați aici preferințele dvs. personale de afișare.",
+	"dateFormat": "Format dată",
+	"dateFormatDescription": "Alegeți cum sunt afișate datele în întreaga aplicație.",
+	"dateFormatAuto": "Automat (după limbă)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "Zi/Lună/An (31/05/2026)",
+	"dateFormatMmddyyyy": "Lună/Zi/An (05/31/2026)",
+	"dateFormatLongDmy": "Lung, ziua prima (31 mai 2026)",
+	"dateFormatLongMdy": "Lung, luna prima (mai 31, 2026)",
 	"multiFactorAuthentication": "Autentificare cu mai mulți factori",
 	"authenticatorApp": "Aplicația de autentificare",
 	"authenticatorAppDescription": "Utilizați o aplicație de autentificare pentru a genera o parolă unică bazată pe timp (TOTP) pentru autentificarea cu doi factori.",
@@ -980,8 +1021,14 @@
 	"associatedFindingsAssessments": "Urmărire asociată",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Oră",
 				"countPlural=other": "{count} Ore"
@@ -990,8 +1037,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Minut",
 				"countPlural=other": "{count} Minute"
@@ -1000,8 +1052,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Zi",
 				"countPlural=other": "{count} Zile"
@@ -1010,8 +1067,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} obiect nevizibil.",
 				"countPlural=other": "{count} obiecte nevizibile."
@@ -1114,8 +1176,14 @@
 	"errorFetching": "Nu se poate încărca informația în cascadă. Vă rugăm să încercați din nou.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "Niciun alt obiect nu va fi afectat.",
 				"countPlural=one": "{count} obiect asociat nu va fi șters, dar va pierde una sau mai multe relații.",
@@ -1264,8 +1332,13 @@
 	"builderPublishModalDescription": "Această acțiune va actualiza cadrul de producție. Verificați modificările de mai jos.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} cerințe adăugate",
 				"countPlural=other": "{count} cerințe adăugate"
@@ -1274,8 +1347,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} întrebări",
 				"countPlural=other": "{count} întrebări"
@@ -1284,8 +1362,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} cerințe eliminate",
 				"countPlural=other": "{count} cerințe eliminate"
@@ -1294,8 +1377,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} întrebări",
 				"countPlural=other": "{count} întrebări"
@@ -1305,8 +1393,13 @@
 	"builderNoStructuralChanges": "Nu au fost detectate modificări structurale (numai metadate).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} modificări incompatibile detectate",
 				"countPlural=other": "{count} modificări incompatibile detectate"
@@ -1316,8 +1409,13 @@
 	"builderBreakingChangesHint": "Aceste modificări pot afecta calculul scorului, vizibilitatea sau rezultatele de conformitate în auditurile existente.",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} audituri existente vor fi afectate",
 				"countPlural=other": "{count} audituri existente vor fi afectate"
@@ -1355,8 +1453,13 @@
 	"builderNoRulesOrGroupsConfigured": "Nicio regulă sau grup configurat",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} reguli de rezultat",
 				"countPlural=other": "{count} reguli de rezultat"
@@ -1365,8 +1468,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} grupuri",
 				"countPlural=other": "{count} grupuri"
@@ -1379,8 +1487,13 @@
 	"builderScoreScale": "Scala de scor",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} niveluri",
 				"countPlural=other": "{count} niveluri"
@@ -1450,8 +1563,13 @@
 	"builderAssessableLeaf": "Frunză evaluabilă",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Evaluabil · {count} copil",
 				"countPlural=other": "Evaluabil · {count} copii"
@@ -1460,8 +1578,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Grup · {count} copil",
 				"countPlural=other": "Grup · {count} copii"
@@ -1488,8 +1611,13 @@
 	"builderAddQuestion": "Adaugă întrebare",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} copil ascuns",
 				"countPlural=other": "{count} copii ascunși"
@@ -1517,8 +1645,14 @@
 	"builderChangeTypeWarning": "Schimbarea tipului va șterge opțiunile existente. Continuați?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Afișat când {ref} = {count} răspunsuri",
 				"countPlural=other": "Afișat când {ref} = {count} răspunsuri"
@@ -1597,31 +1731,39 @@
 	"builderQuestionTypeUniqueChoice": "Alegere unică",
 	"builderQuestionTypeMultipleChoice": "Alegere multiplă",
 	"builderQuestionTypeDate": "Data",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "modificat în",
+	"requirementWeight": "Pondere",
+	"scim": "SCIM",
+	"scimDescription": "Configurați provizionarea SCIM 2.0. Direcționați furnizorul de identitate către endpoint-ul de mai jos și autentificați-l cu un token bearer generat aici.",
+	"scimEndpointUrl": "URL endpoint SCIM",
+	"scimTokens": "Tokenuri SCIM",
+	"generateScimToken": "Generează token",
+	"noScimTokens": "Încă nu există tokenuri SCIM.",
+	"scimTokenName": "Nume",
+	"scimTokenDigest": "Rezumat",
+	"revokeScimToken": "Revocă",
+	"scimTokenGenerated": "Token generat",
+	"scimTokenWarning": "Copiați acest token acum. Din motive de securitate, nu va mai fi afișat.",
+	"scimTokenRevoked": "Token SCIM revocat",
+	"scimTokenGenerationFailed": "Generarea tokenului SCIM a eșuat",
+	"idpGroup": "Grup IdP",
+	"idpGroups": "Grupuri IdP",
+	"idpGroupsDescription": "Activați federarea grupurilor IdP (provizionare SCIM, mapări de grupuri IdP și apartenențe la grupuri IdP ale utilizatorilor).",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

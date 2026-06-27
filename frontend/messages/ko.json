@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "프레임워크로 매핑",
+	"mapToFrameworkDescription": "이 감사에서 매핑하여 다른 프레임워크에 새 감사를 만듭니다.",
+	"mapFromAudit": "감사에서 매핑",
+	"mapFromAuditDescription": "다른 감사의 매핑된 결과를 이 감사로 가져옵니다.",
+	"selectSourceAudit": "보강할 원본 감사 선택",
+	"mapFromSuccess": "감사가 성공적으로 업데이트되었습니다",
+	"mapFromError": "원본 감사에서 매핑하지 못했습니다",
+	"currentState": "현재 상태",
+	"projectedState": "예상 상태",
+	"confirmMapping": "매핑 확인",
+	"mapFromPreview": "매핑 미리보기",
+	"requirementsUpdated": "개 요구사항이 업데이트됩니다",
+	"noMappingPath": "이 프레임워크 간에 매핑 경로를 찾을 수 없습니다",
+	"mapFromNoChanges": "이 원본 감사는 현재 감사에서 아무것도 변경하지 않습니다.",
+	"sourceRequirement": "원본 요구사항",
+	"fullCoverage": "전체 커버리지",
+	"partialCoverage": "부분 커버리지",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "프랑스어",
 	"english": "영어",
@@ -684,7 +701,8 @@
 	"linkHelpText": "추적 또는 참조용 외부 URL(예: ITSM, sharepoint, jira 등)",
 	"effortHelpText": "적용 통제를 구현하는 데 필요한 노력",
 	"costHelpText": "적용 통제를 구현하는 데 필요한 비용",
-	"riskAcceptanceJusitficationHelpText": "위험 수용에 대한 정당성입니다. 승인자만 이 필드를 편집할 수 있습니다.",
+	"riskAcceptanceJustificationHelpText": "위험 수용에 대한 정당성입니다. 승인자만 이 필드를 편집할 수 있습니다.",
+	"riskAcceptanceJustificationLabel": "위험 수용 사유",
 	"approverHelpText": "위험 소유자 및 승인자 정보",
 	"riskAcceptanceRiskScenariosHelpText": "수용된 위험 시나리오",
 	"attachmentHelpText": "증거용 파일(예: 스크린샷, 로그 파일 등)입니다. 선택하면 클립보드에서 스크린샷을 직접 붙여넣을 수 있습니다.",
@@ -993,6 +1011,19 @@
 	"favicon": "파비콘",
 	"logo": "로고",
 	"clientSettings": "클라이언트 설정",
+	"infraConfig": "인프라",
+	"infraConfigDescription": "인프라 계층에 노출되는 인프라 구성을 관리합니다. 아래 IP 주소와 CIDR 범위는 백엔드 액세스를 자동으로 구성하는 데 사용됩니다.",
+	"infraConfigSettingsUpdated": "인프라 설정이 성공적으로 업데이트되었습니다",
+	"allowedIps": "허용된 IP",
+	"ipAddressOrCidr": "IP 주소 또는 CIDR",
+	"invalidIpOrCidr": "유효한 IP 주소 또는 CIDR 범위를 입력하세요.",
+	"ipAlreadyAdded": "이 IP는 이미 목록에 있습니다.",
+	"tooManyAllowedIps": "최대 {max}개의 IP 주소를 추가할 수 있습니다.",
+	"enterIpFirst": "먼저 IP 주소 또는 CIDR을 입력하세요.",
+	"allowsAllIpsWarning": "모든 IP 주소에서의 액세스를 허용합니다.",
+	"confirmEmptyAllowlist": "허용 목록에 IP가 없는 상태로 저장하려고 합니다. 모든 액세스가 차단될 수 있습니다. 계속하시겠습니까?",
+	"removeIp": "{ip} 제거",
+	"noAllowedIpsYet": "아직 허용된 IP가 없습니다.",
 	"templates": "템플릿",
 	"emailTemplates": "이메일 템플릿",
 	"emailTemplatesDescription": "애플리케이션이 전송하는 이메일 템플릿을 사용자 지정합니다. 변경 사항은 기본 제공 기본값을 덮어씁니다.",
@@ -1275,6 +1306,16 @@
 	"emailPasswordMismatch": "제공된 자격 증명으로 로그인할 수 없습니다.",
 	"securitySettings": "보안 설정",
 	"securitySettingsDescription": "여기에서 보안 설정을 구성합니다.",
+	"preferencesSettings": "환경설정",
+	"preferencesSettingsDescription": "여기에서 개인 표시 환경설정을 구성하세요.",
+	"dateFormat": "날짜 형식",
+	"dateFormatDescription": "애플리케이션 전체에서 날짜가 표시되는 방식을 선택하세요.",
+	"dateFormatAuto": "자동 (언어에 따름)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "일/월/년 (31/05/2026)",
+	"dateFormatMmddyyyy": "월/일/년 (05/31/2026)",
+	"dateFormatLongDmy": "긴 형식, 일 먼저 (2026년 5월 31일)",
+	"dateFormatLongMdy": "긴 형식, 월 먼저 (5월 31일, 2026년)",
 	"multiFactorAuthentication": "다단계 인증",
 	"authenticatorApp": "인증 앱",
 	"authenticatorAppDescription": "다단계 인증을 위해 시간 기반 일회용 비밀번호(TOTP)를 생성하는 인증 앱을 사용합니다.",
@@ -1701,10 +1742,10 @@
 	"activityOne": "단계 1",
 	"activityTwo": "단계 2",
 	"activityThree": "단계 3",
-	"ebiosRmStudy": "Ebios RM 연구",
+	"ebiosRmStudy": "EBIOS RM 연구",
 	"qualifications": "등급",
 	"impacts": "영향",
-	"ebiosRmStudies": "Ebios RM 연구",
+	"ebiosRmStudies": "EBIOS RM 연구",
 	"bringTheEvidences": "증거 포함",
 	"bringTheEvidencesHelpText": "비활성화하면 객체가 증거 없이 복제됩니다",
 	"gravity": "심각도",
@@ -1714,12 +1755,12 @@
 	"fearedEvent": "우려 사건",
 	"fearedEvents": "우려 사건",
 	"isSelected": "선택됨",
-	"ebiosRM": "Ebios RM",
-	"ebiosRMStudies": "Ebios RM 연구",
-	"ebiosRMStudyARM": "Ebios RM 연구(ARM 형식)",
-	"ebiosRMStudyARMDescription": "ARM Excel 형식에서 Ebios RM 연구를 가져옵니다.\n이것은 독점 형식이므로 모든 객체가 지원되지는 않으며 헤더나 시트 변경으로 일부 가져오기에 실패할 수 있습니다.",
-	"ebiosRMStudyExcel": "Ebios RM 연구(CISO Assistant 형식)",
-	"ebiosRMStudyExcelDescription": "CISO Assistant Excel 내보내기에서 Ebios RM 연구를 가져옵니다. 이를 통해 서로 다른 인스턴스 간에 연구를 공유하거나 이전에 내보낸 연구를 복원할 수 있습니다.",
+	"ebiosRM": "EBIOS RM",
+	"ebiosRMStudies": "EBIOS RM 연구",
+	"ebiosRMStudyARM": "EBIOS RM 연구(ARM 형식)",
+	"ebiosRMStudyARMDescription": "ARM Excel 형식에서 EBIOS RM 연구를 가져옵니다.\n이것은 독점 형식이므로 모든 객체가 지원되지는 않으며 헤더나 시트 변경으로 일부 가져오기에 실패할 수 있습니다.",
+	"ebiosRMStudyExcel": "EBIOS RM 연구(CISO Assistant 형식)",
+	"ebiosRMStudyExcelDescription": "CISO Assistant Excel 내보내기에서 EBIOS RM 연구를 가져옵니다. 이를 통해 서로 다른 인스턴스 간에 연구를 공유하거나 이전에 내보낸 연구를 복원할 수 있습니다.",
 	"armImportPreview": "ARM 가져오기 미리보기",
 	"armPreviewSummary": "다음 객체가 생성됩니다:",
 	"primaryAssets": "주요 자산",
@@ -1826,7 +1867,7 @@
 	"strategicScenario": "전략 시나리오",
 	"strategicScenarios": "전략 시나리오",
 	"elementaryActionsTechniques": "단위 활동 / 기법",
-	"goBackToEbiosRmStudy": "Ebios RM 연구로 돌아가기",
+	"goBackToEbiosRmStudy": "EBIOS RM 연구로 돌아가기",
 	"addStrategicScenario": "전략 시나리오 추가",
 	"markAsDone": "완료로 표시",
 	"markAsInProgress": "진행 중으로 표시",
@@ -2325,8 +2366,14 @@
 	"associatedFindingsAssessments": "연결된 후속 조치",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}시간",
 				"countPlural=other": "{count}시간"
@@ -2335,8 +2382,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}분",
 				"countPlural=other": "{count}분"
@@ -2345,8 +2397,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}일",
 				"countPlural=other": "{count}일"
@@ -2355,8 +2412,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}개의 객체가 숨겨져 있습니다. 편집 시 링크가 손실될 수 있습니다.",
 				"countPlural=other": "{count}개의 객체가 숨겨져 있습니다. 편집 시 링크가 손실될 수 있습니다."
@@ -3679,8 +3741,14 @@
 	"errorFetching": "연쇄 삭제 정보를 불러올 수 없습니다. 다시 시도하세요.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "영향을 받는 다른 객체가 없습니다.",
 				"countPlural=one": "관련 객체 {count}개는 삭제되지 않지만 하나 이상의 관계가 제거됩니다.",
@@ -3938,8 +4006,13 @@
 	"builderPublishModalDescription": "이 작업은 라이브 프레임워크를 업데이트합니다. 아래 변경 사항을 검토하세요.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}개의 요구사항이 추가됨",
 				"countPlural=other": "{count}개의 요구사항이 추가됨"
@@ -3948,8 +4021,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}개의 질문",
 				"countPlural=other": "{count}개의 질문"
@@ -3958,8 +4036,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}개의 요구사항이 제거됨",
 				"countPlural=other": "{count}개의 요구사항이 제거됨"
@@ -3968,8 +4051,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}개의 질문",
 				"countPlural=other": "{count}개의 질문"
@@ -3979,8 +4067,13 @@
 	"builderNoStructuralChanges": "구조적 변경이 감지되지 않았습니다 (메타데이터만 해당).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}개의 호환성 깨는 변경이 감지됨",
 				"countPlural=other": "{count}개의 호환성 깨는 변경이 감지됨"
@@ -3990,8 +4083,13 @@
 	"builderBreakingChangesHint": "이러한 변경은 기존 감사의 점수, 가시성 또는 컴플라이언스 결과에 영향을 미칠 수 있습니다.",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}개의 기존 감사가 영향을 받습니다",
 				"countPlural=other": "{count}개의 기존 감사가 영향을 받습니다"
@@ -4029,8 +4127,13 @@
 	"builderNoRulesOrGroupsConfigured": "구성된 규칙 또는 그룹이 없습니다",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}개의 결과 규칙",
 				"countPlural=other": "{count}개의 결과 규칙"
@@ -4039,8 +4142,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}개의 그룹",
 				"countPlural=other": "{count}개의 그룹"
@@ -4053,8 +4161,13 @@
 	"builderScoreScale": "점수 척도",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count}개의 단계",
 				"countPlural=other": "{count}개의 단계"
@@ -4124,8 +4237,13 @@
 	"builderAssessableLeaf": "평가 가능한 리프",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "평가 가능 · 하위 {count}개",
 				"countPlural=other": "평가 가능 · 하위 {count}개"
@@ -4134,8 +4252,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "그룹 · 하위 {count}개",
 				"countPlural=other": "그룹 · 하위 {count}개"
@@ -4162,8 +4285,13 @@
 	"builderAddQuestion": "질문 추가",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "하위 {count}개 숨김",
 				"countPlural=other": "하위 {count}개 숨김"
@@ -4191,8 +4319,14 @@
 	"builderChangeTypeWarning": "유형을 변경하면 기존 선택지가 삭제됩니다. 계속하시겠습니까?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{ref} = {count}개 답변일 때 표시됨",
 				"countPlural=other": "{ref} = {count}개 답변일 때 표시됨"
@@ -4271,31 +4405,39 @@
 	"builderQuestionTypeUniqueChoice": "단일 선택",
 	"builderQuestionTypeMultipleChoice": "복수 선택",
 	"builderQuestionTypeDate": "날짜",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "변경됨:",
+	"requirementWeight": "가중치",
+	"scim": "SCIM",
+	"scimDescription": "SCIM 2.0 프로비저닝을 구성합니다. ID 공급자를 아래 엔드포인트로 지정하고 여기에서 생성된 베어러 토큰으로 인증하세요.",
+	"scimEndpointUrl": "SCIM 엔드포인트 URL",
+	"scimTokens": "SCIM 토큰",
+	"generateScimToken": "토큰 생성",
+	"noScimTokens": "아직 SCIM 토큰이 없습니다.",
+	"scimTokenName": "이름",
+	"scimTokenDigest": "다이제스트",
+	"revokeScimToken": "취소",
+	"scimTokenGenerated": "토큰 생성됨",
+	"scimTokenWarning": "지금 이 토큰을 복사하세요. 보안상의 이유로 다시 표시되지 않습니다.",
+	"scimTokenRevoked": "SCIM 토큰이 취소됨",
+	"scimTokenGenerationFailed": "SCIM 토큰 생성 실패",
+	"idpGroup": "IdP 그룹",
+	"idpGroups": "IdP 그룹",
+	"idpGroupsDescription": "IdP 그룹 페더레이션 활성화(SCIM 프로비저닝, IdP 그룹 매핑 및 사용자의 IdP 그룹 멤버십).",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

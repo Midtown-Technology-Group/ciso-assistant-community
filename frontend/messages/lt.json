@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "Susieti su sistema",
+	"mapToFrameworkDescription": "Sukurti naują auditą kitoje sistemoje, susietą iš šio.",
+	"mapFromAudit": "Susieti iš audito",
+	"mapFromAuditDescription": "Perkelti susietus rezultatus iš kito audito į šį.",
+	"selectSourceAudit": "Pasirinkite šaltinio auditą praturtinimui",
+	"mapFromSuccess": "Auditas sėkmingai atnaujintas",
+	"mapFromError": "Nepavyko susieti iš šaltinio audito",
+	"currentState": "Dabartinė būsena",
+	"projectedState": "Numatoma būsena",
+	"confirmMapping": "Patvirtinti susiejimą",
+	"mapFromPreview": "Susiejimo peržiūra",
+	"requirementsUpdated": "reikalavimai bus atnaujinti",
+	"noMappingPath": "Tarp šių sistemų nerasta susiejimo kelio",
+	"mapFromNoChanges": "Šis šaltinio auditas nieko nepakeistų dabartiniame audite.",
+	"sourceRequirement": "Šaltinio reikalavimas",
+	"fullCoverage": "Visiška aprėptis",
+	"partialCoverage": "Dalinė aprėptis",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "Prancūzų",
 	"english": "Anglų",
@@ -735,7 +752,8 @@
 	"linkHelpText": "Išorinė URL sekimui arba nuorodai (pvz., ITSM, SharePoint, Jira ir kt.)",
 	"effortHelpText": "Pastangos, reikalingos taikomai kontrolei įgyvendinti",
 	"costHelpText": "Kaina, reikalinga taikomai kontrolei įgyvendinti",
-	"riskAcceptanceJusitficationHelpText": "Rizikos priėmimo pagrindimas. Tik tvirtintojas gali redaguoti šį lauką.",
+	"riskAcceptanceJustificationHelpText": "Rizikos priėmimo pagrindimas. Tik tvirtintojas gali redaguoti šį lauką.",
+	"riskAcceptanceJustificationLabel": "Rizikos priėmimo pagrindimas",
 	"approverHelpText": "Rizikos savininko ir tvirtintojo tapatybė",
 	"riskAcceptanceRiskScenariosHelpText": "Priimami rizikos scenarijai",
 	"attachmentHelpText": "Failas kaip įrodymas (pvz., ekrano kopija, žurnalo failas ir kt.). Pasirinkus, galite tiesiogiai įklijuoti ekrano kopijas iš mainų srities.",
@@ -1037,7 +1055,7 @@
 	"progress": "Pažanga",
 	"back": "Atgal",
 	"backToTable": "Grįžti į lentelę",
-	"backToWorkshop": "Grįžti į Ebios RM studiją / Ekosistemą",
+	"backToWorkshop": "Grįžti į EBIOS RM studiją / Ekosistemą",
 	"duplicate": "Dublikuoti",
 	"duplicateRiskAssessment": "Dublikuoti rizikos vertinimą",
 	"duplicateAppliedControl": "Dublikuoti taikomą kontrolę",
@@ -1048,6 +1066,19 @@
 	"favicon": "Favikon",
 	"logo": "Logotipas",
 	"clientSettings": "Kliento nustatymai",
+	"infraConfig": "Infrastruktūra",
+	"infraConfigDescription": "Tvarkykite infrastruktūros konfigūraciją, pateikiamą infrastruktūros sluoksniui. Toliau nurodyti IP adresai ir CIDR diapazonai naudojami automatiškai konfigūruoti prieigą prie vidinės sistemos.",
+	"infraConfigSettingsUpdated": "Infrastruktūros nustatymai sėkmingai atnaujinti",
+	"allowedIps": "Leidžiami IP",
+	"ipAddressOrCidr": "IP adresas arba CIDR",
+	"invalidIpOrCidr": "Įveskite galiojantį IP adresą arba CIDR diapazoną.",
+	"ipAlreadyAdded": "Šis IP jau yra sąraše.",
+	"tooManyAllowedIps": "Galite pridėti daugiausiai {max} IP adresų.",
+	"enterIpFirst": "Pirmiausia įveskite IP adresą arba CIDR.",
+	"allowsAllIpsWarning": "Tai leidžia prieigą iš bet kurio IP adreso.",
+	"confirmEmptyAllowlist": "Ketinate išsaugoti be jokio IP leidžiamų sąraše. Tai gali užblokuoti visą prieigą. Tęsti?",
+	"removeIp": "Pašalinti {ip}",
+	"noAllowedIpsYet": "Kol kas nėra leidžiamų IP.",
 	"templates": "Šablonai",
 	"emailTemplates": "El. pašto šablonai",
 	"emailTemplatesDescription": "Tinkinti programos siunčiamus el. pašto šablonus. Pakeitimai perrašo įtaisytuosius numatytuosius.",
@@ -1391,6 +1422,16 @@
 	"emailPasswordMismatch": "Nepavyko prisijungti su nurodytais prisijungimo duomenimis.",
 	"securitySettings": "Saugos nustatymai",
 	"securitySettingsDescription": "Čia galite konfigūruoti saugos nustatymus.",
+	"preferencesSettings": "Nuostatos",
+	"preferencesSettingsDescription": "Čia sukonfigūruokite savo asmenines rodymo nuostatas.",
+	"dateFormat": "Datos formatas",
+	"dateFormatDescription": "Pasirinkite, kaip datos rodomos visoje programoje.",
+	"dateFormatAuto": "Automatinis (pagal kalbą)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "Diena/Mėnuo/Metai (31/05/2026)",
+	"dateFormatMmddyyyy": "Mėnuo/Diena/Metai (05/31/2026)",
+	"dateFormatLongDmy": "Ilgas, pirma diena (2026 m. gegužės 31 d.)",
+	"dateFormatLongMdy": "Ilgas, pirma mėnuo (gegužė 31, 2026)",
 	"multiFactorAuthentication": "Daugiafaktorė autentifikacija",
 	"authenticatorApp": "Autentifikatoriaus programa",
 	"authenticatorAppDescription": "Naudokite autentifikatoriaus programą, kad sugeneruotumėte laiku pagrįstą vienkartinį slaptažodį (TOTP) daugiafaktorei autentifikacijai.",
@@ -1823,10 +1864,10 @@
 	"activityOne": "1 žingsnis",
 	"activityTwo": "2 žingsnis",
 	"activityThree": "3 žingsnis",
-	"ebiosRmStudy": "Ebios RM studija",
+	"ebiosRmStudy": "EBIOS RM studija",
 	"qualifications": "Kvalifikacijos",
 	"impacts": "Poveikiai",
-	"ebiosRmStudies": "Ebios RM studijos",
+	"ebiosRmStudies": "EBIOS RM studijos",
 	"bringTheEvidences": "Pateikti įrodymus",
 	"bringTheEvidencesHelpText": "Jei išjungta, objektas bus dublikuotas be jo įrodymų",
 	"gravity": "Sunkumas",
@@ -1836,12 +1877,12 @@
 	"fearedEvent": "Baiminamasis įvykis",
 	"fearedEvents": "Baiminamieji įvykiai",
 	"isSelected": "Pasirinkta",
-	"ebiosRM": "Ebios RM",
-	"ebiosRMStudies": "Ebios RM studijos",
-	"ebiosRMStudyARM": "Ebios RM studija (ARM formatas)",
-	"ebiosRMStudyARMDescription": "Importuoti Ebios RM studiją iš ARM Excel formato.\nAtkreipkite dėmesį, kad tai yra patentuotas formatas, ne visi objektai palaikomi ir kai kurie importai gali nepavykti dėl antraščių ar lapų pakeitimų.",
-	"ebiosRMStudyExcel": "Ebios RM studija (CISO Assistant formatas)",
-	"ebiosRMStudyExcelDescription": "Importuoti Ebios RM studiją iš CISO Assistant Excel eksporto. Tai leidžia dalintis studijomis tarp skirtingų egzempliorių arba atkurti anksčiau eksportuotas studijas.",
+	"ebiosRM": "EBIOS RM",
+	"ebiosRMStudies": "EBIOS RM studijos",
+	"ebiosRMStudyARM": "EBIOS RM studija (ARM formatas)",
+	"ebiosRMStudyARMDescription": "Importuoti EBIOS RM studiją iš ARM Excel formato.\nAtkreipkite dėmesį, kad tai yra patentuotas formatas, ne visi objektai palaikomi ir kai kurie importai gali nepavykti dėl antraščių ar lapų pakeitimų.",
+	"ebiosRMStudyExcel": "EBIOS RM studija (CISO Assistant formatas)",
+	"ebiosRMStudyExcelDescription": "Importuoti EBIOS RM studiją iš CISO Assistant Excel eksporto. Tai leidžia dalintis studijomis tarp skirtingų egzempliorių arba atkurti anksčiau eksportuotas studijas.",
 	"armImportPreview": "ARM importo peržiūra",
 	"armPreviewSummary": "Bus sukurti šie objektai:",
 	"primaryAssets": "Pagrindiniai turtai",
@@ -1948,7 +1989,7 @@
 	"strategicScenario": "Strateginis scenarijus",
 	"strategicScenarios": "Strateginiai scenarijai",
 	"elementaryActionsTechniques": "Vienetiniai veiksmai / Technikos",
-	"goBackToEbiosRmStudy": "Grįžti į Ebios RM studiją",
+	"goBackToEbiosRmStudy": "Grįžti į EBIOS RM studiją",
 	"addStrategicScenario": "Pridėti strateginį scenarijų",
 	"markAsDone": "Pažymėti kaip atliktą",
 	"markAsInProgress": "Pažymėti kaip vykdomą",
@@ -2106,7 +2147,7 @@
 	"customizeFeatureFlags": "Pritaikyti mano patirtį",
 	"customizeFeatureFlagsDescription": "Įjunkite arba išjunkite modulius, kad platforma atitiktų jūsų poreikius",
 	"skipForNow": "Praleisti dabar",
-	"ebiosRadarParameters": "Ebios RM radaro parametrai",
+	"ebiosRadarParameters": "EBIOS RM radaro parametrai",
 	"maxRadius": "Maksimalus spindulys",
 	"greenZoneRadius": "Žaliosios zonos spindulys",
 	"yellowZoneRadius": "Geltonosios zonos spindulys",
@@ -2517,8 +2558,14 @@
 	"associatedFindingsAssessments": "Susiję stebėjimai",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} valanda",
 				"countPlural=other": "{count} valandos"
@@ -2527,8 +2574,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} minutė",
 				"countPlural=other": "{count} minutės"
@@ -2537,8 +2589,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} diena",
 				"countPlural=other": "{count} dienos"
@@ -2547,8 +2604,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} objektas yra paslėptas. Redaguojant nuoroda gali būti prarasta.",
 				"countPlural=other": "{count} objektai yra paslėpti. Redaguojant nuorodos gali būti prarastos."
@@ -2769,7 +2831,7 @@
 	"roles": "Vaidmenys",
 	"addRole": "Pridėti vaidmenį",
 	"global_settings": "Bendrieji nustatymai",
-	"ebios_rm": "Ebios RM",
+	"ebios_rm": "EBIOS RM",
 	"tprm": "Trečiųjų šalių rizikos valdymas",
 	"resilience": "Atsparumas",
 	"core": "Pagrindinis",
@@ -3871,8 +3933,14 @@
 	"errorFetching": "Nepavyko įkelti kaskadinės informacijos. Bandykite dar kartą.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "Kiti objektai nebus paveikti.",
 				"countPlural=one": "{count} susijęs objektas nebus ištrintas, tačiau praras vieną ar daugiau ryšių.",
@@ -4224,8 +4292,13 @@
 	"builderPublishModalDescription": "Šis veiksmas atnaujins veikiančią sistemą. Peržiūrėkite pakeitimus žemiau.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} reikalavimai pridėti",
 				"countPlural=other": "{count} reikalavimai pridėti"
@@ -4234,8 +4307,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} klausimai",
 				"countPlural=other": "{count} klausimai"
@@ -4244,8 +4322,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} reikalavimai pašalinti",
 				"countPlural=other": "{count} reikalavimai pašalinti"
@@ -4254,8 +4337,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} klausimai",
 				"countPlural=other": "{count} klausimai"
@@ -4265,8 +4353,13 @@
 	"builderNoStructuralChanges": "Struktūrinių pakeitimų neaptikta (tik metaduomenys).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Aptikti {count} nesuderinami pakeitimai",
 				"countPlural=other": "Aptikti {count} nesuderinami pakeitimai"
@@ -4276,8 +4369,13 @@
 	"builderBreakingChangesHint": "Šie pakeitimai gali paveikti vertinimą, matomumą ar atitikties rezultatus esamuose audituose.",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} esami auditai bus paveikti",
 				"countPlural=other": "{count} esami auditai bus paveikti"
@@ -4315,8 +4413,13 @@
 	"builderNoRulesOrGroupsConfigured": "Taisyklių ar grupių nesukonfigūruota",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} rezultato taisyklės",
 				"countPlural=other": "{count} rezultato taisyklės"
@@ -4325,8 +4428,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} grupės",
 				"countPlural=other": "{count} grupės"
@@ -4339,8 +4447,13 @@
 	"builderScoreScale": "Balų skalė",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} lygiai",
 				"countPlural=other": "{count} lygiai"
@@ -4410,8 +4523,13 @@
 	"builderAssessableLeaf": "Vertinamas lapas",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Vertinama · {count} vaikinis",
 				"countPlural=other": "Vertinama · {count} vaikiniai"
@@ -4420,8 +4538,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Grupė · {count} vaikinis",
 				"countPlural=other": "Grupė · {count} vaikiniai"
@@ -4448,8 +4571,13 @@
 	"builderAddQuestion": "Pridėti klausimą",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} vaikinis paslėptas",
 				"countPlural=other": "{count} vaikiniai paslėpti"
@@ -4477,8 +4605,14 @@
 	"builderChangeTypeWarning": "Pakeitus tipą bus ištrinti esami pasirinkimai. Tęsti?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Rodoma, kai {ref} = {count} atsakymai",
 				"countPlural=other": "Rodoma, kai {ref} = {count} atsakymai"
@@ -4557,31 +4691,39 @@
 	"builderQuestionTypeUniqueChoice": "Vienas pasirinkimas",
 	"builderQuestionTypeMultipleChoice": "Keli pasirinkimai",
 	"builderQuestionTypeDate": "Data",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "pakeista",
+	"requirementWeight": "Svoris",
+	"scim": "SCIM",
+	"scimDescription": "Konfigūruokite SCIM 2.0 teikimą. Nukreipkite savo tapatybės teikėją į toliau nurodytą galinį tašką ir autentifikuokite jį čia sugeneruotu bearer žetonu.",
+	"scimEndpointUrl": "SCIM galinio taško URL",
+	"scimTokens": "SCIM žetonai",
+	"generateScimToken": "Generuoti žetoną",
+	"noScimTokens": "Kol kas nėra SCIM žetonų.",
+	"scimTokenName": "Pavadinimas",
+	"scimTokenDigest": "Santrauka",
+	"revokeScimToken": "Atšaukti",
+	"scimTokenGenerated": "Žetonas sugeneruotas",
+	"scimTokenWarning": "Nukopijuokite šį žetoną dabar. Saugumo sumetimais jis nebebus rodomas.",
+	"scimTokenRevoked": "SCIM žetonas atšauktas",
+	"scimTokenGenerationFailed": "Nepavyko sugeneruoti SCIM žetono",
+	"idpGroup": "IdP grupė",
+	"idpGroups": "IdP grupės",
+	"idpGroupsDescription": "Įjungti IdP grupių federaciją (SCIM teikimas, IdP grupių susiejimai ir naudotojų narystės IdP grupėse).",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

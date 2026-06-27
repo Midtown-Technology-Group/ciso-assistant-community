@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "映射到框架",
+	"mapToFrameworkDescription": "在另一个框架中创建一个由当前审计映射而来的新审计。",
+	"mapFromAudit": "从审计映射",
+	"mapFromAuditDescription": "将另一个审计的映射结果导入到当前审计。",
+	"selectSourceAudit": "选择要从中丰富的来源审计",
+	"mapFromSuccess": "审计已成功更新",
+	"mapFromError": "无法从来源审计映射",
+	"currentState": "当前状态",
+	"projectedState": "预期状态",
+	"confirmMapping": "确认映射",
+	"mapFromPreview": "映射预览",
+	"requirementsUpdated": "项要求将被更新",
+	"noMappingPath": "在这些框架之间未找到映射路径",
+	"mapFromNoChanges": "此来源审计不会更改当前审计中的任何内容。",
+	"sourceRequirement": "来源要求",
+	"fullCoverage": "完全覆盖",
+	"partialCoverage": "部分覆盖",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "法语",
 	"english": "英语",
@@ -624,7 +641,8 @@
 	"linkHelpText": "用于跟踪或参考的外部URL（例如ITSM、SharePoint、Jira等）",
 	"effortHelpText": "实施控制措施所需的工作量",
 	"costHelpText": "实施控制措施所需的成本",
-	"riskAcceptanceJusitficationHelpText": "风险接受的理由。只有审批者可以编辑此字段。",
+	"riskAcceptanceJustificationHelpText": "风险接受的理由。只有审批者可以编辑此字段。",
+	"riskAcceptanceJustificationLabel": "风险接受理由",
 	"approverHelpText": "风险负责人和审批者身份",
 	"riskAcceptanceRiskScenariosHelpText": "被接受的风险场景",
 	"attachmentHelpText": "证据文件（例如截图、日志文件等）。选择后，您可以直接从剪贴板粘贴截图。",
@@ -905,7 +923,7 @@
 	"progress": "进度",
 	"back": "返回",
 	"backToTable": "返回表格",
-	"backToWorkshop": "返回 Ebios RM 研究 / 生态系统",
+	"backToWorkshop": "返回 EBIOS RM 研究 / 生态系统",
 	"duplicate": "复制",
 	"duplicateRiskAssessment": "复制风险评估",
 	"duplicateAppliedControl": "复制已实施控制措施",
@@ -914,6 +932,19 @@
 	"favicon": "网站图标",
 	"logo": "标志",
 	"clientSettings": "客户端设置",
+	"infraConfig": "基础设施",
+	"infraConfigDescription": "管理向基础设施层公开的基础设施配置。下面的 IP 地址和 CIDR 范围用于自动配置后端访问。",
+	"infraConfigSettingsUpdated": "基础设施设置已成功更新",
+	"allowedIps": "允许的 IP",
+	"ipAddressOrCidr": "IP 地址或 CIDR",
+	"invalidIpOrCidr": "请输入有效的 IP 地址或 CIDR 范围。",
+	"ipAlreadyAdded": "该 IP 已在列表中。",
+	"tooManyAllowedIps": "您最多可以添加 {max} 个 IP 地址。",
+	"enterIpFirst": "请先输入 IP 地址或 CIDR。",
+	"allowsAllIpsWarning": "这将允许来自任何 IP 地址的访问。",
+	"confirmEmptyAllowlist": "您即将在允许列表中没有任何 IP 的情况下保存。这可能会阻止所有访问。是否继续？",
+	"removeIp": "移除 {ip}",
+	"noAllowedIpsYet": "尚无允许的 IP。",
 	"invalidFileType": "无效的文件类型",
 	"logoHelpText": "标志将显示在应用程序的页眉中。接受的格式为PNG、JPEG、WEBP、SVG。",
 	"faviconHelpText": "网站图标将显示在浏览器标签中。接受的格式为ICO、PNG、JPEG、WEBP、SVG。",
@@ -2818,8 +2849,14 @@
 	"bringTheEvidencesHelpText": "如果禁用，对象将在不带证据的情况下复制",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "不会影响其他对象。",
 				"countPlural=one": "{count} 个相关对象不会被删除，但会失去一个或多个关系。",
@@ -2844,8 +2881,13 @@
 	"dataContractors": "数据承包商",
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} 天",
 				"countPlural=other": "{count} 天"
@@ -2854,8 +2896,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} 个对象不可见。",
 				"countPlural=other": "{count} 个对象不可见。"
@@ -2938,8 +2985,14 @@
 	"hour": "小时",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} 小时",
 				"countPlural=other": "{count} 小时"
@@ -2978,8 +3031,13 @@
 	"minute": "分钟",
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} 分钟",
 				"countPlural=other": "{count} 分钟"
@@ -3078,6 +3136,16 @@
 	"secretCopiedToClipboard": "密钥已成功复制到剪贴板",
 	"securitySettings": "安全设置",
 	"securitySettingsDescription": "在此配置安全设置。",
+	"preferencesSettings": "偏好设置",
+	"preferencesSettingsDescription": "在此配置您的个人显示偏好。",
+	"dateFormat": "日期格式",
+	"dateFormatDescription": "选择日期在整个应用程序中的显示方式。",
+	"dateFormatAuto": "自动（跟随语言）",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "日/月/年 (31/05/2026)",
+	"dateFormatMmddyyyy": "月/日/年 (05/31/2026)",
+	"dateFormatLongDmy": "长格式，日在前 (2026年5月31日)",
+	"dateFormatLongMdy": "长格式，月在前 (5月31日, 2026)",
 	"selectAppliedControls": "选择控制措施",
 	"selectAudit": "选择审核",
 	"serviceNowColumn": "ServiceNow列",
@@ -3291,8 +3359,13 @@
 	"builderPublishModalDescription": "此操作将更新正式框架。请查看下方的更改。",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "已添加 {count} 项要求",
 				"countPlural=other": "已添加 {count} 项要求"
@@ -3301,8 +3374,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} 个问题",
 				"countPlural=other": "{count} 个问题"
@@ -3311,8 +3389,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "已移除 {count} 项要求",
 				"countPlural=other": "已移除 {count} 项要求"
@@ -3321,8 +3404,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} 个问题",
 				"countPlural=other": "{count} 个问题"
@@ -3332,8 +3420,13 @@
 	"builderNoStructuralChanges": "未检测到结构性更改（仅元数据）。",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "检测到 {count} 项不兼容更改",
 				"countPlural=other": "检测到 {count} 项不兼容更改"
@@ -3343,8 +3436,13 @@
 	"builderBreakingChangesHint": "这些更改可能会影响现有审计中的评分、可见性或合规结果。",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} 个现有审计将受到影响",
 				"countPlural=other": "{count} 个现有审计将受到影响"
@@ -3382,8 +3480,13 @@
 	"builderNoRulesOrGroupsConfigured": "未配置任何规则或组",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} 条结果规则",
 				"countPlural=other": "{count} 条结果规则"
@@ -3392,8 +3495,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} 个组",
 				"countPlural=other": "{count} 个组"
@@ -3406,8 +3514,13 @@
 	"builderScoreScale": "评分量表",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} 个级别",
 				"countPlural=other": "{count} 个级别"
@@ -3477,8 +3590,13 @@
 	"builderAssessableLeaf": "可评估叶节点",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "可评估 · {count} 个子节点",
 				"countPlural=other": "可评估 · {count} 个子节点"
@@ -3487,8 +3605,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "分组 · {count} 个子节点",
 				"countPlural=other": "分组 · {count} 个子节点"
@@ -3515,8 +3638,13 @@
 	"builderAddQuestion": "添加问题",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} 个子节点已隐藏",
 				"countPlural=other": "{count} 个子节点已隐藏"
@@ -3544,8 +3672,14 @@
 	"builderChangeTypeWarning": "更改类型将删除现有选项。继续吗？",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "当 {ref} = {count} 个答案时显示",
 				"countPlural=other": "当 {ref} = {count} 个答案时显示"
@@ -3624,31 +3758,39 @@
 	"builderQuestionTypeUniqueChoice": "单选",
 	"builderQuestionTypeMultipleChoice": "多选",
 	"builderQuestionTypeDate": "日期",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "已变更于",
+	"requirementWeight": "权重",
+	"scim": "SCIM",
+	"scimDescription": "配置 SCIM 2.0 预配。将您的身份提供商指向下面的端点，并使用此处生成的持有者令牌进行身份验证。",
+	"scimEndpointUrl": "SCIM 端点 URL",
+	"scimTokens": "SCIM 令牌",
+	"generateScimToken": "生成令牌",
+	"noScimTokens": "尚无 SCIM 令牌。",
+	"scimTokenName": "名称",
+	"scimTokenDigest": "摘要",
+	"revokeScimToken": "吊销",
+	"scimTokenGenerated": "令牌已生成",
+	"scimTokenWarning": "立即复制此令牌。出于安全原因，它将不会再次显示。",
+	"scimTokenRevoked": "SCIM 令牌已吊销",
+	"scimTokenGenerationFailed": "生成 SCIM 令牌失败",
+	"idpGroup": "IdP 组",
+	"idpGroups": "IdP 组",
+	"idpGroupsDescription": "启用 IdP 组联合（SCIM 预配、IdP 组映射以及用户的 IdP 组成员资格）。",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

@@ -9,6 +9,7 @@
 	} from '$lib/components/Modals/ExportModal.svelte';
 	import DomainHierarchy from '$lib/components/DomainHierarchy/DomainHierarchy.svelte';
 	import ModelTable from '$lib/components/ModelTable/ModelTable.svelte';
+	import { buildCustomFieldFilters, listViewFields } from '$lib/utils/table';
 	import { safeTranslate } from '$lib/utils/i18n';
 	import { driverInstance } from '$lib/utils/stores';
 	import { m } from '$paraglide/messages';
@@ -32,6 +33,11 @@
 	let { data, form }: Props = $props();
 	const toastStore = getToastStore();
 	let URLModel = $derived(data.URLModel);
+	// Static (per-model) filters merged with dynamic custom-field filters.
+	const tableFilters = $derived({
+		...listViewFields[URLModel]?.filters,
+		...buildCustomFieldFilters(data.customFields ?? [])
+	});
 	let pullCatalogOpen = $state(false);
 	let currentFilterSearch = $state(page.url.search);
 
@@ -259,6 +265,7 @@
 		{#key URLModel}
 			<ModelTable
 				source={data.table}
+				{tableFilters}
 				deleteForm={data.deleteForm}
 				{URLModel}
 				disableEdit={['user-groups', 'validation-flows'].includes(URLModel)}
@@ -267,7 +274,7 @@
 			>
 				{#snippet addButton()}
 					<div class="relative">
-						<div class="inline-flex overflow-hidden rounded-md border bg-white shadow-xs">
+						<div class="inline-flex overflow-hidden rounded-md border bg-surface-50-950 shadow-xs">
 							{#if !['risk-matrices', 'frameworks', 'requirement-mapping-sets', 'user-groups', 'role-assignments', 'qualifications'].includes(URLModel)}
 								<button
 									class="inline-block p-3 btn-mini-primary w-12 focus:relative"
@@ -347,7 +354,7 @@
 								{/if}
 								{#if URLModel === 'security-advisories'}
 									<button
-										class="inline-block p-3 w-12 focus:relative bg-blue-50 hover:bg-blue-100"
+										class="inline-block p-3 w-12 focus:relative bg-blue-100 hover:bg-blue-200 dark:bg-blue-500/20 dark:hover:bg-blue-500/30"
 										title={m.syncKev()}
 										aria-label={m.syncKev()}
 										data-testid="sync-kev-button"
@@ -379,7 +386,7 @@
 										}}>🇺🇸</button
 									>
 									<button
-										class="inline-block p-3 w-12 focus:relative bg-yellow-50 hover:bg-yellow-100"
+										class="inline-block p-3 w-12 focus:relative bg-yellow-100 hover:bg-yellow-200 dark:bg-yellow-500/20 dark:hover:bg-yellow-500/30"
 										title={m.syncEuvd()}
 										aria-label={m.syncEuvd()}
 										data-testid="sync-euvd-button"
@@ -471,7 +478,7 @@
 								{/if}
 								{#if URLModel === 'folders'}
 									<button
-										class="text-gray-50 inline-block border-e p-3 bg-sky-400 hover:bg-sky-300 w-12 focus:relative"
+										class="text-white inline-block border-e p-3 bg-sky-400 hover:bg-sky-300 w-12 focus:relative"
 										data-testid="import-button"
 										title={safeTranslate('importFolder')}
 										aria-label={safeTranslate('importFolder')}

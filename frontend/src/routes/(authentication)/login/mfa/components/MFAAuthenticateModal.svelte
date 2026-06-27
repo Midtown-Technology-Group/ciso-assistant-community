@@ -12,10 +12,9 @@
 	const modalStore: ModalStore = getModalStore();
 
 	// Base Classes
-	const cBase =
-		'card bg-surface-50 w-[calc(100vw-2rem)] max-w-sm sm:max-w-md p-4 sm:p-6 shadow-xl space-y-3 sm:space-y-4 overflow-hidden';
-	const cHeader = 'text-lg sm:text-2xl font-bold text-center sm:text-left';
-	const cForm = 'w-full p-0 sm:p-4 space-y-4 rounded-container';
+	const cBase = 'card bg-surface-50-950 p-4 w-modal shadow-xl space-y-4';
+	const cHeader = 'text-2xl font-bold';
+	const cForm = 'p-4 space-y-4 rounded-container';
 
 	interface Props {
 		/** Exposes parent props to this component. */
@@ -114,9 +113,7 @@
 {#if $modalStore[0]}
 	<div class="modal-example-form {cBase}">
 		<header class={cHeader}>{$modalStore[0].title ?? '(title missing)'}</header>
-		<article class="text-sm sm:text-base text-center sm:text-left">
-			{$modalStore[0].body ?? '(body missing)'}
-		</article>
+		<article>{$modalStore[0].body ?? '(body missing)'}</article>
 		<article class="flex flex-col space-y-4 items-center">
 			{#if mode === 'webauthn'}
 				<div class="flex flex-col items-center space-y-4 p-4">
@@ -147,19 +144,14 @@
 				>
 					{#snippet children({ form })}
 						{#if mode === 'totp'}
-							<OTPInput
-								{form}
-								field="code"
-								wrapperClass="w-full justify-center gap-1.5 sm:gap-2"
-								inputClass="!w-9 !h-11 sm:!w-14 sm:!h-14 !text-xl sm:!text-2xl"
-							/>
+							<OTPInput {form} field="code" />
 						{:else}
 							<TextField {form} field="code" label={m.recoveryCode()} />
 						{/if}
-						<footer class="modal-footer flex justify-stretch sm:justify-end">
+						<footer class="modal-footer {parent.regionFooter}">
 							<button
 								type="submit"
-								class="btn preset-filled-primary-500 w-full sm:w-auto"
+								class="btn preset-filled-primary-500"
 								data-testid="mfa-authenticate-confirm-button"
 							>
 								{m.login()}
@@ -168,13 +160,9 @@
 					{/snippet}
 				</SuperForm>
 			{/if}
-			<div class="flex w-full flex-col sm:flex-row sm:flex-wrap gap-2 justify-center">
+			<div class="flex flex-wrap gap-2 justify-center">
 				{#if mode !== 'totp' && mfaTypes.includes('totp')}
-					<button
-						type="button"
-						onclick={() => (mode = 'totp')}
-						class="btn hover:underline text-sm w-full sm:w-auto"
-					>
+					<button type="button" onclick={() => (mode = 'totp')} class="btn hover:underline text-sm">
 						{m.loginUsingTOTP()}
 					</button>
 				{/if}
@@ -182,7 +170,7 @@
 					<button
 						type="button"
 						onclick={() => (mode = 'recovery_code')}
-						class="btn hover:underline text-sm w-full sm:w-auto"
+						class="btn hover:underline text-sm"
 					>
 						{m.loginUsingRecoveryCode()}
 					</button>
@@ -191,7 +179,7 @@
 					<button
 						type="button"
 						onclick={() => (mode = 'webauthn')}
-						class="btn hover:underline text-sm w-full sm:w-auto"
+						class="btn hover:underline text-sm"
 					>
 						<i class="fa-solid fa-fingerprint mr-1"></i>
 						{m.useSecurityKey()}

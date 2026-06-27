@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "फ्रेमवर्क में मैप करें",
+	"mapToFrameworkDescription": "इससे मैप करके किसी अन्य फ्रेमवर्क में नया ऑडिट बनाएं।",
+	"mapFromAudit": "ऑडिट से मैप करें",
+	"mapFromAuditDescription": "किसी अन्य ऑडिट के मैप किए गए परिणाम इसमें लाएं।",
+	"selectSourceAudit": "समृद्ध करने के लिए एक स्रोत ऑडिट चुनें",
+	"mapFromSuccess": "ऑडिट सफलतापूर्वक अपडेट किया गया",
+	"mapFromError": "स्रोत ऑडिट से मैप करने में विफल",
+	"currentState": "वर्तमान स्थिति",
+	"projectedState": "अनुमानित स्थिति",
+	"confirmMapping": "मैपिंग की पुष्टि करें",
+	"mapFromPreview": "मैपिंग पूर्वावलोकन",
+	"requirementsUpdated": "आवश्यकताएं अपडेट की जाएंगी",
+	"noMappingPath": "इन फ्रेमवर्क के बीच कोई मैपिंग पथ नहीं मिला",
+	"mapFromNoChanges": "यह स्रोत ऑडिट वर्तमान ऑडिट में कुछ भी नहीं बदलेगा।",
+	"sourceRequirement": "स्रोत आवश्यकता",
+	"fullCoverage": "पूर्ण कवरेज",
+	"partialCoverage": "आंशिक कवरेज",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "फ्रेंच",
 	"english": "अंग्रेज़ी",
@@ -490,7 +507,8 @@
 	"linkHelpText": "ट्रैकिंग या संदर्भ के लिए बाहरी URL (जैसे शेयरपॉइंट, जीरा, आदि)",
 	"effortHelpText": "लागू किए गए नियंत्रण को लागू करने के लिए आवश्यक प्रयास",
 	"costHelpText": "लागू नियंत्रण को लागू करने के लिए आवश्यक लागत",
-	"riskAcceptanceJusitficationHelpText": "जोखिम स्वीकृति के लिए औचित्य। केवल स्वीकर्ता ही इस फ़ील्ड को संपादित कर सकता है।",
+	"riskAcceptanceJustificationHelpText": "जोखिम स्वीकृति के लिए औचित्य। केवल स्वीकर्ता ही इस फ़ील्ड को संपादित कर सकता है।",
+	"riskAcceptanceJustificationLabel": "जोखिम स्वीकृति का औचित्य",
 	"approverHelpText": "जोखिम मालिक और स्वीकर्ता की पहचान",
 	"riskAcceptanceRiskScenariosHelpText": "जोखिम परिदृश्य जिन्हें स्वीकार किया गया है",
 	"attachmentHelpText": "साक्ष्य के लिए फ़ाइल (उदा. स्क्रीनशॉट, लॉग फ़ाइल, आदि)। चयनित होने पर, आप सीधे अपने क्लिपबोर्ड से स्क्रीनशॉट पेस्ट कर सकते हैं।",
@@ -735,7 +753,7 @@
 	"maturity": "परिपक्वता",
 	"progress": "प्रगति",
 	"back": "वापस",
-	"backToWorkshop": "Ebios RM अध्ययन / पारिस्थितिकी तंत्र पर वापस जाएं",
+	"backToWorkshop": "EBIOS RM अध्ययन / पारिस्थितिकी तंत्र पर वापस जाएं",
 	"duplicate": "प्रतिलिपि",
 	"duplicateRiskAssessment": "जोखिम आकलन की प्रतिलिपि बनाएँ",
 	"duplicateAppliedControl": "लागू नियंत्रण की प्रतिलिपि बनाएँ",
@@ -743,6 +761,19 @@
 	"favicon": "फ़ेविकॉन",
 	"logo": "प्रतीक चिन्ह",
 	"clientSettings": "क्लाइंट सेटिंग्स",
+	"infraConfig": "इंफ्रास्ट्रक्चर",
+	"infraConfigDescription": "इंफ्रास्ट्रक्चर परत को उजागर किया गया इंफ्रास्ट्रक्चर कॉन्फ़िगरेशन प्रबंधित करें। नीचे दिए गए IP पते और CIDR रेंज का उपयोग बैकएंड एक्सेस को स्वचालित रूप से कॉन्फ़िगर करने के लिए किया जाता है।",
+	"infraConfigSettingsUpdated": "इंफ्रास्ट्रक्चर सेटिंग्स सफलतापूर्वक अपडेट की गईं",
+	"allowedIps": "अनुमत IP",
+	"ipAddressOrCidr": "IP पता या CIDR",
+	"invalidIpOrCidr": "एक मान्य IP पता या CIDR रेंज दर्ज करें।",
+	"ipAlreadyAdded": "यह IP पहले से सूची में है।",
+	"tooManyAllowedIps": "आप अधिकतम {max} IP पते जोड़ सकते हैं।",
+	"enterIpFirst": "पहले एक IP पता या CIDR दर्ज करें।",
+	"allowsAllIpsWarning": "यह किसी भी IP पते से एक्सेस की अनुमति देता है।",
+	"confirmEmptyAllowlist": "आप अनुमत सूची में बिना किसी IP के सहेजने वाले हैं। इससे सभी एक्सेस अवरुद्ध हो सकती है। जारी रखें?",
+	"removeIp": "{ip} हटाएं",
+	"noAllowedIpsYet": "अभी तक कोई अनुमत IP नहीं।",
 	"invalidFileType": "अमान्य फ़ाइल प्रकार",
 	"logoHelpText": "लोगो को एप्लीकेशन के हेडर में प्रदर्शित किया जाएगा। स्वीकृत प्रारूप PNG, JPEG, WEBP, SVG हैं।",
 	"faviconHelpText": "फ़ेविकॉन ब्राउज़र टैब में प्रदर्शित किया जाएगा। स्वीकृत प्रारूप ICO, PNG, JPEG, WEBP, SVG हैं",
@@ -876,6 +907,16 @@
 	"emailPasswordMismatch": "प्रदान किये गए क्रेडेंशियल्स के साथ लॉग इन करने में असमर्थ।",
 	"securitySettings": "सुरक्षा सेटिंग्स",
 	"securitySettingsDescription": "अपनी सुरक्षा सेटिंग्स यहां कॉन्फ़िगर करें.",
+	"preferencesSettings": "प्राथमिकताएँ",
+	"preferencesSettingsDescription": "यहाँ अपनी व्यक्तिगत प्रदर्शन प्राथमिकताएँ कॉन्फ़िगर करें।",
+	"dateFormat": "दिनांक प्रारूप",
+	"dateFormatDescription": "चुनें कि पूरे एप्लिकेशन में दिनांक कैसे प्रदर्शित हों।",
+	"dateFormatAuto": "स्वचालित (भाषा के अनुसार)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "दिन/माह/वर्ष (31/05/2026)",
+	"dateFormatMmddyyyy": "माह/दिन/वर्ष (05/31/2026)",
+	"dateFormatLongDmy": "लंबा, दिन पहले (31 मई 2026)",
+	"dateFormatLongMdy": "लंबा, माह पहले (मई 31, 2026)",
 	"multiFactorAuthentication": "बहु-कारक प्रमाणीकरण",
 	"authenticatorApp": "प्रमाणक ऐप",
 	"authenticatorAppDescription": "दो-कारक प्रमाणीकरण के लिए समय-आधारित वन-टाइम पासवर्ड (TOTP) उत्पन्न करने के लिए प्रमाणक ऐप का उपयोग करें।",
@@ -952,8 +993,14 @@
 	"associatedFindingsAssessments": "संबद्ध फॉलो-अप",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} घंटा",
 				"countPlural=other": "{count} घंटे"
@@ -962,8 +1009,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} मिनट",
 				"countPlural=other": "{count} मिनट"
@@ -972,8 +1024,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} दिन",
 				"countPlural=other": "{count} दिन"
@@ -982,8 +1039,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} वस्तु दिखाई नहीं देती।",
 				"countPlural=other": "{count} वस्तुएं दिखाई नहीं देतीं।"
@@ -1086,8 +1148,14 @@
 	"errorFetching": "कास्केड जानकारी लोड करने में असमर्थ। कृपया पुनः प्रयास करें।",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "कोई अन्य वस्तुएँ प्रभावित नहीं होंगी।",
 				"countPlural=one": "{count} संबंधित वस्तु हटाई नहीं जाएगी लेकिन एक या अधिक संबंध खो देगी।",
@@ -1217,8 +1285,13 @@
 	"builderPublishModalDescription": "यह लाइव फ्रेमवर्क को अपडेट करेगा। नीचे दिए गए परिवर्तनों की समीक्षा करें।",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} आवश्यकताएँ जोड़ी गईं",
 				"countPlural=other": "{count} आवश्यकताएँ जोड़ी गईं"
@@ -1227,8 +1300,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} प्रश्न",
 				"countPlural=other": "{count} प्रश्न"
@@ -1237,8 +1315,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} आवश्यकताएँ हटाई गईं",
 				"countPlural=other": "{count} आवश्यकताएँ हटाई गईं"
@@ -1247,8 +1330,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} प्रश्न",
 				"countPlural=other": "{count} प्रश्न"
@@ -1258,8 +1346,13 @@
 	"builderNoStructuralChanges": "कोई संरचनात्मक परिवर्तन नहीं मिला (केवल मेटाडेटा)।",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} ब्रेकिंग परिवर्तन पाए गए",
 				"countPlural=other": "{count} ब्रेकिंग परिवर्तन पाए गए"
@@ -1269,8 +1362,13 @@
 	"builderBreakingChangesHint": "ये परिवर्तन मौजूदा ऑडिट में स्कोरिंग, दृश्यता या अनुपालन परिणामों को प्रभावित कर सकते हैं।",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} मौजूदा ऑडिट प्रभावित होंगे",
 				"countPlural=other": "{count} मौजूदा ऑडिट प्रभावित होंगे"
@@ -1308,8 +1406,13 @@
 	"builderNoRulesOrGroupsConfigured": "कोई नियम या समूह कॉन्फ़िगर नहीं किए गए",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} परिणाम नियम",
 				"countPlural=other": "{count} परिणाम नियम"
@@ -1318,8 +1421,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} समूह",
 				"countPlural=other": "{count} समूह"
@@ -1332,8 +1440,13 @@
 	"builderScoreScale": "स्कोर पैमाना",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} स्तर",
 				"countPlural=other": "{count} स्तर"
@@ -1403,8 +1516,13 @@
 	"builderAssessableLeaf": "मूल्यांकन योग्य लीफ",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "मूल्यांकन योग्य · {count} चाइल्ड",
 				"countPlural=other": "मूल्यांकन योग्य · {count} चाइल्ड"
@@ -1413,8 +1531,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "समूह · {count} चाइल्ड",
 				"countPlural=other": "समूह · {count} चाइल्ड"
@@ -1441,8 +1564,13 @@
 	"builderAddQuestion": "प्रश्न जोड़ें",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} चाइल्ड छिपा हुआ",
 				"countPlural=other": "{count} चाइल्ड छिपे हुए"
@@ -1470,8 +1598,14 @@
 	"builderChangeTypeWarning": "प्रकार बदलने से मौजूदा विकल्प हट जाएंगे। जारी रखें?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "जब {ref} = {count} उत्तर हो तब दिखाया गया",
 				"countPlural=other": "जब {ref} = {count} उत्तर हो तब दिखाया गया"
@@ -1550,31 +1684,39 @@
 	"builderQuestionTypeUniqueChoice": "Single choice",
 	"builderQuestionTypeMultipleChoice": "Multiple choice",
 	"builderQuestionTypeDate": "Date",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "बदला गया",
+	"requirementWeight": "भार",
+	"scim": "SCIM",
+	"scimDescription": "SCIM 2.0 प्रावधान कॉन्फ़िगर करें। अपने पहचान प्रदाता को नीचे दिए गए एंडपॉइंट पर इंगित करें और यहाँ उत्पन्न बियरर टोकन से प्रमाणित करें।",
+	"scimEndpointUrl": "SCIM एंडपॉइंट URL",
+	"scimTokens": "SCIM टोकन",
+	"generateScimToken": "टोकन बनाएँ",
+	"noScimTokens": "अभी तक कोई SCIM टोकन नहीं है।",
+	"scimTokenName": "नाम",
+	"scimTokenDigest": "डाइजेस्ट",
+	"revokeScimToken": "निरस्त करें",
+	"scimTokenGenerated": "टोकन उत्पन्न हुआ",
+	"scimTokenWarning": "इस टोकन को अभी कॉपी करें। सुरक्षा कारणों से इसे दोबारा नहीं दिखाया जाएगा।",
+	"scimTokenRevoked": "SCIM टोकन निरस्त किया गया",
+	"scimTokenGenerationFailed": "SCIM टोकन उत्पन्न करने में विफल",
+	"idpGroup": "IdP समूह",
+	"idpGroups": "IdP समूह",
+	"idpGroupsDescription": "IdP समूह फ़ेडरेशन सक्षम करें (SCIM प्रावधान, IdP समूह मैपिंग, और उपयोगकर्ताओं पर IdP समूह सदस्यताएँ)।",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

@@ -1,4 +1,21 @@
 {
+	"mapToFramework": "Petakan ke kerangka kerja",
+	"mapToFrameworkDescription": "Buat audit baru di kerangka kerja lain, dipetakan dari audit ini.",
+	"mapFromAudit": "Petakan dari audit",
+	"mapFromAuditDescription": "Bawa hasil yang dipetakan dari audit lain ke audit ini.",
+	"selectSourceAudit": "Pilih audit sumber untuk diperkaya",
+	"mapFromSuccess": "Audit berhasil diperbarui",
+	"mapFromError": "Gagal memetakan dari audit sumber",
+	"currentState": "Status saat ini",
+	"projectedState": "Status yang diproyeksikan",
+	"confirmMapping": "Konfirmasi pemetaan",
+	"mapFromPreview": "Pratinjau pemetaan",
+	"requirementsUpdated": "persyaratan akan diperbarui",
+	"noMappingPath": "Tidak ada jalur pemetaan yang ditemukan antara kerangka kerja ini",
+	"mapFromNoChanges": "Audit sumber ini tidak akan mengubah apa pun pada audit saat ini.",
+	"sourceRequirement": "Persyaratan sumber",
+	"fullCoverage": "Cakupan penuh",
+	"partialCoverage": "Cakupan sebagian",
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"french": "Prancis",
 	"english": "Inggris",
@@ -491,7 +508,8 @@
 	"linkHelpText": "URL eksternal untuk pelacakan atau referensi (mis. sharepoint, jira, dll.)",
 	"effortHelpText": "Upaya yang diperlukan untuk menerapkan kontrol",
 	"costHelpText": "Biaya yang diperlukan untuk menerapkan kontrol",
-	"riskAcceptanceJusitficationHelpText": "Justifikasi penerimaan risiko. Hanya penyetuju yang dapat mengedit bidang ini.",
+	"riskAcceptanceJustificationHelpText": "Justifikasi penerimaan risiko. Hanya penyetuju yang dapat mengedit bidang ini.",
+	"riskAcceptanceJustificationLabel": "Justifikasi penerimaan risiko",
 	"approverHelpText": "Pemilik risiko dan identitas penyetuju",
 	"riskAcceptanceRiskScenariosHelpText": "Skenario risiko yang diterima",
 	"attachmentHelpText": "File untuk bukti (contoh: tangkapan layar, file log, dll.). Setelah dipilih, Anda dapat menempelkan tangkapan layar langsung dari clipboard Anda.",
@@ -738,7 +756,7 @@
 	"maturity": "Kematangan",
 	"progress": "Kemajuan",
 	"back": "Kembali",
-	"backToWorkshop": "Kembali ke studi Ebios RM / ekosistem",
+	"backToWorkshop": "Kembali ke studi EBIOS RM / ekosistem",
 	"duplicate": "Duplikasi",
 	"duplicateRiskAssessment": "Duplikasi penilaian risiko",
 	"duplicateAppliedControl": "Duplikasi kontrol yang diterapkan",
@@ -746,6 +764,19 @@
 	"favicon": "Favicon",
 	"logo": "Logo",
 	"clientSettings": "Pengaturan klien",
+	"infraConfig": "Infrastruktur",
+	"infraConfigDescription": "Kelola konfigurasi infrastruktur yang diekspos ke lapisan infrastruktur. Alamat IP dan rentang CIDR di bawah ini digunakan untuk mengonfigurasi akses backend secara otomatis.",
+	"infraConfigSettingsUpdated": "Pengaturan infrastruktur berhasil diperbarui",
+	"allowedIps": "IP yang diizinkan",
+	"ipAddressOrCidr": "Alamat IP atau CIDR",
+	"invalidIpOrCidr": "Masukkan alamat IP atau rentang CIDR yang valid.",
+	"ipAlreadyAdded": "IP ini sudah ada dalam daftar.",
+	"tooManyAllowedIps": "Anda dapat menambahkan maksimal {max} alamat IP.",
+	"enterIpFirst": "Masukkan alamat IP atau CIDR terlebih dahulu.",
+	"allowsAllIpsWarning": "Ini mengizinkan akses dari alamat IP mana pun.",
+	"confirmEmptyAllowlist": "Anda akan menyimpan tanpa IP dalam daftar yang diizinkan. Ini dapat memblokir semua akses. Lanjutkan?",
+	"removeIp": "Hapus {ip}",
+	"noAllowedIpsYet": "Belum ada IP yang diizinkan.",
 	"invalidFileType": "Jenis file tidak valid",
 	"logoHelpText": "Logo akan ditampilkan di header aplikasi. Format yang diterima adalah PNG, JPEG, WEBP, SVG.",
 	"faviconHelpText": "Favicon akan ditampilkan di tab browser. Format yang diterima adalah ICO, PNG, JPEG, WEBP, SVG.",
@@ -891,6 +922,16 @@
 	"emailPasswordMismatch": "Tidak dapat masuk dengan kredensial yang diberikan.",
 	"securitySettings": "Pengaturan keamanan",
 	"securitySettingsDescription": "Konfigurasikan pengaturan keamanan Anda di sini.",
+	"preferencesSettings": "Preferensi",
+	"preferencesSettingsDescription": "Konfigurasikan preferensi tampilan pribadi Anda di sini.",
+	"dateFormat": "Format tanggal",
+	"dateFormatDescription": "Pilih bagaimana tanggal ditampilkan di seluruh aplikasi.",
+	"dateFormatAuto": "Otomatis (ikuti bahasa)",
+	"dateFormatIso": "ISO 8601 (2026-05-31)",
+	"dateFormatDdmmyyyy": "Hari/Bulan/Tahun (31/05/2026)",
+	"dateFormatMmddyyyy": "Bulan/Hari/Tahun (05/31/2026)",
+	"dateFormatLongDmy": "Panjang, hari dulu (31 Mei 2026)",
+	"dateFormatLongMdy": "Panjang, bulan dulu (Mei 31, 2026)",
 	"multiFactorAuthentication": "Autentikasi multi-faktor",
 	"authenticatorApp": "Aplikasi autentikator",
 	"authenticatorAppDescription": "Gunakan aplikasi autentikator untuk menghasilkan kata sandi satu kali berbasis waktu (TOTP) untuk autentikasi dua faktor.",
@@ -984,10 +1025,10 @@
 	"activityOne": "Langkah 1",
 	"activityTwo": "Langkah 2",
 	"activityThree": "Langkah 3",
-	"ebiosRmStudy": "Studi Ebios RM",
+	"ebiosRmStudy": "Studi EBIOS RM",
 	"qualifications": "Kualifikasi",
 	"impacts": "Dampak",
-	"ebiosRmStudies": "Studi Ebios RM",
+	"ebiosRmStudies": "Studi EBIOS RM",
 	"bringTheEvidences": "Bawa bukti",
 	"bringTheEvidencesHelpText": "Jika dinonaktifkan, objek akan diduplikasi tanpa bukti-buktinya",
 	"gravity": "Keparahan",
@@ -997,7 +1038,7 @@
 	"fearedEvent": "Kejadian yang ditakuti",
 	"fearedEvents": "Kejadian yang ditakuti",
 	"isSelected": "Terpilih",
-	"ebiosRM": "Ebios RM",
+	"ebiosRM": "EBIOS RM",
 	"riskOrigin": "Asal risiko",
 	"targetObjective": "Tujuan target",
 	"motivation": "Motivasi",
@@ -1047,7 +1088,7 @@
 	"workshopOne": "Workshop 1",
 	"refIdSemiColon": "ID Referensi:",
 	"addFearedEvent": "Tambahkan kejadian yang ditakuti",
-	"addEbiosRmStudy": "Tambahkan studi Ebios RM",
+	"addEbiosRmStudy": "Tambahkan studi EBIOS RM",
 	"noAuthor": "Tidak ada penulis yang ditugaskan",
 	"noReviewer": "Tidak ada peninjau yang ditugaskan",
 	"selectAudit": "Pilih audit",
@@ -1068,7 +1109,7 @@
 	"noStakeholders": "Tidak ada pemangku kepentingan",
 	"strategicScenario": "Skenario strategis",
 	"strategicScenarios": "Skenario strategis",
-	"goBackToEbiosRmStudy": "Kembali ke studi Ebios RM",
+	"goBackToEbiosRmStudy": "Kembali ke studi EBIOS RM",
 	"addStrategicScenario": "Tambahkan skenario strategis",
 	"markAsDone": "Tandai sebagai selesai",
 	"markAsInProgress": "Tandai sebagai sedang berjalan",
@@ -1169,8 +1210,14 @@
 	"associatedFindingsAssessments": "Tindak lanjut terkait",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Jam",
 				"countPlural=other": "{count} Jam"
@@ -1179,8 +1226,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Menit",
 				"countPlural=other": "{count} Menit"
@@ -1189,8 +1241,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Hari",
 				"countPlural=other": "{count} Hari"
@@ -1199,8 +1256,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} objek tidak terlihat.",
 				"countPlural=other": "{count} objek tidak terlihat."
@@ -1302,8 +1364,14 @@
 	"errorFetching": "Tidak dapat memuat informasi kaskade. Silakan coba lagi.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "Tidak ada objek lain yang akan terpengaruh.",
 				"countPlural=one": "{count} objek terkait tidak akan dihapus tetapi akan kehilangan satu atau lebih hubungan.",
@@ -1433,8 +1501,13 @@
 	"builderPublishModalDescription": "Tindakan ini akan memperbarui kerangka kerja aktif. Tinjau perubahannya di bawah.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} persyaratan ditambahkan",
 				"countPlural=other": "{count} persyaratan ditambahkan"
@@ -1443,8 +1516,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} pertanyaan",
 				"countPlural=other": "{count} pertanyaan"
@@ -1453,8 +1531,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} persyaratan dihapus",
 				"countPlural=other": "{count} persyaratan dihapus"
@@ -1463,8 +1546,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} pertanyaan",
 				"countPlural=other": "{count} pertanyaan"
@@ -1474,8 +1562,13 @@
 	"builderNoStructuralChanges": "Tidak ada perubahan struktural yang terdeteksi (hanya metadata).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} perubahan tidak kompatibel terdeteksi",
 				"countPlural=other": "{count} perubahan tidak kompatibel terdeteksi"
@@ -1485,8 +1578,13 @@
 	"builderBreakingChangesHint": "Perubahan ini dapat memengaruhi penilaian, visibilitas, atau hasil kepatuhan dalam audit yang sudah ada.",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} audit yang ada akan terdampak",
 				"countPlural=other": "{count} audit yang ada akan terdampak"
@@ -1524,8 +1622,13 @@
 	"builderNoRulesOrGroupsConfigured": "Tidak ada aturan atau grup yang dikonfigurasi",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} aturan hasil",
 				"countPlural=other": "{count} aturan hasil"
@@ -1534,8 +1637,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} grup",
 				"countPlural=other": "{count} grup"
@@ -1548,8 +1656,13 @@
 	"builderScoreScale": "Skala skor",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} tingkat",
 				"countPlural=other": "{count} tingkat"
@@ -1619,8 +1732,13 @@
 	"builderAssessableLeaf": "Daun yang dapat dinilai",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Dapat dinilai · {count} anak",
 				"countPlural=other": "Dapat dinilai · {count} anak"
@@ -1629,8 +1747,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Grup · {count} anak",
 				"countPlural=other": "Grup · {count} anak"
@@ -1657,8 +1780,13 @@
 	"builderAddQuestion": "Tambah pertanyaan",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} anak disembunyikan",
 				"countPlural=other": "{count} anak disembunyikan"
@@ -1686,8 +1814,14 @@
 	"builderChangeTypeWarning": "Mengubah tipe akan menghapus pilihan yang ada. Lanjutkan?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Ditampilkan ketika {ref} = {count} jawaban",
 				"countPlural=other": "Ditampilkan ketika {ref} = {count} jawaban"
@@ -1766,31 +1900,39 @@
 	"builderQuestionTypeUniqueChoice": "Pilihan unik",
 	"builderQuestionTypeMultipleChoice": "Pilihan ganda",
 	"builderQuestionTypeDate": "Tanggal",
-	"builderChangedOn": "changed on",
+	"builderChangedOn": "diubah pada",
+	"requirementWeight": "Bobot",
+	"scim": "SCIM",
+	"scimDescription": "Konfigurasikan penyediaan SCIM 2.0. Arahkan penyedia identitas Anda ke endpoint di bawah ini dan autentikasi dengan token bearer yang dibuat di sini.",
+	"scimEndpointUrl": "URL endpoint SCIM",
+	"scimTokens": "Token SCIM",
+	"generateScimToken": "Buat token",
+	"noScimTokens": "Belum ada token SCIM.",
+	"scimTokenName": "Nama",
+	"scimTokenDigest": "Digest",
+	"revokeScimToken": "Cabut",
+	"scimTokenGenerated": "Token dibuat",
+	"scimTokenWarning": "Salin token ini sekarang. Untuk alasan keamanan, token tidak akan ditampilkan lagi.",
+	"scimTokenRevoked": "Token SCIM dicabut",
+	"scimTokenGenerationFailed": "Gagal membuat token SCIM",
+	"idpGroup": "Grup IdP",
+	"idpGroups": "Grup IdP",
+	"idpGroupsDescription": "Aktifkan federasi grup IdP (penyediaan SCIM, pemetaan grup IdP, dan keanggotaan grup IdP pada pengguna).",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
-	"providerFolder": "Provider domain",
-	"targetFolders": "Covered customer domains",
-	"lastVerifiedAt": "Last verified at",
-	"isCurrent": "Current",
 	"mspTenancyModel": "MSP tenancy model",
 	"mspProviderCoverageFlows": "Provider coverage flows to customer domains",
 	"mspTenancyModelDescription": "Use one service provider domain as the parent for customer domains. Keep MTG internal domains separate when our internal controls differ from the controls we apply for customers.",
 	"manageMspControlAssertions": "Manage MSP control assertions",
 	"serviceProvider": "Service provider",
 	"serviceProviderDomainDescription": "Parent domain for MSP-applied controls and verification signals.",
-	"customerChildren": "Customer children",
 	"customerChildrenDescription": "Customer assessments can inherit covered safeguards from the provider.",
-	"mtgInternal": "MTG internal",
-	"mtgInternalDescription": "Separate domain tree for our own controls, risks, and evidence.",
 	"mspControlAssertionWorkflow": "MSP control assertion workflow",
 	"providerAppliedCoverage": "Provider-applied coverage",
 	"mapProviderControlToCustomerDomains": "Map one provider control to many covered customer domains",
 	"mspControlAssertionsDescription": "Use assertions for controls MTG operates on behalf of customers, such as managed disk encryption, endpoint baseline enforcement, or backup policy monitoring. Scoring can then treat covered customer requirements as inherited from the provider control.",
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
-	"customerCoverage": "Customer coverage",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"verification": "Verification",
-	"verificationDescription": "The source, reference, and summary for live technical evidence."
+	"providerFolder": "Provider domain"
 }

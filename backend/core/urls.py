@@ -12,6 +12,7 @@ from library.views import (
     StoredLibraryViewSet,
     LoadedLibraryViewSet,
 )
+from custom_fields.views import CustomFieldDefinitionViewSet
 import importlib
 
 
@@ -22,6 +23,11 @@ from django.conf import settings
 
 router = routers.DefaultRouter()
 router.register(r"folders", FolderViewSet, basename="folders")
+router.register(
+    r"custom-fields",
+    CustomFieldDefinitionViewSet,
+    basename="custom-fields",
+)
 router.register(r"entities", EntityViewSet, basename="entities")
 router.register(
     r"entity-assessments", EntityAssessmentViewSet, basename="entity-assessments"
@@ -63,6 +69,7 @@ router.register(r"teams", TeamViewSet, basename="teams")
 
 router.register(r"users", UserViewSet, basename="users")
 router.register(r"user-groups", UserGroupViewSet, basename="user-groups")
+router.register(r"idp-groups", IdPGroupViewSet, basename="idp-groups")
 router.register(r"role-assignments", RoleAssignmentViewSet, basename="role-assignments")
 router.register(r"frameworks", FrameworkViewSet, basename="frameworks")
 router.register(r"evidences", EvidenceViewSet, basename="evidences")
@@ -181,6 +188,11 @@ urlpatterns = [
     ),
     path("get_counters/", get_counters_view, name="get_counters_view"),
     path("get_metrics/", get_metrics_view, name="get_metrics_view"),
+    path(
+        "analytics/export/xlsx/",
+        get_analytics_export_xlsx,
+        name="get_analytics_export_xlsx",
+    ),
     path(
         "get_audits_metrics/", get_audits_metrics_view, name="get_audits_metrics_view"
     ),
