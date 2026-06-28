@@ -104,3 +104,9 @@ export function initThemeFromUser(preferences: { ui?: { theme?: ThemeMode } } | 
 		themeMode.set(getStoredTheme());
 	}
 }
+
+export function initializeThemePreference(): 'light' | 'dark' {
+	const resolved = resolveTheme(getStoredTheme());
+	applyTheme(resolved);
+	return resolved;
+}

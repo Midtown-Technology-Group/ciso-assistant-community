@@ -1744,5 +1744,15 @@
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"providerFolder": "Provider domain"
+	"providerFolder": "Provider domain",
+	"currencyConversionRate": "Currency conversion rate",
+	"exporting": "Exporting...",
+	"errorOccurred": "An error occurred",
+	"diff": "Diff",
+	"confirmDeleteTitle": "Confirm deletion",
+	"areYouSureToDeleteObject": "Are you sure you want to delete this object?",
+	"addActor": "Add actor",
+	"generateReport": "Generate Report",
+	"aboutReports": "About Reports",
+	"aboutReportsDescription": "Reports provide simple tools to generate specialized reports useful for key insights or required by authorities for specific standards.\nMore specialized capabilities will be added as we identify specific cases."
 }

@@ -5253,5 +5253,12 @@
 	"scoreScale": "Score scale",
 	"downloadExcelTemplate": "Download Excel template",
 	"frameworkActionsHelp": "The Excel template is meant for third parties or external entities to fill offline, then re-import the results through the {dataWizard}.",
-	"decisionNotes": "Decision notes"
+	"decisionNotes": "Decision notes",
+	"currencyConversionRate": "Currency conversion rate",
+	"exporting": "Exporting...",
+	"errorOccurred": "An error occurred",
+	"diff": "Diff",
+	"confirmDeleteTitle": "Confirm deletion",
+	"areYouSureToDeleteObject": "Are you sure you want to delete this object?",
+	"addActor": "Add actor"
 }

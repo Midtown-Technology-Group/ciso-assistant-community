@@ -1,10 +1,11 @@
-name: MTG Build Frontend Image
+name: MTG Build and Deploy CISO Images
 
 on:
   push:
     branches:
       - main
     paths:
+      - "backend/**"
       - "frontend/**"
       - ".github/workflows/mtg-frontend-image.yml"
   workflow_dispatch:
@@ -16,6 +17,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
   packages: write
 
 concurrency:
@@ -23,9 +25,84 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  build-backend:
+    name: Build and push backend image
+    runs-on: ubuntu-24.04
+    outputs:
+      image: ${{ steps.image.outputs.primary_tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Create image metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          short_sha="$(git rev-parse --short=9 HEAD)"
+          {
+            echo "CISO_ASSISTANT_VERSION=mtg-$short_sha"
+            echo "CISO_ASSISTANT_BUILD=$short_sha"
+          } > .meta
+          cp .meta ./backend/
+          cp .meta ./backend/ciso_assistant/
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compute image tags
+        id: image
+        shell: bash
+        env:
+          INPUT_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          image="$(echo "ghcr.io/${GITHUB_REPOSITORY_OWNER}/mtg-ciso-assistant-backend" | tr '[:upper:]' '[:lower:]')"
+          short_sha="$(git rev-parse --short=9 HEAD)"
+          primary_tag="$image:mtg-$short_sha"
+          {
+            echo "name=$image"
+            echo "short_sha=$short_sha"
+            echo "primary_tag=$primary_tag"
+            echo "tags<<EOF"
+            echo "$primary_tag"
+            echo "$image:sha-${GITHUB_SHA}"
+            if [[ "${GITHUB_REF_NAME}" == "main" ]]; then
+              echo "$image:mtg-main"
+            fi
+            if [[ -n "${INPUT_TAG}" ]]; then
+              echo "$image:${INPUT_TAG}"
+            fi
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Build and push
+        uses: docker/build-push-action@v7
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: ${{ steps.image.outputs.tags }}
+          labels: |
+            org.opencontainers.image.title=CISO Assistant Backend
+            org.opencontainers.image.description=MTG fork of CISO Assistant backend
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.licenses=AGPL-3.0
+          sbom: true
+          provenance: true
+
   build-frontend:
     name: Build and push frontend image
     runs-on: ubuntu-24.04
+    outputs:
+      image: ${{ steps.image.outputs.primary_tag }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -49,11 +126,13 @@ jobs:
           set -euo pipefail
           image="$(echo "ghcr.io/${GITHUB_REPOSITORY_OWNER}/mtg-ciso-assistant-frontend" | tr '[:upper:]' '[:lower:]')"
           short_sha="$(git rev-parse --short=9 HEAD)"
+          primary_tag="$image:mtg-$short_sha"
           {
             echo "name=$image"
             echo "short_sha=$short_sha"
+            echo "primary_tag=$primary_tag"
             echo "tags<<EOF"
-            echo "$image:mtg-$short_sha"
+            echo "$primary_tag"
             echo "$image:sha-${GITHUB_SHA}"
             if [[ "${GITHUB_REF_NAME}" == "main" ]]; then
               echo "$image:mtg-main"
@@ -97,4 +176,75 @@ jobs:
             while IFS= read -r tag; do
               echo "- \`$tag\`"
             done <<< "$IMAGE_TAGS"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  deploy-container-apps:
+    name: Deploy CISO Container Apps
+    needs:
+      - build-backend
+      - build-frontend
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-24.04
+    environment: ciso-production
+    steps:
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Update backend Container App image
+        shell: bash
+        env:
+          RESOURCE_GROUP: ${{ vars.CISO_RESOURCE_GROUP }}
+          BACKEND_APP: ${{ vars.CISO_BACKEND_CONTAINER_APP }}
+          IMAGE: ${{ needs.build-backend.outputs.image }}
+        run: |
+          set -euo pipefail
+          az containerapp update \
+            --resource-group "$RESOURCE_GROUP" \
+            --name "$BACKEND_APP" \
+            --image "$IMAGE"
+
+      - name: Update frontend Container App image
+        shell: bash
+        env:
+          RESOURCE_GROUP: ${{ vars.CISO_RESOURCE_GROUP }}
+          FRONTEND_APP: ${{ vars.CISO_FRONTEND_CONTAINER_APP }}
+          IMAGE: ${{ needs.build-frontend.outputs.image }}
+        run: |
+          set -euo pipefail
+          az containerapp update \
+            --resource-group "$RESOURCE_GROUP" \
+            --name "$FRONTEND_APP" \
+            --image "$IMAGE"
+
+      - name: Verify deployed images
+        shell: bash
+        env:
+          RESOURCE_GROUP: ${{ vars.CISO_RESOURCE_GROUP }}
+          BACKEND_APP: ${{ vars.CISO_BACKEND_CONTAINER_APP }}
+          FRONTEND_APP: ${{ vars.CISO_FRONTEND_CONTAINER_APP }}
+          BACKEND_IMAGE: ${{ needs.build-backend.outputs.image }}
+          FRONTEND_IMAGE: ${{ needs.build-frontend.outputs.image }}
+        run: |
+          set -euo pipefail
+          running_backend="$(az containerapp show --resource-group "$RESOURCE_GROUP" --name "$BACKEND_APP" --query "properties.template.containers[0].image" -o tsv)"
+          running_frontend="$(az containerapp show --resource-group "$RESOURCE_GROUP" --name "$FRONTEND_APP" --query "properties.template.containers[0].image" -o tsv)"
+          if [[ "$running_backend" != "$BACKEND_IMAGE" ]]; then
+            echo "::error::Expected backend $BACKEND_IMAGE but Container App reports $running_backend"
+            exit 1
+          fi
+          if [[ "$running_frontend" != "$FRONTEND_IMAGE" ]]; then
+            echo "::error::Expected frontend $FRONTEND_IMAGE but Container App reports $running_frontend"
+            exit 1
+          fi
+          {
+            echo "### CISO deployment"
+            echo
+            echo "- Backend app: \`$BACKEND_APP\`"
+            echo "- Backend image: \`$running_backend\`"
+            echo "- Frontend app: \`$FRONTEND_APP\`"
+            echo "- Frontend image: \`$running_frontend\`"
           } >> "$GITHUB_STEP_SUMMARY"

@@ -5241,5 +5241,12 @@
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"providerFolder": "Provider domain"
+	"providerFolder": "Provider domain",
+	"currencyConversionRate": "Currency conversion rate",
+	"exporting": "Exporting...",
+	"errorOccurred": "An error occurred",
+	"diff": "Diff",
+	"confirmDeleteTitle": "Confirm deletion",
+	"areYouSureToDeleteObject": "Are you sure you want to delete this object?",
+	"addActor": "Add actor"
 }
