@@ -185,7 +185,6 @@ jobs:
       - build-frontend
     if: github.ref_name == 'main'
     runs-on: ubuntu-24.04
-    environment: ciso-production
     steps:
       - name: Azure login
         uses: azure/login@v2
