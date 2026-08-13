@@ -8,7 +8,7 @@ readme = "README.md"
 
 dependencies = [
     "django>=6.0.4,<7",
-    "weasyprint>=68.0,<70",
+    "weasyprint>=69.0,<70",
     "psycopg[binary]>=3.3,<4",
     "gunicorn>=23.0.0,<27",
     "django-filter>=25.2,<27",
