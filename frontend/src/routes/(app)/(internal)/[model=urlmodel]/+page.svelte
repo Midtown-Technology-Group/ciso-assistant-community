@@ -3,6 +3,7 @@
 	import { page } from '$app/state';
 
 	import CreateModal from '$lib/components/Modals/CreateModal.svelte';
+	import ImportWorkflowModal from '$lib/components/Modals/ImportWorkflowModal.svelte';
 	import ExportModal, {
 		type ExportGroup,
 		type ExportOption
@@ -133,6 +134,21 @@
 			component: modalComponent,
 			// Data
 			title: safeTranslate('add-' + data.model.localName)
+		};
+		modalStore.trigger(modal);
+	}
+
+	function modalWorkflowImportForm(): void {
+		let modalComponent: ModalComponent = {
+			ref: ImportWorkflowModal,
+			props: {
+				form: data.model['workflowImportForm']
+			}
+		};
+		let modal: ModalSettings = {
+			type: 'component',
+			component: modalComponent,
+			title: safeTranslate('importWorkflow')
 		};
 		modalStore.trigger(modal);
 	}
@@ -275,7 +291,16 @@
 				{#snippet addButton()}
 					<div class="relative">
 						<div class="inline-flex overflow-hidden rounded-md border bg-surface-50-950 shadow-xs">
-							{#if !['risk-matrices', 'frameworks', 'requirement-mapping-sets', 'user-groups', 'role-assignments', 'qualifications'].includes(URLModel)}
+							{#if URLModel === 'document-containers'}
+								<a
+									href="/documents/new"
+									class="inline-block p-3 btn-mini-primary w-12 focus:relative"
+									data-testid="add-button"
+									title={safeTranslate('add-' + data.model.localName)}
+									aria-label={safeTranslate('add-' + data.model.localName)}
+									><i class="fa-solid fa-file-circle-plus"></i>
+								</a>
+							{:else if !['risk-matrices', 'frameworks', 'requirement-mapping-sets', 'user-groups', 'role-assignments', 'qualifications'].includes(URLModel)}
 								<button
 									class="inline-block p-3 btn-mini-primary w-12 focus:relative"
 									data-testid="add-button"
@@ -285,7 +310,7 @@
 									onclick={handlers(modalCreateForm, handleClickForGT)}
 									><i class="fa-solid fa-file-circle-plus"></i>
 								</button>
-								{#if ['applied-controls', 'assets', 'incidents', 'security-exceptions', 'risk-scenarios', 'processings', 'task-templates', 'entities', 'solutions', 'contracts'].includes(URLModel)}
+								{#if ['applied-controls', 'assets', 'incidents', 'security-exceptions', 'risk-scenarios', 'processings', 'task-templates', 'entities', 'solutions', 'contracts', 'representatives'].includes(URLModel)}
 									<button
 										class="inline-block p-3 btn-mini-tertiary w-12 focus:relative"
 										title={m.exportButton()}
@@ -293,6 +318,17 @@
 										onclick={modalExport}
 									>
 										<i class="fa-solid fa-download"></i>
+									</button>
+								{/if}
+								{#if URLModel === 'workflows'}
+									<button
+										class="inline-block p-3 btn-mini-tertiary w-12 focus:relative"
+										title={m.importWorkflow()}
+										aria-label={m.importWorkflow()}
+										data-testid="import-workflow-button"
+										onclick={modalWorkflowImportForm}
+									>
+										<i class="fa-solid fa-file-import"></i>
 									</button>
 								{/if}
 								{#if URLModel === 'vulnerabilities'}
@@ -418,6 +454,15 @@
 										}}>🇪🇺</button
 									>
 								{/if}
+								{#if URLModel === 'document-templates'}
+									<a
+										href="{URLModel}/import"
+										class="inline-block p-3 btn-mini-secondary w-12 focus:relative"
+										title={m.importTemplates()}
+										aria-label={m.importTemplates()}
+										data-testid="import-templates-button"><i class="fa-solid fa-file-import"></i></a
+									>
+								{/if}
 								{#if URLModel === 'cwes'}
 									<button
 										class="inline-block p-3 btn-mini-tertiary w-12 focus:relative"
@@ -459,6 +504,13 @@
 									>
 								{/if}
 								{#if URLModel === 'assets'}
+									<Anchor
+										href="assets/tree/"
+										class="inline-block p-3 btn-mini-quaternary w-12 focus:relative"
+										title={m.assetsTree()}
+										label={m.assetsTree()}
+										data-testid="tree-button"><i class="fa-solid fa-sitemap"></i></Anchor
+									>
 									<Anchor
 										href="assets/graph/"
 										class="inline-block p-3 btn-mini-secondary w-12 focus:relative"

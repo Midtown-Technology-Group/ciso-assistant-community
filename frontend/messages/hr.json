@@ -1,4 +1,12 @@
 {
+	"manageMembers": "Upravljanje članovima",
+	"addMembers": "Dodaj članove",
+	"removeFromGroup": "Ukloni iz grupe",
+	"membersAdded": "Članovi dodani",
+	"membersRemoved": "Članovi uklonjeni",
+	"includeInactive": "Uključi neaktivne",
+	"noResults": "Nema rezultata. Precizirajte pretragu.",
+	"nothingSelected": "Još ništa nije odabrano.",
 	"mapToFramework": "Mapiraj u okvir",
 	"mapToFrameworkDescription": "Stvori novi audit u drugom okviru, mapiran iz ovoga.",
 	"mapFromAudit": "Mapiraj iz audita",
@@ -677,6 +685,7 @@
 	"missingMandatoyObjects2": "Molimo dodajte ih prije nastavljanja",
 	"attemptToDeleteOnlyAdminAccountError": "Ne možete obrisati jedini admin račun u vašoj aplikaciji.",
 	"attemptToRemoveOnlyAdminUserGroup": "Ne možete ukloniti jedini admin račun u aplikaciji iz admin korisničke grupe.",
+	"attemptToRemoveSelfFromDomainAdminGroup": "Ne možete sami sebe ukloniti iz grupe administratora domene. Zamolite drugog administratora da to učini.",
 	"scoringHelpText": "Odaberite za omogućavanje ocjenjivanja",
 	"minScore": "Minimalna ocjena",
 	"maxScore": "Maksimalna ocjena",
@@ -832,6 +841,7 @@
 	"removeIp": "Ukloni {ip}",
 	"noAllowedIpsYet": "Još nema dopuštenih IP adresa.",
 	"invalidFileType": "Neispravna vrsta datoteke",
+	"wordTemplatesWarning": "Pažljivo pregledajte sadržaj predloška prije upotrebe i provjerite je li usklađen sa sigurnosnim i compliance pravilima vaše organizacije.",
 	"logoHelpText": "Logo će biti prikazan u zaglavlju aplikacije. Dozvoljeni formati su PNG, JPEG, WEBP, SVG.",
 	"faviconHelpText": "Favicon će biti prikazan u kartici preglednika. Dozvoljeni formati su ICO, PNG, JPEG, WEBP, SVG.",
 	"entity": "Entitet",
@@ -925,8 +935,8 @@
 	"expirationDateMustBeOnOrAfterStartDate": "Datum završetka mora biti isti ili kasniji od početnog datuma",
 	"backupLoadingError": "Došlo je do pogreške pri učitavanju backupa.",
 	"backupVersionError": "Nije moguće učitati backup, verzija backupa je neispravna",
-	"confirmYes": "Potvrdite upisivanjem 'da' ispod:",
-	"confirmYesPlaceHolder": "Upišite 'da' za potvrdu",
+	"confirmYes": "Potvrdite upisivanjem '{word}' ispod:",
+	"confirmYesPlaceHolder": "Upišite '{word}' za potvrdu",
 	"backupGreaterVersionError": "Nije moguće učitati backup, verzija backupa je viša od trenutne verzije aplikacije.",
 	"backupLowerVersionError": "Došlo je do pogreške, moguće je da je verzija backupa pre stara, tako da se mora ažurirati prije ponovnog pokušaja.",
 	"entityAssessmentEvidenceHelpText": "Vanjski upitnik",
@@ -943,7 +953,9 @@
 	"questionPlural": "Pitanja",
 	"fillMetadataURL": "Opcija 1: Popuni medatada URL",
 	"fillSSOSLOURLx509cert": "Opcija 2: Popuni SSO URL, SLO URL i x509 certifikat",
-	"licenseAboutToExpireWarning": "Preostalo vam je samo {days_left} dana prije isteka licence.",
+	"licenseExpiresToday": "Vaša licenca istječe danas.",
+	"licenseExpiresTomorrow": "Vaša licenca istječe sutra.",
+	"licenseExpiresInDays": "Vaša licenca istječe za {days_left} dana.",
 	"proof": "Dokaz",
 	"privacy": "Privatnost",
 	"safety": "Sigurnost",
@@ -1636,6 +1648,8 @@
 	"forceSSOLogin": "Prisilna SSO prijava",
 	"forceSSOLoginHelpText": "Zahtijevaj SSO od svih korisnika i resetiraj sve pohranjene lozinke. Korisnici s omogućenim 'Izuzmi iz SSO prijave' će zadržati pričuvnu prijavu putem lozinke.",
 	"forceSSOLoginHelpText2": "Osigurajte da je SSO funkcionalan ili da imate pričuvni račun prije omogućavanja ove opcije.",
+	"enableSpInitiatedSlo": "Omogući jedinstvenu odjavu koju pokreće davatelj usluge",
+	"enableSpInitiatedSloHelpText": "Pri odjavi zatvori i sesiju kod davatelja identiteta.",
 	"lastOccurrenceStatus": "Status posljednjeg događaja",
 	"showAllEvents": "Prikaži sve događaje",
 	"featureFlags": "Zastavice značajki",
@@ -1650,6 +1664,26 @@
 	"personalAccessTokenCreateDescription": "Osobni pristupni tokeni (PAT-ovi) mogu biti korišteni umjesto lozinki za autentikaciju na API. Korisni su za automatizaciju ili integraciju s drugim sustavima.",
 	"personalAccessTokenCreateWarning": "Upozorenje: PAT-ovi su osjetljive informacije. Tretirajte ih kao lozinke. Ako izgubite PAT, morat ćete generirati novi.",
 	"personalAccessTokenOnlyDisplayedOnce": "Token će biti prikazan samo jednom. Kopirajte ga i pohranite ga na siguran način.",
+	"serviceAccount": "Servisni račun",
+	"serviceAccounts": "Servisni računi",
+	"serviceAccountsDescription": "Omogućuje servisne račune (pristup API-ju od stroja do stroja putem OAuth2 client credentials toka).",
+	"addServiceAccount": "Dodaj servisni račun",
+	"clientId": "ID klijenta",
+	"clientSecret": "Tajni ključ klijenta",
+	"rotateSecret": "Rotiraj tajni ključ",
+	"rotateSecretConfirm": "Rotacija tajnog ključa odmah će poništiti trenutni. Svaka integracija koja ga koristi prestat će raditi dok se ne ažurira. Nastaviti?",
+	"clientSecretOnlyDisplayedOnce": "Tajni ključ klijenta bit će prikazan samo jednom. Obavezno ga kopirajte i sigurno pohranite.",
+	"isRecursive": "Primijeni na poddomene",
+	"isRecursiveHelpText": "Dodjeljuje odabrane dozvole na odabranim domenama i svim njihovim poddomenama.",
+	"serviceAccountExpiryHelpText": "Servisni račun bit će deaktiviran nakon ovog datuma.",
+	"createdBy": "Izradio",
+	"activate": "Aktiviraj",
+	"deactivate": "Deaktiviraj",
+	"deactivateServiceAccountConfirm": "Deaktivacija ovog servisnog računa odmah će opozvati sve neriješene pristupne tokene i blokirati izdavanje novih. Nastaviti?",
+	"gracePeriod": "Prijelazno razdoblje",
+	"gracePeriodHelpText": "Trenutni tajni ključ nastavlja raditi ovoliko dugo nakon rotacije, kako bi se integracije mogle ažurirati bez prekida rada. Ograničeno na 1 mjesec.",
+	"gracePeriodTooLong": "Prijelazno razdoblje ne smije biti dulje od 1 mjeseca.",
+	"previousSecretValidUntil": "Prethodni tajni ključ klijenta ostaje valjan do {date}.",
 	"expiresOn": "Ističe na {date}",
 	"personalAccessTokenExpiryHelpText": "Broj dana do isteka tokena",
 	"expiry": "Istek",
@@ -1779,19 +1813,14 @@
 	"campaigns": "Kampanje",
 	"addCampaign": "Započni kampanju",
 	"campaignDomainHelpText": "Domena na koju će kampanja biti vezana.",
+	"ebiosRmStudyDomainHelpText": "Promjena domene premješta istraživanje i sve objekte njegovih radionica u odabranu domenu.",
 	"averageProgress": "Prosječni napredak",
 	"daysRemaining": "Preostalo dana",
 	"associatedFindingsAssessments": "Povezana praćenja",
 	"hourCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"count",
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["count", "countPlural"],
 			"match": {
 				"countPlural=one": "{count} Sat",
 				"countPlural=other": "{count} Sati"
@@ -1800,13 +1829,8 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} Minuta",
 				"countPlural=other": "{count} Minuta"
@@ -1815,13 +1839,8 @@
 	],
 	"dayCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} Dan",
 				"countPlural=other": "{count} Dana"
@@ -1830,13 +1849,8 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} objekt nije vidljiv.",
 				"countPlural=other": "{count} objekti nisu vidljivi."
@@ -2145,14 +2159,8 @@
 	"errorFetching": "Nije moguće učitati informacije o kaskadnom brisanju. Pokušajte ponovno.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"count",
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["count", "countPlural"],
 			"match": {
 				"count=0": "Nijedan drugi objekt neće biti pogođen.",
 				"countPlural=one": "{count} povezanog objekta neće biti obrisan, ali će izgubiti jednu ili više veza.",
@@ -3058,6 +3066,8 @@
 	"lithuanian": "Litvanski",
 	"korean": "Korejski",
 	"estonian": "Estonski",
+	"slovak": "Slovački",
+	"slovenian": "Slovenski",
 	"loadDemoDataDescription": "Uvezi primjer okoline za razgledavanje platforme",
 	"loadedLibrary": "Učitana knjižnica",
 	"loadingAleComparisonData": "Učitavanje podataka ALE usporedbe...",
@@ -3493,7 +3503,7 @@
 	"thereWasAnErrorLoading": "Došlo je do pogreške pri učitavanju podataka ključnih metrika. Molimo pokušajte osvježiti stranicu.",
 	"thereWasAnErrorLoadingExecutive": "Došlo je do pogreške pri učitavanju podataka sažetka",
 	"thin": "Tanko",
-	"thirdPartiesImportHelpText": "Uvezite entitete, usluge, i ugovore vaših trećih strana iz višestraničnog Excel predloška",
+	"thirdPartiesImportHelpText": "Uvezite entitete, predstavnike, rješenja i ugovore vaših trećih strana iz višestraničnog Excel predloška",
 	"thirdPartyDescription": "Upravljanje entitetima trećih strana i njihovim predstavnicima, ugovorima, uslugama i procjenama.",
 	"thirdPartyRespondent": "Ispitanik treće strane",
 	"threatsDescription": "Potencijalne prijetnje vašoj organizaciji",
@@ -3829,13 +3839,8 @@
 	"builderPublishModalDescription": "Ova akcija ažurirat će produkcijski okvir. Pregledajte promjene u nastavku.",
 	"builderRequirementAdded": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} zahtjeva dodano",
 				"countPlural=other": "{count} zahtjeva dodano"
@@ -3844,13 +3849,8 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} pitanja",
 				"countPlural=other": "{count} pitanja"
@@ -3859,13 +3859,8 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} zahtjeva uklonjeno",
 				"countPlural=other": "{count} zahtjeva uklonjeno"
@@ -3874,13 +3869,8 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} pitanja",
 				"countPlural=other": "{count} pitanja"
@@ -3890,13 +3880,8 @@
 	"builderNoStructuralChanges": "Nije otkrivena strukturna promjena (samo metapodaci).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} nekompatibilnih promjena otkriveno",
 				"countPlural=other": "{count} nekompatibilnih promjena otkriveno"
@@ -3906,13 +3891,8 @@
 	"builderBreakingChangesHint": "Ove promjene mogu utjecati na bodovanje, vidljivost ili rezultate usklađenosti u postojećim revizijama.",
 	"builderAffectedAudits": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} postojećih revizija bit će pogođeno",
 				"countPlural=other": "{count} postojećih revizija bit će pogođeno"
@@ -3950,13 +3930,8 @@
 	"builderNoRulesOrGroupsConfigured": "Nema konfiguriranih pravila ni grupa",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} pravila ishoda",
 				"countPlural=other": "{count} pravila ishoda"
@@ -3965,13 +3940,8 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} grupa",
 				"countPlural=other": "{count} grupa"
@@ -3984,13 +3954,8 @@
 	"builderScoreScale": "Skala bodovanja",
 	"builderScaleLevel": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} razina",
 				"countPlural=other": "{count} razina"
@@ -4060,13 +4025,8 @@
 	"builderAssessableLeaf": "Procjenjivi list",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Procjenjivo · {count} podčvor",
 				"countPlural=other": "Procjenjivo · {count} podčvorova"
@@ -4075,13 +4035,8 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Grupa · {count} podčvor",
 				"countPlural=other": "Grupa · {count} podčvorova"
@@ -4108,13 +4063,8 @@
 	"builderAddQuestion": "Dodaj pitanje",
 	"builderChildrenHidden": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} podčvor skriven",
 				"countPlural=other": "{count} podčvorova skriveno"
@@ -4142,14 +4092,8 @@
 	"builderChangeTypeWarning": "Promjena tipa izbrisat će postojeće odabire. Nastaviti?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": [
-				"input count",
-				"input ref",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Prikazano kada {ref} = {count} odgovora",
 				"countPlural=other": "Prikazano kada {ref} = {count} odgovora"
@@ -4228,6 +4172,14 @@
 	"builderQuestionTypeUniqueChoice": "Jednostruki odabir",
 	"builderQuestionTypeMultipleChoice": "Višestruki odabir",
 	"builderQuestionTypeDate": "Datum",
+	"disableMFA": "Onemogući MFA",
+	"disableMFA1": "Ako je ovaj korisnik izgubio pristup svom drugom faktoru, možete",
+	"disableMFALinkText": "onemogućiti njihov MFA",
+	"disableMFA2": "Svi njihovi MFA autentifikatori bit će uklonjeni i morat će ponovno omogućiti MFA pri sljedećoj prijavi",
+	"disableMFAWarning": "MFA sigurnost bit će onemogućena za ovog korisnika dok je ponovno ne omogući.",
+	"mfaDisabledSuccessfully": "MFA je onemogućen za ovog korisnika",
+	"errorDisablingMFA": "Nije moguće onemogućiti MFA za ovog korisnika",
+	"userHasNoMFAEnabled": "Ovaj korisnik nema omogućen MFA",
 	"builderChangedOn": "promijenjeno u",
 	"requirementWeight": "Težina",
 	"scim": "SCIM",

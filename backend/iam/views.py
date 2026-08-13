@@ -3,6 +3,7 @@ from datetime import timedelta
 
 import structlog
 from allauth.account.models import EmailAddress
+from allauth.mfa.models import Authenticator
 from django.contrib.auth import get_user_model, login, logout
 from django.db import transaction
 from django.db.models import Q, Exists, OuterRef
@@ -15,7 +16,8 @@ from knox import crypto
 from knox.auth import TokenAuthentication, get_token_model, knox_settings
 from knox.models import AuthToken
 from knox.views import DateTimeField
-from rest_framework import permissions, serializers, status, views
+from django.core.exceptions import ValidationError as DjangoValidationError
+from rest_framework import permissions, serializers, status, views, viewsets
 from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_200_OK,
@@ -28,12 +30,29 @@ from django.conf import settings
 
 from global_settings.models import GlobalSettings
 from core.models import Actor
-from .models import Folder, PersonalAccessToken, Role, RoleAssignment, SCIMToken
-from core.permissions import IsAdministrator, FeatureFlagRequired
+from core.utils import RoleCodename
+from .models import (
+    Folder,
+    PersonalAccessToken,
+    Role,
+    RoleAssignment,
+    SCIMToken,
+    ServiceAccount,
+)
+from core.permissions import IsGlobalAdmin, FeatureFlagRequired
+from iam.sso.slo import copy_slo_state_from_session_key
+from .service_accounts import (
+    UNSET as UNSET_FIELD,
+    get_selectable_permissions,
+    provision_service_account,
+    update_service_account,
+)
 from .serializers import (
     ChangePasswordSerializer,
     PersonalAccessTokenReadSerializer,
+    DisableMFASerializer,
     ResetPasswordConfirmSerializer,
+    ServiceAccountReadSerializer,
     SetPasswordSerializer,
 )
 
@@ -231,7 +250,6 @@ class CurrentUserView(views.APIView):
             "date_joined": request.user.date_joined,
             "user_groups": user_groups,
             "roles": request.user.get_roles(),
-            "permissions": request.user.permissions,
             "is_third_party": request.user.is_third_party,
             "is_auditee": request.user.is_auditee,
             "is_admin": request.user.is_admin(),
@@ -269,6 +287,9 @@ class SessionTokenView(views.APIView):
         # Log the user in and get the session token
         # This token is used for allauth's authentication flows
         login(request, user)
+        copy_slo_state_from_session_key(
+            request, request.META.get("HTTP_X_SSO_SESSION_KEY")
+        )
         session_token = request.session.session_key
         return Response({"token": session_token})
 
@@ -418,32 +439,65 @@ class SetPasswordView(views.APIView):
     An endpoint for setting a password as an administrator.
     """
 
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsGlobalAdmin)
 
     serializer_class = SetPasswordSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = SetPasswordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        if RoleAssignment.has_role(
-            self.request.user, Role.objects.get(name="BI-RL-ADM")
-        ):
-            new_password = serializer.validated_data.get("new_password")
-            user = serializer.validated_data.get("user")
-            user.set_password(new_password)
-            user.save()
-            try:
-                email_address = EmailAddress.objects.get(user=user, primary=True)
-                email_address.verified = True
-                email_address.save()
-            except Exception as e:
-                logger.error(
-                    "Error setting email address as verified",
-                    user=user,
-                    error=e,
-                )
+        new_password = serializer.validated_data.get("new_password")
+        user = serializer.validated_data.get("user")
+        user.set_password(new_password)
+        user.save()
+        try:
+            email_address = EmailAddress.objects.get(user=user, primary=True)
+            email_address.verified = True
+            email_address.save()
+        except Exception as e:
+            logger.error(
+                "Error setting email address as verified",
+                user=user,
+                error=e,
+            )
+        return Response(status=status.HTTP_200_OK)
+
+
+class DisableMFAView(views.APIView):
+    """
+    An endpoint for disabling another user's MFA as an administrator.
+    Removes all MFA authenticators (TOTP, WebAuthn, recovery codes).
+    The user will need to enable MFA again on their next login.
+    """
+
+    permission_classes = (permissions.IsAuthenticated, IsGlobalAdmin)
+    serializer_class = DisableMFASerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = DisableMFASerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        target_user = serializer.validated_data.get("user")
+
+        # Delete first and branch on the deleted count to avoid an
+        # exists-then-delete race where a concurrent request could empty the
+        # authenticators between the check and the delete.
+        deleted_count, _ = Authenticator.objects.filter(user=target_user).delete()
+        if deleted_count > 0:
+            logger.warning(
+                "Admin disabled MFA for another user",
+                admin_id=str(request.user.id),
+                admin_email=request.user.email,
+                target_user_id=str(target_user.id),
+                target_user_email=target_user.email,
+                deleted_authenticators=deleted_count,
+            )
             return Response(status=status.HTTP_200_OK)
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        return Response(
+            {"error": "userHasNoMFAEnabled"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
 
 class RevokeOtherSessionsView(views.APIView):
@@ -491,7 +545,7 @@ class SCIMTokenViewSet(views.APIView):
 
     permission_classes = [
         permissions.IsAuthenticated,
-        IsAdministrator,
+        IsGlobalAdmin,
         FeatureFlagRequired,
     ]
     feature_flag = "idp_groups"
@@ -542,7 +596,7 @@ class SCIMTokenDeleteView(views.APIView):
 
     permission_classes = [
         permissions.IsAuthenticated,
-        IsAdministrator,
+        IsGlobalAdmin,
         FeatureFlagRequired,
     ]
     feature_flag = "idp_groups"
@@ -556,3 +610,155 @@ class SCIMTokenDeleteView(views.APIView):
             )
         scim_token.auth_token.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+MAX_GRACE_PERIOD_DAYS = 30
+
+
+class ServiceAccountViewSet(viewsets.ModelViewSet):
+    """Admin-only management of OAuth2 service accounts; secret is returned once, on create/rotate."""
+
+    permission_classes = [
+        permissions.IsAuthenticated,
+        IsGlobalAdmin,
+        FeatureFlagRequired,
+    ]
+    feature_flag = "service_accounts"
+    serializer_class = ServiceAccountReadSerializer
+    queryset = ServiceAccount.objects.select_related(
+        "client", "user", "role", "created_by"
+    ).order_by("-created_at")
+
+    def get_write_serializer_class(self):
+        """Resolve the write serializer by name through MODULE_PATHS, like
+        BaseModelViewSet does — the seam the enterprise build uses to layer
+        license rules (seat quota) on top without any license code here."""
+        # Deferred import: core.serializers circles into iam at import time.
+        from core.serializers import SerializerFactory
+
+        factory = SerializerFactory(
+            "iam.serializers", settings.MODULE_PATHS.get("serializers", [])
+        )
+        return factory.get_serializer("ServiceAccount", "create")
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_write_serializer_class()(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        try:
+            service_account, plain_secret = provision_service_account(
+                name=data["name"],
+                description=data.get("description"),
+                permission_ids=data.get("permissions"),
+                role_id=data["role"].id if data.get("role") else None,
+                folder_ids=data["folders"],
+                is_recursive=data["is_recursive"],
+                created_by=request.user,
+                expiry_date=data.get("expiry_date"),
+            )
+        except DjangoValidationError as e:
+            return Response({"error": e.messages}, status=status.HTTP_400_BAD_REQUEST)
+        payload = ServiceAccountReadSerializer(service_account).data
+        payload["client_secret"] = plain_secret
+        return Response(payload, status=status.HTTP_201_CREATED)
+
+    def partial_update(self, request, *args, **kwargs):
+        service_account = self.get_object()
+        serializer = self.get_write_serializer_class()(
+            data=request.data, partial=True, context={"instance": service_account}
+        )
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        try:
+            with transaction.atomic():
+                update_service_account(
+                    service_account,
+                    name=data.get("name"),
+                    description=data["description"]
+                    if "description" in data
+                    else UNSET_FIELD,
+                    permission_ids=data.get("permissions"),
+                    role_id=data["role"].id if data.get("role") else None,
+                    folder_ids=data.get("folders"),
+                    is_recursive=data.get("is_recursive"),
+                    expiry_date=data["expiry_date"]
+                    if "expiry_date" in data
+                    else UNSET_FIELD,
+                )
+                if "is_active" in data:
+                    if data["is_active"] and not service_account.is_active:
+                        service_account.activate()
+                    elif not data["is_active"] and service_account.is_active:
+                        service_account.deactivate()
+        except DjangoValidationError as e:
+            return Response({"error": e.messages}, status=status.HTTP_400_BAD_REQUEST)
+        service_account.refresh_from_db()
+        return Response(ServiceAccountReadSerializer(service_account).data)
+
+    def destroy(self, request, *args, **kwargs):
+        service_account = self.get_object()
+        with transaction.atomic():
+            service_account.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def rotate_secret(self, request, pk=None):
+        service_account = self.get_object()
+        grace_period_days = request.data.get("grace_period_days") or 0
+        try:
+            grace_period_days = int(grace_period_days)
+        except TypeError, ValueError:
+            return Response(
+                {"error": ["grace_period_days must be an integer"]},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        if not 0 <= grace_period_days <= MAX_GRACE_PERIOD_DAYS:
+            return Response(
+                {
+                    "error": [
+                        f"grace_period_days must be between 0 and {MAX_GRACE_PERIOD_DAYS}"
+                    ]
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        grace_period = timedelta(days=grace_period_days) if grace_period_days else None
+        with transaction.atomic():
+            plain_secret = service_account.rotate_secret(grace_period=grace_period)
+        logger.info(
+            "service account secret rotated",
+            service_account=service_account.name,
+            by=request.user,
+        )
+        return Response(
+            {
+                "client_id": service_account.client_id,
+                "client_secret": plain_secret,
+                "secret_preview": service_account.secret_preview,
+            }
+        )
+
+    def permissions_catalog(self, request):
+        # Deferred: core.serializers -> ebios_rm.models circles back into iam at import time.
+        from core.serializers import PermissionReadSerializer
+
+        return Response(
+            PermissionReadSerializer(get_selectable_permissions(), many=True).data
+        )
+
+    def builtin_roles(self, request):
+        selectable_ids = set(get_selectable_permissions().values_list("id", flat=True))
+        roles = Role.objects.filter(builtin=True).prefetch_related("permissions")
+        return Response(
+            [
+                {
+                    "id": str(role.id),
+                    "name": str(role),
+                    # Administrator is only linkable through the explicit
+                    # global-admin case (perimeter = Global, recursive).
+                    "global_only": role.name == RoleCodename.ADMINISTRATOR.value,
+                    "permissions": [
+                        p.id for p in role.permissions.all() if p.id in selectable_ids
+                    ],
+                }
+                for role in roles
+            ]
+        )

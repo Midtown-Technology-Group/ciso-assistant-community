@@ -15,13 +15,13 @@
 	import MarkdownRenderer from '$lib/components/MarkdownRenderer.svelte';
 	import AuditTrailButton from '$lib/components/AuditTrail/AuditTrailButton.svelte';
 	import CommentsPanel from '$lib/components/CommentsPanel/CommentsPanel.svelte';
+	import RiskAcceptancesSection from '$lib/components/RiskAcceptances/RiskAcceptancesSection.svelte';
 
 	import { goto } from '$app/navigation';
+	import { openRiskAcceptanceModal } from '$lib/utils/riskAcceptance';
 
 	import { onMount } from 'svelte';
-	import { canPerformAction } from '$lib/utils/access-control';
-	import List from '$lib/components/List/List.svelte';
-	import ConfirmModal from '$lib/components/Modals/ConfirmModal.svelte';
+	import { canPerformActionOnObject } from '$lib/utils/access-control';
 	import {
 		getModalStore,
 		type ModalComponent,
@@ -45,12 +45,22 @@
 
 	const user = page.data.user;
 	const model = URL_MODEL_MAP['risk-scenarios'];
-	const canEditObject: boolean = canPerformAction({
-		user,
-		action: 'change',
-		model: model.name,
-		domain: data.scenario.folder.id
-	});
+	const canEditObject: boolean = $derived(
+		canPerformActionOnObject({
+			user,
+			action: 'change',
+			model: model.name,
+			object: data.scenario
+		})
+	);
+	const canCreateAcceptance = $derived(
+		canPerformActionOnObject({
+			user,
+			action: 'add',
+			model: 'riskacceptance',
+			object: data.scenario
+		})
+	);
 	let color_map = $state({});
 	color_map['--'] = '#A9A9A9';
 
@@ -131,6 +141,13 @@
 			syncingToActionsIsLoading = false;
 	});
 
+	function modalRequestRiskAcceptance(): void {
+		openRiskAcceptanceModal(modalStore, {
+			folderId: data.scenario.folder.id,
+			riskScenarioIds: [page.params.id]
+		});
+	}
+
 	onMount(() => {
 		// Add event listener when component mounts
 		window.addEventListener('keydown', handleKeydown);
@@ -178,8 +195,9 @@
 					<p class="text-surface-400-600 italic text-sm">{m.noDescription()}</p>
 				{/if}
 			</div>
+			<RiskAcceptancesSection riskAcceptances={data.riskAcceptances} />
 		</div>
-		<div class="flex flex-col space-y-2 sm:my-auto shrink-0">
+		<div class="flex flex-col space-y-2 sm:self-start shrink-0">
 			{#if canEditObject}
 				<Anchor
 					href={`${page.url.pathname}/edit?next=${page.url.pathname}`}
@@ -210,7 +228,21 @@
 					</button>
 				{/if}
 			{/if}
-			<AuditTrailButton model="risk-scenarios" objectId={data.scenario.id} />
+			{#if canCreateAcceptance && !data.scenario.risk_assessment?.is_locked}
+				<button
+					class="btn text-white bg-linear-to-r from-orange-500 to-amber-500 h-fit"
+					onclick={() => modalRequestRiskAcceptance()}
+					data-testid="request-risk-acceptance-button"
+				>
+					<i class="fa-solid fa-signature mr-2"></i>
+					{m.requestRiskAcceptance()}
+				</button>
+			{/if}
+			<AuditTrailButton
+				model="risk-scenarios"
+				objectId={data.scenario.id}
+				folderId={data.scenario.folder?.id ?? user.root_folder_id}
+			/>
 		</div>
 	</div>
 
@@ -328,7 +360,7 @@
 	</div>
 
 	<div class="flex flex-col sm:flex-row gap-2">
-		<div class="card px-4 py-2 bg-surface-50-950 shadow-lg w-full sm:w-1/2">
+		<div class="card px-4 py-2 bg-surface-50-950 shadow-lg w-full flex-1">
 			<h4 class="h4 font-semibold">{m.riskOrigin()}</h4>
 			{#if data.scenario.risk_origin}
 				<p class="font-semibold text-surface-600-400">
@@ -341,9 +373,7 @@
 				<p class="text-surface-400-600 italic text-sm">{m.undefined()}</p>
 			{/if}
 		</div>
-		<div
-			class="card px-4 py-2 bg-surface-50-950 shadow-lg w-full sm:w-1/2 max-h-96 overflow-y-auto"
-		>
+		<div class="card px-4 py-2 bg-surface-50-950 shadow-lg w-full flex-1 max-h-96 overflow-y-auto">
 			<h4 class="h4 font-semibold">{m.antecedentScenarios()}</h4>
 			{#if data.scenario.antecedent_scenarios && data.scenario.antecedent_scenarios.length > 0}
 				<ul class="space-y-1">
@@ -359,6 +389,32 @@
 				<p class="text-surface-400-600 italic text-sm">{m.noAntecedentScenarios()}</p>
 			{/if}
 		</div>
+		{#if page.data?.featureflags?.threat_modeling}
+			<div
+				class="card px-4 py-2 bg-surface-50-950 shadow-lg w-full flex-1 max-h-96 overflow-y-auto"
+			>
+				<h4 class="h4 font-semibold">{m.threatModel()}</h4>
+				{#if data.scenario.threat_models && data.scenario.threat_models.length > 0}
+					<ul class="space-y-1">
+						{#each data.scenario.threat_models as threatModel}
+							<li class="flex items-center gap-2">
+								<Anchor class="anchor text-sm font-semibold" href="/threat-models/{threatModel.id}">
+									{threatModel.str}
+								</Anchor>
+								<Anchor
+									class="anchor text-xs text-surface-600-400"
+									href="/threat-models/{threatModel.id}/graph"
+								>
+									<i class="fa-solid fa-diagram-project mr-1"></i>{m.graph()}
+								</Anchor>
+							</li>
+						{/each}
+					</ul>
+				{:else}
+					<p class="text-surface-400-600 italic text-sm">{m.undefined()}</p>
+				{/if}
+			</div>
+		{/if}
 	</div>
 
 	{#if page.data?.featureflags?.inherent_risk}
@@ -537,7 +593,7 @@
 	</div>
 	<div class="card px-4 py-2 bg-surface-50-950 shadow-lg space-y-2">
 		<div>
-			<p class="text-sm font-semibold text-surface-400-600">{m.qualifications()}</p>
+			<p class="text-sm font-semibold text-surface-400-600">{safeTranslate('qualifications')}</p>
 			<p>
 				<span class="font-semibold">
 					{#each data.scenario.qualifications.sort( (a, b) => safeTranslate(a.str).localeCompare(safeTranslate(b.str)) ) as qualification, i}

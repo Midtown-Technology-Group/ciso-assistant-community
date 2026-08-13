@@ -18,6 +18,7 @@
 
 	import { hideSuggestions } from '$lib/utils/stores';
 	import { m } from '$paraglide/messages';
+	import { canPerformActionOnObject } from '$lib/utils/access-control';
 	import { countMasked } from '$lib/utils/related-visibility';
 	import CommentsPanel from '$lib/components/CommentsPanel/CommentsPanel.svelte';
 
@@ -40,7 +41,9 @@
 		computeRequirementScoreAndResult,
 		formatScoreValue,
 		displayScoreColor,
-		resultBadgeStyle
+		hasComputedScore,
+		resultBadgeStyle,
+		filterResultChoices
 	} from '$lib/utils/helpers';
 
 	interface Props {
@@ -181,7 +184,12 @@
 		// triggers invalidateAll, or after the modal creates/links new controls).
 		const _ = data.requirementAssessment.applied_controls;
 		if (
-			Object.hasOwn(page.data.user.permissions, 'add_appliedcontrol') &&
+			canPerformActionOnObject({
+				user: page.data.user,
+				action: 'add',
+				model: 'appliedcontrol',
+				object: data.requirementAssessment
+			}) &&
 			reference_controls.length > 0
 		) {
 			fetchSuggestionsPreview(data.requirementAssessment.id).then((items) => {
@@ -457,7 +465,7 @@
 								<ul class="list-disc ml-4">
 									{#each reference_controls as func}
 										<li>
-											{#if func.id}
+											{#if func.id && !page.data.user.is_third_party}
 												<a class="anchor" href="/reference-controls/{func.id}">
 													{func.str}
 												</a>
@@ -478,7 +486,7 @@
 								<ul class="list-disc ml-4">
 									{#each threats as threat}
 										<li>
-											{#if threat.id}
+											{#if threat.id && !page.data.user.is_third_party}
 												<a class="anchor" href="/threats/{threat.id}">
 													{threat.str}
 												</a>
@@ -561,7 +569,7 @@
 									</div>
 									<div class="h-full flex flex-col space-y-2 rounded-container p-4">
 										<span class="flex flex-row justify-end items-center space-x-2">
-											{#if Object.hasOwn(page.data.user.permissions, 'add_appliedcontrol') && reference_controls.length > 0}
+											{#if canPerformActionOnObject( { user: page.data.user, action: 'add', model: 'appliedcontrol', object: data.requirementAssessment } ) && reference_controls.length > 0}
 												{@const nothingToSuggest = actionableSuggestionsCount === 0}
 												<button
 													class="btn self-end shadow-sm
@@ -756,7 +764,11 @@
 							{:else}
 								<Select
 									{form}
-									options={page.data.model.selectOptions['result']}
+									options={filterResultChoices(
+										page.data.model.selectOptions['result'],
+										page.data.settings?.disable_partially_compliant_result,
+										data.result
+									)}
 									field="result"
 									label={m.result()}
 									helpText={m.requirementAssessmentResultHelpText()}
@@ -776,13 +788,13 @@
 						</div>
 					{/if}
 					{#if page.data.compliance_assessment_score.scoring_enabled}
-						{#if computedScore !== null}
+						{#if computedScore !== null || hasComputedScore(page.data.requirementAssessment.requirement.questions)}
 							{#if showScore}
 								<div class="flex flex-row items-center space-x-4">
 									<span class="font-medium">{m.score()}</span>
 									<div class="shrink-0 relative">
 										<Progress
-											value={formatScoreValue(computedScore || 0, resolvedMax, false, resolvedMin)}
+											value={formatScoreValue(computedScore, resolvedMax, false, resolvedMin)}
 											min={0}
 											max={100}
 										>
@@ -793,7 +805,7 @@
 												/>
 											</Progress.Circle>
 											<div class="absolute inset-0 flex items-center justify-center">
-												<span class="text-xs font-bold">{computedScore}</span>
+												<span class="text-xs font-bold">{computedScore ?? '–'}</span>
 											</div>
 										</Progress>
 									</div>

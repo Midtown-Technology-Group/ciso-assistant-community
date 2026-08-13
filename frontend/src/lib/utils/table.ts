@@ -8,6 +8,7 @@ import ChangeImpact from '$lib/components/ContextMenu/applied-controls/ChangeImp
 import ChangeEffort from '$lib/components/ContextMenu/applied-controls/ChangeEffort.svelte';
 import ChangeCsfFunction from '$lib/components/ContextMenu/applied-controls/ChangeCsfFunction.svelte';
 import EvidenceChangeStatus from '$lib/components/ContextMenu/evidences/ChangeStatus.svelte';
+import WorkflowToggleActive from '$lib/components/ContextMenu/workflows/ToggleActive.svelte';
 import TaskNodeChangeStatus from '$lib/components/ContextMenu/task-nodes/ChangeStatus.svelte';
 import { getModelInfo } from './crud';
 import SelectObject from '$lib/components/ContextMenu/ebios-rm/SelectObject.svelte';
@@ -16,6 +17,7 @@ import ReplaceWith from '$lib/components/ContextMenu/applied-controls/ReplaceWit
 import ChangeAttackStage from '$lib/components/ContextMenu/elementary-actions/ChangeAttackStage.svelte';
 import VulnerabilityChangeStatus from '$lib/components/ContextMenu/vulnerabilities/ChangeStatus.svelte';
 import VulnerabilityChangeSeverity from '$lib/components/ContextMenu/vulnerabilities/ChangeSeverity.svelte';
+import ToggleRecoveryFlags from '$lib/components/ContextMenu/asset-assessments/ToggleRecoveryFlags.svelte';
 
 export function tableSourceMapper(source: any[], keys: string[]): any[] {
 	return source.map((row) => {
@@ -57,6 +59,13 @@ const YES_NO_OPTIONS = [
 	{ label: 'no', value: 'false' }
 ];
 
+const TRIGGER_TYPE_OPTIONS = [
+	{ label: 'triggerManual', value: 'manual' },
+	{ label: 'triggerWebhook', value: 'webhook' },
+	{ label: 'triggerSchedule', value: 'schedule' },
+	{ label: 'triggerInternalEvent', value: 'internal_event' }
+];
+
 const SOLUTION_CRITICALITY_OPTIONS = [
 	{ label: '1', value: '1' },
 	{ label: '2', value: '2' },
@@ -75,12 +84,6 @@ const CONTENT_TYPE_OPTIONS = [
 	{ label: 'DOMAIN', value: 'DO' },
 	{ label: 'GLOBAL', value: 'GL' },
 	{ label: 'ENCLAVE', value: 'EN' }
-];
-
-const YES_NO_UNSET_OPTIONS = [
-	{ label: 'YES', value: 'YES' },
-	{ label: 'NO', value: 'NO' },
-	{ label: '--', value: '--' }
 ];
 
 const RISK_STAGE_OPTIONS = [
@@ -211,12 +214,58 @@ export const DOMAIN_ONLY_FILTER: ListViewFilterConfig = {
 	}
 };
 
+export const DOCUMENT_TYPE_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'document-containers/document_type',
+		optionsLabelField: 'label',
+		optionsValueField: 'value',
+		label: 'documentType',
+		browserCache: 'force-cache',
+		multiple: true
+	}
+};
+
+export const DOCUMENT_STATUS_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'document-containers/status',
+		optionsLabelField: 'label',
+		optionsValueField: 'value',
+		label: 'status',
+		browserCache: 'force-cache',
+		multiple: true
+	}
+};
+
+export const DOCUMENT_SOURCE_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'document-containers/source',
+		optionsLabelField: 'label',
+		optionsValueField: 'value',
+		label: 'source',
+		browserCache: 'force-cache',
+		multiple: true
+	}
+};
+
 export const LABELS_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
 		optionsEndpoint: 'filtering-labels',
 		label: 'filtering_labels',
 		optionsLabelField: 'label',
+		multiple: true
+	}
+};
+
+export const CLASSIFICATION_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'classification-levels',
+		optionsLabelField: 'label',
+		label: 'classification',
 		multiple: true
 	}
 };
@@ -279,7 +328,6 @@ export const RISK_ASSESSMENT_STATUS_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
 		options: [
-			{ label: '--', value: '--' },
 			{ label: 'planned', value: 'planned' },
 			{ label: 'in_progress', value: 'in_progress' },
 			{ label: 'in_review', value: 'in_review' },
@@ -290,7 +338,8 @@ export const RISK_ASSESSMENT_STATUS_FILTER: ListViewFilterConfig = {
 		optionsValueField: 'value',
 		label: 'status',
 		browserCache: 'force-cache',
-		multiple: true
+		multiple: true,
+		enableDoubleDash: true
 	}
 };
 
@@ -298,7 +347,6 @@ export const QUANT_RISK_SCENARIO_STATUS_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
 		options: [
-			{ label: '--', value: '--' },
 			{ label: 'draft', value: 'draft' },
 			{ label: 'open', value: 'open' },
 			{ label: 'mitigate', value: 'mitigate' },
@@ -309,7 +357,8 @@ export const QUANT_RISK_SCENARIO_STATUS_FILTER: ListViewFilterConfig = {
 		optionsValueField: 'value',
 		label: 'status',
 		browserCache: 'force-cache',
-		multiple: true
+		multiple: true,
+		enableDoubleDash: true
 	}
 };
 export const RISK_STAGE_FILTER: ListViewFilterConfig = {
@@ -325,6 +374,17 @@ export const COMPLIANCE_ASSESSMENT_STATUS_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
 		optionsEndpoint: 'compliance-assessments/status',
+		optionsLabelField: 'label',
+		optionsValueField: 'value',
+		label: 'status',
+		browserCache: 'force-cache',
+		multiple: true
+	}
+};
+export const POSTURE_ASSESSMENT_STATUS_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'posture-assessments/status',
 		optionsLabelField: 'label',
 		optionsValueField: 'value',
 		label: 'status',
@@ -430,8 +490,12 @@ export const RISK_TOLERANCE_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
 		label: 'withinTolerance',
-		options: YES_NO_UNSET_OPTIONS,
-		multiple: false
+		options: [
+			{ label: 'YES', value: 'YES' },
+			{ label: 'NO', value: 'NO' }
+		],
+		multiple: false,
+		enableDoubleDash: true
 	}
 };
 
@@ -573,7 +637,8 @@ export const LEGAL_BASIS_FILTER: ListViewFilterConfig = {
 export const PROCESSING_NATURE_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
-		optionsEndpoint: 'processing-natures',
+		optionsEndpoint: 'terminologies?field_path=processing.nature&is_visible=true',
+		optionsLabelField: 'translated_name',
 		label: 'nature',
 		browserCache: 'force-cache',
 		multiple: true
@@ -797,10 +862,20 @@ export const QUALIFICATION_FILTER: ListViewFilterConfig = {
 export const PERSONAL_DATA_CATEGORY_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
-		optionsEndpoint: 'personal-data/category',
+		optionsEndpoint: 'terminologies?field_path=personal_data.category&is_visible=true',
+		optionsLabelField: 'translated_name',
+		label: 'category',
+		browserCache: 'force-cache',
+		multiple: true
+	}
+};
+export const DATA_SUBJECT_CATEGORY_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'data-subjects/category',
 		optionsLabelField: 'label',
 		optionsValueField: 'value',
-		label: 'category',
+		label: 'dataSubjectCategory',
 		browserCache: 'force-cache',
 		multiple: true
 	}
@@ -1092,6 +1167,18 @@ export const LANGUAGE_FILTER: ListViewFilterConfig = {
 	}
 };
 
+export const DOC_TEMPLATE_LANGUAGE_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		label: 'language',
+		optionsEndpoint: 'document-templates/locale',
+		optionsLabelField: 'label',
+		optionsValueField: 'value',
+		browserCache: 'no-store',
+		multiple: true
+	}
+};
+
 export const ASSET_TYPE_FILTER: ListViewFilterConfig = {
 	component: AutocompleteSelect,
 	props: {
@@ -1110,6 +1197,24 @@ export const ASSET_CLASS_FILTER: ListViewFilterConfig = {
 		label: 'asset_class',
 		optionsEndpoint: 'assets/asset_class',
 		multiple: true
+	}
+};
+
+const ASSET_CLASS_IS_VISIBLE_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		label: 'is_visible',
+		options: YES_NO_OPTIONS,
+		multiple: false
+	}
+};
+
+const ASSET_CLASS_BUILTIN_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		label: 'builtin',
+		options: YES_NO_OPTIONS,
+		multiple: false
 	}
 };
 
@@ -1143,6 +1248,18 @@ export const FINDINGS_ASSESSMENTS_CATEGORY_FILTER: ListViewFilterConfig = {
 		optionsLabelField: 'label',
 		browserCache: 'force-cache',
 		optionsValueField: 'value'
+	}
+};
+
+export const FINDINGS_ASSESSMENTS_STATUS_FILTER: ListViewFilterConfig = {
+	component: AutocompleteSelect,
+	props: {
+		optionsEndpoint: 'findings-assessments/status',
+		optionsLabelField: 'label',
+		optionsValueField: 'value',
+		label: 'status',
+		browserCache: 'force-cache',
+		multiple: true
 	}
 };
 
@@ -1358,7 +1475,8 @@ export const EVIDENCE_OWNER_FILTER: ListViewFilterConfig = {
 		optionsLabelField: 'str',
 		optionsValueField: 'id',
 		optionsEndpoint: 'actors',
-		multiple: true
+		multiple: true,
+		enableDoubleDash: true
 	}
 };
 
@@ -1640,8 +1758,13 @@ export const listViewFields = {
 		}
 	},
 	'risk-acceptances': {
-		head: ['name', 'description', 'riskScenarios', 'state'],
-		body: ['name', 'description', 'risk_scenarios', 'state'],
+		head: ['name', 'description', 'riskScenarios'],
+		body: ['name', 'description', 'risk_scenarios'],
+		// State is shown as a badge on the name column, so the column is opt-in.
+		optionalFields: {
+			head: ['state'],
+			body: ['state']
+		},
 		filters: {
 			folder: DOMAIN_FILTER,
 			state: STATE_FILTER,
@@ -1724,8 +1847,8 @@ export const listViewFields = {
 			'filtering_labels'
 		],
 		optionalFields: {
-			head: ['startDate', 'expiryDate', 'createdAt', 'updatedAt'],
-			body: ['start_date', 'expiry_date', 'created_at', 'updated_at']
+			head: ['progress', 'startDate', 'expiryDate', 'createdAt', 'updatedAt'],
+			body: ['progress_field', 'start_date', 'expiry_date', 'created_at', 'updated_at']
 		},
 		filters: {
 			folder: DOMAIN_FILTER,
@@ -1871,8 +1994,8 @@ export const listViewFields = {
 			'filtering_labels'
 		],
 		optionalFields: {
-			head: ['referenceLink', 'createdAt', 'updatedAt'],
-			body: ['reference_link', 'created_at', 'updated_at']
+			head: ['assetClass', 'referenceLink', 'createdAt', 'updatedAt'],
+			body: ['asset_class', 'reference_link', 'created_at', 'updated_at']
 		},
 		filters: {
 			folder: DOMAIN_FILTER,
@@ -1883,8 +2006,19 @@ export const listViewFields = {
 		}
 	},
 	'asset-class': {
-		head: ['name', 'description'],
-		body: ['name', 'description']
+		head: ['name', 'parentAssetClass', 'description', 'translations', 'isVisible', 'builtin'],
+		body: [
+			'translated_name',
+			'parent',
+			'translated_description',
+			'translations',
+			'is_visible',
+			'builtin'
+		],
+		filters: {
+			is_visible: ASSET_CLASS_IS_VISIBLE_FILTER,
+			builtin: ASSET_CLASS_BUILTIN_FILTER
+		}
 	},
 	users: {
 		head: [
@@ -1928,6 +2062,10 @@ export const listViewFields = {
 	'idp-groups': {
 		head: ['name', 'userGroups'],
 		body: ['name', 'user_groups']
+	},
+	'service-accounts': {
+		head: ['name', 'clientId', 'secretPreview', 'isActive', 'expiryDate', 'createdAt'],
+		body: ['name', 'client_id', 'secret_preview', 'is_active', 'expiry_date', 'created_at']
 	},
 	roles: {
 		head: ['name', 'description'],
@@ -1973,8 +2111,8 @@ export const listViewFields = {
 			'updated_at'
 		],
 		optionalFields: {
-			head: ['status'],
-			body: ['status']
+			head: ['status', 'authors'],
+			body: ['status', 'authors']
 		},
 		filters: {
 			folder: DOMAIN_FILTER,
@@ -2027,9 +2165,54 @@ export const listViewFields = {
 		head: ['versionNumber', 'status', 'author', 'changeSummary', 'createdAt'],
 		body: ['version_number', 'status_display', 'author', 'change_summary', 'created_at']
 	},
+	'document-containers': {
+		head: [
+			'refId',
+			'name',
+			'documentType',
+			'status',
+			'reviewProgress',
+			'classification',
+			'domain',
+			'labels'
+		],
+		body: [
+			'ref_id',
+			'name',
+			'document_type',
+			'status',
+			'progress',
+			'classification',
+			'folder',
+			'filtering_labels'
+		],
+		optionalFields: {
+			head: ['source'],
+			body: ['source']
+		},
+		filters: {
+			folder: DOMAIN_FILTER,
+			document_type: DOCUMENT_TYPE_FILTER,
+			source: DOCUMENT_SOURCE_FILTER,
+			status: DOCUMENT_STATUS_FILTER,
+			classification: CLASSIFICATION_FILTER,
+			filtering_labels: LABELS_FILTER
+		}
+	},
+	'document-templates': {
+		head: ['name', 'refId', 'documentType', 'provider', 'language', 'builtin', 'domain'],
+		body: ['name', 'ref_id', 'document_type', 'provider', 'locale', 'builtin', 'folder'],
+		meta: ['id', 'builtin'],
+		filters: {
+			folder: DOMAIN_FILTER,
+			document_type: DOCUMENT_TYPE_FILTER,
+			locale: DOC_TEMPLATE_LANGUAGE_FILTER,
+			builtin: BUILTIN_FILTER
+		}
+	},
 	'managed-documents': {
-		head: ['name', 'documentType', 'policy', 'locale', 'domain'],
-		body: ['name', 'document_type', 'policy', 'locale', 'folder']
+		head: ['name', 'documentType', 'locale', 'domain'],
+		body: ['name', 'document_type', 'locale', 'folder']
 	},
 	requirements: {
 		head: ['ref_id', 'name', 'description', 'framework'],
@@ -2105,13 +2288,14 @@ export const listViewFields = {
 			'default_criticality'
 		],
 		optionalFields: {
-			head: ['referenceLink', 'createdAt', 'updatedAt'],
-			body: ['reference_link', 'created_at', 'updated_at']
+			head: ['filteringLabels', 'referenceLink', 'createdAt', 'updatedAt'],
+			body: ['filtering_labels', 'reference_link', 'created_at', 'updated_at']
 		},
 		filters: {
 			folder: DOMAIN_FILTER,
 			parent_entity: PARENT_ENTITY_FILTER,
-			relationship: ENTITY_RELATIONSHIP_FILTER
+			relationship: ENTITY_RELATIONSHIP_FILTER,
+			filtering_labels: LABELS_FILTER
 		}
 	},
 	'entity-assessments': {
@@ -2164,6 +2348,7 @@ export const listViewFields = {
 			'status',
 			'startDate',
 			'endDate',
+			'annualExpense',
 			'providerEntity',
 			'beneficiaryEntity',
 			'solutions'
@@ -2175,6 +2360,7 @@ export const listViewFields = {
 			'status',
 			'start_date',
 			'end_date',
+			'annual_expense',
 			'provider_entity',
 			'beneficiary_entity',
 			'solutions'
@@ -2260,6 +2446,10 @@ export const listViewFields = {
 	processings: {
 		head: ['refId', 'name', 'description', 'status', 'processingNature', 'labels', 'folder'],
 		body: ['ref_id', 'name', 'description', 'status', 'nature', 'filtering_labels', 'folder'],
+		optionalFields: {
+			head: ['personalDataCategories', 'dataSubjectCategories', 'updatedAt'],
+			body: ['personal_data_categories', 'data_subject_categories', 'updated_at']
+		},
 		filters: {
 			folder: DOMAIN_FILTER,
 			assigned_to: {
@@ -2273,6 +2463,8 @@ export const listViewFields = {
 			},
 			status: PROCESSING_STATUS_FILTER,
 			nature: PROCESSING_NATURE_FILTER,
+			personal_data__category: PERSONAL_DATA_CATEGORY_FILTER,
+			data_subjects__category: DATA_SUBJECT_CATEGORY_FILTER,
 			filtering_labels: LABELS_FILTER
 		}
 	},
@@ -2588,6 +2780,13 @@ export const listViewFields = {
 			is_selected: IS_SELECTED_FILTER
 		}
 	},
+	'threat-models': {
+		head: ['ref_id', 'name', 'description', 'catalog', 'nodeCount', 'domain'],
+		body: ['ref_id', 'name', 'description', 'catalog', 'node_count', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
 	'elementary-actions': {
 		head: ['ref_id', 'folder', '', 'name', 'attack_stage', 'threat'],
 		body: ['ref_id', 'folder', 'icon_fa_class', 'name', 'attack_stage', 'threat'],
@@ -2648,6 +2847,7 @@ export const listViewFields = {
 			'category',
 			'evidences',
 			'findings',
+			'status',
 			'treatmentProgress',
 			'folder',
 			'perimeter'
@@ -2658,14 +2858,31 @@ export const listViewFields = {
 			'category',
 			'evidences',
 			'findings_count',
+			'status',
 			'treatment_progress',
 			'folder',
 			'perimeter'
 		],
+		optionalFields: {
+			head: ['filteringLabels', 'reportedAt'],
+			body: ['filtering_labels', 'reported_at']
+		},
 		filters: {
 			folder: DOMAIN_FILTER,
 			perimeter: PERIMETER_FILTER,
-			category: FINDINGS_ASSESSMENTS_CATEGORY_FILTER
+			category: FINDINGS_ASSESSMENTS_CATEGORY_FILTER,
+			status: FINDINGS_ASSESSMENTS_STATUS_FILTER,
+			filtering_labels: LABELS_FILTER
+		}
+	},
+	'posture-assessments': {
+		head: ['ref_id', 'name', 'framework', 'assets', 'status', 'folder', 'perimeter'],
+		body: ['ref_id', 'name', 'framework', 'assets', 'status', 'folder', 'perimeter'],
+		filters: {
+			folder: DOMAIN_FILTER,
+			perimeter: PERIMETER_FILTER,
+			framework: FRAMEWORK_FILTER,
+			status: POSTURE_ASSESSMENT_STATUS_FILTER
 		}
 	},
 	findings: {
@@ -2731,8 +2948,8 @@ export const listViewFields = {
 			'updated_at'
 		],
 		optionalFields: {
-			head: ['createdAt'],
-			body: ['created_at']
+			head: ['createdAt', 'labels'],
+			body: ['created_at', 'filtering_labels']
 		},
 		filters: {
 			folder: DOMAIN_FILTER,
@@ -2954,9 +3171,25 @@ export const listViewFields = {
 	},
 	terminologies: {
 		head: ['field_path', 'name', 'description', 'translations', 'is_visible'],
-		body: ['field_path', 'name', 'description', 'translations', 'is_visible'],
+		body: ['field_path', 'translated_name', 'description', 'translations', 'is_visible'],
 		filters: {
 			field_path: FIELD_PATH_FILTER,
+			builtin: BUILTIN_FILTER,
+			is_visible: IS_VISIBLE_FILTER
+		}
+	},
+	'object-classifications': {
+		head: ['name', 'description', 'ref_id', 'is_visible'],
+		body: ['name', 'description', 'ref_id', 'is_visible'],
+		filters: {
+			builtin: BUILTIN_FILTER,
+			is_visible: IS_VISIBLE_FILTER
+		}
+	},
+	'classification-levels': {
+		head: ['rank', 'abbreviation', 'name', 'hexcolor', 'is_visible'],
+		body: ['rank', 'abbreviation', 'name', 'hexcolor', 'is_visible'],
+		filters: {
 			builtin: BUILTIN_FILTER,
 			is_visible: IS_VISIBLE_FILTER
 		}
@@ -3013,6 +3246,30 @@ export const listViewFields = {
 		head: ['activity', 'actor', 'role'],
 		body: ['activity', 'actor', 'role'],
 		filters: {}
+	},
+	workflows: {
+		head: ['name', 'description', 'triggerTypes', 'isActive', 'folder'],
+		body: ['name', 'description', 'trigger_types', 'is_active', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER,
+			filtering_labels: LABELS_FILTER,
+			trigger_type: {
+				component: AutocompleteSelect,
+				props: {
+					label: 'triggerType',
+					options: TRIGGER_TYPE_OPTIONS,
+					multiple: true
+				}
+			},
+			is_active: {
+				component: AutocompleteSelect,
+				props: {
+					label: 'isActive',
+					options: YES_NO_OPTIONS,
+					multiple: false
+				}
+			}
+		}
 	},
 	'metric-definitions': {
 		head: ['ref_id', 'name', 'description', 'category', 'unit', 'provider', 'labels', 'folder'],
@@ -3240,6 +3497,7 @@ export const contextMenuActions = {
 		{ component: ReplaceWith, props: {} }
 	],
 	evidences: [{ component: EvidenceChangeStatus, props: {} }],
+	workflows: [{ component: WorkflowToggleActive, props: {} }],
 	'task-nodes': [{ component: TaskNodeChangeStatus, props: {} }],
 	'feared-events': [{ component: SelectObject, props: {} }],
 	'ro-to': [{ component: SelectObject, props: {} }],
@@ -3250,10 +3508,22 @@ export const contextMenuActions = {
 	vulnerabilities: [
 		{ component: VulnerabilityChangeStatus, props: {} },
 		{ component: VulnerabilityChangeSeverity, props: {} }
-	]
+	],
+	'asset-assessments': [{ component: ToggleRecoveryFlags, props: {} }]
 };
 
-// Batch action configuration
+// Batch action configuration.
+//
+// Two shapes, discriminated by `type`, matching two kinds of relationships:
+// - Row operations (BatchActionConfig): act on the selected objects themselves.
+//   Use these when the relationship is REIFIED — it has its own model,
+//   permissions and data (e.g. AssetAssessment), so re-adding does NOT restore
+//   what removing destroyed. Per-row child-model permissions, per-row results.
+// - Parent mutations (ParentActionConfig): the selection only parameterizes an
+//   edit of the PARENT object. Use these for ANONYMOUS links (e.g. group
+//   membership, a bare M2M), where removal loses nothing but the link itself.
+//   Authorized by `change` on the parent via the endpoint's
+//   permission_overrides; single {count} response, no per-row results.
 export interface BatchActionConfig {
 	type:
 		| 'delete'
@@ -3273,9 +3543,36 @@ export interface BatchActionConfig {
 	children?: BatchActionConfig[];
 	minSelection?: number;
 	maxSelection?: number;
+	confirmMessage?: string; // i18n key for an extra confirm warning, receives {count}
 }
 
+export interface ParentActionConfig {
+	type: 'parent_action';
+	action: string; // parent action url segment, e.g. 'remove-members'
+	payloadField: string; // request body key holding the selected ids, e.g. 'users'
+	label: string; // i18n key for the button
+	icon?: string;
+	confirmMessage?: string; // i18n key for the confirm body, receives {count} (defaults to 'confirmRemoveSelected')
+	successMessage?: string; // i18n key for the success toast (defaults to 'saved')
+	// Resolved at runtime by the embedding view (parent url + id + action);
+	// never set in static config.
+	endpoint?: string;
+}
+
+export type TableBatchAction = BatchActionConfig | ParentActionConfig;
+
 export const batchActions: Partial<Record<urlModel, BatchActionConfig[]>> = {
+	'document-templates': [{ type: 'delete', label: 'delete', icon: 'fa-solid fa-trash' }],
+	'asset-assessments': [
+		{
+			type: 'delete',
+			label: 'delete',
+			icon: 'fa-solid fa-trash',
+			// Removing an asset from a BIA deletes its assessment — a reified
+			// association — so the confirm must disclose the cascade.
+			confirmMessage: 'confirmRemoveAssetAssessments'
+		}
+	],
 	'applied-controls': [
 		{
 			type: 'group',
@@ -3713,7 +4010,15 @@ export const batchActions: Partial<Record<urlModel, BatchActionConfig[]>> = {
 	],
 	'validation-flows': [{ type: 'delete', label: 'delete', icon: 'fa-solid fa-trash' }],
 	'quantitative-risk-studies': [{ type: 'delete', label: 'delete', icon: 'fa-solid fa-trash' }],
-	'ebios-rm': [{ type: 'delete', label: 'delete', icon: 'fa-solid fa-trash' }],
+	'ebios-rm': [
+		{
+			type: 'change_folder',
+			label: 'changeDomain',
+			icon: 'fa-solid fa-folder',
+			optionsEndpoint: 'folders?content_type=DO&content_type=GL'
+		},
+		{ type: 'delete', label: 'delete', icon: 'fa-solid fa-trash' }
+	],
 	entities: [
 		{
 			type: 'change_folder',
@@ -3852,8 +4157,11 @@ export function getListViewFields({
 	};
 }
 
-export const headData = (model: urlModel) =>
-	listViewFields[model].body.reduce((obj, key, index) => {
-		obj[key] = listViewFields[model].head[index];
-		return obj;
-	}, {});
+export const headData = (model: urlModel): Record<string, string> =>
+	listViewFields[model].body.reduce(
+		(obj, key, index) => {
+			obj[key] = listViewFields[model].head[index];
+			return obj;
+		},
+		{} as Record<string, string>
+	);

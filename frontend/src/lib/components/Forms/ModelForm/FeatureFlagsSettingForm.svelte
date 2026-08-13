@@ -33,6 +33,11 @@
 					field: 'journeys',
 					label: m.journeys(),
 					description: m.journeysDescription()
+				},
+				{
+					field: 'custom_portals',
+					label: m.customPortals(),
+					description: m.customPortalsDescription()
 				}
 			].filter(({ field }) => availableKeys.includes(field))
 		},
@@ -123,6 +128,11 @@
 					description: m.policyDocumentsFlagDescription()
 				},
 				{
+					field: 'document_management',
+					label: m.documentManagementFlag(),
+					description: m.documentManagementFlagDescription()
+				},
+				{
 					field: 'exceptions',
 					label: m.securityExceptions(),
 					description: m.securityExceptionsDescription()
@@ -157,6 +167,11 @@
 					field: 'audit_tree_inheritance',
 					label: m.auditTreeInheritance(),
 					description: m.auditTreeInheritanceDescription()
+				},
+				{
+					field: 'posture_assessments',
+					label: m.postureAssessments(),
+					description: m.postureAssessmentsDescription()
 				}
 			].filter(({ field }) => availableKeys.includes(field))
 		},
@@ -188,6 +203,16 @@
 					field: 'quantitative_risk_studies',
 					label: m.quantitativeRiskStudies(),
 					description: m.quantitativeRiskStudiesDescription()
+				},
+				{
+					field: 'threat_modeling',
+					label: m.threatModeling(),
+					description: m.threatModelingDescription()
+				},
+				{
+					field: 'ttps',
+					label: m.ttpCatalogs(),
+					description: m.ttpsDescription()
 				},
 				{
 					field: 'scoring_assistant',
@@ -245,6 +270,11 @@
 					field: 'idp_groups',
 					label: m.idpGroups(),
 					description: m.idpGroupsDescription()
+				},
+				{
+					field: 'service_accounts',
+					label: m.serviceAccounts(),
+					description: m.serviceAccountsDescription()
 				},
 				{
 					field: 'terminologies',
@@ -312,6 +342,7 @@
 				'follow_up',
 				'reports',
 				'policy_documents',
+				'document_management',
 				'advanced_analytics',
 				'auditee_mode',
 				'campaigns',

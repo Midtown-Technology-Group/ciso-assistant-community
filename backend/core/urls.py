@@ -1,5 +1,12 @@
 from .views import *
-from sec_intel.views import SecurityAdvisoryViewSet, CWEViewSet
+from sec_intel.views import (
+    SecurityAdvisoryViewSet,
+    CWEViewSet,
+    TTPCatalogViewSet,
+    TacticViewSet,
+    TechniqueViewSet,
+)
+from threat_modeling.views import ThreatModelViewSet
 from tprm.views import (
     EntityViewSet,
     RepresentativeViewSet,
@@ -8,6 +15,7 @@ from tprm.views import (
     ContractViewSet,
 )
 from library.views import (
+    LibraryDraftViewSet,
     MappingLibrariesList,
     StoredLibraryViewSet,
     LoadedLibraryViewSet,
@@ -40,6 +48,10 @@ router.register(r"risk-matrices", RiskMatrixViewSet, basename="risk-matrices")
 router.register(r"vulnerabilities", VulnerabilityViewSet, basename="vulnerabilities")
 router.register(r"risk-assessments", RiskAssessmentViewSet, basename="risk-assessments")
 router.register(r"threats", ThreatViewSet, basename="threats")
+router.register(r"ttp-catalogs", TTPCatalogViewSet, basename="ttp-catalogs")
+router.register(r"tactics", TacticViewSet, basename="tactics")
+router.register(r"techniques", TechniqueViewSet, basename="techniques")
+router.register(r"threat-models", ThreatModelViewSet, basename="threat-models")
 router.register(
     r"security-advisories", SecurityAdvisoryViewSet, basename="security-advisories"
 )
@@ -109,6 +121,7 @@ router.register(
 )
 router.register(r"stored-libraries", StoredLibraryViewSet, basename="stored-libraries")
 router.register(r"loaded-libraries", LoadedLibraryViewSet, basename="loaded-libraries")
+router.register(r"library-drafts", LibraryDraftViewSet, basename="library-drafts")
 router.register(
     r"requirement-mapping-sets",
     RequirementMappingSetViewSet,
@@ -139,6 +152,16 @@ router.register(r"comments", CommentViewSet, basename="comments")
 router.register(r"task-templates", TaskTemplateViewSet, basename="task-templates")
 router.register(r"task-nodes", TaskNodeViewSet, basename="task-nodes")
 router.register(r"terminologies", TerminologyViewSet, basename="terminologies")
+router.register(
+    r"object-classifications",
+    ObjectClassificationViewSet,
+    basename="object-classifications",
+)
+router.register(
+    r"classification-levels",
+    ClassificationLevelViewSet,
+    basename="classification-levels",
+)
 router.register(r"questions", QuestionViewSet, basename="questions")
 router.register(r"question-choices", QuestionChoiceViewSet, basename="question-choices")
 router.register(r"answers", AnswerViewSet, basename="answers")
@@ -170,9 +193,12 @@ urlpatterns = [
     path("", include("doc_management.urls")),
     path("privacy/", include("privacy.urls")),
     path("resilience/", include("resilience.urls")),
+    path("automation/", include("automation.urls")),
     path("crq/", include("crq.urls")),
     path("pmbok/", include("pmbok.urls")),
+    path("workflows/", include("automation.workflows.urls")),
     path("metrology/", include("metrology.urls")),
+    path("", include("portals.urls")),
     path("csrf/", get_csrf_token, name="get_csrf_token"),
     path("health/", healthcheck, name="healthcheck"),
     path("build/", get_build, name="get_build"),
