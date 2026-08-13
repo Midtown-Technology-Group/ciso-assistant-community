@@ -77,6 +77,7 @@
 		lazyLimit?: number;
 		lazyThreshold?: number;
 		maxVisibleChips?: number;
+		portalDropdown?: boolean;
 	}
 
 	let {
@@ -128,7 +129,8 @@
 		lazy = false,
 		lazyLimit = 20,
 		lazyThreshold = 50,
-		maxVisibleChips: _maxVisibleChips = 3
+		maxVisibleChips: _maxVisibleChips = 3,
+		portalDropdown = false
 	}: Props = $props();
 
 	// Clamp to supported CSS range (chip-max-1 through chip-max-5 in app.css)
@@ -136,19 +138,21 @@
 
 	const inputId = `form-input-${field.replaceAll('_', '-')}`;
 
-	// Patch svelte-multiselect's internal DOM (it exposes no props for these): name
-	// the role="searchbox" wrapper and re-role its chips <ul>, which holds the <input>.
+	// svelte-multiselect ≥11.8 puts our `id` on its role="combobox" <input>, so a
+	// visible <label for={inputId}> names it natively. Two patches remain (the lib
+	// exposes no props for them): re-role the chips <ul> — it directly contains the
+	// <input>, which axe's "list" rule (WCAG 1.3.1) flags inside a plain list — and,
+	// with no visible <label> (e.g. column filters), name the input directly.
 	let outerDiv: HTMLElement | null = $state(null);
 	$effect(() => {
 		if (!outerDiv) return;
-		const a11yName = label?.trim() || placeholder?.trim() || field.replaceAll('_', ' ');
-		if (!outerDiv.getAttribute('aria-label')) outerDiv.setAttribute('aria-label', a11yName);
 		outerDiv.querySelector('ul.selected')?.setAttribute('role', 'group');
-		// No visible <label> (e.g. column filters) — name the input directly.
 		if (label === undefined) {
-			outerDiv
-				.querySelector('ul.selected input:not([aria-hidden])')
-				?.setAttribute('aria-label', a11yName);
+			const a11yName = placeholder?.trim() || field.replaceAll('_', ' ');
+			outerDiv.querySelector('input[role="combobox"]')?.setAttribute('aria-label', a11yName);
+		} else {
+			// A visible <label for> names the input; drop any stale fallback so it wins.
+			outerDiv.querySelector('input[role="combobox"]')?.removeAttribute('aria-label');
 		}
 	});
 
@@ -174,7 +178,12 @@
 	type SelectValue = string | number | undefined;
 
 	let selected: Option[] = $state([]);
-	let selectedValues: SelectValue[] = $derived(selected.map((item) => item.value));
+	// svelte-multiselect creates user options as `{ label }` without a value key
+	let selectedValues: SelectValue[] = $derived(
+		selected.map((item: any) =>
+			item != null && typeof item === 'object' ? (item.value ?? item.label) : item
+		)
+	);
 	let isInternalUpdate = false;
 	let optionsLoaded = $state(Boolean(options.length));
 	const default_value = nullable ? null : '';
@@ -202,6 +211,7 @@
 			: '!bg-transparent',
 		inputClass: 'focus:ring-0! focus:outline-hidden!',
 		closeDropdownOnSelect: !multiple,
+		...(portalDropdown ? { portal: { active: true }, ulOptionsClass: 'portaled-options' } : {}),
 		...additionalMultiselectOptions
 	};
 
@@ -309,6 +319,18 @@
 			isLoading = false;
 		}
 	}
+
+	const NULL_OPTION: Option = { label: '--', value: '--', translatedLabel: '--' };
+
+	$effect(() => {
+		if (enableDoubleDash && !optionsEndpoint) {
+			const isNullOptionMissing = options.every((option) => option.value !== '--');
+
+			if (isNullOptionMissing) {
+				options = [NULL_OPTION, ...options];
+			}
+		}
+	});
 
 	async function fetchSelectedItems() {
 		if (!initialValue) return;
@@ -550,8 +572,7 @@
 	});
 
 	run(() => {
-		const mapped = selected.map((option) => option.value);
-		cachedValue = mapped.length > 0 ? mapped : undefined;
+		cachedValue = selectedValues.length > 0 ? selectedValues : undefined;
 		cachedOptions = selected;
 	});
 
@@ -685,6 +706,13 @@
 			{#each $value as val}
 				<input type="hidden" name={field} value={val} />
 			{/each}
+			{#if $value.length === 0}
+				<!-- Empty arrays render no inputs, so in `dataType: 'form'` mode the field
+				     vanishes from the submission (superForm skips absent keys) and the backend
+				     never clears the relation. Emit a marker the write action turns back into
+				     an explicit empty array. -->
+				<input type="hidden" name="__empty_arrays" value={field} />
+			{/if}
 		{:else if $value}
 			<input type="hidden" name={field} value={$value} />
 		{/if}
@@ -825,7 +853,8 @@
 					class="opacity-75"
 					fill="currentColor"
 					d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-				></path>
+				>
+				</path>
 			</svg>
 		{/if}
 	</div>

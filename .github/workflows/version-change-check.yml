@@ -44,7 +44,7 @@ jobs:
           fi
 
           version_file="backend/ciso_assistant/VERSION"
-          if printf '%s\n' "$changed_files" | grep -Fxq "$version_file"; then
+          if grep -Fxq "$version_file" <<< "$changed_files"; then
             echo "$version_file has been modified in this pull request."
           else
             echo "::error::$version_file must be modified in this pull request."

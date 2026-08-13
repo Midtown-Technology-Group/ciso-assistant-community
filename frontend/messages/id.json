@@ -1,4 +1,12 @@
 {
+	"manageMembers": "Kelola anggota",
+	"addMembers": "Tambahkan anggota",
+	"removeFromGroup": "Hapus dari grup",
+	"membersAdded": "Anggota ditambahkan",
+	"membersRemoved": "Anggota dihapus",
+	"includeInactive": "Sertakan yang tidak aktif",
+	"noResults": "Tidak ada hasil. Persempit pencarian Anda.",
+	"nothingSelected": "Belum ada yang dipilih.",
 	"mapToFramework": "Petakan ke kerangka kerja",
 	"mapToFrameworkDescription": "Buat audit baru di kerangka kerja lain, dipetakan dari audit ini.",
 	"mapFromAudit": "Petakan dari audit",
@@ -36,6 +44,8 @@
 	"croatian": "Kroasia",
 	"korean": "Korea",
 	"estonian": "Estonia",
+	"slovak": "Slovakia",
+	"slovenian": "Slovenia",
 	"addThreat": "Tambahkan ancaman",
 	"addVulnerability": "Tambahkan kerentanan",
 	"addReferenceControl": "Tambahkan kontrol referensi",
@@ -341,6 +351,9 @@
 	"riskLevels": "Tingkat risiko",
 	"riskLevel": "Tingkat risiko",
 	"cancel": "Batalkan",
+	"yes": "Ya",
+	"confirmYes": "Konfirmasi dengan mengetik '{word}' di bawah ini:",
+	"confirmYesPlaceHolder": "Ketik '{word}' untuk mengonfirmasi",
 	"save": "Simpan",
 	"assetsImpactedByTheRiskScenario": "Aset yang terpengaruh oleh skenario risiko",
 	"theExistingAppliedControlsToManageThisRisk": "Kontrol yang diterapkan yang ada untuk mengelola risiko ini",
@@ -627,6 +640,7 @@
 	"missingMandatoyObjects2": "Harap tambahkan sebelum melanjutkan",
 	"attemptToDeleteOnlyAdminAccountError": "Anda tidak dapat menghapus satu-satunya akun admin dalam aplikasi Anda.",
 	"attemptToRemoveOnlyAdminUserGroup": "Anda tidak dapat menghapus satu-satunya pengguna admin dari grup pengguna admin aplikasi.",
+	"attemptToRemoveSelfFromDomainAdminGroup": "Anda tidak dapat menghapus diri sendiri dari grup administrator domain. Minta administrator lain untuk melakukannya.",
 	"scoringHelpText": "Centang untuk mengaktifkan penilaian",
 	"minScore": "Skor minimum",
 	"maxScore": "Skor maksimum",
@@ -778,6 +792,7 @@
 	"removeIp": "Hapus {ip}",
 	"noAllowedIpsYet": "Belum ada IP yang diizinkan.",
 	"invalidFileType": "Jenis file tidak valid",
+	"wordTemplatesWarning": "Tinjau isi templat dengan cermat sebelum digunakan dan pastikan isinya mematuhi kebijakan keamanan dan kepatuhan organisasi Anda.",
 	"logoHelpText": "Logo akan ditampilkan di header aplikasi. Format yang diterima adalah PNG, JPEG, WEBP, SVG.",
 	"faviconHelpText": "Favicon akan ditampilkan di tab browser. Format yang diterima adalah ICO, PNG, JPEG, WEBP, SVG.",
 	"entity": "Entitas",
@@ -884,7 +899,9 @@
 	"questionPlural": "Pertanyaan",
 	"fillMetadataURL": "Opsi 1: Isi URL metadata",
 	"fillSSOSLOURLx509cert": "Opsi 2: Isi URL SSO, URL SLO, dan sertifikat x509",
-	"licenseAboutToExpireWarning": "Anda hanya memiliki {days_left} hari sebelum lisensi Anda berakhir.",
+	"licenseExpiresToday": "Lisensi Anda berakhir hari ini.",
+	"licenseExpiresTomorrow": "Lisensi Anda berakhir besok.",
+	"licenseExpiresInDays": "Lisensi Anda berakhir dalam {days_left} hari.",
 	"proof": "Bukti",
 	"privacy": "Privasi",
 	"safety": "Keamanan",
@@ -1203,6 +1220,8 @@
 	"forceSSOLogin": "Paksa login SSO",
 	"forceSSOLoginHelpText": "Wajibkan SSO untuk semua pengguna dan atur ulang semua kata sandi yang disimpan. Pengguna dengan 'Kecualikan dari SSO wajib' yang diaktifkan akan mempertahankan akses cadangan berbasis kata sandi.",
 	"forceSSOLoginHelpText2": "Pastikan SSO Anda berfungsi atau Anda memiliki akun cadangan sebelum mengaktifkan opsi ini.",
+	"enableSpInitiatedSlo": "Aktifkan logout tunggal yang diinisiasi penyedia layanan",
+	"enableSpInitiatedSloHelpText": "Saat logout, tutup juga sesi di penyedia identitas.",
 	"youCanSetPasswordHere": "Anda dapat mengatur kata sandi di sini.",
 	"mappingSuggested": "Pemetaan disarankan",
 	"mappingSuggestedHelpText": "Saran pemetaan berdasarkan kerangka kerja yang dimuat",
@@ -1210,14 +1229,8 @@
 	"associatedFindingsAssessments": "Tindak lanjut terkait",
 	"hourCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"count",
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["count", "countPlural"],
 			"match": {
 				"countPlural=one": "{count} Jam",
 				"countPlural=other": "{count} Jam"
@@ -1226,13 +1239,8 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} Menit",
 				"countPlural=other": "{count} Menit"
@@ -1241,13 +1249,8 @@
 	],
 	"dayCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} Hari",
 				"countPlural=other": "{count} Hari"
@@ -1256,13 +1259,8 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} objek tidak terlihat.",
 				"countPlural=other": "{count} objek tidak terlihat."
@@ -1364,14 +1362,8 @@
 	"errorFetching": "Tidak dapat memuat informasi kaskade. Silakan coba lagi.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"count",
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["count", "countPlural"],
 			"match": {
 				"count=0": "Tidak ada objek lain yang akan terpengaruh.",
 				"countPlural=one": "{count} objek terkait tidak akan dihapus tetapi akan kehilangan satu atau lebih hubungan.",
@@ -1501,13 +1493,8 @@
 	"builderPublishModalDescription": "Tindakan ini akan memperbarui kerangka kerja aktif. Tinjau perubahannya di bawah.",
 	"builderRequirementAdded": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} persyaratan ditambahkan",
 				"countPlural=other": "{count} persyaratan ditambahkan"
@@ -1516,13 +1503,8 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} pertanyaan",
 				"countPlural=other": "{count} pertanyaan"
@@ -1531,13 +1513,8 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} persyaratan dihapus",
 				"countPlural=other": "{count} persyaratan dihapus"
@@ -1546,13 +1523,8 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} pertanyaan",
 				"countPlural=other": "{count} pertanyaan"
@@ -1562,13 +1534,8 @@
 	"builderNoStructuralChanges": "Tidak ada perubahan struktural yang terdeteksi (hanya metadata).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} perubahan tidak kompatibel terdeteksi",
 				"countPlural=other": "{count} perubahan tidak kompatibel terdeteksi"
@@ -1578,13 +1545,8 @@
 	"builderBreakingChangesHint": "Perubahan ini dapat memengaruhi penilaian, visibilitas, atau hasil kepatuhan dalam audit yang sudah ada.",
 	"builderAffectedAudits": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} audit yang ada akan terdampak",
 				"countPlural=other": "{count} audit yang ada akan terdampak"
@@ -1622,13 +1584,8 @@
 	"builderNoRulesOrGroupsConfigured": "Tidak ada aturan atau grup yang dikonfigurasi",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} aturan hasil",
 				"countPlural=other": "{count} aturan hasil"
@@ -1637,13 +1594,8 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} grup",
 				"countPlural=other": "{count} grup"
@@ -1656,13 +1608,8 @@
 	"builderScoreScale": "Skala skor",
 	"builderScaleLevel": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} tingkat",
 				"countPlural=other": "{count} tingkat"
@@ -1732,13 +1679,8 @@
 	"builderAssessableLeaf": "Daun yang dapat dinilai",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Dapat dinilai · {count} anak",
 				"countPlural=other": "Dapat dinilai · {count} anak"
@@ -1747,13 +1689,8 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Grup · {count} anak",
 				"countPlural=other": "Grup · {count} anak"
@@ -1780,13 +1717,8 @@
 	"builderAddQuestion": "Tambah pertanyaan",
 	"builderChildrenHidden": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} anak disembunyikan",
 				"countPlural=other": "{count} anak disembunyikan"
@@ -1814,14 +1746,8 @@
 	"builderChangeTypeWarning": "Mengubah tipe akan menghapus pilihan yang ada. Lanjutkan?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": [
-				"input count",
-				"input ref",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Ditampilkan ketika {ref} = {count} jawaban",
 				"countPlural=other": "Ditampilkan ketika {ref} = {count} jawaban"
@@ -1900,6 +1826,14 @@
 	"builderQuestionTypeUniqueChoice": "Pilihan unik",
 	"builderQuestionTypeMultipleChoice": "Pilihan ganda",
 	"builderQuestionTypeDate": "Tanggal",
+	"disableMFA": "Nonaktifkan MFA",
+	"disableMFA1": "Jika pengguna ini kehilangan akses ke faktor keduanya, Anda dapat",
+	"disableMFALinkText": "nonaktifkan MFA mereka",
+	"disableMFA2": "Semua autentikator MFA mereka akan dihapus dan mereka harus mengaktifkan MFA lagi pada login berikutnya",
+	"disableMFAWarning": "Keamanan MFA akan dinonaktifkan untuk pengguna ini sampai mereka mengaktifkannya kembali.",
+	"mfaDisabledSuccessfully": "MFA telah dinonaktifkan untuk pengguna ini",
+	"errorDisablingMFA": "Tidak dapat menonaktifkan MFA untuk pengguna ini",
+	"userHasNoMFAEnabled": "Pengguna ini tidak memiliki MFA yang diaktifkan",
 	"builderChangedOn": "diubah pada",
 	"requirementWeight": "Bobot",
 	"scim": "SCIM",
@@ -1918,6 +1852,27 @@
 	"idpGroup": "Grup IdP",
 	"idpGroups": "Grup IdP",
 	"idpGroupsDescription": "Aktifkan federasi grup IdP (penyediaan SCIM, pemetaan grup IdP, dan keanggotaan grup IdP pada pengguna).",
+	"ebiosRmStudyDomainHelpText": "Mengubah domain akan memindahkan studi dan semua objek workshop-nya ke domain yang dipilih.",
+	"serviceAccount": "Akun layanan",
+	"serviceAccounts": "Akun layanan",
+	"serviceAccountsDescription": "Mengaktifkan akun layanan (akses API mesin-ke-mesin melalui alur OAuth2 client credentials).",
+	"addServiceAccount": "Tambahkan akun layanan",
+	"clientId": "ID klien",
+	"clientSecret": "Rahasia klien",
+	"rotateSecret": "Putar rahasia",
+	"rotateSecretConfirm": "Memutar rahasia akan langsung membatalkan rahasia saat ini. Setiap integrasi yang menggunakannya akan berhenti berfungsi hingga diperbarui. Lanjutkan?",
+	"clientSecretOnlyDisplayedOnce": "Rahasia klien hanya akan ditampilkan satu kali. Pastikan untuk menyalinnya dan menyimpannya dengan aman.",
+	"isRecursive": "Terapkan ke subdomain",
+	"isRecursiveHelpText": "Memberikan izin yang dipilih pada domain yang dipilih dan semua subdomainnya.",
+	"serviceAccountExpiryHelpText": "Akun layanan akan dinonaktifkan setelah tanggal ini.",
+	"createdBy": "Dibuat oleh",
+	"activate": "Aktifkan",
+	"deactivate": "Nonaktifkan",
+	"deactivateServiceAccountConfirm": "Menonaktifkan akun layanan ini akan langsung mencabut semua token akses yang tertunda dan memblokir penerbitan token baru. Lanjutkan?",
+	"gracePeriod": "Masa tenggang",
+	"gracePeriodHelpText": "Rahasia saat ini terus berfungsi selama durasi ini setelah rotasi, sehingga integrasi dapat diperbarui tanpa waktu henti. Dibatasi hingga 1 bulan.",
+	"gracePeriodTooLong": "Masa tenggang tidak boleh lebih dari 1 bulan.",
+	"previousSecretValidUntil": "Rahasia klien sebelumnya tetap berlaku hingga {date}.",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
 	"mspTenancyModel": "MSP tenancy model",
@@ -1934,15 +1889,5 @@
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"providerFolder": "Provider domain",
-	"currencyConversionRate": "Currency conversion rate",
-	"exporting": "Exporting...",
-	"errorOccurred": "An error occurred",
-	"diff": "Diff",
-	"confirmDeleteTitle": "Confirm deletion",
-	"areYouSureToDeleteObject": "Are you sure you want to delete this object?",
-	"addActor": "Add actor",
-	"generateReport": "Generate Report",
-	"aboutReports": "About Reports",
-	"aboutReportsDescription": "Reports provide simple tools to generate specialized reports useful for key insights or required by authorities for specific standards.\nMore specialized capabilities will be added as we identify specific cases."
+	"providerFolder": "Provider domain"
 }

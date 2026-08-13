@@ -1,4 +1,15 @@
 {
+	"manageMembers": "सदस्यों का प्रबंधन करें",
+	"addMembers": "सदस्य जोड़ें",
+	"removeFromGroup": "समूह से हटाएँ",
+	"membersAdded": "सदस्य जोड़े गए",
+	"membersRemoved": "सदस्य हटाए गए",
+	"includeInactive": "निष्क्रिय शामिल करें",
+	"noResults": "कोई परिणाम नहीं। अपनी खोज को परिष्कृत करें।",
+	"nothingSelected": "अभी तक कुछ चयनित नहीं है।",
+	"licenseExpiresToday": "आपका लाइसेंस आज समाप्त हो रहा है।",
+	"licenseExpiresTomorrow": "आपका लाइसेंस कल समाप्त हो रहा है।",
+	"licenseExpiresInDays": "आपका लाइसेंस {days_left} दिनों में समाप्त हो रहा है।",
 	"mapToFramework": "फ्रेमवर्क में मैप करें",
 	"mapToFrameworkDescription": "इससे मैप करके किसी अन्य फ्रेमवर्क में नया ऑडिट बनाएं।",
 	"mapFromAudit": "ऑडिट से मैप करें",
@@ -36,6 +47,8 @@
 	"croatian": "क्रोएशियाई",
 	"korean": "कोरियाई",
 	"estonian": "एस्टोनियाई",
+	"slovak": "स्लोवाक",
+	"slovenian": "स्लोवेनियाई",
 	"addThreat": "खतरा जोड़ें",
 	"addVulnerability": "भेद्यता जोड़ें",
 	"addReferenceControl": "संदर्भ नियंत्रण जोड़ें",
@@ -340,6 +353,9 @@
 	"riskLevels": "जोखिम स्तर",
 	"riskLevel": "जोखिम स्तर",
 	"cancel": "रद्द करें",
+	"yes": "हाँ",
+	"confirmYes": "नीचे '{word}' टाइप करके पुष्टि करें:",
+	"confirmYesPlaceHolder": "पुष्टि करने के लिए '{word}' टाइप करें",
 	"save": "सहेजें",
 	"assetsImpactedByTheRiskScenario": "जोखिम परिदृश्य द्वारा प्रभावित संपत्तियाँ",
 	"theExistingAppliedControlsToManageThisRisk": "इस जोखिम को प्रबंधित करने के लिए मौजूदा लागू नियंत्रण",
@@ -624,6 +640,7 @@
 	"missingMandatoyObjects2": "कृपया आगे बढ़ने से पहले उन्हें जोड़ें",
 	"attemptToDeleteOnlyAdminAccountError": "आप अपने एप्लिकेशन के केवल व्यवस्थापक खाते को हटा नहीं सकते।",
 	"attemptToRemoveOnlyAdminUserGroup": "आप एप्लिकेशन के केवल व्यवस्थापक उपयोगकर्ता को व्यवस्थापक उपयोगकर्ता समूह से हटा नहीं सकते।",
+	"attemptToRemoveSelfFromDomainAdminGroup": "आप स्वयं को डोमेन व्यवस्थापक समूह से नहीं हटा सकते। किसी अन्य व्यवस्थापक से ऐसा करने के लिए कहें।",
 	"scoringHelpText": "स्कोरिंग को सक्षम करने के लिए जाँचें",
 	"minScore": "न्यूनतम स्कोर",
 	"maxScore": "अधिकतम स्कोर",
@@ -775,6 +792,7 @@
 	"removeIp": "{ip} हटाएं",
 	"noAllowedIpsYet": "अभी तक कोई अनुमत IP नहीं।",
 	"invalidFileType": "अमान्य फ़ाइल प्रकार",
+	"wordTemplatesWarning": "उपयोग से पहले टेम्पलेट की सामग्री की सावधानीपूर्वक समीक्षा करें और सुनिश्चित करें कि यह आपके संगठन की सुरक्षा और अनुपालन नीतियों के अनुरूप है।",
 	"logoHelpText": "लोगो को एप्लीकेशन के हेडर में प्रदर्शित किया जाएगा। स्वीकृत प्रारूप PNG, JPEG, WEBP, SVG हैं।",
 	"faviconHelpText": "फ़ेविकॉन ब्राउज़र टैब में प्रदर्शित किया जाएगा। स्वीकृत प्रारूप ICO, PNG, JPEG, WEBP, SVG हैं",
 	"entity": "इकाई",
@@ -986,6 +1004,8 @@
 	"forceSSOLogin": "SSO लॉगिन को मजबूर करें",
 	"forceSSOLoginHelpText": "सभी उपयोगकर्ताओं के लिए SSO की आवश्यकता होती है और किसी भी सहेजे गए पासवर्ड को रीसेट करता है। जिन उपयोगकर्ताओं के लिए 'मजबूर SSO से बाहर रखें' सक्षम है, वे पासवर्ड-आधारित बैकअप एक्सेस बनाए रखेंगे।",
 	"forceSSOLoginHelpText2": "इस विकल्प को सक्षम करने से पहले सुनिश्चित करें कि आपका SSO कार्यात्मक है या आपके पास एक बैकअप खाता है।",
+	"enableSpInitiatedSlo": "सेवा प्रदाता द्वारा आरंभ किया गया सिंगल लॉगआउट सक्षम करें",
+	"enableSpInitiatedSloHelpText": "लॉगआउट पर, पहचान प्रदाता का सत्र भी समाप्त करें।",
 	"youCanSetPasswordHere": "आप यहाँ अपना पासवर्ड सेट कर सकते हैं",
 	"mappingSuggested": "मैपिंग सुझाई गई",
 	"mappingSuggestedHelpText": "लोड किए गए फ्रेमवर्कों के आधार पर मैपिंग सुझाव",
@@ -993,14 +1013,8 @@
 	"associatedFindingsAssessments": "संबद्ध फॉलो-अप",
 	"hourCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"count",
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["count", "countPlural"],
 			"match": {
 				"countPlural=one": "{count} घंटा",
 				"countPlural=other": "{count} घंटे"
@@ -1009,13 +1023,8 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} मिनट",
 				"countPlural=other": "{count} मिनट"
@@ -1024,13 +1033,8 @@
 	],
 	"dayCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} दिन",
 				"countPlural=other": "{count} दिन"
@@ -1039,13 +1043,8 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} वस्तु दिखाई नहीं देती।",
 				"countPlural=other": "{count} वस्तुएं दिखाई नहीं देतीं।"
@@ -1148,14 +1147,8 @@
 	"errorFetching": "कास्केड जानकारी लोड करने में असमर्थ। कृपया पुनः प्रयास करें।",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"count",
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["count", "countPlural"],
 			"match": {
 				"count=0": "कोई अन्य वस्तुएँ प्रभावित नहीं होंगी।",
 				"countPlural=one": "{count} संबंधित वस्तु हटाई नहीं जाएगी लेकिन एक या अधिक संबंध खो देगी।",
@@ -1285,13 +1278,8 @@
 	"builderPublishModalDescription": "यह लाइव फ्रेमवर्क को अपडेट करेगा। नीचे दिए गए परिवर्तनों की समीक्षा करें।",
 	"builderRequirementAdded": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} आवश्यकताएँ जोड़ी गईं",
 				"countPlural=other": "{count} आवश्यकताएँ जोड़ी गईं"
@@ -1300,13 +1288,8 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} प्रश्न",
 				"countPlural=other": "{count} प्रश्न"
@@ -1315,13 +1298,8 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} आवश्यकताएँ हटाई गईं",
 				"countPlural=other": "{count} आवश्यकताएँ हटाई गईं"
@@ -1330,13 +1308,8 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} प्रश्न",
 				"countPlural=other": "{count} प्रश्न"
@@ -1346,13 +1319,8 @@
 	"builderNoStructuralChanges": "कोई संरचनात्मक परिवर्तन नहीं मिला (केवल मेटाडेटा)।",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} ब्रेकिंग परिवर्तन पाए गए",
 				"countPlural=other": "{count} ब्रेकिंग परिवर्तन पाए गए"
@@ -1362,13 +1330,8 @@
 	"builderBreakingChangesHint": "ये परिवर्तन मौजूदा ऑडिट में स्कोरिंग, दृश्यता या अनुपालन परिणामों को प्रभावित कर सकते हैं।",
 	"builderAffectedAudits": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} मौजूदा ऑडिट प्रभावित होंगे",
 				"countPlural=other": "{count} मौजूदा ऑडिट प्रभावित होंगे"
@@ -1406,13 +1369,8 @@
 	"builderNoRulesOrGroupsConfigured": "कोई नियम या समूह कॉन्फ़िगर नहीं किए गए",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} परिणाम नियम",
 				"countPlural=other": "{count} परिणाम नियम"
@@ -1421,13 +1379,8 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} समूह",
 				"countPlural=other": "{count} समूह"
@@ -1440,13 +1393,8 @@
 	"builderScoreScale": "स्कोर पैमाना",
 	"builderScaleLevel": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} स्तर",
 				"countPlural=other": "{count} स्तर"
@@ -1516,13 +1464,8 @@
 	"builderAssessableLeaf": "मूल्यांकन योग्य लीफ",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "मूल्यांकन योग्य · {count} चाइल्ड",
 				"countPlural=other": "मूल्यांकन योग्य · {count} चाइल्ड"
@@ -1531,13 +1474,8 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "समूह · {count} चाइल्ड",
 				"countPlural=other": "समूह · {count} चाइल्ड"
@@ -1564,13 +1502,8 @@
 	"builderAddQuestion": "प्रश्न जोड़ें",
 	"builderChildrenHidden": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} चाइल्ड छिपा हुआ",
 				"countPlural=other": "{count} चाइल्ड छिपे हुए"
@@ -1598,14 +1531,8 @@
 	"builderChangeTypeWarning": "प्रकार बदलने से मौजूदा विकल्प हट जाएंगे। जारी रखें?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": [
-				"input count",
-				"input ref",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "जब {ref} = {count} उत्तर हो तब दिखाया गया",
 				"countPlural=other": "जब {ref} = {count} उत्तर हो तब दिखाया गया"
@@ -1684,6 +1611,14 @@
 	"builderQuestionTypeUniqueChoice": "Single choice",
 	"builderQuestionTypeMultipleChoice": "Multiple choice",
 	"builderQuestionTypeDate": "Date",
+	"disableMFA": "MFA अक्षम करें",
+	"disableMFA1": "यदि इस उपयोगकर्ता ने अपने दूसरे फ़ैक्टर तक पहुंच खो दी है, तो आप",
+	"disableMFALinkText": "उनका MFA अक्षम करें",
+	"disableMFA2": "उनके सभी MFA प्रमाणक हटा दिए जाएँगे और उन्हें अगली बार लॉगिन करते समय MFA फिर से सक्षम करना होगा",
+	"disableMFAWarning": "इस उपयोगकर्ता के लिए MFA सुरक्षा तब तक अक्षम रहेगी जब तक वे इसे फिर से सक्षम नहीं करते।",
+	"mfaDisabledSuccessfully": "इस उपयोगकर्ता के लिए MFA अक्षम कर दिया गया है",
+	"errorDisablingMFA": "इस उपयोगकर्ता के लिए MFA अक्षम नहीं किया जा सका",
+	"userHasNoMFAEnabled": "इस उपयोगकर्ता के पास MFA सक्षम नहीं है",
 	"builderChangedOn": "बदला गया",
 	"requirementWeight": "भार",
 	"scim": "SCIM",
@@ -1702,6 +1637,27 @@
 	"idpGroup": "IdP समूह",
 	"idpGroups": "IdP समूह",
 	"idpGroupsDescription": "IdP समूह फ़ेडरेशन सक्षम करें (SCIM प्रावधान, IdP समूह मैपिंग, और उपयोगकर्ताओं पर IdP समूह सदस्यताएँ)।",
+	"ebiosRmStudyDomainHelpText": "डोमेन बदलने से अध्ययन और उसकी सभी कार्यशाला वस्तुएँ चयनित डोमेन में स्थानांतरित हो जाती हैं।",
+	"serviceAccount": "सेवा खाता",
+	"serviceAccounts": "सेवा खाते",
+	"serviceAccountsDescription": "सेवा खाते सक्षम करता है (OAuth2 क्लाइंट क्रेडेंशियल फ़्लो के माध्यम से मशीन-टू-मशीन API एक्सेस)।",
+	"addServiceAccount": "सेवा खाता जोड़ें",
+	"clientId": "क्लाइंट आईडी",
+	"clientSecret": "क्लाइंट सीक्रेट",
+	"rotateSecret": "सीक्रेट रोटेट करें",
+	"rotateSecretConfirm": "सीक्रेट को रोटेट करने से मौजूदा सीक्रेट तुरंत अमान्य हो जाएगा। इसका उपयोग करने वाला कोई भी इंटीग्रेशन अपडेट होने तक काम करना बंद कर देगा। जारी रखें?",
+	"clientSecretOnlyDisplayedOnce": "क्लाइंट सीक्रेट केवल एक बार दिखाया जाएगा। सुनिश्चित करें कि आप इसे कॉपी करके सुरक्षित रूप से संग्रहीत करें।",
+	"isRecursive": "उप-डोमेन पर लागू करें",
+	"isRecursiveHelpText": "चयनित डोमेन और उनके सभी उप-डोमेन पर चयनित अनुमतियाँ प्रदान करता है।",
+	"serviceAccountExpiryHelpText": "इस तिथि के बाद सेवा खाता निष्क्रिय कर दिया जाएगा।",
+	"createdBy": "द्वारा बनाया गया",
+	"activate": "सक्रिय करें",
+	"deactivate": "निष्क्रिय करें",
+	"deactivateServiceAccountConfirm": "इस सेवा खाते को निष्क्रिय करने से सभी लंबित एक्सेस टोकन तुरंत रद्द हो जाएंगे और नए टोकन जारी होने से रुक जाएंगे। जारी रखें?",
+	"gracePeriod": "अनुग्रह अवधि",
+	"gracePeriodHelpText": "रोटेशन के बाद मौजूदा सीक्रेट इतने समय तक काम करता रहता है, ताकि इंटीग्रेशन बिना डाउनटाइम के अपडेट किए जा सकें। अधिकतम 1 महीने तक सीमित।",
+	"gracePeriodTooLong": "अनुग्रह अवधि 1 महीने से अधिक नहीं हो सकती।",
+	"previousSecretValidUntil": "पिछला क्लाइंट सीक्रेट {date} तक मान्य रहता है।",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
 	"mspTenancyModel": "MSP tenancy model",
@@ -1718,15 +1674,5 @@
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"providerFolder": "Provider domain",
-	"currencyConversionRate": "Currency conversion rate",
-	"exporting": "Exporting...",
-	"errorOccurred": "An error occurred",
-	"diff": "Diff",
-	"confirmDeleteTitle": "Confirm deletion",
-	"areYouSureToDeleteObject": "Are you sure you want to delete this object?",
-	"addActor": "Add actor",
-	"generateReport": "Generate Report",
-	"aboutReports": "About Reports",
-	"aboutReportsDescription": "Reports provide simple tools to generate specialized reports useful for key insights or required by authorities for specific standards.\nMore specialized capabilities will be added as we identify specific cases."
+	"providerFolder": "Provider domain"
 }

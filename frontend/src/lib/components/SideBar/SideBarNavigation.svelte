@@ -6,31 +6,25 @@
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { page } from '$app/state';
 	import { URL_MODEL_MAP } from '$lib/utils/crud';
+	import { hasPermissionAnywhere } from '$lib/utils/access-control';
 	import { driverInstance } from '$lib/utils/stores';
 
 	const user = page.data.user;
-	const featureflags = (page.data.featureflags ?? {}) as Record<string, boolean>;
 
 	const items = navData.items
 		.map((item) => {
 			// Check and filter the sub-items based on user permissions
 			const filteredSubItems = item.items.filter((subItem) => {
-				// Feature-flag gate: a flagged nav item is hidden unless its flag is enabled.
-				const featureFlag = (subItem as { featureFlag?: string }).featureFlag;
-				if (featureFlag && !featureflags[featureFlag]) {
-					return false;
+				if (subItem.adminOnly) {
+					return Boolean(user?.is_admin);
 				}
 				if (subItem.exclude) {
 					return user?.roles?.some((role: string) => !subItem.exclude.includes(role)) ?? false;
 				} else if (subItem.permissions) {
-					return subItem.permissions?.some(
-						(permission) => user?.permissions && Object.hasOwn(user.permissions, permission)
-					);
+					return subItem.permissions?.some((permission) => hasPermissionAnywhere(user, permission));
 				} else if (Object.hasOwn(URL_MODEL_MAP, subItem.href.split('/')[1])) {
 					const model = URL_MODEL_MAP[subItem.href.split('/')[1]];
-					const canViewObject =
-						user?.permissions && Object.hasOwn(user.permissions, `view_${model.name}`);
-					return canViewObject;
+					return hasPermissionAnywhere(user, `view_${model.name}`);
 				}
 				return false;
 			});

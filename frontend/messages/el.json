@@ -1,4 +1,12 @@
 {
+	"manageMembers": "Διαχείριση μελών",
+	"addMembers": "Προσθήκη μελών",
+	"removeFromGroup": "Αφαίρεση από την ομάδα",
+	"membersAdded": "Τα μέλη προστέθηκαν",
+	"membersRemoved": "Τα μέλη αφαιρέθηκαν",
+	"includeInactive": "Συμπερίληψη ανενεργών",
+	"noResults": "Κανένα αποτέλεσμα. Βελτιώστε την αναζήτησή σας.",
+	"nothingSelected": "Δεν έχει επιλεγεί τίποτα ακόμα.",
 	"mapToFramework": "Αντιστοίχιση σε πλαίσιο",
 	"mapToFrameworkDescription": "Δημιουργία νέου ελέγχου σε άλλο πλαίσιο, αντιστοιχισμένου από αυτόν.",
 	"mapFromAudit": "Αντιστοίχιση από έλεγχο",
@@ -39,6 +47,8 @@
 	"croatian": "κροατικά",
 	"korean": "Κορεατικά",
 	"estonian": "Εσθονικά",
+	"slovak": "Σλοβακικά",
+	"slovenian": "Σλοβενικά",
 	"addThreat": "Προσθήκη απειλής",
 	"addVulnerability": "Προσθήκη ευπάθειας",
 	"addReferenceControl": "Προσθήκη πρότυπου ελέγχου",
@@ -667,6 +677,7 @@
 	"missingMandatoyObjects2": "Προσθέστε τα πριν συνεχίσετε",
 	"attemptToDeleteOnlyAdminAccountError": "Δεν μπορείτε να διαγράψετε τον μοναδικό λογαριασμό διαχειριστή.",
 	"attemptToRemoveOnlyAdminUserGroup": "Δεν μπορείτε να αφαιρέσετε τον μοναδικό διαχειριστή από την ομάδα διαχειριστών.",
+	"attemptToRemoveSelfFromDomainAdminGroup": "Δεν μπορείτε να αφαιρέσετε τον εαυτό σας από μια ομάδα διαχειριστών τομέα. Ζητήστε από άλλον διαχειριστή να το κάνει.",
 	"scoringHelpText": "Επιλέξτε για ενεργοποίηση βαθμολόγησης",
 	"minScore": "Ελάχιστη βαθμολογία",
 	"maxScore": "Μέγιστη βαθμολογία",
@@ -823,6 +834,7 @@
 	"removeIp": "Κατάργηση {ip}",
 	"noAllowedIpsYet": "Δεν υπάρχουν ακόμη επιτρεπόμενες IP.",
 	"invalidFileType": "Μη έγκυρος τύπος αρχείου",
+	"wordTemplatesWarning": "Ελέγξτε προσεκτικά το περιεχόμενο του προτύπου πριν από τη χρήση και βεβαιωθείτε ότι συμμορφώνεται με τις πολιτικές ασφάλειας και συμμόρφωσης του οργανισμού σας.",
 	"logoHelpText": "Το λογότυπο εμφανίζεται στην κεφαλίδα. Επιτρεπόμενες μορφές: PNG, JPEG, WEBP, SVG.",
 	"faviconHelpText": "Το favicon εμφανίζεται στην καρτέλα του browser. Επιτρεπόμενες μορφές: ICO, PNG, JPEG, WEBP, SVG.",
 	"entity": "Οντότητα",
@@ -916,8 +928,8 @@
 	"expirationDateMustBeOnOrAfterStartDate": "Η ημερομηνία λήξης πρέπει να είναι ίδια ή μεταγενέστερη της ημερομηνίας έναρξης",
 	"backupLoadingError": "Παρουσιάστηκε σφάλμα κατά τη φόρτωση του αντιγράφου ασφαλείας.",
 	"backupVersionError": "Αδυναμία φόρτωσης: μη έγκυρη έκδοση αντιγράφου ασφαλείας",
-	"confirmYes": "Πληκτρολογήστε «yes» για επιβεβαίωση:",
-	"confirmYesPlaceHolder": "Πληκτρολογήστε «yes» για επιβεβαίωση",
+	"confirmYes": "Πληκτρολογήστε «{word}» για επιβεβαίωση:",
+	"confirmYesPlaceHolder": "Πληκτρολογήστε «{word}» για επιβεβαίωση",
 	"backupGreaterVersionError": "Αδυναμία φόρτωσης: η έκδοση του αντιγράφου ασφαλείας είναι νεότερη από την τρέχουσα έκδοση της εφαρμογής.",
 	"backupLowerVersionError": "Ίσως το αντίγραφο ασφαλείας είναι πολύ παλιό· ενημερώστε το πριν δοκιμάσετε ξανά.",
 	"entityAssessmentEvidenceHelpText": "Εξωτερικό ερωτηματολόγιο",
@@ -934,7 +946,9 @@
 	"questionPlural": "Ερωτήσεις",
 	"fillMetadataURL": "Επιλογή 1: Συμπληρώστε το metadata URL",
 	"fillSSOSLOURLx509cert": "Επιλογή 2: Συμπληρώστε SSO URL, SLO URL και x509 cert",
-	"licenseAboutToExpireWarning": "Απομένουν μόνο {days_left} ημέρες μέχρι τη λήξη της άδειας.",
+	"licenseExpiresToday": "Η άδειά σας λήγει σήμερα.",
+	"licenseExpiresTomorrow": "Η άδειά σας λήγει αύριο.",
+	"licenseExpiresInDays": "Η άδειά σας λήγει σε {days_left} ημέρες.",
 	"proof": "Απόδειξη",
 	"privacy": "Απόρρητο",
 	"safety": "Ασφάλεια",
@@ -1609,6 +1623,8 @@
 	"forceSSOLogin": "Επιβολή SSO",
 	"forceSSOLoginHelpText": "Απαίτηση SSO για όλους· θα μηδενιστούν οι τοπικοί κωδικοί. Οι χρήστες με 'Εξαίρεση από SSO' θα διατηρήσουν πρόσβαση με κωδικό.",
 	"forceSSOLoginHelpText2": "Βεβαιωθείτε ότι το SSO λειτουργεί ή ότι έχετε λογαριασμό δημιουργίας αντιγράφων ασφαλείας πριν το ενεργοποιήσετε.",
+	"enableSpInitiatedSlo": "Ενεργοποίηση ενιαίας αποσύνδεσης με πρωτοβουλία του παρόχου υπηρεσιών",
+	"enableSpInitiatedSloHelpText": "Κατά την αποσύνδεση, τερματίζεται και η συνεδρία στον πάροχο ταυτότητας.",
 	"lastOccurrenceStatus": "Κατάσταση τελευταίας εμφάνισης",
 	"showAllEvents": "Εμφάνιση όλων των γεγονότων",
 	"featureFlags": "Διακόπτες λειτουργιών",
@@ -1623,6 +1639,26 @@
 	"personalAccessTokenCreateDescription": "Χρησιμοποιήστε PAT αντί κωδικού για αυτοματισμούς ή ενσωματώσεις.",
 	"personalAccessTokenCreateWarning": "Προσοχή: Τα PAT είναι ευαίσθητα· φυλάξτε τα όπως τους κωδικούς.",
 	"personalAccessTokenOnlyDisplayedOnce": "Θα εμφανιστεί μόνο μία φορά· αντιγράψτε το και φυλάξτε το με ασφάλεια.",
+	"serviceAccount": "Λογαριασμός υπηρεσίας",
+	"serviceAccounts": "Λογαριασμοί υπηρεσίας",
+	"serviceAccountsDescription": "Ενεργοποιεί τους λογαριασμούς υπηρεσίας (πρόσβαση API από μηχανή σε μηχανή μέσω της ροής OAuth2 client credentials).",
+	"addServiceAccount": "Προσθήκη λογαριασμού υπηρεσίας",
+	"clientId": "Αναγνωριστικό πελάτη",
+	"clientSecret": "Μυστικό πελάτη",
+	"rotateSecret": "Εναλλαγή μυστικού",
+	"rotateSecretConfirm": "Η εναλλαγή του μυστικού θα ακυρώσει αμέσως το τρέχον. Κάθε ενσωμάτωση που το χρησιμοποιεί θα σταματήσει να λειτουργεί μέχρι να ενημερωθεί. Συνέχεια;",
+	"clientSecretOnlyDisplayedOnce": "Το μυστικό πελάτη θα εμφανιστεί μόνο μία φορά. Φροντίστε να το αντιγράψετε και να το αποθηκεύσετε με ασφάλεια.",
+	"isRecursive": "Εφαρμογή σε υποτομείς",
+	"isRecursiveHelpText": "Παραχωρεί τα επιλεγμένα δικαιώματα στους επιλεγμένους τομείς και σε όλους τους υποτομείς τους.",
+	"serviceAccountExpiryHelpText": "Ο λογαριασμός υπηρεσίας θα απενεργοποιηθεί μετά από αυτήν την ημερομηνία.",
+	"createdBy": "Δημιουργήθηκε από",
+	"activate": "Ενεργοποίηση",
+	"deactivate": "Απενεργοποίηση",
+	"deactivateServiceAccountConfirm": "Η απενεργοποίηση αυτού του λογαριασμού υπηρεσίας θα ανακαλέσει αμέσως όλα τα ενεργά διακριτικά πρόσβασης και θα εμποδίσει την έκδοση νέων. Συνέχεια;",
+	"gracePeriod": "Περίοδος χάριτος",
+	"gracePeriodHelpText": "Το τρέχον μυστικό συνεχίζει να λειτουργεί για αυτό το διάστημα μετά την εναλλαγή, ώστε οι ενσωματώσεις να μπορούν να ενημερωθούν χωρίς διακοπή. Περιορίζεται σε 1 μήνα.",
+	"gracePeriodTooLong": "Η περίοδος χάριτος δεν μπορεί να υπερβαίνει το 1 μήνα.",
+	"previousSecretValidUntil": "Το προηγούμενο μυστικό πελάτη παραμένει έγκυρο έως {date}.",
 	"expiresOn": "Λήγει στις {date}",
 	"personalAccessTokenExpiryHelpText": "Ημέρες μέχρι τη λήξη του διακριτικού",
 	"expiry": "Λήξη",
@@ -1735,13 +1771,8 @@
 	"associatedFindingsAssessments": "Συνδεδεμένες παρακολουθήσεις",
 	"hourCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} Ώρα",
 				"countPlural=other": "{count} Ώρες"
@@ -1853,14 +1884,8 @@
 	"errorFetching": "Δεν είναι δυνατή η φόρτωση των πληροφοριών αλυσιδωτής διαγραφής. Παρακαλώ προσπαθήστε ξανά.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"count",
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["count", "countPlural"],
 			"match": {
 				"count=0": "Κανένα άλλο αντικείμενο δεν θα επηρεαστεί.",
 				"countPlural=one": "{count} σχετικό αντικείμενο δεν θα διαγραφεί αλλά θα χάσει μία ή περισσότερες σχέσεις.",
@@ -1873,13 +1898,8 @@
 	"campaignsDescription": "Διαχείριση εκστρατειών ελέγχου",
 	"objectsNotVisible": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} αντικείμενο δεν είναι ορατό.",
 				"countPlural=other": "{count} αντικείμενα δεν είναι ορατά."
@@ -2003,13 +2023,8 @@
 	"builderPublishModalDescription": "Αυτή η ενέργεια θα ενημερώσει το ενεργό πλαίσιο. Ελέγξτε τις αλλαγές παρακάτω.",
 	"builderRequirementAdded": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} απαιτήσεις προστέθηκαν",
 				"countPlural=other": "{count} απαιτήσεις προστέθηκαν"
@@ -2018,13 +2033,8 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} ερωτήσεις",
 				"countPlural=other": "{count} ερωτήσεις"
@@ -2033,13 +2043,8 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} απαιτήσεις αφαιρέθηκαν",
 				"countPlural=other": "{count} απαιτήσεις αφαιρέθηκαν"
@@ -2048,13 +2053,8 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} ερωτήσεις",
 				"countPlural=other": "{count} ερωτήσεις"
@@ -2064,13 +2064,8 @@
 	"builderNoStructuralChanges": "Δεν εντοπίστηκαν δομικές αλλαγές (μόνο μεταδεδομένα).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Εντοπίστηκαν {count} ασύμβατες αλλαγές",
 				"countPlural=other": "Εντοπίστηκαν {count} ασύμβατες αλλαγές"
@@ -2080,13 +2075,8 @@
 	"builderBreakingChangesHint": "Αυτές οι αλλαγές μπορεί να επηρεάσουν τη βαθμολόγηση, την ορατότητα ή τα αποτελέσματα συμμόρφωσης σε υπάρχοντες ελέγχους.",
 	"builderAffectedAudits": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} υπάρχοντες έλεγχοι θα επηρεαστούν",
 				"countPlural=other": "{count} υπάρχοντες έλεγχοι θα επηρεαστούν"
@@ -2124,13 +2114,8 @@
 	"builderNoRulesOrGroupsConfigured": "Δεν έχουν διαμορφωθεί κανόνες ή ομάδες",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} κανόνες αποτελέσματος",
 				"countPlural=other": "{count} κανόνες αποτελέσματος"
@@ -2139,13 +2124,8 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} ομάδες",
 				"countPlural=other": "{count} ομάδες"
@@ -2158,13 +2138,8 @@
 	"builderScoreScale": "Κλίμακα βαθμολογίας",
 	"builderScaleLevel": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} επίπεδα",
 				"countPlural=other": "{count} επίπεδα"
@@ -2234,13 +2209,8 @@
 	"builderAssessableLeaf": "Αξιολογήσιμο φύλλο",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Αξιολογήσιμη · {count} θυγατρικό",
 				"countPlural=other": "Αξιολογήσιμη · {count} θυγατρικά"
@@ -2249,13 +2219,8 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Ομάδα · {count} θυγατρικό",
 				"countPlural=other": "Ομάδα · {count} θυγατρικά"
@@ -2282,13 +2247,8 @@
 	"builderAddQuestion": "Προσθήκη ερώτησης",
 	"builderChildrenHidden": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} θυγατρικό κρυφό",
 				"countPlural=other": "{count} θυγατρικά κρυφά"
@@ -2316,14 +2276,8 @@
 	"builderChangeTypeWarning": "Η αλλαγή τύπου θα διαγράψει τις υπάρχουσες επιλογές. Συνέχεια;",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": [
-				"input count",
-				"input ref",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Εμφανίζεται όταν {ref} = {count} απαντήσεις",
 				"countPlural=other": "Εμφανίζεται όταν {ref} = {count} απαντήσεις"
@@ -2402,6 +2356,14 @@
 	"builderQuestionTypeUniqueChoice": "Μοναδική επιλογή",
 	"builderQuestionTypeMultipleChoice": "Πολλαπλή επιλογή",
 	"builderQuestionTypeDate": "Ημερομηνία",
+	"disableMFA": "Απενεργοποίηση MFA",
+	"disableMFA1": "Εάν αυτός ο χρήστης έχει χάσει την πρόσβαση στον δεύτερο παράγοντα, μπορείτε",
+	"disableMFALinkText": "απενεργοποίηση του MFA του",
+	"disableMFA2": "Όλοι οι έλεγχοι ταυτότητας MFA θα αφαιρεθούν και θα χρειαστεί να ενεργοποιήσει ξανά το MFA κατά την επόμενη σύνδεση",
+	"disableMFAWarning": "Η ασφάλεια MFA θα απενεργοποιηθεί για αυτόν τον χρήστη μέχρι να την ενεργοποιήσει ξανά.",
+	"mfaDisabledSuccessfully": "Το MFA απενεργοποιήθηκε για αυτόν τον χρήστη",
+	"errorDisablingMFA": "Δεν ήταν δυνατή η απενεργοποίηση του MFA για αυτόν τον χρήστη",
+	"userHasNoMFAEnabled": "Αυτός ο χρήστης δεν έχει ενεργοποιημένο MFA",
 	"builderChangedOn": "άλλαξε σε",
 	"requirementWeight": "Βάρος",
 	"scim": "SCIM",
@@ -2420,6 +2382,7 @@
 	"idpGroup": "Ομάδα IdP",
 	"idpGroups": "Ομάδες IdP",
 	"idpGroupsDescription": "Ενεργοποίηση ομοσπονδίας ομάδων IdP (παροχή SCIM, αντιστοιχίσεις ομάδων IdP και συμμετοχές χρηστών σε ομάδες IdP).",
+	"ebiosRmStudyDomainHelpText": "Η αλλαγή του τομέα μετακινεί τη μελέτη και όλα τα αντικείμενα των εργαστηρίων της στον επιλεγμένο τομέα.",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
 	"mspTenancyModel": "MSP tenancy model",
@@ -2436,15 +2399,5 @@
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"providerFolder": "Provider domain",
-	"currencyConversionRate": "Currency conversion rate",
-	"exporting": "Exporting...",
-	"errorOccurred": "An error occurred",
-	"diff": "Diff",
-	"confirmDeleteTitle": "Confirm deletion",
-	"areYouSureToDeleteObject": "Are you sure you want to delete this object?",
-	"addActor": "Add actor",
-	"generateReport": "Generate Report",
-	"aboutReports": "About Reports",
-	"aboutReportsDescription": "Reports provide simple tools to generate specialized reports useful for key insights or required by authorities for specific standards.\nMore specialized capabilities will be added as we identify specific cases."
+	"providerFolder": "Provider domain"
 }

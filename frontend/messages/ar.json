@@ -1,4 +1,15 @@
 {
+	"manageMembers": "إدارة الأعضاء",
+	"addMembers": "إضافة أعضاء",
+	"removeFromGroup": "إزالة من المجموعة",
+	"membersAdded": "تمت إضافة الأعضاء",
+	"membersRemoved": "تمت إزالة الأعضاء",
+	"includeInactive": "تضمين غير النشطين",
+	"noResults": "لا توجد نتائج. حسّن بحثك.",
+	"nothingSelected": "لم يتم تحديد أي شيء بعد.",
+	"licenseExpiresToday": "تنتهي صلاحية ترخيصك اليوم.",
+	"licenseExpiresTomorrow": "تنتهي صلاحية ترخيصك غدًا.",
+	"licenseExpiresInDays": "تنتهي صلاحية ترخيصك خلال {days_left} يومًا.",
 	"mapToFramework": "الربط بإطار",
 	"mapToFrameworkDescription": "إنشاء تدقيق جديد في إطار آخر، مرتبط من هذا التدقيق.",
 	"mapFromAudit": "الربط من تدقيق",
@@ -36,6 +47,8 @@
 	"croatian": "الكرواتية",
 	"korean": "الكورية",
 	"estonian": "الإستونية",
+	"slovak": "السلوفاكية",
+	"slovenian": "السلوفينية",
 	"addThreat": "أضف تهديدًا",
 	"addVulnerability": "إضافة الضعف",
 	"addReferenceControl": "أضف تحكمًا مرجعيًا",
@@ -624,6 +637,7 @@
 	"missingMandatoyObjects2": "يرجى إضافتها قبل المتابعة",
 	"attemptToDeleteOnlyAdminAccountError": "لا يمكنك حذف حساب المسؤول الوحيد في التطبيق.",
 	"attemptToRemoveOnlyAdminUserGroup": "لا يمكنك إزالة المستخدم الوحيد المسؤول في التطبيق من مجموعة المستخدمين المسؤولين.",
+	"attemptToRemoveSelfFromDomainAdminGroup": "لا يمكنك إزالة نفسك من مجموعة مسؤولي النطاق. اطلب من مسؤول آخر القيام بذلك.",
 	"scoringHelpText": "حدد لتمكين التسجيل",
 	"minScore": "الدرجة الدنيا",
 	"maxScore": "الدرجة القصوى",
@@ -775,6 +789,7 @@
 	"removeIp": "إزالة {ip}",
 	"noAllowedIpsYet": "لا توجد عناوين IP مسموح بها بعد.",
 	"invalidFileType": "نوع الملف غير صالح",
+	"wordTemplatesWarning": "راجِع محتوى القالب بعناية قبل الاستخدام وتأكد من امتثاله لسياسات الأمان والامتثال في مؤسستك.",
 	"logoHelpText": "سيتم عرض الشعار في رأس التطبيق. التنسيقات المقبولة هي PNG وJPEG وWEBP وSVG.",
 	"faviconHelpText": "سيتم عرض الرمز المفضل في علامة تبويب المتصفح. التنسيقات المقبولة هي ICO وPNG وJPEG وWEBP",
 	"entity": "كيان",
@@ -986,6 +1001,8 @@
 	"forceSSOLogin": "فرض تسجيل الدخول عبر SSO",
 	"forceSSOLoginHelpText": "يتطلب SSO لجميع المستخدمين ويعيد تعيين أي كلمات مرور محفوظة. سيحتفظ المستخدمون الذين لديهم 'استبعاد من SSO الإجباري' مفعلًا بإمكانية الوصول الاحتياطي عبر كلمة المرور.",
 	"forceSSOLoginHelpText2": "تأكد من أن SSO الخاص بك يعمل أو أن لديك حسابًا احتياطيًا قبل تفعيل هذا الخيار.",
+	"enableSpInitiatedSlo": "تفعيل تسجيل الخروج الموحّد الذي يبدأه مزوّد الخدمة",
+	"enableSpInitiatedSloHelpText": "عند تسجيل الخروج، أغلق أيضًا جلسة مزوّد الهوية.",
 	"youCanSetPasswordHere": "يمكنك تعيين كلمة المرور هنا",
 	"mappingSuggested": "تم اقتراح رسم الخرائط",
 	"mappingSuggestedHelpText": "اقتراحات رسم الخرائط بناءً على الأطر المحملة",
@@ -993,14 +1010,8 @@
 	"associatedFindingsAssessments": "التقييمات المرتبطة",
 	"hourCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"count",
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["count", "countPlural"],
 			"match": {
 				"countPlural=one": "ساعة {count} ",
 				"countPlural=other": "ساعات {count} "
@@ -1009,13 +1020,8 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "دقيقة {count}",
 				"countPlural=other": "دقائق {count}"
@@ -1024,13 +1030,8 @@
 	],
 	"dayCount": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "يوم {count}",
 				"countPlural=other": "أيام {count}"
@@ -1039,13 +1040,8 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} عنصر غير مرئي.",
 				"countPlural=other": "{count} عناصر غير مرئية."
@@ -1144,14 +1140,8 @@
 	"errorFetching": "تعذر تحميل معلومات التسلسل. يرجى المحاولة مرة أخرى.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"count",
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["count", "countPlural"],
 			"match": {
 				"count=0": "لا سيؤثر على أي كائنات أخرى.",
 				"countPlural=one": "سيتم حذف {count} كائن(أ) مرتبط(ة) ولكنهم سيخسرون أحد أو أكثر من العلاقات.",
@@ -1256,6 +1246,8 @@
 	"text": "نص",
 	"uniqueChoice": "اختيار فريد",
 	"yes": "نعم",
+	"confirmYes": "أكّد بكتابة '{word}' أدناه:",
+	"confirmYesPlaceHolder": "اكتب '{word}' للتأكيد",
 	"boolean": "قيمة منطقية",
 	"builderEmptyStateTitle": "كيف تريد هيكلة هذا الإطار؟",
 	"builderEmptyStateSubtitle": "اختر شكلاً مبدئيًا — يمكنك تغيير الهيكل في أي وقت.",
@@ -1311,13 +1303,8 @@
 	"builderPublishModalDescription": "ستحدّث هذه العملية الإطار النشط. راجع التعديلات أدناه.",
 	"builderRequirementAdded": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "تم إضافة {count} متطلبات",
 				"countPlural=other": "تم إضافة {count} متطلبات"
@@ -1326,13 +1313,8 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} أسئلة",
 				"countPlural=other": "{count} أسئلة"
@@ -1341,13 +1323,8 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "تم حذف {count} متطلبات",
 				"countPlural=other": "تم حذف {count} متطلبات"
@@ -1356,13 +1333,8 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} أسئلة",
 				"countPlural=other": "{count} أسئلة"
@@ -1372,13 +1344,8 @@
 	"builderNoStructuralChanges": "لم يتم اكتشاف تغييرات هيكلية (بيانات وصفية فقط).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "تم اكتشاف {count} تغييرات جذرية",
 				"countPlural=other": "تم اكتشاف {count} تغييرات جذرية"
@@ -1388,13 +1355,8 @@
 	"builderBreakingChangesHint": "قد تؤثر هذه التعديلات على التسجيل أو الرؤية أو نتائج الامتثال في التدقيقات الموجودة.",
 	"builderAffectedAudits": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "سيتأثر {count} تدقيقات موجودة",
 				"countPlural=other": "سيتأثر {count} تدقيقات موجودة"
@@ -1432,13 +1394,8 @@
 	"builderNoRulesOrGroupsConfigured": "لم يتم تكوين أي قواعد أو مجموعات",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} قواعد نتائج",
 				"countPlural=other": "{count} قواعد نتائج"
@@ -1447,13 +1404,8 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} مجموعات",
 				"countPlural=other": "{count} مجموعات"
@@ -1466,13 +1418,8 @@
 	"builderScoreScale": "مقياس الدرجات",
 	"builderScaleLevel": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} مستويات",
 				"countPlural=other": "{count} مستويات"
@@ -1542,13 +1489,8 @@
 	"builderAssessableLeaf": "ورقة قابلة للتقييم",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "قابل للتقييم · {count} عنصر فرعي",
 				"countPlural=other": "قابل للتقييم · {count} عناصر فرعية"
@@ -1557,13 +1499,8 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "مجموعة · {count} عنصر فرعي",
 				"countPlural=other": "مجموعة · {count} عناصر فرعية"
@@ -1590,13 +1527,8 @@
 	"builderAddQuestion": "إضافة سؤال",
 	"builderChildrenHidden": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} عنصر فرعي مخفي",
 				"countPlural=other": "{count} عناصر فرعية مخفية"
@@ -1624,14 +1556,8 @@
 	"builderChangeTypeWarning": "سيؤدي تغيير النوع إلى حذف الخيارات الموجودة. هل تريد المتابعة؟",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": [
-				"input count",
-				"input ref",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "يظهر عندما {ref} = {count} إجابات",
 				"countPlural=other": "يظهر عندما {ref} = {count} إجابات"
@@ -1710,8 +1636,16 @@
 	"builderQuestionTypeUniqueChoice": "اختيار فريد",
 	"builderQuestionTypeMultipleChoice": "اختيار متعدد",
 	"builderQuestionTypeDate": "التاريخ",
-	"builderChangedOn": "تم التغيير في",
+	"disableMFA": "تعطيل المصادقة الثنائية",
+	"disableMFA1": "إذا فقد هذا المستخدم الوصول إلى عامله الثاني، يمكنك",
+	"disableMFALinkText": "تعطيل المصادقة الثنائية الخاصة به",
+	"disableMFA2": "ستتم إزالة جميع وسائل المصادقة الثنائية الخاصة به وسيحتاج إلى تفعيل المصادقة الثنائية مرة أخرى عند تسجيل الدخول التالي",
+	"disableMFAWarning": "سيتم تعطيل حماية المصادقة الثنائية لهذا المستخدم حتى يقوم بتفعيلها مرة أخرى.",
+	"mfaDisabledSuccessfully": "تم تعطيل المصادقة الثنائية لهذا المستخدم",
+	"errorDisablingMFA": "تعذّر تعطيل المصادقة الثنائية لهذا المستخدم",
+	"userHasNoMFAEnabled": "هذا المستخدم لا يملك MFA مفعلة",
 	"requirementWeight": "الوزن",
+	"builderChangedOn": "تم التغيير في",
 	"scim": "SCIM",
 	"scimDescription": "قم بتكوين توفير SCIM 2.0. وجّه موفّر الهوية الخاص بك إلى نقطة النهاية أدناه وقم بمصادقته باستخدام رمز حامل تم إنشاؤه هنا.",
 	"scimEndpointUrl": "عنوان URL لنقطة نهاية SCIM",
@@ -1728,6 +1662,27 @@
 	"idpGroup": "مجموعة IdP",
 	"idpGroups": "مجموعات IdP",
 	"idpGroupsDescription": "تمكين اتحاد مجموعات IdP (توفير SCIM، وتعيينات مجموعات IdP، وعضويات مجموعات IdP للمستخدمين).",
+	"ebiosRmStudyDomainHelpText": "يؤدي تغيير النطاق إلى نقل الدراسة وجميع عناصر ورش العمل الخاصة بها إلى النطاق المحدد.",
+	"serviceAccount": "حساب خدمة",
+	"serviceAccounts": "حسابات الخدمة",
+	"serviceAccountsDescription": "تفعيل حسابات الخدمة (الوصول إلى واجهة برمجة التطبيقات من آلة إلى آلة عبر تدفق OAuth2 لبيانات اعتماد العميل).",
+	"addServiceAccount": "إضافة حساب خدمة",
+	"clientId": "معرّف العميل",
+	"clientSecret": "سر العميل",
+	"rotateSecret": "تدوير السر",
+	"rotateSecretConfirm": "سيؤدي تدوير السر إلى إبطال السر الحالي فورًا. سيتوقف أي تكامل يستخدمه عن العمل حتى يتم تحديثه. هل تريد المتابعة؟",
+	"clientSecretOnlyDisplayedOnce": "سيتم عرض سر العميل مرة واحدة فقط. تأكد من نسخه وتخزينه بأمان.",
+	"isRecursive": "التطبيق على النطاقات الفرعية",
+	"isRecursiveHelpText": "يمنح الأذونات المحددة على النطاقات المحددة وجميع نطاقاتها الفرعية.",
+	"serviceAccountExpiryHelpText": "سيتم تعطيل حساب الخدمة بعد هذا التاريخ.",
+	"createdBy": "أنشأه",
+	"activate": "تفعيل",
+	"deactivate": "تعطيل",
+	"deactivateServiceAccountConfirm": "سيؤدي تعطيل حساب الخدمة هذا إلى إبطال أي رمز وصول معلّق فورًا ومنع إصدار رموز جديدة. هل تريد المتابعة؟",
+	"gracePeriod": "فترة السماح",
+	"gracePeriodHelpText": "يستمر السر الحالي في العمل لهذه المدة بعد التدوير، حتى يمكن تحديث عمليات التكامل دون توقف. محدد بشهر واحد.",
+	"gracePeriodTooLong": "لا يمكن أن تتجاوز فترة السماح شهرًا واحدًا.",
+	"previousSecretValidUntil": "يظل سر العميل السابق صالحًا حتى {date}.",
 	"mspControlAssertion": "MSP control assertion",
 	"mspControlAssertions": "MSP control assertions",
 	"mspTenancyModel": "MSP tenancy model",
@@ -1744,15 +1699,5 @@
 	"providerControl": "Provider control",
 	"providerControlDescription": "The applied control we operate and verify.",
 	"customerCoverageDescription": "The child domains receiving inherited coverage.",
-	"providerFolder": "Provider domain",
-	"currencyConversionRate": "Currency conversion rate",
-	"exporting": "Exporting...",
-	"errorOccurred": "An error occurred",
-	"diff": "Diff",
-	"confirmDeleteTitle": "Confirm deletion",
-	"areYouSureToDeleteObject": "Are you sure you want to delete this object?",
-	"addActor": "Add actor",
-	"generateReport": "Generate Report",
-	"aboutReports": "About Reports",
-	"aboutReportsDescription": "Reports provide simple tools to generate specialized reports useful for key insights or required by authorities for specific standards.\nMore specialized capabilities will be added as we identify specific cases."
+	"providerFolder": "Provider domain"
 }
