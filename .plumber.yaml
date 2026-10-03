@@ -77,6 +77,7 @@ github:
       # Owner-level wildcards for well-known vendor orgs; exact repos for
       # individual-maintainer accounts.
       trustedGithubActions:
+      - MTG-Thomas/dockerfile-roast # MTG advisory scanner; full SHA and binary checksum pinned
       - astral-sh/*              # setup-uv (uv/ruff maintainers)
       - pnpm/*                   # action-setup
       - docker/*                 # setup-buildx/login/metadata/build-push/setup-qemu
